@@ -10,16 +10,59 @@
 <head>
     <title>Index page</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <style type="text/css">
+        <%@include file="/css/styles.css" %>
+        <%@include file="/css/bootstrap.min.css" %>
+    </style>
 </head>
 <body>
-    <hr/>
-<%--    <jsp:useBean id="user" class="ua.training.persistance.beans.User">--%>
-<%--        <jsp:setProperty name="user" property="param1" value="value1" />--%>
-<%--    </jsp:useBean>--%>
+    <!-- TOP navbar -->
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<%--            <a class="navbar-brand" href="#">User Name</a>--%>
+            <div>
+                <h5 class="text-white h5">User name</h5>
+                <span class="text-white">user type </span>
+            </div>
 
-    ${firstName} ${lastName}, hello!
-    <p>User role is: ${pageContext.session.getAttribute("role")} </p>
-    <hr/>
-    <a href="taxsystem/?command=logout">Logout</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logut</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- A vertical navbar -->
+                <nav class="navbar bg-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link 1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link 2</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link 3</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="col-md-9">
+                <!-- center page content -->
+                <h1> Main page content will be here </h1>
+            </div>
+        </div>
+    </div>
+
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>

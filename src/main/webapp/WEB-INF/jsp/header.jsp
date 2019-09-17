@@ -10,9 +10,7 @@
 <head>
     <title>Error page</title>
     <meta charset="utf-8">
-<%--    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>--%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">
-<%--    <link href="${pageContext.servletContext}/css/styles.css" type="text/css" rel="stylesheet"/>--%>
 
     <style type="text/css">
         <%@include file="/css/styles.css" %>
@@ -37,8 +35,8 @@
             </div>
         </nav>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" crossorigin="anonymous"></script>
-    <script src="${pageContext.servletContext}/js/bootstrap.min.js"></script>
-<%--    <%@include file="/js/bootstrap.min.js" %>--%>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>
