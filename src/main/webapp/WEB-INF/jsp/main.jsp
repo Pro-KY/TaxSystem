@@ -18,6 +18,7 @@
 <%--    </jsp:useBean>--%>
 
     ${firstName} ${lastName}, hello!
+    <p>User role is: ${pageContext.session.getAttribute("role")} </p>
     <hr/>
     <a href="taxsystem/?command=logout">Logout</a>
 </body>

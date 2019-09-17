@@ -8,5 +8,5 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public interface IUserDao extends IDao<User> {
-    Optional<User> getUserByLoginAndPassword(String login, String password); //throws DaoException
+    Optional<User> getUserByLoginAndPassword(String login, String password);
 }

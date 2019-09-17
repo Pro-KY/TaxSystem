@@ -1,8 +1,5 @@
 package ua.training.util;
 
-import ua.training.persistance.beans.User;
-import ua.training.persistance.util.Param;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 

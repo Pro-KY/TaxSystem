@@ -8,8 +8,8 @@ public class CommandFactory {
 
     static {
         System.out.println("init called");
-        commandHashMap.put("login", new AuthorizationCommand());
-        commandHashMap.put("logout", new LogoutCommand());
+        commandHashMap.put("login", new LogInCommand());
+        commandHashMap.put("logout", new LogOutCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

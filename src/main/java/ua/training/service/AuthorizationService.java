@@ -3,18 +3,13 @@ package ua.training.service;
 import ua.training.persistance.beans.User;
 import ua.training.persistance.dao.IUserDao;
 import ua.training.persistance.dao.factory.MySQLDaoFactory;
-import ua.training.util.PropertiesHandler;
+import ua.training.util.exceptions.DaoException;
 
 import java.util.Optional;
 
 public class AuthorizationService {
     // userDao;
     private MySQLDaoFactory daoFactory;
-    private static PropertiesHandler propertiesHandler;
-
-    static {
-        propertiesHandler = PropertiesHandler.getInstance();
-    }
 
     public AuthorizationService() {
         this.daoFactory = MySQLDaoFactory.getInstance();
@@ -22,7 +17,7 @@ public class AuthorizationService {
 
 
     // return authorized user if one exist in DB
-    public Optional<User> getAuthorizedUser(String login, String password) {
+    public Optional<User> authorizeUser(String login, String password) {
         final IUserDao userDao = daoFactory.getUserDao();
         return userDao.getUserByLoginAndPassword(login, password);
     }

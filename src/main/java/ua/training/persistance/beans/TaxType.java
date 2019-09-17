@@ -22,7 +22,6 @@ public class TaxType implements Serializable {
     this.id = id;
   }
 
-
   public String getType() {
     return type;
   }

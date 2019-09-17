@@ -3,7 +3,7 @@ package ua.training.util.handler.properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-public class MessageProperty {
+public class MessagePropertiesHandler {
     private static ResourceBundle messageProperties;
     public static final String LOGIN_ERROR = "login.error";
 

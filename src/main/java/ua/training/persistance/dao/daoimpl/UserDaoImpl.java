@@ -2,56 +2,51 @@ package ua.training.persistance.dao.daoimpl;
 
 import ua.training.persistance.beans.User;
 import ua.training.persistance.dao.IUserDao;
+import ua.training.persistance.dao.mappers.UserBeanMapper;
 import ua.training.persistance.db.datasource.MyDataSource;
-import ua.training.util.PropertiesHandler;
+import ua.training.util.exceptions.DaoException;
+import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
-import java.util.ResourceBundle;
+
+import static ua.training.util.handler.properties.SqlPropertiesHandler.LOGIN_AND_PASSWORD;
 
 // move all SQl queries to fields or in properties file
 public class UserDaoImpl implements IUserDao {
     private MyDataSource myDataSource;
-//    private Properties sqlQueries;
-    private ResourceBundle sqlQueries;
+    private UserBeanMapper userBeanMapper;
 
     public void setMyDataSource(MyDataSource myDataSource) {
         this.myDataSource = myDataSource;
     }
 
     public UserDaoImpl() {
-        sqlQueries = PropertiesHandler.getInstance().getSqlProperties();
+        userBeanMapper = new UserBeanMapper();
     }
 
-    public Optional<User> getUserByLoginAndPassword(String login, String password) { // throws DaoException
-//        final HashMap<String, String> requestParameters = requestContent.getRequestParameters();
-//        final String login = requestParameters.get(Param.LOGIN);
-//        final String password = requestParameters.get(Param.PASSWORD);
+    public Optional<User> getUserByLoginAndPassword(String login, String password)  {
+        Optional<User> optionalUser;
 
-        Optional<User> optionalUser = Optional.empty();
+        final String getByLoginAndPasswordQry = SqlPropertiesHandler.getSqlQuery(LOGIN_AND_PASSWORD);
 
-        if (sqlQueries != null) {
-            final String getByLoginAndPasswordQry = sqlQueries.getString("getByLoginAndPassword");
-
-            try (Connection connection = myDataSource.getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement(getByLoginAndPasswordQry)) {
-
+        try (Connection connection = myDataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(getByLoginAndPasswordQry)) {
                 preparedStatement.setString(1, login);
                 preparedStatement.setString(2, password);
-                final ResultSet resultSet = preparedStatement.executeQuery();
-                optionalUser = mapRsToUser(resultSet);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("sql queries is null");
+
+            final ResultSet resultSet = preparedStatement.executeQuery();
+            optionalUser = userBeanMapper.mapToUser(resultSet);
+        } catch (Exception e) {
+            optionalUser = Optional.empty();
+                    //TODO: add logger
+//            throw new DaoException("error during getting data from DB", e);
         }
 
         return optionalUser;
-
     }
 
     @Override
@@ -135,24 +130,24 @@ public class UserDaoImpl implements IUserDao {
         return null;
     }
 
-    private Optional<User> mapRsToUser(ResultSet rs) {
-        Optional<User> optionalUser = Optional.empty();
-
-        try {
-            if (rs.next()) {
-                final long id = rs.getLong("id");
-                final String login = rs.getString("email");
-                final String firstName = rs.getString("first_name");
-                final String lastName= rs.getString("last_name");
-                final String pwd = rs.getString("password");
-    //            final long userTypeId = rs.getLong("user_type_id");
-
-                optionalUser = Optional.of(new User(id, firstName, lastName, login, pwd));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return optionalUser;
-    }
+//    private Optional<User> mapRsToUser(ResultSet rs) {
+//        Optional<User> optionalUser = Optional.empty();
+//
+//        try {
+//            if (rs.next()) {
+//                final long id = rs.getLong("id");
+//                final String login = rs.getString("email");
+//                final String firstName = rs.getString("first_name");
+//                final String lastName= rs.getString("last_name");
+//                final String pwd = rs.getString("password");
+//    //            final long userTypeId = rs.getLong("user_type_id");
+//
+//                optionalUser = Optional.of(new User(id, firstName, lastName, login, pwd));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return optionalUser;
+//    }
 }

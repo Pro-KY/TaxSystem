@@ -3,8 +3,9 @@ package ua.training.util.handler.properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-public class ViewProperty {
+public class ViewProperiesHandler {
     private static ResourceBundle viewProperties;
+
     public static final String PATH_MAIN = "path.main";
     public static final String PATH_ERROR = "path.error";
     public static final String PATH_INDEX = "path.index";

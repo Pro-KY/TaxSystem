@@ -1,8 +1,5 @@
 package ua.training.persistance.beans;
 
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -14,9 +11,10 @@ public class User implements Serializable {
     private String password;
     private String address;
     private Boolean isPhysical;
-    private Long userTypeId;
+//    private Long userTypeId;
+    private UserType userType;
 
-    public User(long id, String firstName, String lastName, String organization, String email, String password, String address, boolean isPhysical, long userTypeId) {
+    public User(long id, String firstName, String lastName, String organization, String email, String password, String address, boolean isPhysical, UserType userType) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -25,7 +23,7 @@ public class User implements Serializable {
         this.password = password;
         this.address = address;
         this.isPhysical = isPhysical;
-        this.userTypeId = userTypeId;
+        this.userType = userType;
     }
 
     public User(long id, String firstName, String lastName, String email, String password) {
@@ -50,8 +48,9 @@ public class User implements Serializable {
         setPassword(builder.password);
         setAddress(builder.address);
         isPhysical = builder.isPhysical;
-        userTypeId = builder.userTypeId;
+        userType = builder.userType;
     }
+
 
     public long getId() {
         return id;
@@ -123,12 +122,12 @@ public class User implements Serializable {
         isPhysical = physical;
     }
 
-    public long getUserTypeId() {
-        return userTypeId;
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
-    public void setUserTypeId(long userTypeId) {
-        this.userTypeId = userTypeId;
+    public UserType getUserType() {
+        return userType;
     }
 
     @Override
@@ -148,7 +147,7 @@ public class User implements Serializable {
         private String password;
         private String address;
         private Boolean isPhysical;
-        private Long userTypeId;
+        private UserType userType;
 
         public Builder() {
         }
@@ -193,8 +192,8 @@ public class User implements Serializable {
             return this;
         }
 
-        public Builder userTypeId(Long val) {
-            userTypeId = val;
+        public Builder userType(UserType val) {
+            userType = val;
             return this;
         }
 

@@ -1,4 +1,4 @@
-package ua.training.persistance.util;
+package ua.training.util;
 
 public class Param {
     public static final String LOGIN = "login";

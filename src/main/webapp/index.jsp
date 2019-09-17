@@ -10,9 +10,11 @@
 <head>
     <title>Index page</title>
     <meta charset="utf-8">
-    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
-</head>
+<%--    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>--%>
+</head>!
 <body>
+    <jsp:include page="WEB-INF/jsp/header.jsp"/>
+
     <div class="container pt-3">
         <h1 class="text-center">Welcome!</h1>
 
@@ -20,7 +22,7 @@
             <div class="col-sm-6 col-md-4">
                 <div class="card border-info text-center">
                     <div class="card-body">
-                        <img id="img_logo" alt="Company logo" src="${pageContext.request.contextPath}/assets/logo.png">
+                        <img id="user_icon" alt="user icon" src="${pageContext.request.contextPath}/assets/user.png">
 <%--                        <h4 class="text-center">Tax Report System</h4>--%>
 
                         <jsp:include page="WEB-INF/jsp/login.jsp"/>
@@ -28,8 +30,7 @@
                 </div>
             </div>
         </div>
-
-        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<%--        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>--%>
     </div>
 </body>
 </html>
