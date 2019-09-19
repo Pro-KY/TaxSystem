@@ -18,9 +18,9 @@
 <%--    <form name="LoginForm" method="POST" action ="${pageContext.request.contextPath}/taxsystem/">--%>
     <form name="LoginForm" method="POST" action ="${pageContextPath}/taxsystem/">
         <input type="hidden" name="command" value="login">
-        <input type="text" name="email" class="form-control mb-2" required autofocus placeholder=<fmt:message key="login.label.email" bundle="${rb}"/>>
-        <input type="password" name="password" class="form-control mb-2" required placeholder=<fmt:message key="login.label.password" bundle="${rb}"/>>
-        <button class="btn btn-lg btn-primary btn-block mb-1" type="submit"><fmt:message key="login.button.signin" bundle="${rb}"/></button>
+        <input type="text" name="email" class="form-control mb-2" required autofocus placeholder=<fmt:message key="login.email" bundle="${rb}"/>>
+        <input type="password" name="password" class="form-control mb-2" required placeholder=<fmt:message key="login.password" bundle="${rb}"/>>
+        <button class="btn btn-lg btn-primary btn-block mb-1" type="submit"><fmt:message key="login.signin" bundle="${rb}"/></button>
     </form>
 </body>
 </html>

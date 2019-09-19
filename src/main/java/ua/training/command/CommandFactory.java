@@ -8,14 +8,14 @@ public class CommandFactory {
 
     static {
         commandHashMap.put("login", new SignInCommand());
-        commandHashMap.put("logout", new LogOutCommand());
+        commandHashMap.put("logout", new SignOutCommand());
         commandHashMap.put("changeLanguage", new LanguageCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {
         ICommand command;
         final String cliendCommand = request.getParameter("command");
-        System.out.println(cliendCommand);
+        System.out.println("commad: " + cliendCommand);
 
         if (cliendCommand == null || cliendCommand.isEmpty()) {
             command = new EmptyCommand();

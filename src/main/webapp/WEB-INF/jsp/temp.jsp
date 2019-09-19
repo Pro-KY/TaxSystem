@@ -8,38 +8,23 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
-    <title>Index page</title>
+    <title>Just for testing some things</title>
     <meta charset="utf-8">
 </head>
 <body>
-    <hr/>
-<%--    <jsp:useBean id="user" class="ua.training.persistance.beans.User">--%>
-<%--        <jsp:setProperty name="user" property="param1" value="value1" />--%>
-<%--    </jsp:useBean>--%>
-
-    <!-- top navbar -->
-
-    <!-- A vertical navbar -->
-    <nav class="navbar bg-light">
-        <!-- Links -->
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 1</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 2</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 3</a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- center page -->
-
-    ${firstName} ${lastName}, hello!
-    <p>User role is: ${pageContext.session.getAttribute("role")} </p>
-    <hr/>
-    <a href="taxsystem/?command=logout">Logout</a>
+<%--from menu--%>
+<%--<!-- 0 -->--%>
+<%--<c:choose>--%>
+<%--    <c:when test="${sessionScope.currentRole eq sessionScope.roleUser}">--%>
+<%--        <li class="nav-item"><a class="nav-link" href="#"> ${user_0} </a></li>--%>
+<%--    </c:when>--%>
+<%--    <c:when test="${sessionScope.currentRole eq sessionScope.roleInspector}">--%>
+<%--        <li class="nav-item"><a class="nav-link" href="#"> ${inpector_0} </a></li>--%>
+<%--    </c:when>--%>
+<%--    <c:otherwise>--%>
+<%--        <li class="nav-item"><a class="nav-link" href="#"> ${admin_0} </a></li>--%>
+<%--    </c:otherwise>--%>
+<%--</c:choose>--%>
+<%--<!-- 0 -->--%>
 </body>
 </html>

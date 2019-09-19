@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import static ua.training.util.handler.properties.ViewProperiesHandler.*;
 
-public class LogOutCommand implements ICommand {
+public class SignOutCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         request.getSession().invalidate();
