@@ -28,5 +28,4 @@
         <servlet-name>frontController</servlet-name>
         <url-pattern>/taxsystem/*</url-pattern>
     </servlet-mapping>
-
 </web-app>

@@ -20,11 +20,11 @@
     <h1>${myName}</h1>
 
     <c:if test="${10 > 9}">
-    <p>True<p>
-        </c:if>
-        <c:if test="${10 < 9}">
-    <p>False<p>
-        </c:if>
+        <p>True<p>
+    </c:if>
+    <c:if test="${10 < 9}">
+        <p>False<p>
+    </c:if>
 
     <hr/>
     <jsp:expression>(request.getAttribute("errorMsg") != null)

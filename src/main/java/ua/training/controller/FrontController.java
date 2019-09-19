@@ -27,12 +27,15 @@ public class FrontController extends HttpServlet {
         final String page = command.execute(request);
         System.out.println(page);
 
+        final Object language = request.getSession().getAttribute("language");
+        System.out.println((String) language);
+
+
         if(page.equals("/index.jsp")) {
             response.sendRedirect("/");
         } else {
             RequestDispatcher  dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request, response);
         }
-
     }
 }

@@ -68,7 +68,6 @@ public class User implements Serializable {
         this.firstName = firstName;
     }
 
-
     public String getLastName() {
         return lastName;
     }
@@ -104,7 +103,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-
     public String getAddress() {
         return address;
     }
@@ -112,7 +110,6 @@ public class User implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-
 
     public Boolean getPhysical() {
         return isPhysical;

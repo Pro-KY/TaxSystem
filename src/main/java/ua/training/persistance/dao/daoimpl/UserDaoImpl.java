@@ -28,7 +28,7 @@ public class UserDaoImpl implements IUserDao {
         userBeanMapper = new UserBeanMapper();
     }
 
-    public Optional<User> getUserByLoginAndPassword(String login, String password)  {
+    public Optional<User> getUserByEmailAndPassword(String login, String password)  {
         Optional<User> optionalUser;
 
         final String getByLoginAndPasswordQry = SqlPropertiesHandler.getSqlQuery(LOGIN_AND_PASSWORD);

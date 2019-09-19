@@ -4,12 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 public class CommandFactory {
-    private static HashMap<String, ICommand> commandHashMap = new HashMap<>(); // key - attribute from request, getValue = ICommand
+    private static HashMap<String, ICommand> commandHashMap = new HashMap<>(); // key - parameter from request, getValue = ICommand
 
     static {
-        System.out.println("init called");
-        commandHashMap.put("login", new LogInCommand());
+        commandHashMap.put("login", new SignInCommand());
         commandHashMap.put("logout", new LogOutCommand());
+        commandHashMap.put("changeLanguage", new LanguageCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

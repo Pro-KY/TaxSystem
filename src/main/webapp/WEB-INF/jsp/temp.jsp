@@ -33,7 +33,6 @@
                 <a class="nav-link" href="#">Link 3</a>
             </li>
         </ul>
-
     </nav>
 
     <!-- center page -->
