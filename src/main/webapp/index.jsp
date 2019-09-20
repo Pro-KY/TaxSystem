@@ -19,10 +19,12 @@
     <meta charset="utf-8">
 </head>
 <body>
-    <%@include file="/WEB-INF/jsp/header.jsp" %>
+
+    <!-- header fragment -->
+    <%@include file="/WEB-INF/jsp/fragments/header.jsp" %>
+    <!-- header fragment -->
 
     <c:out value="${language}"/>
-<%--    <jsp:include page="${pageContext.request.contextPath}/jsp/header.jsp"/>--%>
     <div class="container pt-3">
         <h1 class="text-center"> <fmt:message key="index.text.greeting" bundle="${rb}"/> </h1>
 
@@ -32,7 +34,10 @@
                     <div class="card-body">
                         <img id="logo_icon" alt="logo icon" src="${pageContext.request.contextPath}/assets/logo.png">
 <%--                        <jsp:include page="/WEB-INF/jsp/login.jsp"/>--%>
-                        <%@include file="/WEB-INF/jsp/login.jsp" %>
+
+                        <!-- login fragment -->
+                        <%@include file="/WEB-INF/jsp/fragments/login.jsp" %>
+                        <!-- login fragment -->
                     </div>
                 </div>
             </div>

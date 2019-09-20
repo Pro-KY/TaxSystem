@@ -2,9 +2,9 @@ package ua.training.persistance.dao.daoimpl;
 
 import ua.training.persistance.beans.User;
 import ua.training.persistance.dao.IUserDao;
-import ua.training.persistance.dao.mappers.UserBeanMapper;
+import ua.training.persistance.dao.mappers.UserBeanMapperImpl;
+import ua.training.persistance.dao.util.DaoUtil;
 import ua.training.persistance.db.datasource.MyDataSource;
-import ua.training.util.exceptions.DaoException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.sql.Connection;
@@ -18,15 +18,12 @@ import static ua.training.util.handler.properties.SqlPropertiesHandler.LOGIN_AND
 // move all SQl queries to fields or in properties file
 public class UserDaoImpl implements IUserDao {
     private MyDataSource myDataSource;
-    private UserBeanMapper userBeanMapper;
 
     public void setMyDataSource(MyDataSource myDataSource) {
         this.myDataSource = myDataSource;
     }
 
-    public UserDaoImpl() {
-        userBeanMapper = new UserBeanMapper();
-    }
+    public UserDaoImpl() { }
 
     public Optional<User> getUserByEmailAndPassword(String login, String password)  {
         Optional<User> optionalUser;
@@ -39,7 +36,13 @@ public class UserDaoImpl implements IUserDao {
                 preparedStatement.setString(2, password);
 
             final ResultSet resultSet = preparedStatement.executeQuery();
-            optionalUser = userBeanMapper.mapToUser(resultSet);
+//            optionalUser = userBeanMapperImpl.mapRow(resultSet);
+            optionalUser= DaoUtil.mapResultSetToBean(new UserBeanMapperImpl(), resultSet);
+            optionalUser.ifPresent(user -> {
+                System.out.println(user);
+            });
+
+
         } catch (Exception e) {
             optionalUser = Optional.empty();
                     //TODO: add logger

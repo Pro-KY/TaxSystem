@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="pageContextPath" value="${pageContext.request.contextPath}" scope="page"/>
 
 <html>
 <head>
@@ -15,8 +14,7 @@
     <meta charset="utf-8">
 </head>
 <body>
-<%--    <form name="LoginForm" method="POST" action ="${pageContext.request.contextPath}/taxsystem/">--%>
-    <form name="LoginForm" method="POST" action ="${pageContextPath}/taxsystem/">
+    <form name="LoginForm" method="POST" action ="${pageContext.request.contextPath}/taxsystem/">
         <input type="hidden" name="command" value="login">
         <input type="text" name="email" class="form-control mb-2" required autofocus placeholder=<fmt:message key="login.email" bundle="${rb}"/>>
         <input type="password" name="password" class="form-control mb-2" required placeholder=<fmt:message key="login.password" bundle="${rb}"/>>

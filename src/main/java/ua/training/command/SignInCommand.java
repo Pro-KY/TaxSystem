@@ -1,17 +1,17 @@
 package ua.training.command;
 
 import ua.training.persistance.beans.User;
-import ua.training.persistance.dao.mappers.UserBeanMapper;
+import ua.training.persistance.dao.mappers.UserBeanMapperImpl;
 import ua.training.service.SignInService;
 import ua.training.util.handler.properties.MessagePropertiesHandler;
-import ua.training.util.handler.properties.ViewProperiesHandler;
+import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 import static ua.training.util.handler.properties.MessagePropertiesHandler.LOGIN_ERROR;
-import static ua.training.util.handler.properties.ViewProperiesHandler.PATH_ERROR;
-import static ua.training.util.handler.properties.ViewProperiesHandler.PATH_MAIN;
+import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_ERROR;
+import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_MAIN;
 
 public class SignInCommand implements ICommand {
     private SignInService signInService;
@@ -23,8 +23,8 @@ public class SignInCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
 
-        final String email = request.getParameter(UserBeanMapper.EMAIL);
-        final String password = request.getParameter(UserBeanMapper.PASSWORD);
+        final String email = request.getParameter(UserBeanMapperImpl.EMAIL);
+        final String password = request.getParameter(UserBeanMapperImpl.PASSWORD);
 
         //TODO: validate request params
         final Optional<User> optionalUser = signInService.getAuthorizedUser(email, password);
@@ -41,6 +41,6 @@ public class SignInCommand implements ICommand {
             request.setAttribute("errorMsg", MessagePropertiesHandler.getMessage(LOGIN_ERROR));
         }
 
-        return ViewProperiesHandler.getViewPath(pagePathProperty);
+        return ViewPropertiesHandler.getViewPath(pagePathProperty);
     }
 }

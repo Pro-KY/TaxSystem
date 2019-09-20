@@ -10,11 +10,10 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String address;
-    private Boolean isPhysical;
 //    private Long userTypeId;
     private UserType userType;
 
-    public User(long id, String firstName, String lastName, String organization, String email, String password, String address, boolean isPhysical, UserType userType) {
+    public User(long id, String firstName, String lastName, String organization, String email, String password, String address, UserType userType) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,16 +21,7 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
         this.address = address;
-        this.isPhysical = isPhysical;
         this.userType = userType;
-    }
-
-    public User(long id, String firstName, String lastName, String email, String password) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
     }
 
     public User(String email, String password) {
@@ -47,7 +37,6 @@ public class User implements Serializable {
         setEmail(builder.email);
         setPassword(builder.password);
         setAddress(builder.address);
-        isPhysical = builder.isPhysical;
         userType = builder.userType;
     }
 
@@ -76,7 +65,6 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-
     public String getOrganization() {
         return organization;
     }
@@ -85,7 +73,6 @@ public class User implements Serializable {
         this.organization = organization;
     }
 
-
     public String getEmail() {
         return email;
     }
@@ -93,7 +80,6 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public String getPassword() {
         return password;
@@ -111,14 +97,6 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public Boolean getPhysical() {
-        return isPhysical;
-    }
-
-    public void setPhysical(Boolean physical) {
-        isPhysical = physical;
-    }
-
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
@@ -130,8 +108,14 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", organization='" + organization + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", userType=" + userType +
                 '}';
     }
 
@@ -143,7 +127,6 @@ public class User implements Serializable {
         private String email;
         private String password;
         private String address;
-        private Boolean isPhysical;
         private UserType userType;
 
         public Builder() {
@@ -181,11 +164,6 @@ public class User implements Serializable {
 
         public Builder address(String val) {
             address = val;
-            return this;
-        }
-
-        public Builder isPhysical(Boolean val) {
-            isPhysical = val;
             return this;
         }
 

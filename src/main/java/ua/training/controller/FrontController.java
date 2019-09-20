@@ -27,6 +27,19 @@ public class FrontController extends HttpServlet {
         final String page = command.execute(request);
         System.out.println(page);
 
+        if (page == null) {
+            response.sendRedirect("/error.jsp");
+            return;
+        }
+
+        // or use filter
+//        if(getSession(false) != null) {
+//            // process main logic
+//        } else {
+//            // redirect to home
+//        }
+//
+
         final Object language = request.getSession().getAttribute("language");
         System.out.println("language: " + (String) language);
 

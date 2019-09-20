@@ -6,10 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 
-public class SignOutCommand implements ICommand {
+public class ProcessReportCommand implements ICommand {
+
     @Override
     public String execute(HttpServletRequest request) {
-        request.getSession().invalidate();
-        return ViewPropertiesHandler.getViewPath(PATH_INDEX);
+        System.out.println("process report command");
+        request.setAttribute("fragmentPath", PATH_INSPECTOR_PROCESS_REPORT);
+        return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }
 }

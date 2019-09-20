@@ -7,9 +7,11 @@ public class CommandFactory {
     private static HashMap<String, ICommand> commandHashMap = new HashMap<>(); // key - parameter from request, getValue = ICommand
 
     static {
-        commandHashMap.put("login", new SignInCommand());
+        commandHashMap.put("login", new SignInCommand()); // move all strings into properties
         commandHashMap.put("logout", new SignOutCommand());
         commandHashMap.put("changeLanguage", new LanguageCommand());
+        commandHashMap.put("sendReport", new SendReportCommand());
+        commandHashMap.put("processReport", new ProcessReportCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

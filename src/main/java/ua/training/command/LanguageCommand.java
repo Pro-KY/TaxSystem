@@ -1,14 +1,11 @@
 package ua.training.command;
 
-import ua.training.util.handler.properties.ViewProperiesHandler;
+import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.jstl.core.Config;
 
-import java.util.Locale;
-
-import static ua.training.util.handler.properties.ViewProperiesHandler.PATH_INDEX;
+import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_INDEX;
 
 public class LanguageCommand implements ICommand {
     @Override
@@ -18,7 +15,7 @@ public class LanguageCommand implements ICommand {
         session.setAttribute("language", chosenLanguage);
 //        Config.set(session, Config.FMT_LOCALE, Locale.forLanguageTag(chosenLanguage));
 
-        return ViewProperiesHandler.getViewPath(PATH_INDEX);
+        return ViewPropertiesHandler.getViewPath(PATH_INDEX);
     }
 }
 
