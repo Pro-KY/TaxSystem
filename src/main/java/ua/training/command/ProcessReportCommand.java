@@ -11,7 +11,9 @@ public class ProcessReportCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         System.out.println("process report command");
-        request.setAttribute("fragmentPath", PATH_INSPECTOR_PROCESS_REPORT);
+
+        final String viewPath = getViewPath(PATH_INSPECTOR_PROCESS_REPORT);
+        request.setAttribute("fragmentPath", viewPath);
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }
 }

@@ -37,6 +37,11 @@
         <%@include file="/css/styles.css" %>
         <%@include file="/css/bootstrap.min.css" %>
     </style>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="<c:url value="/js/bootstrap.min.js" />"></script>
+    <script src="<c:url value="/js/scripts.js" />"></script>
 </head>
 <body>
     <!-- TOP navbar -->
@@ -82,15 +87,14 @@
 
             <!-- center page content -->
             <div class="col-md-9">
-<%--                <h1> Main page content will be here </h1>--%>
-                ${requestScope.get("fragmentPath")}
-<%--                <c:import url="fragments/menu.jsp" />--%>
+                <c:if test="${requestScope.get('fragmentPath') != null}">
+                    <c:import url="${requestScope.get('fragmentPath')}" />
+                </c:if>
+<%--                <jsp:include page="${requestScope.get('fragmentPath')}"/>--%>
+<%--                <jsp:include page="${requestScope.get('fragmentPath')}"/>--%>
             </div>
             <!-- center page content -->
         </div>
     </div>
-
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/my.js"></script>
 </body>
 </html>

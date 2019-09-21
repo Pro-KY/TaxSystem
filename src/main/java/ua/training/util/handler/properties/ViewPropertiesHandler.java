@@ -9,6 +9,7 @@ public class ViewPropertiesHandler {
     public static final String PATH_MAIN = "path.main";
     public static final String PATH_ERROR = "path.error";
     public static final String PATH_INDEX = "path.index";
+    public static final String PATH_LOGIN = "path.login";
     public static final String PATH_INSPECTOR_PROCESS_REPORT = "path.inspector.process_report";
     public static final String PATH_USER_SEND_REPORT = "path.user.send_report";
 

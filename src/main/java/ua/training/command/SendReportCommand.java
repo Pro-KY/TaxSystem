@@ -11,7 +11,8 @@ public class SendReportCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         System.out.println("sendReport command");
-        request.setAttribute("fragmentPath", PATH_USER_SEND_REPORT);
+        final String viewPath = getViewPath(PATH_USER_SEND_REPORT);
+        request.setAttribute("fragmentPath", viewPath);
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }
 }

@@ -16,17 +16,6 @@
 <body>
     <h3>Error</h3>
 
-    <c:set var="myName" value="Alex"/>
-    <h1>${myName}</h1>
-
-    <c:if test="${10 > 9}">
-        <p>True<p>
-    </c:if>
-    <c:if test="${10 < 9}">
-        <p>False<p>
-    </c:if>
-
-    <hr/>
     <jsp:expression>(request.getAttribute("errorMsg") != null)
         ? (String) request.getAttribute("error") : "unknown error"</jsp:expression>
     <hr/>

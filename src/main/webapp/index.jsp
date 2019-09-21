@@ -19,7 +19,6 @@
     <meta charset="utf-8">
 </head>
 <body>
-
     <!-- header fragment -->
     <%@include file="/WEB-INF/jsp/fragments/header.jsp" %>
     <!-- header fragment -->
