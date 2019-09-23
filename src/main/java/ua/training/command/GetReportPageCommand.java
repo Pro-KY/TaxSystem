@@ -6,14 +6,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 
-// for inspector
-public class ProcessReportCommand implements ICommand {
+public class GetReportPageCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        System.out.println("process report command");
+        System.out.println("sendReport command");
 
-        final String viewPath = getViewPath(PATH_INSPECTOR_PROCESS_REPORT);
+        final String parameter = request.getParameter("sum");
+        System.out.println(parameter);
+
+        final String viewPath = getViewPath(PATH_USER_SEND_REPORT);
         request.setAttribute("fragmentPath", viewPath);
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }

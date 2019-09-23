@@ -1,7 +1,5 @@
 const form = 'Form';
 
-
-
 $(function(){
     $('#inputGroupSelect01').change(function() {
         // console.log(event.targetElement);
@@ -37,8 +35,10 @@ function openFile(evt) {
 
     fileReader.onload = function() {
         var text = fileReader.result;
-        console.log(text.substring(0, 200));
-        document.getElementById("inputFileLabel").innerText  = chosenFile.name;
+        // console.log(text.substring(0, 200));
+        var inputFileLabel = $("#inputFileLabel");
+        inputFileLabel.text(chosenFile.name);
+        $("#fileContentInput").val(text);
     };
 
     fileReader.readAsText(chosenFile, "UTF-8");

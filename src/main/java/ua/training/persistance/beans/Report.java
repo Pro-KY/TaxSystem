@@ -5,77 +5,98 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Report implements Serializable {
+    private Long id;
+    private TaxType taxType;
+    private double sum;
+    private int quarter;
 
-  private long id;
-  private long taxTypeId;
-  private double sum;
-  private long quarter;
+    public Report(Long id, TaxType taxType, double sum, int quarter) {
+        this.id = id;
+        this.taxType = taxType;
+        this.sum = sum;
+        this.quarter = quarter;
+    }
 
-  public Report(long id, long taxTypeId, double sum, long quarter) {
-    this.id = id;
-    this.taxTypeId = taxTypeId;
-    this.sum = sum;
-    this.quarter = quarter;
-  }
+    private Report(Builder builder) {
+        id = builder.id;
+        setTaxType(builder.taxType);
+        setSum(builder.sum);
+        setQuarter(builder.quarter);
+    }
 
-  public long getId() {
-    return id;
-  }
+    public long getId() {
+        return id;
+    }
 
-  public void setId(long id) {
-    this.id = id;
-  }
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    public TaxType getTaxType() {
+        return taxType;
+    }
 
-  public long getTaxTypeId() {
-    return taxTypeId;
-  }
+    public void setTaxType(TaxType taxType) {
+        this.taxType = taxType;
+    }
 
-  public void setTaxTypeId(long taxTypeId) {
-    this.taxTypeId = taxTypeId;
-  }
+    public double getSum() {
+        return sum;
+    }
 
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
 
-  public double getSum() {
-    return sum;
-  }
+    public long getQuarter() {
+        return quarter;
+    }
 
-  public void setSum(double sum) {
-    this.sum = sum;
-  }
+    public void setQuarter(int quarter) {
+        this.quarter = quarter;
+    }
 
+    public static final class Builder {
+        private Long id;
+        private TaxType taxType;
+        private double sum;
+        private int quarter;
 
-  public long getQuarter() {
-    return quarter;
-  }
+        public Builder() {
+        }
 
-  public void setQuarter(long quarter) {
-    this.quarter = quarter;
-  }
+        public Builder id(Long val) {
+            id = val;
+            return this;
+        }
 
-  @Override
-  public String toString() {
-    return "Report{" +
-            "id=" + id +
-            ", taxTypeId=" + taxTypeId +
-            ", sum=" + sum +
-            ", quarter=" + quarter +
-            '}';
-  }
+        public Builder taxType(TaxType val) {
+            taxType = val;
+            return this;
+        }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Report report = (Report) o;
-    return id == report.id &&
-            taxTypeId == report.taxTypeId &&
-            Double.compare(report.sum, sum) == 0 &&
-            quarter == report.quarter;
-  }
+        public Builder sum(double val) {
+            sum = val;
+            return this;
+        }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, taxTypeId, sum, quarter);
-  }
+        public Builder quarter(int val) {
+            quarter = val;
+            return this;
+        }
+
+        public Report build() {
+            return new Report(this);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "id=" + id +
+                ", taxTypeId=" + taxType +
+                ", sum=" + sum +
+                ", quarter=" + quarter +
+                '}';
+    }
 }

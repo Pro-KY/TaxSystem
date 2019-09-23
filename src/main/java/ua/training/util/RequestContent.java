@@ -20,11 +20,11 @@ public class RequestContent {
     }
 
     public void extractAuthenticationValues() {
-        final String login = request.getParameter(Parameter.LOGIN);
-        final String password = request.getParameter(Parameter.PASSWORD);
+        final String login = request.getParameter(RequestParameters.LOGIN);
+        final String password = request.getParameter(RequestParameters.PASSWORD);
         // TODO: handle case when values are null or absent
-        requestParameters.put(Parameter.LOGIN, login);
-        requestParameters.put(Parameter.PASSWORD, password);
+        requestParameters.put(RequestParameters.LOGIN, login);
+        requestParameters.put(RequestParameters.PASSWORD, password);
     }
 
     // метод добавления в запрос данных для передачи в jsp
