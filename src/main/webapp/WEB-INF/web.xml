@@ -28,4 +28,9 @@
         <servlet-name>frontController</servlet-name>
         <url-pattern>/taxsystem/*</url-pattern>
     </servlet-mapping>
+
+<!--    <context-param>-->
+<!--        <param-name>log4jConfiguration</param-name>-->
+<!--        <param-value>WEB-INF/classes/log4j2.xml</param-value>-->
+<!--    </context-param>-->
 </web-app>
