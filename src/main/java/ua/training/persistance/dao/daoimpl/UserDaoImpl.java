@@ -1,62 +1,51 @@
 package ua.training.persistance.dao.daoimpl;
 
-import ua.training.persistance.beans.User;
 import ua.training.persistance.dao.IUserDao;
-import ua.training.persistance.dao.mappers.UserBeanMapperImpl;
-import ua.training.persistance.dao.util.DaoUtil;
+import ua.training.persistance.dao.mappers.UserEntitiyMapperImpl;
+import ua.training.persistance.dao.util.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
+import ua.training.persistance.entities.User;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Optional;
 
 import static ua.training.util.handler.properties.SqlPropertiesHandler.LOGIN_AND_PASSWORD;
 
 // move all SQl queries to fields or in properties file
 public class UserDaoImpl implements IUserDao {
-    private MyDataSource myDataSource;
+    private static UserDaoImpl instance;
+//    private MyDataSource dataSource;
+    private JdbcTemplate jdbcTemplate;
 
-    public void setMyDataSource(MyDataSource myDataSource) {
-        this.myDataSource = myDataSource;
+    public void setDataSource(MyDataSource dataSource) {
+//        this.dataSource = dataSource;
+        jdbcTemplate.setDataSource(dataSource);
     }
 
-    public UserDaoImpl() { }
+    private UserDaoImpl() {
+        jdbcTemplate = JdbcTemplate.getInstance();
+    }
+
+    public static UserDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new UserDaoImpl();
+        }
+        return instance;
+    }
 
     public Optional<User> getUserByEmailAndPassword(String login, String password)  {
-        Optional<User> optionalUser;
+        String sql = SqlPropertiesHandler.getSqlQuery(LOGIN_AND_PASSWORD);
+        final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
+        Object[] params = {login, password};
 
-        final String getByLoginAndPasswordQry = SqlPropertiesHandler.getSqlQuery(LOGIN_AND_PASSWORD);
-
-        try (Connection connection = myDataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(getByLoginAndPasswordQry)) {
-                preparedStatement.setString(1, login);
-                preparedStatement.setString(2, password);
-
-            final ResultSet resultSet = preparedStatement.executeQuery();
-//            optionalUser = userBeanMapperImpl.mapRow(resultSet);
-            optionalUser= DaoUtil.mapResultSetToBean(new UserBeanMapperImpl(), resultSet);
-            optionalUser.ifPresent(user -> {
-                System.out.println(user);
-            });
-
-
-        } catch (Exception e) {
-            optionalUser = Optional.empty();
-                    //TODO: add logger
-//            throw new DaoException("error during getting data from DB", e);
-        }
-
-        return optionalUser;
+        return jdbcTemplate.getEntity(sql, new UserEntitiyMapperImpl(), params);
     }
 
     @Override
-    public void create(User user) throws SQLException {
+    public void save(User entity) {
 //        final String SQL = "INSERT INTO mydb.user (login, password, user_type_id) VALUES (?, ?, ?)";
 //
-//        final Connection connection = myDataSource.getConnection();
+//        final Connection connection = dataSource.getConnection();
 //        PreparedStatement ps = connection.prepareStatement(SQL);
 //
 //        try {
@@ -71,15 +60,15 @@ public class UserDaoImpl implements IUserDao {
 ////            sneakyThrow(new SQLException()); //TODO: uncomment later
 //            System.out.println("rows inserted: " + rowsAffected);
 //        } finally {
-//            myDataSource.releaseResources(connection, ps);
+//            dataSource.releaseResources(connection, ps);
 //        }
     }
 
     @Override
-    public void update(User user) {
+    public void update(User entity) {
 //        final String SQL = "UPDATE mydb.user SET login = ?, password = ?, user_type_id = ? WHERE id = ?";
 //
-//        try(final var connection = myDataSource.getConnection();
+//        try(final var connection = dataSource.getConnection();
 //            PreparedStatement ps = connection.prepareStatement(SQL)) {
 //
 ////            ps.setString(1, user.getLogin());
@@ -98,10 +87,10 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(User entity) {
 //        final String SQL = "DELETE FROM mydb.user WHERE id = ?";
 //
-//        try(final var connection = myDataSource.getConnection();
+//        try(final var connection = dataSource.getConnection();
 //            PreparedStatement ps = connection.prepareStatement(SQL)) {
 //            ps.setLong(1, user.getId());
 //
@@ -118,9 +107,9 @@ public class UserDaoImpl implements IUserDao {
 //
 //        Optional<User> user = Optional.empty();
 //
-//        try(final var connection = myDataSource.getConnection();
+//        try(final var connection = dataSource.getConnection();
 //            final var statement = connection.createStatement();
-//            final var resultSet = statement.executeQuery(sql)) {
+//            final var resultSet = statement.select(sql)) {
 //
 //            while (resultSet.next()) {
 //                user = mapRsToUser(resultSet);

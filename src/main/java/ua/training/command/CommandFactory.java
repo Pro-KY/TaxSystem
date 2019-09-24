@@ -1,5 +1,7 @@
 package ua.training.command;
 
+import ua.training.command.fragments.ReportFragmentCommand;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
@@ -12,7 +14,7 @@ public class CommandFactory {
         commandHashMap.put("changeLanguage", new LanguageCommand());
         commandHashMap.put("sendReport", new SendReportCommand());
         commandHashMap.put("processReport", new ProcessReportCommand());
-        commandHashMap.put("getReportPage", new GetReportPageCommand());
+        commandHashMap.put("reportPage", new ReportFragmentCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

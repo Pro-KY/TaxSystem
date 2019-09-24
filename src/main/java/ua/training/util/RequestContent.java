@@ -1,5 +1,7 @@
 package ua.training.util;
 
+import ua.training.util.constans.Parameters;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
@@ -20,11 +22,11 @@ public class RequestContent {
     }
 
     public void extractAuthenticationValues() {
-        final String login = request.getParameter(RequestParameters.LOGIN);
-        final String password = request.getParameter(RequestParameters.PASSWORD);
-        // TODO: handle case when values are null or absent
-        requestParameters.put(RequestParameters.LOGIN, login);
-        requestParameters.put(RequestParameters.PASSWORD, password);
+        final String login = request.getParameter(Parameters.LOGIN);
+        final String password = request.getParameter(Parameters.PASSWORD);
+        // TODO: mapRow case when values are null or absent
+        requestParameters.put(Parameters.LOGIN, login);
+        requestParameters.put(Parameters.PASSWORD, password);
     }
 
     // метод добавления в запрос данных для передачи в jsp

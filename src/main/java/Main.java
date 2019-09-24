@@ -1,12 +1,7 @@
-import ua.training.persistance.beans.User;
-import ua.training.persistance.dao.daoimpl.UserDaoImpl;
-import ua.training.util.exceptions.DaoException;
 import ua.training.util.exceptions.FileParsingException;
 import ua.training.util.parsers.FileParser;
 import ua.training.util.parsers.JsonFileParserImpl;
 import ua.training.util.parsers.XmlFileParserImpl;
-
-import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {

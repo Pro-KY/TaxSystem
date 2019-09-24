@@ -1,9 +1,8 @@
 package ua.training.util.parsers;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import ua.training.persistance.beans.Report;
-import ua.training.persistance.beans.TaxType;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import ua.training.persistance.entities.Report;
 import ua.training.util.exceptions.FileParsingException;
 
 public class JsonFileParserImpl implements FileParser<Report> {
@@ -13,19 +12,11 @@ public class JsonFileParserImpl implements FileParser<Report> {
 
         try {
             if (jsonContent != null && !jsonContent.isEmpty()) {
-                JSONObject jsonObject = new JSONObject(jsonContent);
-                final String taxtype = jsonObject.getString("taxtype");
-                final double sum = jsonObject.getDouble("sum");
-                final int quarter = jsonObject.getInt("quarter");
-
-
-                final TaxType taxType = new TaxType(taxtype);
-                report = new Report.Builder().
-                        quarter(quarter)
-                        .sum(sum)
-                        .taxType(taxType).build();
+                GsonBuilder builder = new GsonBuilder();
+                Gson gson = builder.create();
+                report = gson.fromJson(jsonContent, Report.class);
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             throw new FileParsingException("error occur during json file parsing");
         }
 

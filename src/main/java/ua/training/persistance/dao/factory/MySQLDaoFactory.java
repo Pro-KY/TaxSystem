@@ -1,15 +1,13 @@
 package ua.training.persistance.dao.factory;
 
-import ua.training.persistance.dao.IUserDao;
-import ua.training.persistance.dao.IRoleDao;
-import ua.training.persistance.dao.daoimpl.RoleDaoImpl;
-import ua.training.persistance.dao.daoimpl.UserDaoImpl;
+import ua.training.persistance.dao.*;
+import ua.training.persistance.dao.daoimpl.*;
 import ua.training.persistance.db.datasource.MyDataSource;
 import ua.training.persistance.db.datasource.MysqlMyDataSource;
 
 // get Dao's via fabric
 public class MySQLDaoFactory implements DaoFactory {
-    // should I create one method with switch statement which accepts enum?
+    // should I save one method with switch statement which accepts enum?
     private MyDataSource myDataSource;
     private static MySQLDaoFactory instance;
 
@@ -30,16 +28,37 @@ public class MySQLDaoFactory implements DaoFactory {
     }
 
     @Override
+    public ITaxTypeDao getTaxTypeDao() {
+        final TaxTypeDaoImpl taxTypeDao = TaxTypeDaoImpl.getInstance();
+        taxTypeDao.setDataSource(myDataSource);
+        return taxTypeDao;
+    }
+
+    @Override
     public IUserDao getUserDao() {
-        final UserDaoImpl userDao = new UserDaoImpl();
-        userDao.setMyDataSource(myDataSource);
+        final UserDaoImpl userDao = UserDaoImpl.getInstance();
+        userDao.setDataSource(myDataSource);
         return userDao;
     }
 
     @Override
-    public IRoleDao getUserTypeDao() {
-        final RoleDaoImpl userTypeDao = new RoleDaoImpl();
-        userTypeDao.setMyDataSource(myDataSource);
+    public IUserTypeDao getUserTypeDao() {
+        final UserTypeDaoImpl userTypeDao = new UserTypeDaoImpl();
+        userTypeDao.setDataSource(myDataSource);
         return userTypeDao;
+    }
+
+    @Override
+    public IReportDao getReportDao() {
+        final IReportDaoIml iReportDaoIml = IReportDaoIml.getInstance();
+        iReportDaoIml.setDataSource(myDataSource);
+        return iReportDaoIml;
+    }
+
+    @Override
+    public IReportStateDao getReportStateDao() {
+        final ReportStateDaoImpl iReportDaoIml = ReportStateDaoImpl.getInstance();
+        iReportDaoIml.setDataSource(myDataSource);
+        return iReportDaoIml;
     }
 }

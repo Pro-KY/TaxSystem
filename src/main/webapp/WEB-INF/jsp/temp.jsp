@@ -46,7 +46,7 @@
 <%--                            <fmt:message key="main.usertype.inspector" bundle="${rb}"/>--%>
 <%--                        </c:when>--%>
 <%--                        <c:when test="${currentRole eq roleUser}">--%>
-<%--                            <c:if test="${user.physical}">--%>
+<%--                            <c:if test="${sender.physical}">--%>
 <%--                                <fmt:message key="main.usertype.individual" bundle="${rb}"/>--%>
 <%--                            </c:if>--%>
 <%--                            <fmt:message key="main.usertype.legal" bundle="${rb}"/>--%>

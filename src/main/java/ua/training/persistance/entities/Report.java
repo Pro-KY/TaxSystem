@@ -1,8 +1,7 @@
-package ua.training.persistance.beans;
+package ua.training.persistance.entities;
 
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class Report implements Serializable {
     private Long id;

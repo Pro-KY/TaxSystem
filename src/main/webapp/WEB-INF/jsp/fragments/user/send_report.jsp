@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page import="ua.training.util.RequestParameters" %>
+<%@ page import="ua.training.util.constans.Parameters" %>
+<%@ page import="ua.training.util.constans.Attributes" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <fmt:message var="selectFormItem" key="sendreport.dropdown.item.form" bundle="${sessionScope.rb}" scope="request"/>
 <fmt:message var="dropDownBtnLabel" key="sendreport.dropdown.label" bundle="${sessionScope.rb}" scope="request"/>
@@ -27,7 +29,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">${reportTypeName}</label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01" name="${RequestParameters.REPORT_CONTENT_TYPE}">
+                    <select class="custom-select" id="inputGroupSelect01" name="${Parameters.REPORT_CONTENT_TYPE}">
                         <option selected >${selectFormItem}</option>
                         <option>JSON</option>
                         <option>XML</option>
@@ -39,18 +41,18 @@
                     <!-- type -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">${taxTypeLabel}</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="${RequestParameters.REPORT_TAXTYPE}">
-                            <option>${singleTaxType}</option>
-                            <option>${propertyTaxType}</option>
-                            <option>${touristTaxType}</option>
-                            <option>${parkingTaxType}</option>
+                        <select class="form-control" id="exampleFormControlSelect1" name="${Parameters.REPORT_TAXTYPE_ID}">
+                            <option value="1">${singleTaxType}</option>
+                            <option value="2"> ${propertyTaxType}</option>
+                            <option value="3">${touristTaxType}</option>
+                            <option value="4">${parkingTaxType}</option>
                         </select>
                     </div>
 
                     <!-- quoter -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">${quarterLabel}</label>
-                        <select class="form-control" id="exampleFormControlSelect2" name="${RequestParameters.REPORT_QUARTER}">
+                        <select class="form-control" id="exampleFormControlSelect2" name="${Parameters.REPORT_QUARTER}">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -61,7 +63,7 @@
                     <!-- sum-->
                     <div class="form-group">
                         <label for="exampleFormControlInput2">${sumLabel}</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="sum" name="${RequestParameters.REPORT_SUM}">
+                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="sum" name="${Parameters.REPORT_SUM}">
                     </div>
                 </div>
 
@@ -77,7 +79,7 @@
                 </div>
 
                 <input type="hidden" name="command" value="sendReport">
-                <input type="hidden" id="fileContentInput" name="${RequestParameters.REPORT_CONTENT}">
+                <input type="hidden" id="fileContentInput" name="${Parameters.REPORT_CONTENT}">
                 <button type="submit" class="btn btn-primary">${submitButton}</button>
             </form>
             <!-- form -->

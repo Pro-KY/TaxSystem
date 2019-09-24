@@ -1,4 +1,4 @@
-package ua.training.persistance.beans;
+package ua.training.persistance.entities;
 
 
 import java.io.Serializable;
@@ -6,15 +6,13 @@ import java.util.Objects;
 
 public class TaxType implements Serializable {
 
-  private long id;
+  private Long id;
   private String type;
 
-  public TaxType(long id, String type) {
-    this.id = id;
-    this.type = type;
-  }
+  public TaxType() {}
 
-  public TaxType(String type) {
+  public TaxType(Long id, String type) {
+    this.id = id;
     this.type = type;
   }
 
@@ -22,7 +20,7 @@ public class TaxType implements Serializable {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

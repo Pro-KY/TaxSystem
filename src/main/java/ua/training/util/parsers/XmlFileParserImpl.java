@@ -5,13 +5,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import ua.training.persistance.beans.Report;
-import ua.training.persistance.beans.TaxType;
+import ua.training.persistance.entities.Report;
+import ua.training.persistance.entities.TaxType;
 import ua.training.util.exceptions.FileParsingException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.ByteArrayInputStream;
 import java.io.StringReader;
 
 public class XmlFileParserImpl implements FileParser<Report> {
@@ -26,18 +25,26 @@ public class XmlFileParserImpl implements FileParser<Report> {
                 InputSource is = new InputSource(new StringReader(xml));
                 final Document document = builder.parse(is);
                 document.getDocumentElement().normalize();
-                NodeList nList = document.getElementsByTagName("report");
+                NodeList reportTags = document.getElementsByTagName("report");
 
-                for (int i = 0; i < nList.getLength(); i++) {
-                    Node nNode = nList.item(i);
+                for (int i = 0; i < reportTags.getLength(); i++) {
+                    Node nNode = reportTags.item(i);
 
                     if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                         Element eElement = (Element) nNode;
+
                         final String quarter = eElement.getElementsByTagName("quarter").item(0).getTextContent().trim();
-                        final String taxtype = eElement.getElementsByTagName("taxtype").item(0).getTextContent().trim();
+
+                        TaxType taxType = null;
+                        NodeList taxTypeElements = document.getElementsByTagName("taxtype");
+                        for (int j = 0; j < taxTypeElements.getLength(); j++) {
+                            String id = eElement.getElementsByTagName("id").item(0).getTextContent().trim();
+                            String taxTypeText = eElement.getElementsByTagName("type").item(0).getTextContent().trim();
+                            taxType = new TaxType(Long.valueOf(id), taxTypeText);
+                        }
+
                         final String sum = eElement.getElementsByTagName("sum").item(0).getTextContent().trim();
 
-                        final TaxType taxType = new TaxType(taxtype);
                         report = new Report.Builder().
                                 quarter(Integer.valueOf(quarter))
                                 .sum(Double.valueOf(sum))

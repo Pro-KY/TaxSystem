@@ -1,14 +1,12 @@
 package ua.training.persistance.dao.mappers;
 
-import ua.training.persistance.beans.User;
-import ua.training.persistance.beans.UserType;
-import ua.training.util.exceptions.BeanMappingException;
+import ua.training.persistance.entities.User;
+import ua.training.persistance.entities.UserType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Optional;
 
-public class UserBeanMapperImpl implements BeanMapper<User> {
+public class UserEntitiyMapperImpl implements Mapper<User> {
     public static final String ID = "id";
     public static final String PASSWORD = "password";
     public static final String FIRST_NAME = "first_name";
@@ -20,8 +18,9 @@ public class UserBeanMapperImpl implements BeanMapper<User> {
 
 
     @Override
-    public Optional<User> mapRow(ResultSet resultSet) throws BeanMappingException {
-        Optional<User> optionalUser = Optional.empty();
+    public User mapRow(ResultSet resultSet) {
+//        Optional<User> optionalUser = Optional.empty();
+        User user = null;
 
         try {
             if (resultSet.next()) {
@@ -34,17 +33,18 @@ public class UserBeanMapperImpl implements BeanMapper<User> {
                 final String password = resultSet.getString(PASSWORD);
                 final long userTypeId = resultSet.getLong(USER_TYPE_ID);
                 final String type = resultSet.getString(UserTypeBeanMapper.TYPE);
+                // TODO: remove from here
                 final UserType userType = new UserType(userTypeId, type);
+                // TODO: remove from here
 
-                final User user = new User(id, firstName, lastName, organization, email, password, adress, userType);
-                optionalUser = Optional.of(user);
+                user = new User(id, firstName, lastName, organization, email, password, adress, userType);
             }
         } catch (SQLException e) {
             System.out.println(e.getCause().toString());
-            throw new BeanMappingException("can't map User bean due to absent of some fields", e.getCause());
+//            throw new BeanMappingException("can't map User bean due to absent of some fields", e.getCause());
             //TODO: add logger here
         }
 
-        return optionalUser;
+        return user;
     }
 }

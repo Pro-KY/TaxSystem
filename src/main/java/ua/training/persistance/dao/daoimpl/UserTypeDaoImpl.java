@@ -1,28 +1,27 @@
 package ua.training.persistance.dao.daoimpl;
 
-import ua.training.persistance.dao.IRoleDao;
+import ua.training.persistance.dao.IUserTypeDao;
 import ua.training.persistance.db.datasource.MyDataSource;
-import ua.training.persistance.beans.Role;
+import ua.training.persistance.entities.Role;
 
-import java.sql.SQLException;
 import java.util.Optional;
 
-public class RoleDaoImpl implements IRoleDao {
+public class UserTypeDaoImpl implements IUserTypeDao {
     private MyDataSource myDataSource;
 
-    public void setMyDataSource(MyDataSource myDataSource) {
+    public void setDataSource(MyDataSource myDataSource) {
         this.myDataSource = myDataSource;
     }
 
     @Override
-    public void create(Role userType) throws SQLException {
+    public void save(Role entity) {
 //        final String SQL = "INSERT INTO mydb.use_type (user_type, description) VALUES (?, ?)";
 //
 //        final var connection = myDataSource.getConnection();
 //        PreparedStatement ps = connection.prepareStatement(SQL);
 //
 //        try {
-//            System.out.println("conn in RoleDaoImpl: " + connection.toString());
+//            System.out.println("conn in UserTypeDaoImpl: " + connection.toString());
 //
 //            ps.setString(1, userType.getUserType());
 //            ps.setString(2, userType.getDescription());
@@ -38,12 +37,12 @@ public class RoleDaoImpl implements IRoleDao {
     }
 
     @Override
-    public void update(Role userType) {
+    public void update(Role entity) {
 
     }
 
     @Override
-    public void delete(Role userType) {
+    public void delete(Role entity) {
 
     }
 
