@@ -1,6 +1,6 @@
 package ua.training.persistance.dao;
 
-import ua.training.persistance.entities.TaxType;
+import ua.training.persistance.beans.TaxType;
 
 import java.util.List;
 import java.util.Optional;

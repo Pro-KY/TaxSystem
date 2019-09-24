@@ -1,7 +1,6 @@
 package ua.training.persistance.dao.mappers;
 
-import ua.training.persistance.entities.User;
-import ua.training.persistance.entities.UserType;
+import ua.training.persistance.beans.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,10 +33,10 @@ public class UserEntitiyMapperImpl implements Mapper<User> {
                 final long userTypeId = resultSet.getLong(USER_TYPE_ID);
                 final String type = resultSet.getString(UserTypeBeanMapper.TYPE);
                 // TODO: remove from here
-                final UserType userType = new UserType(userTypeId, type);
+//                final UserType userType = new UserType(userTypeId, type);
                 // TODO: remove from here
 
-                user = new User(id, firstName, lastName, organization, email, password, adress, userType);
+                user = new User(id, firstName, lastName, organization, email, password, adress, userTypeId);
             }
         } catch (SQLException e) {
             System.out.println(e.getCause().toString());

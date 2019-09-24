@@ -2,7 +2,7 @@ package ua.training.persistance.dao.mappers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.persistance.entities.TaxType;
+import ua.training.persistance.beans.TaxType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

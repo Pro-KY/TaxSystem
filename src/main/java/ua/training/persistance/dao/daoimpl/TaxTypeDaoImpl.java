@@ -4,7 +4,7 @@ import ua.training.persistance.dao.ITaxTypeDao;
 import ua.training.persistance.dao.mappers.TaxTypeMapperIml;
 import ua.training.persistance.dao.util.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
-import ua.training.persistance.entities.TaxType;
+import ua.training.persistance.beans.TaxType;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.List;
@@ -41,34 +41,33 @@ public class TaxTypeDaoImpl implements ITaxTypeDao {
         final String type = taxType.getType();
         final Object[] parameters = {type};
 
-        return jdbcTemplate.getEntity(sql, new TaxTypeMapperIml(), parameters);
+        return jdbcTemplate.findByQuery(sql, new TaxTypeMapperIml(), parameters);
     }
 
     @Override
     public List<TaxType> getAllTaxTypes() {
         final Object[] parameters = {};
         String sql = SqlPropertiesHandler.getSqlQuery(ALL_TAX_TYPES);
-        return jdbcTemplate.getAllEntities(sql, new TaxTypeMapperIml(), parameters);
+        return jdbcTemplate.finAll(sql, new TaxTypeMapperIml(), parameters);
     }
 
     @Override
-    public void save(TaxType entity) {
-
+    public Long save(TaxType bean) {
+        return null;
     }
 
     @Override
-    public void update(TaxType entity){
-
-
+    public Long update(TaxType bean) {
+        return null;
     }
 
     @Override
-    public void delete(TaxType entity){
-
+    public boolean delete(TaxType bean) {
+        return false;
     }
 
     @Override
-    public Optional<TaxType> getById(Long id) {
+    public Optional<TaxType> findById(Long id) {
         return Optional.empty();
     }
 

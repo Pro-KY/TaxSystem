@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<c:set var="isRoleUser" value="${sessionScope.currentUserType != sessionScope.userTypeInspector}"/>
+<c:set var="isRoleUser" value="${sessionScope.currentUserTypeId != sessionScope.userTypeInspectorId}"/>
 <c:set var="command_0" value="${isRoleUser ? 'reportPage' : 'processReport'}" scope="page"/>
 <c:set var="command_1" value="${isRoleUser ? 'sentReports' : 'handledReports'}" scope="page"/>
 

@@ -4,7 +4,7 @@ import ua.training.persistance.dao.IUserDao;
 import ua.training.persistance.dao.mappers.UserEntitiyMapperImpl;
 import ua.training.persistance.dao.util.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
-import ua.training.persistance.entities.User;
+import ua.training.persistance.beans.User;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.Optional;
@@ -38,11 +38,11 @@ public class UserDaoImpl implements IUserDao {
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
         Object[] params = {login, password};
 
-        return jdbcTemplate.getEntity(sql, new UserEntitiyMapperImpl(), params);
+        return jdbcTemplate.findByQuery(sql, new UserEntitiyMapperImpl(), params);
     }
 
     @Override
-    public void save(User entity) {
+    public Long save(User bean) {
 //        final String SQL = "INSERT INTO mydb.user (login, password, user_type_id) VALUES (?, ?, ?)";
 //
 //        final Connection connection = dataSource.getConnection();
@@ -62,10 +62,11 @@ public class UserDaoImpl implements IUserDao {
 //        } finally {
 //            dataSource.releaseResources(connection, ps);
 //        }
+        return 0L;
     }
 
     @Override
-    public void update(User entity) {
+    public Long update(User bean) {
 //        final String SQL = "UPDATE mydb.user SET login = ?, password = ?, user_type_id = ? WHERE id = ?";
 //
 //        try(final var connection = dataSource.getConnection();
@@ -84,10 +85,11 @@ public class UserDaoImpl implements IUserDao {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
+        return 0L;
     }
 
     @Override
-    public void delete(User entity) {
+    public boolean delete(User bean) {
 //        final String SQL = "DELETE FROM mydb.user WHERE id = ?";
 //
 //        try(final var connection = dataSource.getConnection();
@@ -99,10 +101,11 @@ public class UserDaoImpl implements IUserDao {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
+        return false;
     }
 
     @Override
-    public Optional<User> getById(Long id) {
+    public Optional<User> findById(Long id) {
 //        String sql = "SELECT * FROM mydb.user WHERE id = " + id;
 //
 //        Optional<User> user = Optional.empty();

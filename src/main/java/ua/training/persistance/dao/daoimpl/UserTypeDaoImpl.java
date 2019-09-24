@@ -2,7 +2,7 @@ package ua.training.persistance.dao.daoimpl;
 
 import ua.training.persistance.dao.IUserTypeDao;
 import ua.training.persistance.db.datasource.MyDataSource;
-import ua.training.persistance.entities.Role;
+import ua.training.persistance.beans.Role;
 
 import java.util.Optional;
 
@@ -14,7 +14,7 @@ public class UserTypeDaoImpl implements IUserTypeDao {
     }
 
     @Override
-    public void save(Role entity) {
+    public Long save(Role bean) {
 //        final String SQL = "INSERT INTO mydb.use_type (user_type, description) VALUES (?, ?)";
 //
 //        final var connection = myDataSource.getConnection();
@@ -34,20 +34,21 @@ public class UserTypeDaoImpl implements IUserTypeDao {
 //        } finally {
 //            myDataSource.releaseResources(connection, ps);
 //        }
+        return 1L;
     }
 
     @Override
-    public void update(Role entity) {
-
+    public Long update(Role bean) {
+        return 1L;
     }
 
     @Override
-    public void delete(Role entity) {
-
+    public boolean delete(Role bean) {
+        return false;
     }
 
     @Override
-    public Optional<Role> getById(Long id) {
+    public Optional<Role> findById(Long id) {
         return Optional.empty();
     }
 

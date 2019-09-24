@@ -9,17 +9,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<jsp:useBean id="user" scope="session" type="ua.training.persistance.entities.User"/>
+<jsp:useBean id="user" scope="session" type="ua.training.persistance.beans.User"/>
 
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="localization.pagecontent" var = "rb" scope="session"/>
 
 <c:set var="session" value="${pageContext.session}" scope="session"/>
-<c:set var="currentUserType" value="${user.userType.type}" scope="session"/>
+<c:set var="currentUserTypeId" value="${user.userTypeId}" scope="session"/>
 
-<c:set var="userTypeLegalEntity" value="legal entity" scope="session"/>
-<c:set var="userTypeIndividual" value="individual" scope="session"/>
-<c:set var="userTypeInspector" value="inspector" scope="session"/>
+<c:set var="userTypeIndividualId" value="1" scope="session"/>
+<c:set var="userTypeLegalEntityId" value="2" scope="session"/>
+<c:set var="userTypeInspectorId" value="3" scope="session"/>
 
 <fmt:message var ="userTypeIndividualText" key="main.usertype.individual" bundle="${rb}"/>
 <fmt:message var ="userTypeLegalEntityText" key="main.usertype.legal" bundle="${rb}"/>
@@ -58,7 +58,7 @@
 
                 <!-- user type -->
                 <span class="text-white">
-                    ${currentUserType eq userTypeInspector ? userTypeInspector : (currentUserType eq userTypeLegalEntity ? userTypeLegalEntityText : userTypeIndividualText)}
+                    ${currentUserTypeId eq userTypeInspectorId ? userTypeInspectorText : (currentUserTypeId eq userTypeLegalEntityId ? userTypeLegalEntityText : userTypeIndividualText)}
                 </span>
                 <!-- user type -->
             </div>
@@ -80,9 +80,9 @@
     <div class="container-fluid">
         <div class="row">
             <!-- menu -->
-            <c:import url="fragments/menu.jsp" />
-<%--            <jsp:include page="fragments/menu.jsp"/>--%>
-<%--            <%@include file="fragments/menu.jsp" %>--%>
+            <c:import url="fragments/sidebar.jsp" />
+<%--            <jsp:include page="fragments/sidebar.jsp"/>--%>
+<%--            <%@include file="fragments/sidebar.jsp" %>--%>
             <!-- menu -->
 
             <!-- center page content -->

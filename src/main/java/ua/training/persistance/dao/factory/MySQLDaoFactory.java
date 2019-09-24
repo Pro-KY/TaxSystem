@@ -50,9 +50,9 @@ public class MySQLDaoFactory implements DaoFactory {
 
     @Override
     public IReportDao getReportDao() {
-        final IReportDaoIml iReportDaoIml = IReportDaoIml.getInstance();
-        iReportDaoIml.setDataSource(myDataSource);
-        return iReportDaoIml;
+        final ReportDaoIml reportDaoIml = ReportDaoIml.getInstance();
+        reportDaoIml.setDataSource(myDataSource);
+        return reportDaoIml;
     }
 
     @Override
@@ -60,5 +60,12 @@ public class MySQLDaoFactory implements DaoFactory {
         final ReportStateDaoImpl iReportDaoIml = ReportStateDaoImpl.getInstance();
         iReportDaoIml.setDataSource(myDataSource);
         return iReportDaoIml;
+    }
+
+    @Override
+    public ISendReportEventDao getSendReportEventDao() {
+        final SendReportEventDaoImpl sendReportEventDaoImpl = SendReportEventDaoImpl.getInstance();
+        sendReportEventDaoImpl.setDataSource(myDataSource);
+        return sendReportEventDaoImpl;
     }
 }

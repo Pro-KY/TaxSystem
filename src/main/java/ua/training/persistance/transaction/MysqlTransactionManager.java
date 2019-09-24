@@ -16,7 +16,7 @@ public class MysqlTransactionManager implements TransactionManager {
     private DaoFactory mySQLDaoFactory;
     private MysqlMyDataSourceProxy mysqlDataSourceProxy;
     private Connection connection;
-
+    private boolean isRollBacked;
 
     public static MysqlTransactionManager getInstance() {
         if (instance == null) {
@@ -33,6 +33,8 @@ public class MysqlTransactionManager implements TransactionManager {
 
     @Override
     public void doInTransaction(ThrowingConsumer<DaoFactory, Exception> daoFactoryConsumer) { // Consumer<DaoFactory> daoFactoryConsumer
+        isRollBacked = false;
+
         try {
             connection = mysqlDataSourceProxy.getConnection();
             connection.setAutoCommit(false);
@@ -40,6 +42,7 @@ public class MysqlTransactionManager implements TransactionManager {
             commit();
         } catch(Exception e) {
             logger.debug("exp here.. =(");
+            isRollBacked = true;
             rollback();
         } finally {
             try {
@@ -59,6 +62,10 @@ public class MysqlTransactionManager implements TransactionManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isRollBacked() {
+        return isRollBacked;
     }
 
     @Override

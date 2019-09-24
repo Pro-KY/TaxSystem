@@ -9,6 +9,8 @@ public class SqlPropertiesHandler {
     public static final String GET_TAX_TYPE_BY_NAME = "TAX_TYPE_BY_NAME";
     public static final String ALL_TAX_TYPES = "ALL_TAX_TYPES";
     public static final String REPORT_STATE_BY_NANE = "REPORT_STATE_BY_NANE";
+    public static final String SAVE_REPORT = "SAVE_REPORT";
+    public static final String SAVE_SEND_REPORT_EVENT = "SAVE_SEND_REPORT_EVENT";
 
 
 

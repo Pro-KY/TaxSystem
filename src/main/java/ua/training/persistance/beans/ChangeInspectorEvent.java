@@ -1,4 +1,4 @@
-package ua.training.persistance.entities;
+package ua.training.persistance.beans;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

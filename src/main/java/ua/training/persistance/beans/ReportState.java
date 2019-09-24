@@ -1,4 +1,4 @@
-package ua.training.persistance.entities;
+package ua.training.persistance.beans;
 
 
 import java.io.Serializable;
@@ -37,7 +37,7 @@ public class ReportState implements Serializable {
 
   @Override
   public String toString() {
-    return "ReportState{" +
+    return "ReportStateEnum{" +
             "id=" + id +
             ", name='" + name + '\'' +
             '}';

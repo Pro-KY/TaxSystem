@@ -3,15 +3,15 @@ package ua.training.command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.command.util.CommandParamsExtractor;
-import ua.training.persistance.entities.Report;
-import ua.training.persistance.entities.User;
+import ua.training.dto.SendReportDto;
+import ua.training.persistance.beans.User;
 import ua.training.service.SendReportService;
 import ua.training.util.constans.Attributes;
+import ua.training.util.exceptions.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
-import static ua.training.command.util.CommandUtilFunctions.extractParamsIntoReport;
 
 public class SendReportCommand implements ICommand {
 
@@ -27,16 +27,19 @@ public class SendReportCommand implements ICommand {
         final HttpSession session = request.getSession(false);
         final User user = (User) session.getAttribute(Attributes.USER);
 
-        logger.info("hello");
-        final Optional<Report> reportOptional = CommandParamsExtractor.extractParamsIntoBean(extractParamsIntoReport, request);
-//        final Report report = reportOptional.orElseThrow(() -> new ServiceException("Can't sent report due to some problems"));
+        final Optional<SendReportDto> reportOptional = CommandParamsExtractor.extractParamsIntoBean(request, SendReportDto.class);
 
-        // if type from
-        // else => parse here
-
-        if (reportOptional.isPresent()) {
-            final Report report = reportOptional.get();
-            sendReportService.saveSentReport(report, user);
+        try {
+            if (reportOptional.isPresent()) {
+                final SendReportDto sendReportDto = reportOptional.get();
+                sendReportDto.setUser(user);
+                sendReportService.saveSentReport(sendReportDto);
+            } else {
+                // show error page
+            }
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            // return error page
         }
 
         return null;

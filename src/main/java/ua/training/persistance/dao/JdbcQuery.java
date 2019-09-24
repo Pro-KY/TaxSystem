@@ -9,17 +9,13 @@ public class JdbcQuery {
     private String sql;
     private int rowsAffected;
 
-    public ResultSet getResult() {
-        return rs;
-    }
+//    public ResultSet getResult() {
+//        return rs;
+//    }
 
     public JdbcQuery(Connection connection, String sql) {
         this.connection = connection;
         this.sql = sql;
-    }
-
-    public int getRowsAffected() {
-        return rowsAffected;
     }
 
     private void setParameters(Object... parameters) {
@@ -32,9 +28,29 @@ public class JdbcQuery {
         }
     }
 
-    public void saveOrUpdate() {
+    public Long saveOrUpdate(Object... parameters) {
+        performModyingQuery(parameters);
+        long generatedKey = 0L;
+
+        try {
+            if(rs.next()) {
+                generatedKey = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e);
+        }
+        return generatedKey;
+    }
+
+    public boolean delete(Object... parameters) {
+        performModyingQuery(parameters);
+        return rowsAffected > 0;
+    }
+
+    private void performModyingQuery(Object... parameters) {
         try {
             ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            setParameters(parameters);
             rowsAffected = ps.executeUpdate();
             rs = ps.getGeneratedKeys();
         } catch (SQLException e) {
@@ -42,11 +58,12 @@ public class JdbcQuery {
         }
     }
 
-    public void select(Object... parameters) {
+    public ResultSet select(Object... parameters) {
         try {
             ps = connection.prepareStatement(sql);
             setParameters(parameters);
             rs = ps.executeQuery();
+            return rs;
         } catch (SQLException e) {
             throw new DataAccessException(e);
         }

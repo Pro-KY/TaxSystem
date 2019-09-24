@@ -29,13 +29,12 @@ public class JdbcTemplate {
     }
 
 //    Function<ResultSet, List<T>> function
-    public <T> List<T> getAllEntities(String sql, Mapper <T> mapper, Object... parameters) {
+    public <T> List<T> finAll(String sql, Mapper <T> mapper, Object... parameters) {
         final Connection connection = myDataSource.getConnection();
         List<T> resultList = new ArrayList<>();
 
         final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
-        jdbcQuery1.select(parameters);
-        final ResultSet result = jdbcQuery1.getResult();
+        final ResultSet result = jdbcQuery1.select(parameters);
 
         try {
             while (result.next()) {
@@ -51,14 +50,32 @@ public class JdbcTemplate {
         return resultList;
     }
 
-    public <T> Optional<T> getEntity(String sql, Mapper<T> mapper, Object... parameters) {
+    public <T> Optional<T> findByQuery(String sql, Mapper<T> mapper, Object... parameters) {
         final Connection connection = myDataSource.getConnection();
         final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
-        jdbcQuery1.select(parameters);
-        final ResultSet result = jdbcQuery1.getResult();
+        final ResultSet result = jdbcQuery1.select(parameters);
+//        final ResultSet result = jdbcQuery1.getResult();
         final Optional<T> t = Optional.ofNullable(mapper.mapRow(result));
         jdbcQuery1.releaseResources();
         return t;
+    }
+
+    public Long saveOrUpdate(String sql, Object... parameters) {
+        long insertedId;
+        final Connection connection = myDataSource.getConnection();
+        final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
+        insertedId = jdbcQuery1.saveOrUpdate(parameters);
+        jdbcQuery1.releaseResources();
+        return insertedId;
+    }
+
+    public boolean delete(String sql, Object... parameters) {
+        boolean isDeleted;
+        final Connection connection = myDataSource.getConnection();
+        final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
+        isDeleted = jdbcQuery1.delete(parameters);
+        jdbcQuery1.releaseResources();
+        return isDeleted;
     }
 
 
@@ -169,7 +186,7 @@ public class JdbcTemplate {
 
 
 
-//    public <T> Optional<T> findOne(String queryName, Function<T, Object[]> paramsExtractor, Mapper<T> entityMapper, T entity) {
+//    public <T> Optional<T> findByQuery(String queryName, Function<T, Object[]> paramsExtractor, Mapper<T> entityMapper, T entity) {
 //        Optional<T> result;
 //
 //        final String sqlQuery = SqlPropertiesHandler.getSqlQuery(queryName);

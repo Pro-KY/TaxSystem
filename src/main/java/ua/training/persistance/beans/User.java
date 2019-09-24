@@ -1,4 +1,4 @@
-package ua.training.persistance.entities;
+package ua.training.persistance.beans;
 
 import java.io.Serializable;
 
@@ -10,10 +10,11 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String address;
-//    private Long userTypeId;
-    private UserType userType;
+    private Long userTypeId;
 
-    public User(long id, String firstName, String lastName, String organization, String email, String password, String address, UserType userType) {
+    public User() {}
+
+    public User(Long id, String firstName, String lastName, String organization, String email, String password, String address, Long userTypeId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,25 +22,13 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
         this.address = address;
-        this.userType = userType;
+        this.userTypeId = userTypeId;
     }
 
     public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
-
-    private User(Builder builder) {
-        id = builder.id;
-        setFirstName(builder.firstName);
-        setLastName(builder.lastName);
-        setOrganization(builder.organization);
-        setEmail(builder.email);
-        setPassword(builder.password);
-        setAddress(builder.address);
-        userType = builder.userType;
-    }
-
 
     public long getId() {
         return id;
@@ -97,12 +86,12 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+    public Long getUserTypeId() {
+        return userTypeId;
     }
 
-    public UserType getUserType() {
-        return userType;
+    public void setUserTypeId(Long userTypeId) {
+        this.userTypeId = userTypeId;
     }
 
     @Override
@@ -115,65 +104,7 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", address='" + address + '\'' +
-                ", userType=" + userType +
+                ", userType=" + userTypeId +
                 '}';
-    }
-
-    public static final class Builder {
-        private Long id;
-        private String firstName;
-        private String lastName;
-        private String organization;
-        private String email;
-        private String password;
-        private String address;
-        private UserType userType;
-
-        public Builder() {
-        }
-
-        public Builder id(Long val) {
-            id = val;
-            return this;
-        }
-
-        public Builder firstName(String val) {
-            firstName = val;
-            return this;
-        }
-
-        public Builder lastName(String val) {
-            lastName = val;
-            return this;
-        }
-
-        public Builder organization(String val) {
-            organization = val;
-            return this;
-        }
-
-        public Builder email(String val) {
-            email = val;
-            return this;
-        }
-
-        public Builder password(String val) {
-            password = val;
-            return this;
-        }
-
-        public Builder address(String val) {
-            address = val;
-            return this;
-        }
-
-        public Builder userType(UserType val) {
-            userType = val;
-            return this;
-        }
-
-        public User build() {
-            return new User(this);
-        }
     }
 }

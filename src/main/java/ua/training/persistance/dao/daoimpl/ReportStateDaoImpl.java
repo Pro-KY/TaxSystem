@@ -3,7 +3,7 @@ package ua.training.persistance.dao.daoimpl;
 import ua.training.persistance.dao.IReportStateDao;
 import ua.training.persistance.dao.util.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
-import ua.training.persistance.entities.ReportState;
+import ua.training.persistance.beans.ReportState;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.Optional;
@@ -31,27 +31,27 @@ public class ReportStateDaoImpl implements IReportStateDao {
 
     public ReportState findByName(String name) {
         String sql = SqlPropertiesHandler.getSqlQuery(REPORT_STATE_BY_NANE);
-//        jdbcTemplate.getEntity(sql, );
+//        jdbcTemplate.findByQuery(sql, );
         return null;
     }
 
     @Override
-    public void save(ReportState entity) {
-
+    public Long save(ReportState bean) {
+        return 0L;
     }
 
     @Override
-    public void update(ReportState entity) {
-
+    public Long update(ReportState bean) {
+        return 0L;
     }
 
     @Override
-    public void delete(ReportState entity) {
-
+    public boolean delete(ReportState bean) {
+        return false;
     }
 
     @Override
-    public Optional<ReportState> getById(Long id) {
+    public Optional<ReportState> findById(Long id) {
         return Optional.empty();
     }
 }

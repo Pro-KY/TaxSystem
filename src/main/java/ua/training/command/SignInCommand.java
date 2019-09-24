@@ -1,6 +1,6 @@
 package ua.training.command;
 
-import ua.training.persistance.entities.User;
+import ua.training.persistance.beans.User;
 import ua.training.persistance.dao.mappers.UserEntitiyMapperImpl;
 import ua.training.service.SignInService;
 import ua.training.util.handler.properties.MessagePropertiesHandler;

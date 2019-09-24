@@ -5,8 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import ua.training.persistance.entities.Report;
-import ua.training.persistance.entities.TaxType;
+import ua.training.persistance.beans.Report;
 import ua.training.util.exceptions.FileParsingException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,7 +14,7 @@ import java.io.StringReader;
 
 public class XmlFileParserImpl implements FileParser<Report> {
     @Override
-    public Report parseFile(String xml) throws FileParsingException{
+    public Report parseFile(String xml) throws FileParsingException {
         Report report = null;
 
         if (xml != null && !xml.isEmpty()) {
@@ -35,23 +34,20 @@ public class XmlFileParserImpl implements FileParser<Report> {
 
                         final String quarter = eElement.getElementsByTagName("quarter").item(0).getTextContent().trim();
 
-                        TaxType taxType = null;
+                        String taxTypeId = "0";
                         NodeList taxTypeElements = document.getElementsByTagName("taxtype");
                         for (int j = 0; j < taxTypeElements.getLength(); j++) {
-                            String id = eElement.getElementsByTagName("id").item(0).getTextContent().trim();
-                            String taxTypeText = eElement.getElementsByTagName("type").item(0).getTextContent().trim();
-                            taxType = new TaxType(Long.valueOf(id), taxTypeText);
+                             taxTypeId = eElement.getElementsByTagName("id").item(0).getTextContent().trim();
                         }
 
                         final String sum = eElement.getElementsByTagName("sum").item(0).getTextContent().trim();
 
-                        report = new Report.Builder().
-                                quarter(Integer.valueOf(quarter))
-                                .sum(Double.valueOf(sum))
-                                .taxType(taxType).build();
+                        report = new Report();
+                        report.setQuarter(Integer.valueOf(quarter));
+                        report.setSum(Double.valueOf(sum));
+                        report.setTaxTypeId(Long.valueOf(taxTypeId));
                     }
                 }
-
             } catch (Exception e) {
                 throw new FileParsingException("error occur during xml file parsing");
             }
