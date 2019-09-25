@@ -8,16 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="errorMsg" value="${pageContext.getAttribute('errorMsg')}" scope="request"/>
 <html>
 <head>
     <title>Error page</title>
     <meta charset="utf-8">
 </head>
 <body>
-    <h3>Error</h3>
-
-    <jsp:expression>(request.getAttribute("errorMsg") != null)
-        ? (String) request.getAttribute("error") : "unknown error"</jsp:expression>
-    <hr/>
+    <h3>Error code: ${""}</h3>
+    <p> Error message: ${errorMsg} != null ? ${errorMsg} : Unknown error}</p>
 </body>
 </html>

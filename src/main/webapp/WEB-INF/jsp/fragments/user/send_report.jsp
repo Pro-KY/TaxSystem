@@ -86,6 +86,11 @@
         </div>
         <div class="col-md-8"></div>
     </div>
+    <c:if test="${pageContext.getAttribute('alert') eq true}">
+        <div class="alert alert-success" role="alert">
+            This is a success alert—check it out!
+        </div>
+    </c:if>
 </div>
 
 <script>

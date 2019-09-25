@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 public class MessagePropertiesHandler {
     private static ResourceBundle messageProperties;
-    public static final String LOGIN_ERROR = "login.error";
+    public static final String LOGIN_ERROR = "LOGIN_ERROR";
 
     static {
         messageProperties = PropertyResourceBundle.getBundle("message");
