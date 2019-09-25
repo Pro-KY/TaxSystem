@@ -1,14 +1,15 @@
 package ua.training.command;
 
 import ua.training.persistance.beans.User;
-import ua.training.persistance.dao.mappers.UserEntitiyMapperImpl;
 import ua.training.service.SignInService;
+import ua.training.util.constans.Parameters;
 import ua.training.util.handler.properties.MessagePropertiesHandler;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
+
 import static ua.training.util.handler.properties.MessagePropertiesHandler.LOGIN_ERROR;
 import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_ERROR;
 import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_MAIN;
@@ -23,8 +24,8 @@ public class SignInCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
 
-        final String email = request.getParameter(UserEntitiyMapperImpl.EMAIL);
-        final String password = request.getParameter(UserEntitiyMapperImpl.PASSWORD);
+        final String email = request.getParameter(Parameters.EMAIL);
+        final String password = request.getParameter(Parameters.PASSWORD);
 
         //TODO: validate request params
         final Optional<User> optionalUser = signInService.getAuthorizedUser(email, password);

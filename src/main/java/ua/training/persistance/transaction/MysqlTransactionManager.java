@@ -18,15 +18,15 @@ public class MysqlTransactionManager implements TransactionManager {
     private Connection connection;
     private boolean isRollBacked;
 
-    public static MysqlTransactionManager getInstance() {
-        if (instance == null) {
-            instance = new MysqlTransactionManager();
-        }
-        return instance;
-    }
+//    public static MysqlTransactionManager getInstance() {
+//        if (instance == null) {
+//            instance = new MysqlTransactionManager();
+//        }
+//        return instance;
+//    }
 
-    private MysqlTransactionManager() {
-        mySQLDaoFactory = new MySQLDaoFactory();
+    public MysqlTransactionManager() {
+        mySQLDaoFactory = MySQLDaoFactory.getInstance();
         mysqlDataSourceProxy = new MysqlMyDataSourceProxy(MysqlMyDataSource.getInstance());
         mySQLDaoFactory.setMyDataSource(mysqlDataSourceProxy);
     }

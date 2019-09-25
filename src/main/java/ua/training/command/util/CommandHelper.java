@@ -1,6 +1,19 @@
 package ua.training.command.util;
 
-public class CommandFunctions {
+import ua.training.util.handler.properties.ViewPropertiesHandler;
+
+import javax.servlet.http.HttpServletRequest;
+
+import static ua.training.util.constans.Attributes.ERROR_CODE;
+import static ua.training.util.constans.Attributes.ERROR_MSG;
+import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_ERROR;
+
+public class CommandHelper {
+    public static String getErrorPage(HttpServletRequest request) {
+        request.setAttribute(ERROR_CODE, 11); // just for testing purposes
+        request.setAttribute(ERROR_MSG, "error =(");
+        return ViewPropertiesHandler.getViewPath(PATH_ERROR);
+    }
 //    public static Function<SendReportDto, Optional<Report>> parseReportFile = dto -> {
 //        Optional<Report> result = Optional.empty();
 //

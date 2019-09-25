@@ -13,7 +13,7 @@ public class ProcessReportCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         System.out.println("process report command");
 
-        final String viewPath = getViewPath(PATH_INSPECTOR_PROCESS_REPORT);
+        final String viewPath = getViewPath(FRAGMENT_PATH_PROCESS_REPORT);
         request.setAttribute("fragmentPath", viewPath);
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }

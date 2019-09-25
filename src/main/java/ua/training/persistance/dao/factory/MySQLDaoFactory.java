@@ -11,7 +11,7 @@ public class MySQLDaoFactory implements DaoFactory {
     private MyDataSource myDataSource;
     private static MySQLDaoFactory instance;
 
-    public MySQLDaoFactory() {
+    private MySQLDaoFactory() {
         this.myDataSource = MysqlMyDataSource.getInstance();
     }
 

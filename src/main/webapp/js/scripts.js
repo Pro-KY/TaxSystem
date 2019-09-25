@@ -1,5 +1,7 @@
 const form = 'Form';
 
+$('.alert').alert()
+
 $(function(){
     $('#inputGroupSelect01').change(function() {
         // console.log(event.targetElement);

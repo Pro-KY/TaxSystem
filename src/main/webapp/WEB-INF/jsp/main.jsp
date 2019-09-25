@@ -10,6 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <jsp:useBean id="user" scope="session" type="ua.training.persistance.beans.User"/>
+<%@ page import="ua.training.util.constans.Attributes" %>
 
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="localization.pagecontent" var = "rb" scope="session"/>
@@ -87,8 +88,8 @@
 
             <!-- center page content -->
             <div class="col-md-9">
-                <c:if test="${requestScope.get('fragmentPath') != null}">
-                    <c:import url="${requestScope.get('fragmentPath')}" />
+                <c:if test="${requestScope.get(Attributes.FRAGMENT_PATH) != null}">
+                    <c:import url="${requestScope.get(Attributes.FRAGMENT_PATH)}" />
                 </c:if>
 <%--                <jsp:include page="${requestScope.get('fragmentPath')}"/>--%>
 <%--                <jsp:include page="${requestScope.get('fragmentPath')}"/>--%>

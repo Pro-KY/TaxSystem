@@ -25,7 +25,8 @@ public class SendReportService {
     }
 
     public void saveSentReport(SendReportDto sendReportDto) {
-        MysqlTransactionManager tm = MysqlTransactionManager.getInstance();
+//        MysqlTransactionManager tm = MysqlTransactionManager.getInstance();
+        MysqlTransactionManager tm = new MysqlTransactionManager();
         final SendReportEvent sendReportEvent = new SendReportEvent();
         sendReportEvent.setSenderId(sendReportDto.getUser().getId());
         sendReportEvent.setTimestamp(new Timestamp(System.currentTimeMillis()));
@@ -36,7 +37,7 @@ public class SendReportService {
         if(sendReportDto.getReportContentTypeId() == ReportContentType.FORM.getId()) {
             report = new Report(sendReportDto.getReportTaxtypeId(), sendReportDto.getReportSum(), sendReportDto.getReportQuarter());
         } else {
-//            final Optional<Report> reportOptional = CommandFunctions.parseReportFile.apply(sendReportDto);
+//            final Optional<Report> reportOptional = CommandHelper.parseReportFile.apply(sendReportDto);
             final ReportFileService reportFileService = new ReportFileService();
             final Optional<Report> reportOptional = reportFileService.parseReportFile(sendReportDto);
 
