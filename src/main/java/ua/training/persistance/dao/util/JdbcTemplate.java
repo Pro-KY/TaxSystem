@@ -34,9 +34,7 @@ public class JdbcTemplate {
         List<T> resultList = new ArrayList<>();
 
         final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
-        final ResultSet result = jdbcQuery1.select(parameters);
-
-        try {
+        try(final ResultSet result = jdbcQuery1.select(parameters)) {
             while (result.next()) {
                 final T t = mapper.mapRow(result);
                 resultList.add(t);
@@ -44,7 +42,7 @@ public class JdbcTemplate {
         } catch (SQLException e) {
             resultList = new ArrayList<>();
         }  finally {
-            jdbcQuery1.releaseResources();
+            myDataSource.releaseResources(connection, jdbcQuery1.getPs());
         }
 
         return resultList;
@@ -53,10 +51,14 @@ public class JdbcTemplate {
     public <T> Optional<T> findByQuery(String sql, Mapper<T> mapper, Object... parameters) {
         final Connection connection = myDataSource.getConnection();
         final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
-        final ResultSet result = jdbcQuery1.select(parameters);
-//        final ResultSet result = jdbcQuery1.getResult();
-        final Optional<T> t = Optional.ofNullable(mapper.mapRow(result));
-        jdbcQuery1.releaseResources();
+        Optional<T> t;
+        try (ResultSet result = jdbcQuery1.select(parameters)) {
+            t = Optional.ofNullable(mapper.mapRow(result));
+        } catch (SQLException e) {
+            t = Optional.empty();
+        }  finally {
+            myDataSource.releaseResources(connection, jdbcQuery1.getPs());
+        }
         return t;
     }
 
@@ -65,7 +67,8 @@ public class JdbcTemplate {
         final Connection connection = myDataSource.getConnection();
         final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
         insertedId = jdbcQuery1.saveOrUpdate(parameters);
-        jdbcQuery1.releaseResources();
+        closeResultSet(jdbcQuery1.getResult());
+        myDataSource.releaseResources(connection, jdbcQuery1.getPs());
         return insertedId;
     }
 
@@ -74,14 +77,22 @@ public class JdbcTemplate {
         final Connection connection = myDataSource.getConnection();
         final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
         isDeleted = jdbcQuery1.delete(parameters);
-        jdbcQuery1.releaseResources();
+        closeResultSet(jdbcQuery1.getResult());
+        myDataSource.releaseResources(connection, jdbcQuery1.getPs());
         return isDeleted;
     }
 
-
-    public void test() {
-
+    private void closeResultSet(ResultSet resultSet) {
+        try {
+            if(resultSet != null) {
+                resultSet.close();
+            }
+        } catch (Exception e) {
+            // TODO: log here
+            e.printStackTrace();
+        }
     }
+
 
 //    public static <T> Optional<T> mapResultSetToBean(Mapper<T> entityMapper, ResultSet resultSet) throws BeanMappingException {
 //        return entityMapper.mapRow(resultSet);

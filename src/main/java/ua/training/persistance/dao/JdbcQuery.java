@@ -9,9 +9,9 @@ public class JdbcQuery {
     private String sql;
     private int rowsAffected;
 
-//    public ResultSet getResult() {
-//        return rs;
-//    }
+    public ResultSet getResult() {
+        return rs;
+    }
 
     public JdbcQuery(Connection connection, String sql) {
         this.connection = connection;
@@ -39,6 +39,7 @@ public class JdbcQuery {
         } catch (SQLException e) {
             throw new DataAccessException(e);
         }
+
         return generatedKey;
     }
 
@@ -80,13 +81,17 @@ public class JdbcQuery {
         return rowsAffected > 0;
     }
 
-    public void releaseResources() {
-        try {
-            if(rs != null) { rs.close(); }
-            if(ps != null) {ps.close();}
-            connection.close();
-        } catch (SQLException e) {
-            // log here
-        }
+    public PreparedStatement getPs() {
+        return ps;
     }
+
+//    public void releaseResources() {
+//        try {
+//            if(rs != null) { rs.close(); }
+//            if(ps != null) {ps.close();}
+//            connection.close();
+//        } catch (SQLException e) {
+//            // log here
+//        }
+//    }
 }
