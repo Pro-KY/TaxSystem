@@ -1,8 +1,8 @@
 package ua.training.persistance.dao.daoimpl;
 
 import ua.training.persistance.dao.ITaxTypeDao;
-import ua.training.persistance.dao.mappers.TaxTypeMapperIml;
-import ua.training.persistance.dao.util.JdbcTemplate;
+import ua.training.persistance.dao.mappers.TaxTypeBeanMapperIml;
+import ua.training.persistance.dao.jdbc.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
 import ua.training.persistance.beans.TaxType;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
@@ -41,14 +41,14 @@ public class TaxTypeDaoImpl implements ITaxTypeDao {
         final String type = taxType.getType();
         final Object[] parameters = {type};
 
-        return jdbcTemplate.findByQuery(sql, new TaxTypeMapperIml(), parameters);
+        return jdbcTemplate.findByQuery(sql, new TaxTypeBeanMapperIml(), parameters);
     }
 
     @Override
     public List<TaxType> getAllTaxTypes() {
         final Object[] parameters = {};
         String sql = SqlPropertiesHandler.getSqlQuery(ALL_TAX_TYPES);
-        return jdbcTemplate.finAll(sql, new TaxTypeMapperIml(), parameters);
+        return jdbcTemplate.finAll(sql, new TaxTypeBeanMapperIml(), parameters);
     }
 
     @Override

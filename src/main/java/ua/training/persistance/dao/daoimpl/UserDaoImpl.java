@@ -1,8 +1,8 @@
 package ua.training.persistance.dao.daoimpl;
 
 import ua.training.persistance.dao.IUserDao;
-import ua.training.persistance.dao.mappers.UserEntitiyMapperImpl;
-import ua.training.persistance.dao.util.JdbcTemplate;
+import ua.training.persistance.dao.mappers.UserBeanBeanMapperImpl;
+import ua.training.persistance.dao.jdbc.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
 import ua.training.persistance.beans.User;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
@@ -38,7 +38,7 @@ public class UserDaoImpl implements IUserDao {
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
         Object[] params = {login, password};
 
-        return jdbcTemplate.findByQuery(sql, new UserEntitiyMapperImpl(), params);
+        return jdbcTemplate.findByQuery(sql, new UserBeanBeanMapperImpl(), params);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class UserDaoImpl implements IUserDao {
 //            final var statement = connection.createStatement();
 //            final var resultSet = statement.select(sql)) {
 //
-//            while (resultSet.next()) {
+//            while (resultSet.getPage()) {
 //                user = mapRsToUser(resultSet);
 //            }
 //        } catch (SQLException e) {
@@ -129,7 +129,7 @@ public class UserDaoImpl implements IUserDao {
 //        Optional<User> optionalUser = Optional.empty();
 //
 //        try {
-//            if (rs.next()) {
+//            if (rs.getPage()) {
 //                final long id = rs.getLong("id");
 //                final String login = rs.getString("email");
 //                final String firstName = rs.getString("first_name");

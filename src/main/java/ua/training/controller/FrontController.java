@@ -1,4 +1,5 @@
 package ua.training.controller;
+
 import ua.training.command.CommandFactory;
 import ua.training.command.ICommand;
 
@@ -45,7 +46,7 @@ public class FrontController extends HttpServlet {
         if(page.equals("/index.jsp")) {
             response.sendRedirect("/");
         } else {
-            RequestDispatcher  dispatcher = getServletContext().getRequestDispatcher(page);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request, response);
         }
     }

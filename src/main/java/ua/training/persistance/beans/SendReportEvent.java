@@ -13,6 +13,16 @@ public class SendReportEvent implements Serializable {
     private Long senderId;
     private Long inspectorId;
 
+    public SendReportEvent(Long id, Timestamp timestamp, String refusalCause, Long reportStateId, Long reportId, Long senderId, Long inspectorId) {
+        this.id = id;
+        this.timestamp = timestamp;
+        this.refusalCause = refusalCause;
+        this.reportStateId = reportStateId;
+        this.reportId = reportId;
+        this.senderId = senderId;
+        this.inspectorId = inspectorId;
+    }
+
     public SendReportEvent() { }
 
     public Long getId() {

@@ -5,7 +5,7 @@ import ua.training.persistance.beans.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserEntitiyMapperImpl implements Mapper<User> {
+public class UserBeanBeanMapperImpl implements BeanMapper<User> {
     public static final String ID = "id";
     public static final String PASSWORD = "password";
     public static final String FIRST_NAME = "first_name";

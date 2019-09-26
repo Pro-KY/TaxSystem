@@ -5,13 +5,17 @@ import org.apache.logging.log4j.Logger;
 import ua.training.persistance.beans.SendReportEvent;
 import ua.training.persistance.dao.DataAccessException;
 import ua.training.persistance.dao.ISendReportEventDao;
-import ua.training.persistance.dao.util.JdbcTemplate;
+import ua.training.persistance.dao.jdbc.JdbcTemplate;
+import ua.training.persistance.dao.jdbc.pagination.Page;
+import ua.training.persistance.dao.mappers.SendReportEventBeanMapperImpl;
 import ua.training.persistance.db.datasource.MyDataSource;
 import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
+import java.util.List;
 import java.util.Optional;
 
+import static ua.training.util.handler.properties.SqlPropertiesHandler.PAGINATION;
 import static ua.training.util.handler.properties.SqlPropertiesHandler.SAVE_SEND_REPORT_EVENT;
 
 public class SendReportEventDaoImpl implements ISendReportEventDao {
@@ -48,6 +52,12 @@ public class SendReportEventDaoImpl implements ISendReportEventDao {
             // log
             throw new PersistenceException("", e);
         }
+    }
+
+    @Override
+    public List<SendReportEvent> getPaginationList(Page page) {
+        String sql = SqlPropertiesHandler.getSqlQuery(PAGINATION);
+        return  jdbcTemplate.getPage(sql, new SendReportEventBeanMapperImpl(), page);
     }
 
     @Override

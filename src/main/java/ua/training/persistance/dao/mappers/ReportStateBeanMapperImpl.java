@@ -6,8 +6,8 @@ import ua.training.persistance.beans.ReportState;
 
 import java.sql.ResultSet;
 
-public class ReportStateMapperImpl implements Mapper<ReportState> {
-    private static final Logger LOGGER = LogManager.getLogger(TaxTypeMapperIml.class);
+public class ReportStateBeanMapperImpl implements BeanMapper<ReportState> {
+    private static final Logger LOGGER = LogManager.getLogger(TaxTypeBeanMapperIml.class);
     private static final String ID = "id";
     private static final String NAME = "name";
 

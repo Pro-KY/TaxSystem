@@ -1,7 +1,7 @@
 package ua.training.persistance.dao.daoimpl;
 
 import ua.training.persistance.dao.IReportStateDao;
-import ua.training.persistance.dao.util.JdbcTemplate;
+import ua.training.persistance.dao.jdbc.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
 import ua.training.persistance.beans.ReportState;
 import ua.training.util.handler.properties.SqlPropertiesHandler;

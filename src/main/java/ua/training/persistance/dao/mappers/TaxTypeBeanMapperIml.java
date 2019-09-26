@@ -7,8 +7,8 @@ import ua.training.persistance.beans.TaxType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class TaxTypeMapperIml implements Mapper<TaxType> {
-    private static final Logger LOGGER = LogManager.getLogger(TaxTypeMapperIml.class);
+public class TaxTypeBeanMapperIml implements BeanMapper<TaxType> {
+    private static final Logger LOGGER = LogManager.getLogger(TaxTypeBeanMapperIml.class);
 
     private static final String ID = "id";
     private static final String TYPE = "type";

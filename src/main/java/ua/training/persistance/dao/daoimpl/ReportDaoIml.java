@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ua.training.persistance.beans.Report;
 import ua.training.persistance.dao.DataAccessException;
 import ua.training.persistance.dao.IReportDao;
-import ua.training.persistance.dao.util.JdbcTemplate;
+import ua.training.persistance.dao.jdbc.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
 import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
