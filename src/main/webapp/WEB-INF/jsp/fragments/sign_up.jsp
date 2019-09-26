@@ -45,12 +45,12 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="password"><fmt:message key="signin.password" bundle="${rb}"/></label>
-                    <input type="text" class="form-control" id="password" placeholder="sum" name="${Parameters.PASSWORD}">
+                    <input type="password" class="form-control" id="password" placeholder="sum" name="${Parameters.PASSWORD}">
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
+        <div id="organizationWrapper" class="form-group">
             <label for="organization"><fmt:message key="signup.user.organization" bundle="${rb}"/></label>
             <input type="text" class="form-control" id="organization" placeholder="sum" name="${Parameters.USER_ORGANIZATION}">
         </div>

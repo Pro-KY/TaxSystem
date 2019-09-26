@@ -1,24 +1,29 @@
 package ua.training.persistance.dao.impl;
 
-import ua.training.persistance.dao.IUserDao;
-import ua.training.persistance.dao.mappers.UserBeanBeanMapperImpl;
-import ua.training.persistance.dao.jdbc.JdbcTemplate;
-import ua.training.persistance.db.datasource.MyDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.training.persistance.beans.User;
+import ua.training.persistance.dao.IUserDao;
+import ua.training.persistance.dao.jdbc.JdbcTemplate;
+import ua.training.persistance.dao.mappers.UserBeanBeanMapperImpl;
+import ua.training.persistance.db.datasource.MyDataSource;
+import ua.training.util.exceptions.DataAccessException;
+import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.Optional;
 
 import static ua.training.util.handler.properties.SqlPropertiesHandler.LOGIN_AND_PASSWORD;
+import static ua.training.util.handler.properties.SqlPropertiesHandler.SAVE_USER;
 
 // move all SQl queries to fields or in properties file
 public class UserDaoImpl implements IUserDao {
     private static UserDaoImpl instance;
-//    private MyDataSource dataSource;
     private JdbcTemplate jdbcTemplate;
+    private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
+
 
     public void setDataSource(MyDataSource dataSource) {
-//        this.dataSource = dataSource;
         jdbcTemplate.setDataSource(dataSource);
     }
 
@@ -42,27 +47,19 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
-    public Long save(User bean) {
-//        final String SQL = "INSERT INTO mydb.user (login, password, user_type_id) VALUES (?, ?, ?)";
-//
-//        final Connection connection = dataSource.getConnection();
-//        PreparedStatement ps = connection.prepareStatement(SQL);
-//
-//        try {
-//            System.out.println("conn in UserDaoImpl: " + connection.toString());
-//
-//            ps.setString(1, user.getLogin());
-//            ps.setString(2, user.getPassword());
-//            ps.setLong(3, user.getUserTypeId());
-//
-//            final var rowsAffected = ps.executeUpdate();
-//
-////            sneakyThrow(new SQLException()); //TODO: uncomment later
-//            System.out.println("rows inserted: " + rowsAffected);
-//        } finally {
-//            dataSource.releaseResources(connection, ps);
-//        }
-        return 0L;
+    public Long save(User userBean) {
+        Object[] params = {userBean.getFirstName(), userBean.getLastName(), userBean.getOrganization(),
+                userBean.getEmail(), userBean.getPassword(), userBean.getAddress(), userBean.getUserTypeId()};
+
+        String sql = SqlPropertiesHandler.getSqlQuery(SAVE_USER);
+        final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
+
+        try {
+            return jdbcTemplate.saveOrUpdate(sql, params);
+        } catch (DataAccessException e) {
+            logger.debug("exp here _ 1");
+            throw new PersistenceException("", e);
+        }
     }
 
     @Override

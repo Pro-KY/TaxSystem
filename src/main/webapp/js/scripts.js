@@ -22,8 +22,10 @@ $(function(){
         let selectedValue = $('#usertype').val();
         if(selectedValue === '2') {
             $('#fistLastNamesWrapper').hide();
+            $('#organizationWrapper').show();
         } else {
             $('#fistLastNamesWrapper').show();
+            $('#organizationWrapper').hide();
         }
 
         console.log(selectedValue);
@@ -31,19 +33,6 @@ $(function(){
 });
 
 function changeSendReportTagsVisibility(formChosenValue) {
-    let formWrapper = document.getElementById("formWrapper");
-    let inputFileWrapper = document.getElementById("inputFileWrapper");
-
-    if (formChosenValue) {
-        formWrapper.style.display = "block";
-        inputFileWrapper.style.display = "none";
-    } else {
-        formWrapper.style.display = "none";
-        inputFileWrapper.style.display = "block";
-    }
-}
-
-function hideFirstLastNamesTags(formChosenValue) {
     let formWrapper = document.getElementById("formWrapper");
     let inputFileWrapper = document.getElementById("inputFileWrapper");
 

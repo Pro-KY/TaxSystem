@@ -3,8 +3,8 @@ package ua.training.util.exceptions;
 import java.sql.SQLException;
 
 public class DataAccessException extends RuntimeException {
-    public int errorCode;
-    public String state;
+    private int errorCode;
+    private String state;
 
     public DataAccessException(String message) {
         super(message);
@@ -32,6 +32,7 @@ public class DataAccessException extends RuntimeException {
     public String getState() {
         return state;
     }
+
     public DataAccessException(Throwable cause) {
         super(cause);
     }

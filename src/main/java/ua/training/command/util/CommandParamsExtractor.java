@@ -24,9 +24,7 @@ public class CommandParamsExtractor {
         Optional<T> optional;
         JsonObject requestJson = new JsonObject();
 
-        // iterate over all the paramters
         for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
-            // add every item as a property to the json
             requestJson.addProperty(entry.getKey(), entry.getValue()[0]);
         }
 
@@ -40,6 +38,5 @@ public class CommandParamsExtractor {
 
         return optional;
     }
-//        return function.apply(request);
 //    }
 }

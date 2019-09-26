@@ -13,6 +13,7 @@ public class SqlPropertiesHandler {
     public static final String SAVE_SEND_REPORT_EVENT = "SAVE_SEND_REPORT_EVENT";
     public static final String PAGINATION = "PAGINATION";
     public static final String SAVE_USER_SEND_REPORT_EVENT = "SAVE_USER_SEND_REPORT_EVENT";
+    public static final String SAVE_USER = "SAVE_USER";
 
 
     static {
