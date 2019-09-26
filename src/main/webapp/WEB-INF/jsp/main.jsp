@@ -9,7 +9,7 @@
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="localization.pagecontent" var = "rb" scope="session"/>
 
-<c:set var="session" value="${pageContext.session}" scope="session"/>
+<%--<c:set var="session" value="${pageContext.session}" scope="session"/>--%>
 <c:set var="currentUserTypeId" value="${user.userTypeId}" scope="session"/>
 
 <c:set var="userTypeIndividualId" value="1" scope="session"/>
@@ -76,17 +76,13 @@
         <div class="row">
             <!-- sidebar -->
             <c:import url="fragments/sidebar.jsp" />
-<%--            <jsp:include page="fragments/sidebar.jsp"/>--%>
-<%--            <%@include file="fragments/sidebar.jsp" %>--%>
             <!-- sidebar -->
 
             <!-- center page content -->
             <div class="col-md-9">
-                <c:if test="${requestScope.get(Attributes.FRAGMENT_PATH) != null}">
+                <c:if test="${requestScope.get(Attributes.FRAGMENT_PATH) ne null}">
                     <c:import url="${requestScope.get(Attributes.FRAGMENT_PATH)}" />
                 </c:if>
-<%--                <jsp:include page="${requestScope.get('fragmentPath')}"/>--%>
-<%--                <jsp:include page="${requestScope.get('fragmentPath')}"/>--%>
             </div>
             <!-- center page content -->
         </div>

@@ -19,7 +19,7 @@
         <ul class="navbar-nav">
             <!-- 0 -->
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/taxsystem/?command=${command_0}">
+                <a id="sendReportNavLink" class="nav-link" href="${pageContext.request.contextPath}/taxsystem/?command=${command_0}">
                     ${isRoleUser ? menu_user_0 : menu_inpector_0}
                 </a>
             </li>
