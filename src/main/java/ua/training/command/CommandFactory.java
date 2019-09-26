@@ -1,6 +1,8 @@
 package ua.training.command;
 
 import ua.training.command.fragments.ReportFragmentCommand;
+import ua.training.command.fragments.SignInFragmentCommand;
+import ua.training.command.fragments.SignUpFragmentCommand;
 import ua.training.util.constans.Command;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,8 @@ public class CommandFactory {
         commandHashMap.put(Command.SEND_REPORT, new SendReportCommand());
         commandHashMap.put(Command.PROCESS_REPORT, new ProcessReportCommand());
         commandHashMap.put(Command.GET_REPORT_FRAGMENT, new ReportFragmentCommand());
+        commandHashMap.put(Command.GET_SIGN_UP_FRAGMENT, new SignUpFragmentCommand());
+        commandHashMap.put(Command.GET_SIGN_IN_FRAGMENT, new SignInFragmentCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

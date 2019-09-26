@@ -10,4 +10,5 @@ public class Attributes {
     public static final String ALERT_MSG_REPORT_SUCCES_KEY = "alert.sendreport.success";
 
     public static final String FRAGMENT_PATH = "fragmentPath";
+    public static final String IS_SIGN_UP = "isSignUp";
 }
