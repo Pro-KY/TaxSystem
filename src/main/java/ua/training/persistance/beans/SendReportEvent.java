@@ -10,17 +10,13 @@ public class SendReportEvent implements Serializable {
     private String refusalCause;
     private Long reportStateId;
     private Long reportId;
-    private Long senderId;
-    private Long inspectorId;
 
-    public SendReportEvent(Long id, Timestamp timestamp, String refusalCause, Long reportStateId, Long reportId, Long senderId, Long inspectorId) {
+    public SendReportEvent(Long id, Timestamp timestamp, String refusalCause, Long reportStateId, Long reportId) {
         this.id = id;
         this.timestamp = timestamp;
         this.refusalCause = refusalCause;
         this.reportStateId = reportStateId;
         this.reportId = reportId;
-        this.senderId = senderId;
-        this.inspectorId = inspectorId;
     }
 
     public SendReportEvent() { }
@@ -65,22 +61,6 @@ public class SendReportEvent implements Serializable {
         this.reportId = reportId;
     }
 
-    public Long getSenderId() {
-        return senderId;
-    }
-
-    public void setSenderId(Long senderId) {
-        this.senderId = senderId;
-    }
-
-    public Long getInspectorId() {
-        return inspectorId;
-    }
-
-    public void setInspectorId(Long inspectorId) {
-        this.inspectorId = inspectorId;
-    }
-
     @Override
     public String toString() {
         return "SendReportEvent{" +
@@ -89,8 +69,6 @@ public class SendReportEvent implements Serializable {
                 ", refusalCause='" + refusalCause + '\'' +
                 ", reportStateId=" + reportStateId +
                 ", reportId=" + reportId +
-                ", senderId=" + senderId +
-                ", inspectorId=" + inspectorId +
                 '}';
     }
 }

@@ -2,12 +2,12 @@ package ua.training.persistance.beans;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Role  implements Serializable {
+public class UserType implements Serializable {
 
     private long id;
     private String role;
 
-    public Role(long id, String role) {
+    public UserType(long id, String role) {
         this.id = id;
         this.role = role;
     }
@@ -31,7 +31,7 @@ public class Role  implements Serializable {
 
     @Override
     public String toString() {
-        return "Role{" +
+        return "UserType{" +
                 "id=" + id +
                 ", role='" + role + '\'' +
                 '}';
@@ -41,9 +41,9 @@ public class Role  implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Role role1 = (Role) o;
-        return id == role1.id &&
-                Objects.equals(role, role1.role);
+        UserType userType1 = (UserType) o;
+        return id == userType1.id &&
+                Objects.equals(role, userType1.role);
     }
 
     @Override
