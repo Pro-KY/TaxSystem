@@ -38,13 +38,6 @@ public class FrontController extends HttpServlet {
             return;
         }
 
-        // or use filter
-//        if(getSession(false) != null) {
-//            // process main logic
-//        } else {
-//            // redirect to home
-//        }
-
         final Object language = request.getSession().getAttribute("language");
         System.out.println("language: " + language);
 

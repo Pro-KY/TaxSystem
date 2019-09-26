@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-import static ua.training.util.constans.Attributes.*;
-import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
+import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_INDEX;
+import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_MAIN;
 
 public class SendReportCommand implements ICommand {
     private static final Logger logger = LogManager.getLogger(SendReportCommand.class);
@@ -29,26 +29,29 @@ public class SendReportCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         final HttpSession session = request.getSession(false);
-        // TODO: if session not null
-        final User user = (User) session.getAttribute(Attributes.USER);
         String page;
-        final CommandParamsExtractor paramsExtractor = CommandParamsExtractor.getInstance();
-        final Optional<SendReportDto> reportOptional = paramsExtractor.extractParamsIntoBean(request, SendReportDto.class);
 
-        try {
-            if (reportOptional.isPresent()) {
-                final SendReportDto sendReportDto = reportOptional.get();
-                sendReportDto.setUser(user);
-                sendReportService.saveSentReport(sendReportDto);
-                request.setAttribute(ALERT, "true");
-                request.setAttribute(ALERT_MSG, ALERT_MSG_REPORT_SUCCES_KEY);
-                request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SEND_REPORT));
-                page = ViewPropertiesHandler.getViewPath(PATH_MAIN);
-            } else {
-                page = CommandHelper.getErrorPage(request);
+        if(session != null) {
+            final User user = (User) session.getAttribute(Attributes.USER);
+
+            final CommandParamsExtractor paramsExtractor = CommandParamsExtractor.getInstance();
+            final Optional<SendReportDto> reportOptional = paramsExtractor.extractParamsIntoBean(request, SendReportDto.class);
+
+            try {
+                if (reportOptional.isPresent()) {
+                    final SendReportDto sendReportDto = reportOptional.get();
+                    sendReportDto.setUser(user);
+                    sendReportService.saveSentReport(sendReportDto);
+                    CommandHelper.setSendReportCommandAttributes(request);
+                    page = ViewPropertiesHandler.getViewPath(PATH_MAIN);
+                } else {
+                    page = CommandHelper.getErrorPage(request, "err_msg");
+                }
+            } catch (ServiceException e) {
+                page = CommandHelper.getErrorPage(request, "err_msg");
             }
-        } catch (ServiceException e) {
-            page = CommandHelper.getErrorPage(request);
+        } else {
+            page = ViewPropertiesHandler.getViewPath(PATH_INDEX);
         }
 
         return page;
