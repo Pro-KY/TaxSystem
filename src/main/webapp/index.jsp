@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Yuriy
-  Date: 03.09.2019
-  Time: 23:42
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -32,10 +25,10 @@
                 <div class="card border-info text-center">
                     <div class="card-body">
                         <img id="logo_icon" alt="logo icon" src="${pageContext.request.contextPath}/assets/logo.png">
-<%--                        <jsp:include page="/WEB-INF/jsp/login.jsp"/>--%>
+<%--                        <jsp:include page="/WEB-INF/jsp/sign_in.jsp"/>--%>
 
                         <!-- login fragment -->
-                        <%@include file="/WEB-INF/jsp/fragments/login.jsp" %>
+                        <%@include file="/WEB-INF/jsp/fragments/sign_in.jsp" %>
                         <!-- login fragment -->
                     </div>
                 </div>

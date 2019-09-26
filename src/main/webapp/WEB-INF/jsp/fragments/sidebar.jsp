@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="isRoleUser" value="${sessionScope.currentUserTypeId != sessionScope.userTypeInspectorId}"/>
-<c:set var="command_0" value="${isRoleUser ? 'reportPage' : 'processReport'}" scope="page"/>
+<c:set var="command_0" value="${isRoleUser ? 'getReportFragment' : 'processReport'}" scope="page"/>
 <c:set var="command_1" value="${isRoleUser ? 'sentReports' : 'handledReports'}" scope="page"/>
 
 <fmt:message var="menu_user_0" key="main.menu.user.sendreport" bundle="${sessionScope.rb}"/>

@@ -1,12 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Yuriy
-  Date: 03.09.2019
-  Time: 23:42
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <c:set var="pageContextPath" value="${pageContext.request.contextPath}" scope="page"/>
+<%@ page import="ua.training.util.constans.Command" %>
 
 <html>
 <head>
@@ -29,8 +23,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="${pageContextPath}/taxsystem/?command=changeLanguage&language=en" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> English</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown09">
-                            <a class="dropdown-item" href="${pageContextPath}/taxsystem/?command=changeLanguage&language=ua"><span class="flag-icon flag-icon-ua"> </span>  Ukrainian</a>
-                            <a class="dropdown-item" href="${pageContextPath}/taxsystem/?command=changeLanguage&language=ru"><span class="flag-icon flag-icon-ru"> </span>  Russian</a>
+                            <a class="dropdown-item" href="${pageContextPath}/taxsystem/?command=${Command.CHANGE_LANGUAGE}&language=ua"><span class="flag-icon flag-icon-ua"> </span>  Ukrainian</a>
+                            <a class="dropdown-item" href="${pageContextPath}/taxsystem/?command=${Command.CHANGE_LANGUAGE}&language=ru"><span class="flag-icon flag-icon-ru"> </span>  Russian</a>
                         </div>
                     </li>
                 </ul>

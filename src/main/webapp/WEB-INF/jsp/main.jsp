@@ -1,16 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Yuriy
-  Date: 03.09.2019
-  Time: 23:42
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <jsp:useBean id="user" scope="session" type="ua.training.persistance.beans.User"/>
+
 <%@ page import="ua.training.util.constans.Attributes" %>
+<%@ page import="ua.training.util.constans.Command" %>
 
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="localization.pagecontent" var = "rb" scope="session"/>
@@ -68,7 +62,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/taxsystem/?command=logout">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/taxsystem/?command=${Command.SIGN_OUT}">
                             <fmt:message key="header.singout" bundle="${rb}"/>
                         </a>
                     </li>
@@ -80,11 +74,11 @@
 
     <div class="container-fluid">
         <div class="row">
-            <!-- menu -->
+            <!-- sidebar -->
             <c:import url="fragments/sidebar.jsp" />
 <%--            <jsp:include page="fragments/sidebar.jsp"/>--%>
 <%--            <%@include file="fragments/sidebar.jsp" %>--%>
-            <!-- menu -->
+            <!-- sidebar -->
 
             <!-- center page content -->
             <div class="col-md-9">

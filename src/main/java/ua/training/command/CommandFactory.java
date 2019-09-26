@@ -1,20 +1,22 @@
 package ua.training.command;
 
 import ua.training.command.fragments.ReportFragmentCommand;
+import ua.training.util.constans.Command;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+
 
 public class CommandFactory {
     private static HashMap<String, ICommand> commandHashMap = new HashMap<>(); // key - parameter from request, getValue = ICommand
 
     static {
-        commandHashMap.put("login", new SignInCommand()); //TODO: move all strings into properties
-        commandHashMap.put("logout", new SignOutCommand());
-        commandHashMap.put("changeLanguage", new LanguageCommand());
-        commandHashMap.put("sendReport", new SendReportCommand());
-        commandHashMap.put("processReport", new ProcessReportCommand());
-        commandHashMap.put("reportPage", new ReportFragmentCommand());
+        commandHashMap.put(Command.SIGN_IN, new SignInCommand());
+        commandHashMap.put(Command.SIGN_OUT, new SignOutCommand());
+        commandHashMap.put(Command.CHANGE_LANGUAGE, new LanguageCommand());
+        commandHashMap.put(Command.SEND_REPORT, new SendReportCommand());
+        commandHashMap.put(Command.PROCESS_REPORT, new ProcessReportCommand());
+        commandHashMap.put(Command.GET_REPORT_FRAGMENT, new ReportFragmentCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {
