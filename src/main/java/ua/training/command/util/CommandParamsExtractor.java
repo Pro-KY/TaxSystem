@@ -9,11 +9,18 @@ import java.util.Map;
 import java.util.Optional;
 
 public class CommandParamsExtractor {
-//    public static <T> Optional<T>  extractParamsIntoBean(Function<HttpServletRequest, Optional<T>> function, HttpServletRequest request) {
-//        return function.apply(request);
-//    }
+    private static CommandParamsExtractor instance;
 
-    public static <T> Optional<T> extractParamsIntoBean(HttpServletRequest request, Class<T> classOfT) {
+    private CommandParamsExtractor() { }
+
+    public static CommandParamsExtractor getInstance() {
+        if (instance == null) {
+            instance = new CommandParamsExtractor();
+        }
+        return instance;
+    }
+
+    public <T> Optional<T> extractParamsIntoBean(HttpServletRequest request, Class<T> classOfT) {
         Optional<T> optional;
         JsonObject requestJson = new JsonObject();
 

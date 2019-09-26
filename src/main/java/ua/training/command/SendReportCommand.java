@@ -29,9 +29,11 @@ public class SendReportCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         final HttpSession session = request.getSession(false);
+        // TODO: if session not null
         final User user = (User) session.getAttribute(Attributes.USER);
         String page;
-        final Optional<SendReportDto> reportOptional = CommandParamsExtractor.extractParamsIntoBean(request, SendReportDto.class);
+        final CommandParamsExtractor paramsExtractor = CommandParamsExtractor.getInstance();
+        final Optional<SendReportDto> reportOptional = paramsExtractor.extractParamsIntoBean(request, SendReportDto.class);
 
         try {
             if (reportOptional.isPresent()) {

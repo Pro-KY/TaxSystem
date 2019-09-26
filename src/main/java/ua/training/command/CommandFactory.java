@@ -18,6 +18,8 @@ public class CommandFactory {
         commandHashMap.put(Command.CHANGE_LANGUAGE, new LanguageCommand());
         commandHashMap.put(Command.SEND_REPORT, new SendReportCommand());
         commandHashMap.put(Command.PROCESS_REPORT, new ProcessReportCommand());
+        commandHashMap.put(Command.SIGN_UP, new SignUpCommand());
+
         commandHashMap.put(Command.GET_REPORT_FRAGMENT, new ReportFragmentCommand());
         commandHashMap.put(Command.GET_SIGN_UP_FRAGMENT, new SignUpFragmentCommand());
         commandHashMap.put(Command.GET_SIGN_IN_FRAGMENT, new SignInFragmentCommand());

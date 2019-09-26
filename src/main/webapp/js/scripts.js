@@ -1,6 +1,6 @@
 const form = 'Form';
 
-$('.alert').alert()
+// $('.alert').alert();
 
 $(function(){
     $('#inputGroupSelect01').change(function() {
@@ -10,14 +10,40 @@ $(function(){
         console.log(selectedText);
 
         if (selectedText === form) {
-            changeSendReportElementsVisibility(true);
+            changeSendReportTagsVisibility(true);
         } else {
-            changeSendReportElementsVisibility(false);
+            changeSendReportTagsVisibility(false);
         }
     })
 });
 
-function changeSendReportElementsVisibility(formChosenValue) {
+$(function(){
+    $('#usertype').change(function() {
+        let selectedValue = $('#usertype').val();
+        if(selectedValue === '2') {
+            $('#fistLastNamesWrapper').hide();
+        } else {
+            $('#fistLastNamesWrapper').show();
+        }
+
+        console.log(selectedValue);
+    })
+});
+
+function changeSendReportTagsVisibility(formChosenValue) {
+    let formWrapper = document.getElementById("formWrapper");
+    let inputFileWrapper = document.getElementById("inputFileWrapper");
+
+    if (formChosenValue) {
+        formWrapper.style.display = "block";
+        inputFileWrapper.style.display = "none";
+    } else {
+        formWrapper.style.display = "none";
+        inputFileWrapper.style.display = "block";
+    }
+}
+
+function hideFirstLastNamesTags(formChosenValue) {
     let formWrapper = document.getElementById("formWrapper");
     let inputFileWrapper = document.getElementById("inputFileWrapper");
 

@@ -20,7 +20,7 @@
                 <option value="2"> <fmt:message key="signup.user.type.legalentity" bundle="${rb}"/> </option>
             </select>
         </div>
-        <div class="row justify-content-start" >
+        <div id = "fistLastNamesWrapper" class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="fistName"><fmt:message key="signup.user.firstName" bundle="${rb}"/></label>
@@ -31,6 +31,21 @@
                 <div class="form-group">
                     <label for="lastName"><fmt:message key="signup.user.lastName" bundle="${rb}"/></label>
                     <input type="text" class="form-control" id="lastName" placeholder="sum" name="${Parameters.USER_LAST_NAME}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email"><fmt:message key="signin.email" bundle="${rb}"/></label>
+                    <input type="text" class="form-control" id="email" placeholder="sum" name="${Parameters.EMAIL}">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="password"><fmt:message key="signin.password" bundle="${rb}"/></label>
+                    <input type="text" class="form-control" id="password" placeholder="sum" name="${Parameters.PASSWORD}">
                 </div>
             </div>
         </div>
