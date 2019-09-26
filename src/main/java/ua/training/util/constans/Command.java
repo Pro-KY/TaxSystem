@@ -10,4 +10,7 @@ public class Command {
     public static final String GET_REPORT_FRAGMENT = "getReportFragment";
     public static final String GET_SIGN_UP_FRAGMENT = "getSignUpFragment";
     public static final String GET_SIGN_IN_FRAGMENT = "getSignInFragment";
+    public static final String SENT_REPORTS = "sentReports";
+    public static final String HANDLED_REPORTS = "handledReports";
+
 }

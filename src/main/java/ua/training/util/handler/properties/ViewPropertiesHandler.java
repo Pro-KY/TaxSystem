@@ -12,6 +12,7 @@ public class ViewPropertiesHandler {
     public static final String FRAGMENT_PATH_SIGN_IN = "FRAGMENT_PATH_SIGN_IN";
     public static final String FRAGMENT_PATH_PROCESS_REPORT = "FRAGMENT_PATH_PROCESS_REPORT";
     public static final String FRAGMENT_PATH_SEND_REPORT = "FRAGMENT_PATH_SEND_REPORT";
+    public static final String FRAGMENT_PATH_SENT_REPORTS = "FRAGMENT_PATH_SENT_REPORTS";
     public static final String FRAGMENT_PATH_SIGN_UP = "FRAGMENT_PATH_SIGN_UP";
 
     static {

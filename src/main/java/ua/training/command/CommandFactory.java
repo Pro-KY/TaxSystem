@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 
 public class CommandFactory {
-    private static HashMap<String, ICommand> commandHashMap = new HashMap<>(); // key - parameter from request, getValue = ICommand
+    private static HashMap<String, ICommand> commandHashMap = new HashMap<>();
 
     static {
         commandHashMap.put(Command.SIGN_IN, new SignInCommand());
@@ -23,6 +23,7 @@ public class CommandFactory {
         commandHashMap.put(Command.GET_REPORT_FRAGMENT, new ReportFragmentCommand());
         commandHashMap.put(Command.GET_SIGN_UP_FRAGMENT, new SignUpFragmentCommand());
         commandHashMap.put(Command.GET_SIGN_IN_FRAGMENT, new SignInFragmentCommand());
+        commandHashMap.put(Command.SENT_REPORTS, new SentReportsCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {
@@ -30,10 +31,11 @@ public class CommandFactory {
         final String cliendCommand = request.getParameter("command");
         System.out.println("command: " + cliendCommand);
 
-        if (cliendCommand == null || cliendCommand.isEmpty()) {
+        if (cliendCommand == null || cliendCommand.isEmpty() || commandHashMap.get(cliendCommand) == null) {
             command = new EmptyCommand();
         } else {
             command = commandHashMap.get(cliendCommand);
+
         }
 
         return command;
