@@ -28,7 +28,7 @@ public class SendReportService {
 //        MysqlTransactionManager tm = MysqlTransactionManager.getInstance();
         MysqlTransactionManager tm = new MysqlTransactionManager();
         final SendReportEvent sendReportEvent = new SendReportEvent();
-        sendReportEvent.setSenderId(sendReportDto.getUser().getId());
+//        sendReportEvent.setSenderId(sendReportDto.getUser().getId());
         sendReportEvent.setTimestamp(new Timestamp(System.currentTimeMillis()));
         sendReportEvent.setReportStateId(ReportStateEnum.PROCESSING.getStateId());
 

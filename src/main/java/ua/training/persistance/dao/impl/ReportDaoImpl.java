@@ -1,9 +1,9 @@
-package ua.training.persistance.dao.daoimpl;
+package ua.training.persistance.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.persistance.beans.Report;
-import ua.training.persistance.dao.DataAccessException;
+import ua.training.util.exceptions.DataAccessException;
 import ua.training.persistance.dao.IReportDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
@@ -14,22 +14,22 @@ import java.util.Optional;
 
 import static ua.training.util.handler.properties.SqlPropertiesHandler.SAVE_REPORT;
 
-public class ReportDaoIml implements IReportDao {
-    private static ReportDaoIml instance;
+public class ReportDaoImpl implements IReportDao {
+    private static ReportDaoImpl instance;
     private JdbcTemplate jdbcTemplate;
-    private static final Logger logger = LogManager.getLogger(ReportDaoIml.class);
+    private static final Logger logger = LogManager.getLogger(ReportDaoImpl.class);
 
     public void setDataSource(MyDataSource dataSource) {
         jdbcTemplate.setDataSource(dataSource);
     }
 
-    private ReportDaoIml() {
+    private ReportDaoImpl() {
         jdbcTemplate = JdbcTemplate.getInstance();
     }
 
-    public static ReportDaoIml getInstance() {
+    public static ReportDaoImpl getInstance() {
         if (instance == null) {
-            instance = new ReportDaoIml();
+            instance = new ReportDaoImpl();
         }
         return instance;
     }

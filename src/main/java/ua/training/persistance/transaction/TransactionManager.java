@@ -2,7 +2,7 @@ package ua.training.persistance.transaction;
 
 
 import ua.training.persistance.dao.factory.DaoFactory;
-import ua.training.util.exceptions.ThrowingConsumer;
+import ua.training.util.ThrowingConsumer;
 
 public interface TransactionManager {
 //    void doInTransaction(Consumer<DaoFactory> daoFactoryConsumer) throws SQLException;

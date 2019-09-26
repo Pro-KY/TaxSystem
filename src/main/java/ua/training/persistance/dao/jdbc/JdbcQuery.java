@@ -1,6 +1,6 @@
 package ua.training.persistance.dao.jdbc;
 
-import ua.training.persistance.dao.DataAccessException;
+import ua.training.util.exceptions.DataAccessException;
 
 import java.sql.*;
 

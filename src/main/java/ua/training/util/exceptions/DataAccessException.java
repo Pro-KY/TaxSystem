@@ -1,4 +1,4 @@
-package ua.training.persistance.dao;
+package ua.training.util.exceptions;
 
 import java.sql.SQLException;
 

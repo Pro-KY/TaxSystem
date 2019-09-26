@@ -1,4 +1,4 @@
-package ua.training.util.exceptions;
+package ua.training.util;
 
 @FunctionalInterface
 public interface ThrowingConsumer<T, E extends Exception> {

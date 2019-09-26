@@ -5,7 +5,7 @@ import ua.training.persistance.dao.factory.DaoFactory;
 import ua.training.persistance.dao.factory.MySQLDaoFactory;
 import ua.training.persistance.db.datasource.MysqlMyDataSource;
 import ua.training.persistance.db.datasource.MysqlMyDataSourceProxy;
-import ua.training.util.exceptions.ThrowingConsumer;
+import ua.training.util.ThrowingConsumer;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,7 +1,7 @@
 package ua.training.persistance.dao.factory;
 
 import ua.training.persistance.dao.*;
-import ua.training.persistance.dao.daoimpl.*;
+import ua.training.persistance.dao.impl.*;
 import ua.training.persistance.db.datasource.MyDataSource;
 import ua.training.persistance.db.datasource.MysqlMyDataSource;
 
@@ -50,9 +50,9 @@ public class MySQLDaoFactory implements DaoFactory {
 
     @Override
     public IReportDao getReportDao() {
-        final ReportDaoIml reportDaoIml = ReportDaoIml.getInstance();
-        reportDaoIml.setDataSource(myDataSource);
-        return reportDaoIml;
+        final ReportDaoImpl reportDaoImpl = ReportDaoImpl.getInstance();
+        reportDaoImpl.setDataSource(myDataSource);
+        return reportDaoImpl;
     }
 
     @Override
@@ -65,6 +65,13 @@ public class MySQLDaoFactory implements DaoFactory {
     @Override
     public ISendReportEventDao getSendReportEventDao() {
         final SendReportEventDaoImpl sendReportEventDaoImpl = SendReportEventDaoImpl.getInstance();
+        sendReportEventDaoImpl.setDataSource(myDataSource);
+        return sendReportEventDaoImpl;
+    }
+
+    @Override
+    public IUserSentReportEvent getUserSendReportEventDao() {
+        final UserSentReportEventImpl sendReportEventDaoImpl = UserSentReportEventImpl.getInstance();
         sendReportEventDaoImpl.setDataSource(myDataSource);
         return sendReportEventDaoImpl;
     }

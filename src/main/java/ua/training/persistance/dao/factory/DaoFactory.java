@@ -9,6 +9,7 @@ public interface DaoFactory {
      IUserTypeDao getUserTypeDao();
      ITaxTypeDao getTaxTypeDao();
      IReportDao getReportDao();
-    IReportStateDao getReportStateDao();
-    ISendReportEventDao getSendReportEventDao();
+     IReportStateDao getReportStateDao();
+     ISendReportEventDao getSendReportEventDao();
+     IUserSentReportEvent getUserSendReportEventDao();
 }

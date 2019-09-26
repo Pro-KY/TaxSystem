@@ -1,9 +1,9 @@
-package ua.training.persistance.dao.daoimpl;
+package ua.training.persistance.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.persistance.beans.SendReportEvent;
-import ua.training.persistance.dao.DataAccessException;
+import ua.training.util.exceptions.DataAccessException;
 import ua.training.persistance.dao.ISendReportEventDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
 import ua.training.persistance.dao.jdbc.pagination.Page;
@@ -42,7 +42,7 @@ public class SendReportEventDaoImpl implements ISendReportEventDao {
     public Long save(SendReportEvent bean) {
         String sql = SqlPropertiesHandler.getSqlQuery(SAVE_SEND_REPORT_EVENT);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
-        Object[] params = {bean.getTimestamp(), bean.getReportStateId(), bean.getReportId(), bean.getSenderId()};
+        Object[] params = {bean.getTimestamp(), bean.getReportStateId(), bean.getReportId()};
 
         try {
             return jdbcTemplate.saveOrUpdate(sql, params);

@@ -1,4 +1,4 @@
-package ua.training.persistance.dao.daoimpl;
+package ua.training.persistance.dao.impl;
 
 import ua.training.persistance.dao.IUserDao;
 import ua.training.persistance.dao.mappers.UserBeanBeanMapperImpl;
