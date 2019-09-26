@@ -5,8 +5,10 @@ import org.apache.logging.log4j.Logger;
 import ua.training.dto.SendReportDto;
 import ua.training.persistance.beans.Report;
 import ua.training.persistance.beans.SendReportEvent;
+import ua.training.persistance.beans.UserSentReportEvent;
 import ua.training.persistance.dao.IReportDao;
 import ua.training.persistance.dao.ISendReportEventDao;
+import ua.training.persistance.dao.IUserSentReportEvent;
 import ua.training.persistance.dao.factory.MySQLDaoFactory;
 import ua.training.persistance.transaction.MysqlTransactionManager;
 import ua.training.util.constans.ReportContentType;
@@ -51,9 +53,13 @@ public class SendReportService {
         tm.doInTransaction(daoFactory -> {
             final IReportDao reportDao = daoFactory.getReportDao();
             final ISendReportEventDao sendReportEventDao = daoFactory.getSendReportEventDao();
+            final IUserSentReportEvent userSendReportEventDao = daoFactory.getUserSendReportEventDao();
+
             final Long reportId = reportDao.save(report);
             sendReportEvent.setReportId(reportId);
-            sendReportEventDao.save(sendReportEvent);
+            final Long sendReportEventId = sendReportEventDao.save(sendReportEvent);
+            final UserSentReportEvent userSentReportEvent = new UserSentReportEvent(sendReportEventId, sendReportDto.getUser().getId());
+            userSendReportEventDao.save(userSentReportEvent);
         });
 
         if (tm.isRollBacked()) {
