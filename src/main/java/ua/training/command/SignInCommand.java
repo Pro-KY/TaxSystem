@@ -1,6 +1,5 @@
 package ua.training.command;
 
-import ua.training.persistance.entities.User;
 import ua.training.service.SignInService;
 import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;

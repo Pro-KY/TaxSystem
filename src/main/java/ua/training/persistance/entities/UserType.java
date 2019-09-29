@@ -7,6 +7,10 @@ public class UserType implements Serializable {
     private long id;
     private String role;
 
+    public UserType(long id) {
+        this.id = id;
+    }
+
     public UserType(long id, String role) {
         this.id = id;
         this.role = role;

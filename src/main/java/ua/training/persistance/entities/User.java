@@ -10,7 +10,7 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String address;
-    private Long userTypeId;
+    private UserType userType;
 
     public User() {}
 
@@ -18,7 +18,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Long id, String firstName, String lastName, String organization, String email, String password, String address, Long userTypeId) {
+    public User(Long id, String firstName, String lastName, String organization, String email, String password, String address, UserType userType) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,8 +26,19 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
         this.address = address;
-        this.userTypeId = userTypeId;
+        this.userType = userType;
     }
+
+    //    public User(Long id, String firstName, String lastName, String organization, String email, String password, String address, Long userType) {
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.organization = organization;
+//        this.email = email;
+//        this.password = password;
+//        this.address = address;
+//        this.userType = userType;
+//    }
 
     public User(String email, String password) {
         this.email = email;
@@ -90,12 +101,12 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public Long getUserTypeId() {
-        return userTypeId;
+    public UserType getUserType() {
+        return userType;
     }
 
-    public void setUserTypeId(Long userTypeId) {
-        this.userTypeId = userTypeId;
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     @Override
@@ -108,7 +119,7 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", address='" + address + '\'' +
-                ", userType=" + userTypeId +
+                ", userType=" + userType +
                 '}';
     }
 }

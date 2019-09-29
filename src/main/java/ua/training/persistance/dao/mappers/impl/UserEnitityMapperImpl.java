@@ -1,7 +1,6 @@
 package ua.training.persistance.dao.mappers.impl;
 
 import ua.training.persistance.dao.mappers.EnitityMapper;
-import ua.training.persistance.entities.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

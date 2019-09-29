@@ -11,6 +11,10 @@ public class TaxType implements Serializable {
 
   public TaxType() {}
 
+  public TaxType(Long id) {
+    this.id = id;
+  }
+
   public TaxType(Long id, String type) {
     this.id = id;
     this.type = type;

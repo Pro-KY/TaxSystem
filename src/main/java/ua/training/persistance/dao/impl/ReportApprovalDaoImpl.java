@@ -8,7 +8,6 @@ import ua.training.persistance.dao.IReportApprovalDao;
 import ua.training.persistance.dao.jdbc.JdbcPagination;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
-import ua.training.persistance.entities.ReportApproval;
 import ua.training.util.exceptions.DataAccessException;
 import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;

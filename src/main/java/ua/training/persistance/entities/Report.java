@@ -5,9 +5,13 @@ import java.io.Serializable;
 
 public class Report implements Serializable {
     private Long id;
-    private Long taxTypeId;
+    private TaxType taxType;
     private double sum;
     private int quarter;
+
+    public void setTaxType(TaxType taxType) {
+        this.taxType = taxType;
+    }
 
     public Report() {}
 
@@ -15,12 +19,26 @@ public class Report implements Serializable {
         this.id = id;
     }
 
-    public Report(Long taxTypeId, double sum, int quarter) {
-        this.taxTypeId = taxTypeId;
+
+    public Report(TaxType taxType) {
+        this.taxType = taxType;
+    }
+
+    public Report(Long id, TaxType taxType, double sum, int quarter) {
+        this.id = id;
+        this.taxType = taxType;
         this.sum = sum;
         this.quarter = quarter;
     }
 
+
+
+
+    public Report(TaxType taxType, double sum, int quarter) {
+        this.taxType = taxType;
+        this.sum = sum;
+        this.quarter = quarter;
+    }
 
     public long getId() {
         return id;
@@ -30,17 +48,17 @@ public class Report implements Serializable {
         this.id = id;
     }
 
-    public Long getTaxTypeId() {
-        return taxTypeId;
-    }
-
-    public void setTaxTypeId(Long taxTypeId) {
-        if(taxTypeId != null && taxTypeId == 0) {
-            throw new IllegalArgumentException("wrong taxTypeId value, must be bigger than 0!");
-        }
-
-        this.taxTypeId = taxTypeId;
-    }
+//    public Long getTaxTypeId() {
+//        return taxTypeId;
+//    }
+//
+//    public void setTaxTypeId(Long taxTypeId) {
+//        if(taxTypeId != null && taxTypeId == 0) {
+//            throw new IllegalArgumentException("wrong taxTypeId value, must be bigger than 0!");
+//        }
+//
+//        this.taxTypeId = taxTypeId;
+//    }
 
     public double getSum() {
         return sum;

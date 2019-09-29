@@ -1,6 +1,5 @@
 package ua.training.persistance.dao.impl;
 
-import ua.training.persistance.entities.UserType;
 import ua.training.persistance.dao.IUserTypeDao;
 import ua.training.persistance.db.datasource.MyDataSource;
 

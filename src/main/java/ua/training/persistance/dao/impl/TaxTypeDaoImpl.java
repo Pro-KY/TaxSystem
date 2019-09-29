@@ -4,7 +4,6 @@ import ua.training.persistance.dao.ITaxTypeDao;
 import ua.training.persistance.dao.mappers.impl.TaxTypeEnitityMapperIml;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
-import ua.training.persistance.entities.TaxType;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.List;

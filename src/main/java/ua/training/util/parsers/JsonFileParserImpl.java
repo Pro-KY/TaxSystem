@@ -2,7 +2,6 @@ package ua.training.util.parsers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ua.training.persistance.entities.Report;
 import ua.training.util.exceptions.FileParsingException;
 
 public class JsonFileParserImpl implements FileParser<Report> {

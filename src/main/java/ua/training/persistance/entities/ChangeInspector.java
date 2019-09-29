@@ -2,19 +2,35 @@ package ua.training.persistance.entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Objects;
 
 public class ChangeInspector implements Serializable {
     private long id;
-    private java.sql.Timestamp date;
-    private long approved;
-    private long sendReportEventId;
+    private Timestamp date;
+    private ReportApproval reportApproval;
+    private User previousInspector;
 
-    public ChangeInspector(long id, Timestamp date, long approved, long sendReportEventId) {
+    public ChangeInspector(long id, Timestamp date, ReportApproval reportApproval, User previousInspector) {
       this.id = id;
       this.date = date;
-      this.approved = approved;
-      this.sendReportEventId = sendReportEventId;
+      this.reportApproval = reportApproval;
+      this.previousInspector = previousInspector;
+    }
+
+
+    public ReportApproval getReportApproval() {
+        return reportApproval;
+    }
+
+    public void setReportApproval(ReportApproval reportApproval) {
+        this.reportApproval = reportApproval;
+    }
+
+    public User getPreviousInspector() {
+        return previousInspector;
+    }
+
+    public void setPreviousInspector(User previousInspector) {
+        this.previousInspector = previousInspector;
     }
 
     public long getId() {
@@ -26,55 +42,14 @@ public class ChangeInspector implements Serializable {
     }
 
 
-    public java.sql.Timestamp getDate() {
+    public Timestamp getDate() {
       return date;
     }
 
-    public void setDate(java.sql.Timestamp date) {
+    public void setDate(Timestamp date) {
       this.date = date;
     }
 
 
-    public long getApproved() {
-      return approved;
-    }
 
-    public void setApproved(long approved) {
-      this.approved = approved;
-    }
-
-
-    public long getSendReportEventId() {
-      return sendReportEventId;
-    }
-
-    public void setSendReportEventId(long sendReportEventId) {
-      this.sendReportEventId = sendReportEventId;
-    }
-
-  @Override
-  public String toString() {
-    return "ChangeInspector{" +
-            "id=" + id +
-            ", date=" + date +
-            ", approved=" + approved +
-            ", sendReportEventId=" + sendReportEventId +
-            '}';
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ChangeInspector that = (ChangeInspector) o;
-    return id == that.id &&
-            approved == that.approved &&
-            sendReportEventId == that.sendReportEventId &&
-            Objects.equals(date, that.date);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, date, approved, sendReportEventId);
-  }
 }

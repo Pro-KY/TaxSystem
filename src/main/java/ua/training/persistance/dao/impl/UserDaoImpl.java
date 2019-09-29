@@ -3,7 +3,6 @@ package ua.training.persistance.dao.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.persistance.dao.mappers.impl.UserEnitityMapperImpl;
-import ua.training.persistance.entities.User;
 import ua.training.persistance.dao.IUserDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;

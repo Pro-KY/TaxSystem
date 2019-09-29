@@ -1,8 +1,6 @@
 package ua.training.dto;
 
 
-import ua.training.persistance.entities.User;
-
 import java.io.Serializable;
 
 public class SendReportDto implements Serializable {

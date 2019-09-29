@@ -1,6 +1,5 @@
 package ua.training.service;
 
-import ua.training.persistance.entities.User;
 import ua.training.persistance.dao.IUserDao;
 import ua.training.persistance.dao.factory.MysqlDaoFactory;
 

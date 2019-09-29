@@ -3,7 +3,6 @@ package ua.training.persistance.dao.impl;
 import ua.training.persistance.dao.IStateApprovalDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
 import ua.training.persistance.db.datasource.MyDataSource;
-import ua.training.persistance.entities.StateApproval;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.Optional;

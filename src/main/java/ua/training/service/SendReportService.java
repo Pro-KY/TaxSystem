@@ -6,8 +6,6 @@ import ua.training.dto.SendReportDto;
 import ua.training.persistance.dao.IReportDao;
 import ua.training.persistance.dao.IReportApprovalDao;
 import ua.training.persistance.dao.factory.MysqlDaoFactory;
-import ua.training.persistance.entities.Report;
-import ua.training.persistance.entities.ReportApproval;
 import ua.training.persistance.transaction.MysqlTransactionManager;
 import ua.training.util.constans.ReportContentType;
 import ua.training.util.constans.StateApprovalEnum;

@@ -1,7 +1,6 @@
 package ua.training.service;
 
 import ua.training.dto.SendReportDto;
-import ua.training.persistance.entities.Report;
 import ua.training.util.constans.ReportContentType;
 import ua.training.util.exceptions.FileParsingException;
 import ua.training.util.parsers.FileParser;
