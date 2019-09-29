@@ -18,11 +18,11 @@ public class UserTypeMapperImpl extends EnitityMapper<UserType> {
     @Override
     public UserType mapToEntity(ResultSet resultSet) {
         try {
-            if (resultSet.next()) {
+//            if (resultSet.next()) {
                 long id = resultSet.getLong(columnsIndexes.get(ID));
                 final String type = resultSet.getString(columnsIndexes.get(TYPE));
                mappedEntity =  new UserType(id, type);
-            }
+//            }
         } catch (SQLException e) {
             System.out.println(e.getCause().toString());
         }

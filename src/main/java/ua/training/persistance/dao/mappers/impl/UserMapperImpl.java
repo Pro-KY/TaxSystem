@@ -40,27 +40,26 @@ public class UserMapperImpl extends EnitityMapper<User> {
 
     @Override
     public User mapToEntity(ResultSet resultSet) {
-        super.resultSet = resultSet;
+        columnsIndexes.forEach((k, v) -> System.out.println(v + " "));
 
         try {
-            if (resultSet.next()) {
                 long id = resultSet.getLong(columnsIndexes.get(ID));
-                final String email = resultSet.getString(columnsIndexes.get(EMAIL));
                 final String firstName = resultSet.getString(columnsIndexes.get(FIRST_NAME));
                 final String lastName= resultSet.getString(columnsIndexes.get(LAST_NAME));
                 final String organization = resultSet.getString(columnsIndexes.get(ORGANIZATION));
-                final String adress = resultSet.getString(columnsIndexes.get(ADDRESS));
-                final String password = resultSet.getString(columnsIndexes.get(PASSWORD));
+            final String email = resultSet.getString(columnsIndexes.get(EMAIL));
+            final String password = resultSet.getString(columnsIndexes.get(PASSWORD));
+            final String address = resultSet.getString(columnsIndexes.get(ADDRESS));
                 final long userTypeId = resultSet.getLong(columnsIndexes.get(USER_TYPE_ID));
 //                final String type = resultSet.getString(UserTypeEntityMapperImpl.TYPE);
                 final UserType userType = new UserType(userTypeId);
 
-                mappedEntity =  new User(id, firstName, lastName, organization, email, password, adress, userType);
+                mappedEntity =  new User(id, firstName, lastName, organization, email, password, address, userType);
 
                 if (mapUserType) {
                     mappedEntity.setUserType(userTypeMapper.mapToEntity(resultSet));
                 }
-            }
+//            }
         } catch (SQLException e) {
             System.out.println(e.getCause().toString());
         }

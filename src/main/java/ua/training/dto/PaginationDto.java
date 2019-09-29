@@ -4,12 +4,13 @@ public class PaginationDto {
     private long currentPageIndex;
     private boolean selectionAction;
     private boolean nextPageAction;
-    private int pageSize = -1;
+    private int pageSize;
 
-    public PaginationDto(long currentPageIndex, boolean selectionAction, boolean nextPageAction) {
+    public PaginationDto(long currentPageIndex, boolean selectionAction, boolean nextPageAction, int pageSize) {
         this.currentPageIndex = currentPageIndex;
         this.selectionAction = selectionAction;
         this.nextPageAction = nextPageAction;
+        this.pageSize = pageSize;
     }
 
     public int getPageSize() {

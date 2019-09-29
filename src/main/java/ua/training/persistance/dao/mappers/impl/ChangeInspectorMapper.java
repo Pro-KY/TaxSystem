@@ -29,7 +29,6 @@ public class ChangeInspectorMapper extends EnitityMapper<ChangeInspector> {
     @Override
     public ChangeInspector mapToEntity(ResultSet resultSet) {
         try {
-            if (resultSet.next()) {
                 final long id = resultSet.getLong(columnsIndexes.get(ID));
                 final Timestamp timestamp = resultSet.getTimestamp(columnsIndexes.get(TIMESTAMP));
                 final Long reportApprovalId = resultSet.getLong(columnsIndexes.get(REPORT_APPROVAL_ID));
@@ -47,7 +46,6 @@ public class ChangeInspectorMapper extends EnitityMapper<ChangeInspector> {
                 if(mapReportApprovalMapper) {
                     mappedEntity.setReportApproval(reportApprovalMapper.mapToEntity(resultSet));
                 }
-            }
         } catch (SQLException e) {
             System.out.println(e.getCause().toString());
         }

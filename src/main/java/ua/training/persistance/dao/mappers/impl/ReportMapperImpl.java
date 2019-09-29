@@ -27,10 +27,10 @@ public class ReportMapperImpl extends EnitityMapper<Report> {
 
     @Override
     public Report mapToEntity(ResultSet resultSet) {
-        super.resultSet = resultSet;
+//        super.resultSet = resultSet;
 
         try {
-            if (resultSet.next()) {
+//            if (resultSet.next()) {
                 final long id = resultSet.getLong(columnsIndexes.get(ID));
                 final long taxTypeId = resultSet.getLong(columnsIndexes.get(TAX_TYPE_ID));
                 final double sum = resultSet.getDouble(columnsIndexes.get(SUM));
@@ -41,7 +41,7 @@ public class ReportMapperImpl extends EnitityMapper<Report> {
                 if(mapTaxType) {
                     mappedEntity.setTaxType(taxTypeMapper.mapToEntity(resultSet));
                 }
-            }
+//            }
         } catch (SQLException e) {
             System.out.println(e.getCause().toString());
         }

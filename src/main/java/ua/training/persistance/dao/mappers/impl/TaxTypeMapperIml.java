@@ -24,7 +24,6 @@ public class TaxTypeMapperIml extends EnitityMapper<TaxType> {
 
     @Override
     public TaxType mapToEntity(ResultSet resultSet) {
-        super.resultSet = resultSet;
 
         try {
             final long id = resultSet.getLong(columnsIndexes.get(ID));

@@ -32,26 +32,26 @@ public class ReportApprovalMapper extends EnitityMapper<ReportApproval> {
         columnsIndexes.put(ID, 1);
         columnsIndexes.put(TIMESTAMP, 2);
         columnsIndexes.put(REFUSAL_CAUSE, 3);
-        columnsIndexes.put(REPORT_ID, 3);
-        columnsIndexes.put(STATE_APPROVAL_ID, 4);
-        columnsIndexes.put(INSPECTOR_ID, 5);
+        columnsIndexes.put(REPORT_ID, 4);
+        columnsIndexes.put(STATE_APPROVAL_ID, 5);
         columnsIndexes.put(USER_ID, 6);
+        columnsIndexes.put(INSPECTOR_ID, 7);
     }
 
     @Override
     public ReportApproval mapToEntity(ResultSet resultSet) {
-        super.resultSet = resultSet;
+//        super.resultSet = resultSet;
         try {
-            if (resultSet.next()) {
+//            if (resultSet.next()) {
                 final long id = resultSet.getLong(columnsIndexes.get(ID));
                 final Timestamp timestamp = resultSet.getTimestamp(columnsIndexes.get(TIMESTAMP));
                 final String refusalCause = resultSet.getString(columnsIndexes.get(REFUSAL_CAUSE));
-                final Long reportId = resultSet.getLong(columnsIndexes.get(REPORT_ID));
                 final Long stateApprovalId = resultSet.getLong(columnsIndexes.get(STATE_APPROVAL_ID));
-                final Long inspectorId = resultSet.getLong(columnsIndexes.get(INSPECTOR_ID));
+                final Long reportId = resultSet.getLong(columnsIndexes.get(REPORT_ID));
                 final Long userId = resultSet.getLong(columnsIndexes.get(USER_ID));
+                final Long inspectorId = resultSet.getLong(columnsIndexes.get(INSPECTOR_ID));
 
-                final Report report = new Report(reportId);
+            final Report report = new Report(reportId);
                 final StateApproval stateApproval = new StateApproval(stateApprovalId);
                 final User inspector = new User(inspectorId);
                 final User user = new User(userId);
@@ -66,13 +66,13 @@ public class ReportApprovalMapper extends EnitityMapper<ReportApproval> {
                 }
 
                 if (mapInspector) {
-                    mappedEntity.setUser(userMapper.mapToEntity(resultSet));
+                    mappedEntity.setInspector(inspectorMapper.mapToEntity(resultSet));
                 }
 
                 if (mapUser) {
-                    mappedEntity.setUser(inspectorMapper.mapToEntity(resultSet));
+                    mappedEntity.setUser(userMapper.mapToEntity(resultSet));
                 }
-            }
+//            }
         } catch (SQLException e) {
             System.out.println(e.getCause().toString());
         }
@@ -95,7 +95,7 @@ public class ReportApprovalMapper extends EnitityMapper<ReportApproval> {
         this.userMapper = userMapper;
     }
 
-    public void setMapInspector(EnitityMapper<User> inspectorMapper) {
+    public void setInspectorMapper(EnitityMapper<User> inspectorMapper) {
         mapInspector = true;
         this.inspectorMapper = inspectorMapper;
     }

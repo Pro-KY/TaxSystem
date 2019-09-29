@@ -14,8 +14,8 @@ public class SqlPropertiesHandler {
     public static final String SAVE_USER_SEND_REPORT_EVENT = "SAVE_USER_SEND_REPORT_EVENT";
     public static final String SAVE_USER = "SAVE_USER";
 
-    public static final String PAGINATION = "PAGINATION";
-    public static final String ALL_ROWS_PAGINATION_COUNT = "ALL_ROWS_PAGINATION_COUNT";
+    public static final String REPORT_APPROVAL_PAGINATION = "REPORT_APPROVAL_PAGINATION";
+    public static final String REPORT_APPROVAL_COUNT = "REPORT_APPROVAL_COUNT";
 
 
     static {

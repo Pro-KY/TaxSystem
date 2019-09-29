@@ -3,10 +3,12 @@ package ua.training.persistance.dao.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.dto.PaginationDto;
-import ua.training.dto.ReportApprovalDto;
 import ua.training.persistance.dao.IReportApprovalDao;
 import ua.training.persistance.dao.jdbc.JdbcPagination;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
+import ua.training.persistance.dao.mappers.impl.ReportApprovalMapper;
+import ua.training.persistance.dao.mappers.impl.StateApprovalMapperImpl;
+import ua.training.persistance.dao.mappers.impl.UserMapperImpl;
 import ua.training.persistance.db.datasource.MysqlDataSource;
 import ua.training.persistance.entities.ReportApproval;
 import ua.training.util.exceptions.DataAccessException;
@@ -55,20 +57,26 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     }
 
     @Override
-    public List<ReportApprovalDto> getPaginationList(PaginationDto dto) {
-
-        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.PAGINATION);
+    public List<ReportApproval> getPaginationList(PaginationDto dto) {
+        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_PAGINATION);
         JdbcPagination<ReportApproval> jdbcPagination = new JdbcPagination<>(jdbcTemplate);
-        jdbcPagination.countAllRowsAmount(SqlPropertiesHandler.ALL_ROWS_PAGINATION_COUNT);
+        jdbcPagination.countAllRowsAmount(SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_COUNT));
 
         final int pageSize = dto.getPageSize();
         jdbcPagination.setPageSize(pageSize);
+        jdbcPagination.calculateOffset();
 
-//        Object[] params = {jdbcPagination.getPageSize(), jdbcPagination.getOffSet()};
+        final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper();
 
-//        final List<ReportApprovalDto> reportApprovals = jdbcPagination.getpageResult(sql,);
-//        return reportApprovals;
-        return null;
+        final StateApprovalMapperImpl stateApprovalMapper = new StateApprovalMapperImpl();
+        stateApprovalMapper.setIndexesInJoinQuery(new int[] {8, 9});
+        reportApprovalMapper.setStateApprovalMapper(stateApprovalMapper);
+
+        final UserMapperImpl userMapper = new UserMapperImpl();
+        userMapper.setIndexesInJoinQuery(new int[] {10, 11, 12, 13, 14, 15, 16, 17});
+        reportApprovalMapper.setInspectorMapper(userMapper);
+
+        return jdbcPagination.getPageResult(sql, reportApprovalMapper);
     }
 
     @Override

@@ -20,11 +20,11 @@ public class StateApprovalMapperImpl extends EnitityMapper<StateApproval> {
     @Override
     public StateApproval mapToEntity(ResultSet resultSet) {
         try {
-            if (resultSet.next()) {
+//            if (resultSet.next()) {
                 final Long id = resultSet.getLong(columnsIndexes.get(ID));
                 final String state = resultSet.getString(columnsIndexes.get(STATE));
                 mappedEntity = new StateApproval(id, state);
-            }
+//            }
         } catch (SQLException e) {
             logger.debug((e.getCause().toString()));
         }

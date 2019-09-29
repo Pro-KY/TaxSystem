@@ -30,7 +30,6 @@ public class JdbcTemplate {
         return instance;
     }
 
-//    Function<ResultSet, List<T>> function
     public <T> List<T> finAll(String sql, EnitityMapper<T> entityEnitityMapper, Object... parameters) {
         final Connection connection = mysqlDataSource.getConnection();
         List<T> resultList = new ArrayList<>();
@@ -42,6 +41,7 @@ public class JdbcTemplate {
                 resultList.add(t);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             resultList = new ArrayList<>();
         }  finally {
             mysqlDataSource.releaseResources(connection, jdbcQuery1.getPs());
@@ -55,6 +55,7 @@ public class JdbcTemplate {
         final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
         Optional<T> t;
         try (ResultSet result = jdbcQuery1.select(parameters)) {
+            result.next();
             t = Optional.ofNullable(entityMapper.mapToEntity(result));
         } catch (SQLException e) {
             t = Optional.empty();
@@ -69,11 +70,12 @@ public class JdbcTemplate {
         final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
         long rowsAmount;
         try (ResultSet result = jdbcQuery1.select()) {
+            result.next();
             rowsAmount = result.getLong(1);
         } catch (SQLException e) {
             rowsAmount = 0;
         }  finally {
-            mysqlDataSource.releaseResources(connection, jdbcQuery1.getPs());
+            mysqlDataSource.releaseResources(connection, jdbcQuery1.getStatement());
         }
         return rowsAmount;
     }

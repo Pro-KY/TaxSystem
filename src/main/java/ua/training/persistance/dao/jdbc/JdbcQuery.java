@@ -95,6 +95,10 @@ public class JdbcQuery {
         return rowsAffected > 0;
     }
 
+    public Statement getStatement() {
+        return statement;
+    }
+
     public PreparedStatement getPs() {
         return ps;
     }

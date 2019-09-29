@@ -45,6 +45,11 @@ public class JdbcPagination<T>  { // implements Pageable<T>
         allPagesAmount += allPagesAmount % pageSize > 0 ? 1 : 0;
     }
 
+    // 3
+    public void calculateOffset() { // 2
+        offSet = currentPageIndex * pageSize;
+    }
+
     public long getPageSize() {
         return pageSize;
     }
@@ -53,7 +58,7 @@ public class JdbcPagination<T>  { // implements Pageable<T>
         return offSet;
     }
 
-    public List<T> getpageResult(String sql, EnitityMapper<T> entityEnitityMapper) {
+    public List<T> getPageResult(String sql, EnitityMapper<T> entityEnitityMapper) {
         return jdbcTemplate.finAll(sql, entityEnitityMapper, pageSize, offSet);
     }
 
@@ -73,9 +78,6 @@ public class JdbcPagination<T>  { // implements Pageable<T>
 ////        }
 //    }
 
-    public void calculateOffset() { // 2
-        offSet = (currentPageIndex * pageSize) - 1;
-    }
 
     public void handleNextButton() {
         if(currentPageIndex < endVisibleIndex) { // 1,1

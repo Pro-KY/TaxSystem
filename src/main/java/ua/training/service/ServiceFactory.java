@@ -5,4 +5,8 @@ public class ServiceFactory {
         return TaxTypeService.getInstance();
     }
 
+    public static SentReportsService getSentReportsService() {
+        return SentReportsService.getInstance();
+    }
+
 }
