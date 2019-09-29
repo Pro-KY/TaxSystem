@@ -2,7 +2,7 @@ package ua.training.persistance.dao.jdbc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.persistance.dao.mappers.EnitityMapper;
+import ua.training.persistance.dao.mappers.impl2.EnitityMapper;
 
 import java.util.List;
 

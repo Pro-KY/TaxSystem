@@ -9,6 +9,10 @@ public class Report implements Serializable {
     private double sum;
     private int quarter;
 
+    public TaxType getTaxType() {
+        return taxType;
+    }
+
     public void setTaxType(TaxType taxType) {
         this.taxType = taxType;
     }

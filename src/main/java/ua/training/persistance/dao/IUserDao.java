@@ -1,5 +1,7 @@
 package ua.training.persistance.dao;
 
+import ua.training.persistance.entities.User;
+
 import java.util.Optional;
 
 public interface IUserDao extends IDao<User> {

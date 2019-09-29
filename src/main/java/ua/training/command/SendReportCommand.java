@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ua.training.command.util.CommandHelper;
 import ua.training.command.util.CommandParamsExtractor;
 import ua.training.dto.SendReportDto;
+import ua.training.persistance.entities.User;
 import ua.training.service.SendReportService;
 import ua.training.util.constans.Attributes;
 import ua.training.util.exceptions.ServiceException;

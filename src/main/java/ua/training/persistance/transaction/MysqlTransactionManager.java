@@ -3,8 +3,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.persistance.dao.factory.DaoFactory;
 import ua.training.persistance.dao.factory.MysqlDaoFactory;
-import ua.training.persistance.db.datasource.MysqlMyDataSource;
-import ua.training.persistance.db.datasource.MysqlMyDataSourceProxy;
+import ua.training.persistance.db.datasource.MysqlMysqlDataSource;
+import ua.training.persistance.db.datasource.MysqlMysqlDataSourceProxy;
 import ua.training.util.ThrowingConsumer;
 
 import java.sql.Connection;
@@ -14,7 +14,7 @@ public class MysqlTransactionManager implements TransactionManager {
     private static MysqlTransactionManager instance;
     private static final Logger logger = LogManager.getLogger(MysqlTransactionManager.class);
     private DaoFactory mySQLDaoFactory;
-    private MysqlMyDataSourceProxy mysqlDataSourceProxy;
+    private MysqlMysqlDataSourceProxy mysqlDataSourceProxy;
     private Connection connection;
     private boolean isRollBacked;
 
@@ -27,7 +27,7 @@ public class MysqlTransactionManager implements TransactionManager {
 
     public MysqlTransactionManager() {
         mySQLDaoFactory = MysqlDaoFactory.getInstance();
-        mysqlDataSourceProxy = new MysqlMyDataSourceProxy(MysqlMyDataSource.getInstance());
+        mysqlDataSourceProxy = new MysqlMysqlDataSourceProxy(MysqlMysqlDataSource.getInstance());
         mySQLDaoFactory.setDataSource(mysqlDataSourceProxy);
     }
 

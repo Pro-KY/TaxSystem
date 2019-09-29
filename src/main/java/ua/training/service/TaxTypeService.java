@@ -2,6 +2,7 @@ package ua.training.service;
 
 import ua.training.persistance.dao.ITaxTypeDao;
 import ua.training.persistance.dao.factory.MysqlDaoFactory;
+import ua.training.persistance.entities.TaxType;
 
 import java.util.List;
 

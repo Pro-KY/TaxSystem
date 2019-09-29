@@ -1,10 +1,10 @@
 package ua.training.persistance.dao.factory;
 
 import ua.training.persistance.dao.*;
-import ua.training.persistance.db.datasource.MyDataSource;
+import ua.training.persistance.db.datasource.MysqlDataSource;
 
 public interface DaoFactory {
-    void setDataSource(MyDataSource myDataSource);
+    void setDataSource(MysqlDataSource mysqlDataSource);
     IUserDao getUserDao();
     IUserTypeDao getUserTypeDao();
     ITaxTypeDao getTaxTypeDao();

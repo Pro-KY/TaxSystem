@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class MysqlMyDataSourceProxy implements MyDataSource {
-    private static final Logger logger = LogManager.getLogger(MysqlMyDataSourceProxy.class);
-    private MysqlMyDataSource mysqlDataSource;
+public class MysqlMysqlDataSourceProxy implements MysqlDataSource {
+    private static final Logger logger = LogManager.getLogger(MysqlMysqlDataSourceProxy.class);
+    private MysqlMysqlDataSource mysqlDataSource;
     private Connection connection;
 
-    public MysqlMyDataSourceProxy(MysqlMyDataSource mysqlDataSource) {
+    public MysqlMysqlDataSourceProxy(MysqlMysqlDataSource mysqlDataSource) {
         this.mysqlDataSource = mysqlDataSource;
     }
 

@@ -3,9 +3,13 @@ package ua.training.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.dto.SendReportDto;
-import ua.training.persistance.dao.IReportDao;
 import ua.training.persistance.dao.IReportApprovalDao;
+import ua.training.persistance.dao.IReportDao;
 import ua.training.persistance.dao.factory.MysqlDaoFactory;
+import ua.training.persistance.entities.Report;
+import ua.training.persistance.entities.ReportApproval;
+import ua.training.persistance.entities.StateApproval;
+import ua.training.persistance.entities.TaxType;
 import ua.training.persistance.transaction.MysqlTransactionManager;
 import ua.training.util.constans.ReportContentType;
 import ua.training.util.constans.StateApprovalEnum;
@@ -28,12 +32,13 @@ public class SendReportService {
         final ReportApproval reportApproval = new ReportApproval();
 //        reportApproval.setSenderId(sendReportDto.getUser().getId());
         reportApproval.setTimestamp(new Timestamp(System.currentTimeMillis()));
-        reportApproval.setStateApprovalId(StateApprovalEnum.PROCESSING.getStateId());
+        reportApproval.setStateApproval(new StateApproval(StateApprovalEnum.PROCESSING.getStateId()));
 
         Report report;
 
         if(sendReportDto.getReportContentTypeId() == ReportContentType.FORM.getId()) {
-            report = new Report(sendReportDto.getReportTaxtypeId(), sendReportDto.getReportSum(), sendReportDto.getReportQuarter());
+            report = new Report(new TaxType(sendReportDto.getReportTaxtypeId()), sendReportDto.getReportSum(), sendReportDto.getReportQuarter());
+
         } else {
 //            final Optional<Report> reportOptional = CommandHelper.parseReportFile.apply(sendReportDto);
             final ReportFileService reportFileService = new ReportFileService();
@@ -51,7 +56,7 @@ public class SendReportService {
             final IReportApprovalDao iReportApprovalDao = daoFactory.getReportApprovalDao();
 
             final Long reportId = reportDao.save(report);
-            reportApproval.setReportId(reportId);
+            reportApproval.setReport(new Report(reportId));
             iReportApprovalDao.save(reportApproval);
         });
 

@@ -7,7 +7,8 @@ import ua.training.dto.ReportApprovalDto;
 import ua.training.persistance.dao.IReportApprovalDao;
 import ua.training.persistance.dao.jdbc.JdbcPagination;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
-import ua.training.persistance.db.datasource.MyDataSource;
+import ua.training.persistance.db.datasource.MysqlDataSource;
+import ua.training.persistance.entities.ReportApproval;
 import ua.training.util.exceptions.DataAccessException;
 import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
@@ -22,7 +23,7 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     private JdbcTemplate jdbcTemplate;
     private static final Logger logger = LogManager.getLogger(ReportApprovalDaoImpl.class);
 
-    public void setDataSource(MyDataSource dataSource) {
+    public void setDataSource(MysqlDataSource dataSource) {
         jdbcTemplate.setDataSource(dataSource);
     }
 
@@ -38,10 +39,10 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     }
 
     @Override
-    public Long save(ReportApproval bean) {
+    public Long save(ReportApproval reportApproval) {
         String sql = SqlPropertiesHandler.getSqlQuery(SAVE_SEND_REPORT_EVENT);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
-        Object[] params = {bean.getTimestamp(), bean.getStateApprovalId(), bean.getReportId()};
+        Object[] params = {reportApproval.getTimestamp(), reportApproval.getStateApproval().getId(), reportApproval.getReport().getId()};
 
         try {
             return jdbcTemplate.saveOrUpdate(sql, params);

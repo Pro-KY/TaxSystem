@@ -2,10 +2,11 @@ package ua.training.persistance.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.util.exceptions.DataAccessException;
 import ua.training.persistance.dao.IReportDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
-import ua.training.persistance.db.datasource.MyDataSource;
+import ua.training.persistance.db.datasource.MysqlDataSource;
+import ua.training.persistance.entities.Report;
+import ua.training.util.exceptions.DataAccessException;
 import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
@@ -18,7 +19,7 @@ public class ReportDaoImpl implements IReportDao {
     private JdbcTemplate jdbcTemplate;
     private static final Logger logger = LogManager.getLogger(ReportDaoImpl.class);
 
-    public void setDataSource(MyDataSource dataSource) {
+    public void setDataSource(MysqlDataSource dataSource) {
         jdbcTemplate.setDataSource(dataSource);
     }
 
@@ -34,10 +35,10 @@ public class ReportDaoImpl implements IReportDao {
     }
 
     @Override
-    public Long save(Report bean) {
+    public Long save(Report report) {
         String sql = SqlPropertiesHandler.getSqlQuery(SAVE_REPORT);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
-        Object[] params = {bean.getTaxTypeId(), bean.getSum(), bean.getQuarter()};
+        Object[] params = {report.getTaxType().getId(), report.getSum(), report.getQuarter()};
 
         try {
             return jdbcTemplate.saveOrUpdate(sql, params);

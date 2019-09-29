@@ -1,15 +1,16 @@
 package ua.training.persistance.dao.impl;
 
 import ua.training.persistance.dao.IUserTypeDao;
-import ua.training.persistance.db.datasource.MyDataSource;
+import ua.training.persistance.db.datasource.MysqlDataSource;
+import ua.training.persistance.entities.UserType;
 
 import java.util.Optional;
 
 public class UserTypeDaoImpl implements IUserTypeDao {
-    private MyDataSource myDataSource;
+    private MysqlDataSource mysqlDataSource;
 
-    public void setDataSource(MyDataSource myDataSource) {
-        this.myDataSource = myDataSource;
+    public void setDataSource(MysqlDataSource mysqlDataSource) {
+        this.mysqlDataSource = mysqlDataSource;
     }
 
     @Override

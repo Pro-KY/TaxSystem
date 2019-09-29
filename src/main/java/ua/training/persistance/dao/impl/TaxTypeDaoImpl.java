@@ -1,9 +1,10 @@
 package ua.training.persistance.dao.impl;
 
 import ua.training.persistance.dao.ITaxTypeDao;
-import ua.training.persistance.dao.mappers.impl.TaxTypeEnitityMapperIml;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
-import ua.training.persistance.db.datasource.MyDataSource;
+import ua.training.persistance.dao.mappers.impl2.TaxTypeMapperIml;
+import ua.training.persistance.db.datasource.MysqlDataSource;
+import ua.training.persistance.entities.TaxType;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.List;
@@ -15,12 +16,12 @@ import static ua.training.util.handler.properties.SqlPropertiesHandler.GET_TAX_T
 
 public class TaxTypeDaoImpl implements ITaxTypeDao {
     private static TaxTypeDaoImpl instance;
-//    private MyDataSource myDataSource;
+//    private MysqlDataSource myDataSource;
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource(MyDataSource myDataSource) {
-//        this.myDataSource = myDataSource;
-        jdbcTemplate.setDataSource(myDataSource);
+    public void setDataSource(MysqlDataSource mysqlDataSource) {
+//        this.mysqlDataSource = mysqlDataSource;
+        jdbcTemplate.setDataSource(mysqlDataSource);
     }
 
     private TaxTypeDaoImpl() {
@@ -40,14 +41,14 @@ public class TaxTypeDaoImpl implements ITaxTypeDao {
         final String type = taxType.getType();
         final Object[] parameters = {type};
 
-        return jdbcTemplate.findByQuery(sql, new TaxTypeEnitityMapperIml(), parameters);
+        return jdbcTemplate.findByQuery(sql, new TaxTypeMapperIml(), parameters);
     }
 
     @Override
     public List<TaxType> getAllTaxTypes() {
         final Object[] parameters = {};
         String sql = SqlPropertiesHandler.getSqlQuery(ALL_TAX_TYPES);
-        return jdbcTemplate.finAll(sql, new TaxTypeEnitityMapperIml(), parameters);
+        return jdbcTemplate.finAll(sql, new TaxTypeMapperIml(), parameters);
     }
 
     @Override

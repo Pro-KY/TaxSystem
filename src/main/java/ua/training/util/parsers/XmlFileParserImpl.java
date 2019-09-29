@@ -5,6 +5,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import ua.training.persistance.entities.Report;
+import ua.training.persistance.entities.TaxType;
 import ua.training.util.exceptions.FileParsingException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -44,7 +46,7 @@ public class XmlFileParserImpl implements FileParser<Report> {
                         report = new Report();
                         report.setQuarter(Integer.valueOf(quarter));
                         report.setSum(Double.valueOf(sum));
-                        report.setTaxTypeId(Long.valueOf(taxTypeId));
+                        report.setTaxType(new TaxType(Long.valueOf(taxTypeId)));
                     }
                 }
             } catch (Exception e) {

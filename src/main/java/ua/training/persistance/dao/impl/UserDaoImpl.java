@@ -2,10 +2,11 @@ package ua.training.persistance.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.persistance.dao.mappers.impl.UserEnitityMapperImpl;
 import ua.training.persistance.dao.IUserDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
-import ua.training.persistance.db.datasource.MyDataSource;
+import ua.training.persistance.dao.mappers.impl2.UserMapperImpl;
+import ua.training.persistance.db.datasource.MysqlDataSource;
+import ua.training.persistance.entities.User;
 import ua.training.util.exceptions.DataAccessException;
 import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
@@ -22,7 +23,7 @@ public class UserDaoImpl implements IUserDao {
     private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
 
 
-    public void setDataSource(MyDataSource dataSource) {
+    public void setDataSource(MysqlDataSource dataSource) {
         jdbcTemplate.setDataSource(dataSource);
     }
 
@@ -41,14 +42,14 @@ public class UserDaoImpl implements IUserDao {
         String sql = SqlPropertiesHandler.getSqlQuery(LOGIN_AND_PASSWORD);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
         Object[] params = {login, password};
-
-        return jdbcTemplate.findByQuery(sql, new UserEnitityMapperImpl(), params);
+        final UserMapperImpl userMapper = new UserMapperImpl();
+        return jdbcTemplate.findByQuery(sql, userMapper, params);
     }
 
     @Override
-    public Long save(User userBean) {
-        Object[] params = {userBean.getFirstName(), userBean.getLastName(), userBean.getOrganization(),
-                userBean.getEmail(), userBean.getPassword(), userBean.getAddress(), userBean.getUserTypeId()};
+    public Long save(User user) {
+        Object[] params = {user.getFirstName(), user.getLastName(), user.getOrganization(),
+                user.getEmail(), user.getPassword(), user.getAddress(), user.getUserType().getId()};
 
         String sql = SqlPropertiesHandler.getSqlQuery(SAVE_USER);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();

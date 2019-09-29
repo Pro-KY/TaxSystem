@@ -2,6 +2,7 @@ package ua.training.service;
 
 import ua.training.persistance.dao.IUserDao;
 import ua.training.persistance.dao.factory.MysqlDaoFactory;
+import ua.training.persistance.entities.User;
 
 import java.util.Optional;
 

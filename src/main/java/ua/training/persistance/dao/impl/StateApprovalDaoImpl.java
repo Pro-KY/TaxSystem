@@ -2,7 +2,8 @@ package ua.training.persistance.dao.impl;
 
 import ua.training.persistance.dao.IStateApprovalDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
-import ua.training.persistance.db.datasource.MyDataSource;
+import ua.training.persistance.db.datasource.MysqlDataSource;
+import ua.training.persistance.entities.StateApproval;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.Optional;
@@ -13,8 +14,8 @@ public class StateApprovalDaoImpl implements IStateApprovalDao {
     private static StateApprovalDaoImpl instance;
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource(MyDataSource myDataSource) {
-        jdbcTemplate.setDataSource(myDataSource);
+    public void setDataSource(MysqlDataSource mysqlDataSource) {
+        jdbcTemplate.setDataSource(mysqlDataSource);
     }
 
     private StateApprovalDaoImpl() {
