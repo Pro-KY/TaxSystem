@@ -10,7 +10,7 @@
 <fmt:setBundle basename="localization.pagecontent" var = "rb" scope="session"/>
 
 <%--<c:set var="session" value="${pageContext.session}" scope="session"/>--%>
-<c:set var="currentUserTypeId" value="${user.userTypeId}" scope="session"/>
+<c:set var="currentUserTypeId" value="${user.userType.role}" scope="session"/>
 
 <c:set var="userTypeIndividualId" value="1" scope="session"/>
 <c:set var="userTypeLegalEntityId" value="2" scope="session"/>
