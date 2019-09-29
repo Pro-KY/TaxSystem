@@ -2,7 +2,7 @@ package ua.training.persistance.dao.impl;
 
 import ua.training.persistance.dao.ITaxTypeDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
-import ua.training.persistance.dao.mappers.impl2.TaxTypeMapperIml;
+import ua.training.persistance.dao.mappers.impl.TaxTypeMapperIml;
 import ua.training.persistance.db.datasource.MysqlDataSource;
 import ua.training.persistance.entities.TaxType;
 import ua.training.util.handler.properties.SqlPropertiesHandler;

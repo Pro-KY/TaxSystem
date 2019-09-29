@@ -1,4 +1,4 @@
-package ua.training.persistance.dao.mappers.impl2;
+package ua.training.persistance.dao.mappers.impl;
 
 import java.sql.ResultSet;
 import java.util.Iterator;

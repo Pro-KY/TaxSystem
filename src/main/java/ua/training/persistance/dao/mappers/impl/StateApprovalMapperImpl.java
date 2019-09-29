@@ -1,4 +1,4 @@
-package ua.training.persistance.dao.mappers.impl2;
+package ua.training.persistance.dao.mappers.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

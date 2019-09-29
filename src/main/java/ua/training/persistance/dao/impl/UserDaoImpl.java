@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.persistance.dao.IUserDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
-import ua.training.persistance.dao.mappers.impl2.UserMapperImpl;
+import ua.training.persistance.dao.mappers.impl.UserMapperImpl;
 import ua.training.persistance.db.datasource.MysqlDataSource;
 import ua.training.persistance.entities.User;
 import ua.training.util.exceptions.DataAccessException;

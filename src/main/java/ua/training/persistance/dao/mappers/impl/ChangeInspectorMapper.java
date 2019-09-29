@@ -1,4 +1,4 @@
-package ua.training.persistance.dao.mappers.impl2;
+package ua.training.persistance.dao.mappers.impl;
 
 import ua.training.persistance.entities.*;
 
