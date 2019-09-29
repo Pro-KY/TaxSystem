@@ -40,9 +40,7 @@ public class ReportApprovalMapper extends EnitityMapper<ReportApproval> {
 
     @Override
     public ReportApproval mapToEntity(ResultSet resultSet) {
-//        super.resultSet = resultSet;
         try {
-//            if (resultSet.next()) {
                 final long id = resultSet.getLong(columnsIndexes.get(ID));
                 final Timestamp timestamp = resultSet.getTimestamp(columnsIndexes.get(TIMESTAMP));
                 final String refusalCause = resultSet.getString(columnsIndexes.get(REFUSAL_CAUSE));

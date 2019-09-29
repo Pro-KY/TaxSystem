@@ -19,7 +19,6 @@ public class ChangeInspectorMapper extends EnitityMapper<ChangeInspector> {
     private boolean mapReportApprovalMapper;
 
     public ChangeInspectorMapper(ResultSet resultSet) {
-        super(resultSet);
         columnsIndexes.put(ID, 1);
         columnsIndexes.put(TIMESTAMP, 2);
         columnsIndexes.put(REPORT_APPROVAL_ID, 3);

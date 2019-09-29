@@ -5,12 +5,21 @@ public class PaginationDto {
     private boolean selectionAction;
     private boolean nextPageAction;
     private int pageSize;
+    private Long userId;
 
     public PaginationDto(long currentPageIndex, boolean selectionAction, boolean nextPageAction, int pageSize) {
         this.currentPageIndex = currentPageIndex;
         this.selectionAction = selectionAction;
         this.nextPageAction = nextPageAction;
         this.pageSize = pageSize;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public int getPageSize() {

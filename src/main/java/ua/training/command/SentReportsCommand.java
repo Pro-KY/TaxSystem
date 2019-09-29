@@ -34,6 +34,7 @@ public class SentReportsCommand implements ICommand {
         final int pageSize = 5;
         final int pageIndex = 0;
         final PaginationDto paginationDto = new PaginationDto(pageIndex, false, false, pageSize);
+        paginationDto.setUserId(3);
 
         final List<SentReportsDto> sentReports;
         try {
