@@ -26,7 +26,7 @@
 <head>
     <title>Main page</title>
     <meta charset="utf-8">
-    <meta state="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <style type="text/css">
         <%@include file="/css/styles.css" %>
@@ -44,12 +44,12 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 <%--            <a class="navbar-brand" href="#">User Name</a>--%>
             <div>
-                <!-- user state -->
+                <!-- user name -->
                 <h5 class="text-white h5">
-<%--                 TODO: add organization state if user type is legal--%>
+<%--                 TODO: add organization name if user type is legal--%>
                     ${user.organization eq null ? (user.firstName.concat(" ").concat(user.lastName)) : (user.organization)}
                 </h5>
-                <!-- user state -->
+                <!-- user name -->
 
                 <!-- user type -->
                 <span class="text-white">
