@@ -1,4 +1,4 @@
-package ua.training.persistance.beans;
+package ua.training.persistance.entities;
 
 
 import java.io.Serializable;
@@ -11,11 +11,16 @@ public class Report implements Serializable {
 
     public Report() {}
 
+    public Report(Long id) {
+        this.id = id;
+    }
+
     public Report(Long taxTypeId, double sum, int quarter) {
         this.taxTypeId = taxTypeId;
         this.sum = sum;
         this.quarter = quarter;
     }
+
 
     public long getId() {
         return id;
@@ -57,7 +62,6 @@ public class Report implements Serializable {
     public String toString() {
         return "Report{" +
                 "id=" + id +
-                ", taxTypeId=" + taxTypeId +
                 ", sum=" + sum +
                 ", quarter=" + quarter +
                 '}';

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<jsp:useBean id="user" scope="session" type="ua.training.persistance.beans.User"/>
+<jsp:useBean id="user" scope="session" type="ua.training.persistance.entities.User"/>
 
 <%@ page import="ua.training.util.constans.Attributes" %>
 <%@ page import="ua.training.util.constans.Command" %>
@@ -26,7 +26,7 @@
 <head>
     <title>Main page</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta state="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <style type="text/css">
         <%@include file="/css/styles.css" %>
@@ -44,12 +44,12 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 <%--            <a class="navbar-brand" href="#">User Name</a>--%>
             <div>
-                <!-- user name -->
+                <!-- user state -->
                 <h5 class="text-white h5">
-<%--                 TODO: add organization name if user type is legal--%>
+<%--                 TODO: add organization state if user type is legal--%>
                     ${user.organization eq null ? (user.firstName.concat(" ").concat(user.lastName)) : (user.organization)}
                 </h5>
-                <!-- user name -->
+                <!-- user state -->
 
                 <!-- user type -->
                 <span class="text-white">

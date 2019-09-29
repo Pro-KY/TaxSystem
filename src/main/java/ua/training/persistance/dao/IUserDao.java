@@ -1,6 +1,6 @@
 package ua.training.persistance.dao;
 
-import ua.training.persistance.beans.User;
+import ua.training.persistance.entities.User;
 
 import java.util.Optional;
 

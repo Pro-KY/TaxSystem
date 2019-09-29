@@ -7,6 +7,7 @@ import java.sql.*;
 public class JdbcQuery {
     private ResultSet rs;
     private PreparedStatement ps;
+    private Statement statement;
     private Connection connection;
     private String sql;
     private int rowsAffected;
@@ -71,6 +72,17 @@ public class JdbcQuery {
             throw new DataAccessException(e);
         }
     }
+
+    public ResultSet select() {
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            throw new DataAccessException(e);
+        }
+    }
+
 
     public boolean modifyAll() {
         try {

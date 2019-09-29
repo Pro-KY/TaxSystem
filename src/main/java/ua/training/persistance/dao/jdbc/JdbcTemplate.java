@@ -2,8 +2,7 @@ package ua.training.persistance.dao.jdbc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.persistance.dao.jdbc.pagination.Page;
-import ua.training.persistance.dao.mappers.BeanMapper;
+import ua.training.persistance.dao.mappers.EnitityMapper;
 import ua.training.persistance.db.datasource.MyDataSource;
 
 import java.sql.Connection;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+//TODO: refactor as simple object no singleton?
 public class JdbcTemplate {
     private static final Logger LOGGER = LogManager.getLogger(JdbcTemplate.class);
     private static JdbcTemplate instance;
@@ -31,14 +31,14 @@ public class JdbcTemplate {
     }
 
 //    Function<ResultSet, List<T>> function
-    public <T> List<T> finAll(String sql, BeanMapper<T> beanMapper, Object... parameters) {
+    public <T> List<T> finAll(String sql, EnitityMapper<T> entityEnitityMapper, Object... parameters) {
         final Connection connection = myDataSource.getConnection();
         List<T> resultList = new ArrayList<>();
 
         final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
         try(final ResultSet result = jdbcQuery1.select(parameters)) {
             while (result.next()) {
-                final T t = beanMapper.mapRow(result);
+                final T t = entityEnitityMapper.mapRow(result);
                 resultList.add(t);
             }
         } catch (SQLException e) {
@@ -50,18 +50,32 @@ public class JdbcTemplate {
         return resultList;
     }
 
-    public <T> Optional<T> findByQuery(String sql, BeanMapper<T> beanMapper, Object... parameters) {
+    public <T> Optional<T> findByQuery(String sql, EnitityMapper<T> entityEnitityMapper, Object... parameters) {
         final Connection connection = myDataSource.getConnection();
         final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
         Optional<T> t;
         try (ResultSet result = jdbcQuery1.select(parameters)) {
-            t = Optional.ofNullable(beanMapper.mapRow(result));
+            t = Optional.ofNullable(entityEnitityMapper.mapRow(result));
         } catch (SQLException e) {
             t = Optional.empty();
         }  finally {
             myDataSource.releaseResources(connection, jdbcQuery1.getPs());
         }
         return t;
+    }
+
+    public Long countRows(String sql) {
+        final Connection connection = myDataSource.getConnection();
+        final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
+        long rowsAmount;
+        try (ResultSet result = jdbcQuery1.select()) {
+            rowsAmount = result.getLong(1);
+        } catch (SQLException e) {
+            rowsAmount = 0;
+        }  finally {
+            myDataSource.releaseResources(connection, jdbcQuery1.getPs());
+        }
+        return rowsAmount;
     }
 
     public Long saveOrUpdate(String sql, Object... parameters) {
@@ -84,9 +98,9 @@ public class JdbcTemplate {
         return isDeleted;
     }
 
-    public <T> List<T> getPage(String sql, BeanMapper<T> beanMapper, Page page) {
-        return finAll(sql, beanMapper, page);
-    }
+//    public <T> List<T> getPage(String sql, EnitityMapper<T> beanMapper, Object...params) {
+//        return finAll(sql, beanMapper, params);
+//    }
 
     private void closeResultSet(ResultSet resultSet) {
         try {

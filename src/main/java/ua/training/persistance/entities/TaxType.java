@@ -1,4 +1,4 @@
-package ua.training.persistance.beans;
+package ua.training.persistance.entities;
 
 
 import java.io.Serializable;

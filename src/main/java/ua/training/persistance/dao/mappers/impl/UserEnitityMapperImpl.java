@@ -1,12 +1,13 @@
-package ua.training.persistance.dao.mappers;
+package ua.training.persistance.dao.mappers.impl;
 
-import ua.training.persistance.beans.User;
+import ua.training.persistance.dao.mappers.EnitityMapper;
+import ua.training.persistance.entities.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserBeanBeanMapperImpl implements BeanMapper<User> {
-    public static final String ID = "id";
+public class UserEnitityMapperImpl implements EnitityMapper<User> {
+    public String ID = "id";
     public static final String PASSWORD = "password";
     public static final String FIRST_NAME = "first_name";
     public static final String LAST_NAME = "last_name";
@@ -18,12 +19,10 @@ public class UserBeanBeanMapperImpl implements BeanMapper<User> {
 
     @Override
     public User mapRow(ResultSet resultSet) {
-//        Optional<User> optionalUser = Optional.empty();
         User user = null;
-
         try {
             if (resultSet.next()) {
-                final long id = resultSet.getLong(ID);
+                long id = resultSet.getLong(ID);;
                 final String email = resultSet.getString(EMAIL);
                 final String firstName = resultSet.getString(FIRST_NAME);
                 final String lastName= resultSet.getString(LAST_NAME);
@@ -31,17 +30,13 @@ public class UserBeanBeanMapperImpl implements BeanMapper<User> {
                 final String adress = resultSet.getString(ADDRESS);
                 final String password = resultSet.getString(PASSWORD);
                 final long userTypeId = resultSet.getLong(USER_TYPE_ID);
-                final String type = resultSet.getString(UserTypeBeanMapper.TYPE);
-                // TODO: remove from here
+//                final String type = resultSet.getString(UserTypeEntityMapperImpl.TYPE);
 //                final UserType userType = new UserType(userTypeId, type);
-                // TODO: remove from here
 
                 user = new User(id, firstName, lastName, organization, email, password, adress, userTypeId);
             }
         } catch (SQLException e) {
             System.out.println(e.getCause().toString());
-//            throw new BeanMappingException("can't map User bean due to absent of some fields", e.getCause());
-            //TODO: add logger here
         }
 
         return user;

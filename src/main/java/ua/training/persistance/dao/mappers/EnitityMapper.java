@@ -3,6 +3,6 @@ package ua.training.persistance.dao.mappers;
 import java.sql.ResultSet;
 
 @FunctionalInterface
-public interface BeanMapper<T> {
+public interface EnitityMapper<T> {
     T mapRow(ResultSet resultSet);
 }

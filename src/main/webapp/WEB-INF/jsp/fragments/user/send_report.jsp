@@ -15,7 +15,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">${reportTypeName}</label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01" name="${Parameters.REPORT_CONTENT_TYPE}">
+                    <select class="custom-select" id="inputGroupSelect01" state="${Parameters.REPORT_CONTENT_TYPE}">
                         <option value="1" selected >${selectFormItem}</option>
                         <option value="2">JSON</option>
                         <option value="3">XML</option>
@@ -27,7 +27,7 @@
                     <!-- type -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">${taxTypeLabel}</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="${Parameters.REPORT_TAXTYPE_ID}">
+                        <select class="form-control" id="exampleFormControlSelect1" state="${Parameters.REPORT_TAXTYPE_ID}">
                             <option value="1" selected>${singleTaxType}</option>
                             <option value="2"> ${propertyTaxType}</option>
                             <option value="3">${touristTaxType}</option>
@@ -38,7 +38,7 @@
                     <!-- quoter -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">${quarterLabel}</label>
-                        <select class="form-control" id="exampleFormControlSelect2" name="${Parameters.REPORT_QUARTER}">
+                        <select class="form-control" id="exampleFormControlSelect2" state="${Parameters.REPORT_QUARTER}">
                             <option selected>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -49,7 +49,7 @@
                     <!-- sum-->
                     <div class="form-group">
                         <label for="exampleFormControlInput2">${sumLabel}</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="sum" name="${Parameters.REPORT_SUM}">
+                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="sum" state="${Parameters.REPORT_SUM}">
                     </div>
                 </div>
 
@@ -64,8 +64,8 @@
                     <!-- load file -->
                 </div>
 
-                <input type="hidden" name="command" value="sendReport">
-                <input type="hidden" id="fileContentInput" name="${Parameters.REPORT_FILE_CONTENT}">
+                <input type="hidden" state="command" value="sendReport">
+                <input type="hidden" id="fileContentInput" state="${Parameters.REPORT_FILE_CONTENT}">
                 <button type="submit" class="btn btn-primary">${submitButton}</button>
             </form>
             <!-- form -->

@@ -12,4 +12,5 @@ public class Attributes {
 
     public static final String FRAGMENT_PATH = "fragmentPath";
     public static final String IS_SIGN_UP = "isSignUp";
+    public static final String PAGE_LIST = "pageList";
 }

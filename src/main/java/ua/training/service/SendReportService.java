@@ -3,16 +3,14 @@ package ua.training.service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.dto.SendReportDto;
-import ua.training.persistance.beans.Report;
-import ua.training.persistance.beans.SendReportEvent;
-import ua.training.persistance.beans.UserSentReportEvent;
 import ua.training.persistance.dao.IReportDao;
-import ua.training.persistance.dao.ISendReportEventDao;
-import ua.training.persistance.dao.IUserSentReportEvent;
-import ua.training.persistance.dao.factory.MySQLDaoFactory;
+import ua.training.persistance.dao.IReportApprovalDao;
+import ua.training.persistance.dao.factory.MysqlDaoFactory;
+import ua.training.persistance.entities.Report;
+import ua.training.persistance.entities.ReportApproval;
 import ua.training.persistance.transaction.MysqlTransactionManager;
 import ua.training.util.constans.ReportContentType;
-import ua.training.util.constans.ReportStateEnum;
+import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.exceptions.ServiceException;
 
 import java.sql.Timestamp;
@@ -20,19 +18,19 @@ import java.util.Optional;
 
 public class SendReportService {
     private static final Logger LOGGER = LogManager.getLogger(SendReportService.class);
-    private MySQLDaoFactory daoFactory;
+    private MysqlDaoFactory daoFactory;
 
     public SendReportService() {
-        this.daoFactory = MySQLDaoFactory.getInstance();
+        this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
     public void saveSentReport(SendReportDto sendReportDto) {
 //        MysqlTransactionManager tm = MysqlTransactionManager.getInstance();
         MysqlTransactionManager tm = new MysqlTransactionManager();
-        final SendReportEvent sendReportEvent = new SendReportEvent();
-//        sendReportEvent.setSenderId(sendReportDto.getUser().getId());
-        sendReportEvent.setTimestamp(new Timestamp(System.currentTimeMillis()));
-        sendReportEvent.setReportStateId(ReportStateEnum.PROCESSING.getStateId());
+        final ReportApproval reportApproval = new ReportApproval();
+//        reportApproval.setSenderId(sendReportDto.getUser().getId());
+        reportApproval.setTimestamp(new Timestamp(System.currentTimeMillis()));
+        reportApproval.setStateApprovalId(StateApprovalEnum.PROCESSING.getStateId());
 
         Report report;
 
@@ -52,14 +50,11 @@ public class SendReportService {
 
         tm.doInTransaction(daoFactory -> {
             final IReportDao reportDao = daoFactory.getReportDao();
-            final ISendReportEventDao sendReportEventDao = daoFactory.getSendReportEventDao();
-            final IUserSentReportEvent userSendReportEventDao = daoFactory.getUserSendReportEventDao();
+            final IReportApprovalDao iReportApprovalDao = daoFactory.getReportApprovalDao();
 
             final Long reportId = reportDao.save(report);
-            sendReportEvent.setReportId(reportId);
-            final Long sendReportEventId = sendReportEventDao.save(sendReportEvent);
-            final UserSentReportEvent userSentReportEvent = new UserSentReportEvent(sendReportEventId, sendReportDto.getUser().getId());
-            userSendReportEventDao.save(userSentReportEvent);
+            reportApproval.setReportId(reportId);
+            iReportApprovalDao.save(reportApproval);
         });
 
         if (tm.isRollBacked()) {

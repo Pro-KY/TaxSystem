@@ -1,17 +1,17 @@
 package ua.training.service;
 
-import ua.training.persistance.beans.User;
+import ua.training.persistance.entities.User;
 import ua.training.persistance.dao.IUserDao;
-import ua.training.persistance.dao.factory.MySQLDaoFactory;
+import ua.training.persistance.dao.factory.MysqlDaoFactory;
 
 import java.util.Optional;
 
 public class SignInService {
     // userDao;
-    private MySQLDaoFactory daoFactory;
+    private MysqlDaoFactory daoFactory;
 
     public SignInService() {
-        this.daoFactory = MySQLDaoFactory.getInstance();
+        this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
     // return authorized user if one exist in DB

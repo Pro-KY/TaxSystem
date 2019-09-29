@@ -2,10 +2,10 @@ package ua.training.persistance.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.persistance.beans.User;
+import ua.training.persistance.dao.mappers.impl.UserEnitityMapperImpl;
+import ua.training.persistance.entities.User;
 import ua.training.persistance.dao.IUserDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
-import ua.training.persistance.dao.mappers.UserBeanBeanMapperImpl;
 import ua.training.persistance.db.datasource.MyDataSource;
 import ua.training.util.exceptions.DataAccessException;
 import ua.training.util.exceptions.PersistenceException;
@@ -43,7 +43,7 @@ public class UserDaoImpl implements IUserDao {
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
         Object[] params = {login, password};
 
-        return jdbcTemplate.findByQuery(sql, new UserBeanBeanMapperImpl(), params);
+        return jdbcTemplate.findByQuery(sql, new UserEnitityMapperImpl(), params);
     }
 
     @Override

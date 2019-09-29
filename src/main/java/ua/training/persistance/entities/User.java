@@ -1,4 +1,4 @@
-package ua.training.persistance.beans;
+package ua.training.persistance.entities;
 
 import java.io.Serializable;
 
@@ -13,6 +13,10 @@ public class User implements Serializable {
     private Long userTypeId;
 
     public User() {}
+
+    public User(Long id) {
+        this.id = id;
+    }
 
     public User(Long id, String firstName, String lastName, String organization, String email, String password, String address, Long userTypeId) {
         this.id = id;

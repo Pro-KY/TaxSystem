@@ -2,7 +2,7 @@ package ua.training.persistance.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.persistance.beans.Report;
+import ua.training.persistance.entities.Report;
 import ua.training.util.exceptions.DataAccessException;
 import ua.training.persistance.dao.IReportDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;

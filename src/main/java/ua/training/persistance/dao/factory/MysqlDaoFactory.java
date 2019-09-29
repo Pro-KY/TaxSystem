@@ -6,23 +6,23 @@ import ua.training.persistance.db.datasource.MyDataSource;
 import ua.training.persistance.db.datasource.MysqlMyDataSource;
 
 // get Dao's via fabric
-public class MySQLDaoFactory implements DaoFactory {
+public class MysqlDaoFactory implements DaoFactory {
     // should I save one method with switch statement which accepts enum?
     private MyDataSource myDataSource;
-    private static MySQLDaoFactory instance;
+    private static MysqlDaoFactory instance;
 
-    private MySQLDaoFactory() {
+    private MysqlDaoFactory() {
         this.myDataSource = MysqlMyDataSource.getInstance();
     }
 
     @Override
-    public void setMyDataSource(MyDataSource myDataSource) {
+    public void setDataSource(MyDataSource myDataSource) {
         this.myDataSource = myDataSource;
     }
 
-    public static MySQLDaoFactory getInstance() {
+    public static MysqlDaoFactory getInstance() {
         if (instance == null) {
-            instance = new MySQLDaoFactory();
+            instance = new MysqlDaoFactory();
         }
         return instance;
     }
@@ -56,22 +56,15 @@ public class MySQLDaoFactory implements DaoFactory {
     }
 
     @Override
-    public IReportStateDao getReportStateDao() {
-        final ReportStateDaoImpl iReportDaoIml = ReportStateDaoImpl.getInstance();
+    public IStateApprovalDao getReportStateDao() {
+        final StateApprovalDaoImpl iReportDaoIml = StateApprovalDaoImpl.getInstance();
         iReportDaoIml.setDataSource(myDataSource);
         return iReportDaoIml;
     }
 
     @Override
-    public ISendReportEventDao getSendReportEventDao() {
-        final SendReportEventDaoImpl sendReportEventDaoImpl = SendReportEventDaoImpl.getInstance();
-        sendReportEventDaoImpl.setDataSource(myDataSource);
-        return sendReportEventDaoImpl;
-    }
-
-    @Override
-    public IUserSentReportEvent getUserSendReportEventDao() {
-        final UserSentReportEventImpl sendReportEventDaoImpl = UserSentReportEventImpl.getInstance();
+    public IReportApprovalDao getReportApprovalDao() {
+        final ReportApprovalDaoImpl sendReportEventDaoImpl = ReportApprovalDaoImpl.getInstance();
         sendReportEventDaoImpl.setDataSource(myDataSource);
         return sendReportEventDaoImpl;
     }

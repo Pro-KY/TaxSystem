@@ -1,16 +1,16 @@
 package ua.training.service;
 
 import ua.training.persistance.dao.ITaxTypeDao;
-import ua.training.persistance.dao.factory.MySQLDaoFactory;
-import ua.training.persistance.beans.TaxType;
+import ua.training.persistance.dao.factory.MysqlDaoFactory;
+import ua.training.persistance.entities.TaxType;
 
 import java.util.List;
 
 public class TaxTypeService {
-    private MySQLDaoFactory daoFactory;
+    private MysqlDaoFactory daoFactory;
 
     public TaxTypeService() {
-        this.daoFactory = MySQLDaoFactory.getInstance();
+        this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
     private static TaxTypeService instance;

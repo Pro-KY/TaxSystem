@@ -1,16 +1,16 @@
-package ua.training.persistance.beans;
+package ua.training.persistance.entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-public class ChangeInspectorEvent implements Serializable {
+public class ChangeInspector implements Serializable {
     private long id;
     private java.sql.Timestamp date;
     private long approved;
     private long sendReportEventId;
 
-    public ChangeInspectorEvent(long id, Timestamp date, long approved, long sendReportEventId) {
+    public ChangeInspector(long id, Timestamp date, long approved, long sendReportEventId) {
       this.id = id;
       this.date = date;
       this.approved = approved;
@@ -54,7 +54,7 @@ public class ChangeInspectorEvent implements Serializable {
 
   @Override
   public String toString() {
-    return "ChangeInspectorEvent{" +
+    return "ChangeInspector{" +
             "id=" + id +
             ", date=" + date +
             ", approved=" + approved +
@@ -66,7 +66,7 @@ public class ChangeInspectorEvent implements Serializable {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    ChangeInspectorEvent that = (ChangeInspectorEvent) o;
+    ChangeInspector that = (ChangeInspector) o;
     return id == that.id &&
             approved == that.approved &&
             sendReportEventId == that.sendReportEventId &&

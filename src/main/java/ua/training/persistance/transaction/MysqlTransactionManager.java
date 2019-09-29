@@ -2,7 +2,7 @@ package ua.training.persistance.transaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.persistance.dao.factory.DaoFactory;
-import ua.training.persistance.dao.factory.MySQLDaoFactory;
+import ua.training.persistance.dao.factory.MysqlDaoFactory;
 import ua.training.persistance.db.datasource.MysqlMyDataSource;
 import ua.training.persistance.db.datasource.MysqlMyDataSourceProxy;
 import ua.training.util.ThrowingConsumer;
@@ -26,9 +26,9 @@ public class MysqlTransactionManager implements TransactionManager {
 //    }
 
     public MysqlTransactionManager() {
-        mySQLDaoFactory = MySQLDaoFactory.getInstance();
+        mySQLDaoFactory = MysqlDaoFactory.getInstance();
         mysqlDataSourceProxy = new MysqlMyDataSourceProxy(MysqlMyDataSource.getInstance());
-        mySQLDaoFactory.setMyDataSource(mysqlDataSourceProxy);
+        mySQLDaoFactory.setDataSource(mysqlDataSourceProxy);
     }
 
     @Override
