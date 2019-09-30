@@ -30,7 +30,6 @@ public class SendReportService {
         MysqlTransactionManager tm = new MysqlTransactionManager();
         final Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         final StateApproval stateApproval = new StateApproval(StateApprovalEnum.PROCESSING.getStateId());
-        //TOOD: get id from DB
 
         Report report;
 

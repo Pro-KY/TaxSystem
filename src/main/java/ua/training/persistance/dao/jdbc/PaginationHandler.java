@@ -4,8 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.dto.PaginationDto;
 
-public class PaginationHandler { // implements Pageable<T>
-//    private int[] pages;
+public class PaginationHandler {
     private long pageSize;
     private long offSet = 0;
     private long startVisibleIndex = 0;
@@ -18,11 +17,19 @@ public class PaginationHandler { // implements Pageable<T>
     private static final int DEFAULT_PAGE_SIZE = 5;
     private static final int DEFAULT_START_INDEX = 0;
 
+    private boolean isLeftButtonDisabled;
+    private boolean isRightButtonVisible;
+
     private static final Logger LOGGER = LogManager.getLogger(PaginationHandler.class);
 
     public PaginationHandler(PaginationDto paginationDto) {
         setPageSize(paginationDto.getPageSize());
-        currentPageIndex = (paginationDto.getCurrentPageIndex() != null) ? (Long) paginationDto.getCurrentPageIndex() : DEFAULT_START_INDEX;
+    }
+
+    public void setPageCurrentIndex(Long currentIndex) {
+        currentPageIndex = (currentIndex != null) ? (Long) currentIndex : DEFAULT_START_INDEX;
+        isLeftButtonDisabled = (currentPageIndex == startVisibleIndex);
+        isRightButtonVisible = currentPageIndex == endVisibleIndex;
     }
 
     public void setAllRowsAmount(long allRowsAmount) {
@@ -41,19 +48,6 @@ public class PaginationHandler { // implements Pageable<T>
     public void calculateOffset() { // 2
         offSet = currentPageIndex * pageSize;
     }
-
-    public long getPageSize() {
-        return pageSize;
-    }
-
-    public long getOffSet() {
-        return offSet;
-    }
-
-    // when clicked directly on the number
-//    private void changePagePosition(int chosenPageIndx) { //1
-//        this.currentPageIndex = chosenPageIndx;
-//    }
 
     public void handleNextButtonClick() {
         if(currentPageIndex < endVisibleIndex) { // 1,1
@@ -77,5 +71,22 @@ public class PaginationHandler { // implements Pageable<T>
         startVisibleIndex += forward ? 1 : -1;
         endVisibleIndex += forward ? 1 : -1;
         currentPageIndex += forward ? 1 : -1;
+    }
+
+    public boolean isLeftButtonDisabled() {
+        return isLeftButtonDisabled;
+    }
+
+
+    public boolean isRightButtonVisible() {
+        return isRightButtonVisible;
+    }
+
+    public long getPageSize() {
+        return pageSize;
+    }
+
+    public long getOffSet() {
+        return offSet;
     }
 }

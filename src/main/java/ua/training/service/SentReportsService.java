@@ -36,6 +36,7 @@ public class SentReportsService {
         final Long userId = paginationDto.getUserId();
 
         PaginationHandler paginationHandler = new PaginationHandler(paginationDto);
+        paginationHandler.setPageCurrentIndex(paginationDto.getCurrentPageIndex());
         paginationHandler.setAllRowsAmount(allRows);
         paginationHandler.calculateOffset();
 

@@ -14,7 +14,7 @@
                     <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath  }?${Parameters.PAGE_SIZE}=5&${Parameters.PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>"> 5 </a>
+                    <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=5&${Parameters.PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>"> 5 </a>
                     <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=10&${Parameters.PAGE_INDEX}=${param.currentPageIndex}&command=${Command.SENT_REPORTS}"/>">10</a>
                     <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=15&${Parameters.PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>">15</a>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="btn-group">
                     <li class="page-item disabled"><span class="page-link">Previous</span></li>
 
-                    <c:forEach begin="1" end="4" varStatus="counter">
+                    <c:forEach begin="1" end="5" varStatus="counter">
                         <li class="page-item"><a class="page-link" href="#">${counter.index}</a></li>
                     </c:forEach>
 <%--                    href="<c:url value="/taxsystem/?universityId=${param.universityId}&page=${counter.count}&command=specialtySelection"/>--%>
