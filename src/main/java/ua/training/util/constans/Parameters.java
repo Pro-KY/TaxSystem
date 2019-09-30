@@ -16,4 +16,8 @@ public class Parameters {
     public static final String USER_ORGANIZATION = "organization";
     public static final String USER_ADDRESS = "address";
 
+    public static final String PAGE_SIZE = "pageSize";
+    public static final String NEXT_PAGE_CLICK = "nextPageClick";
+    public static final String PREV_PAGE_CLICK = "prevPageClick";
+
 }

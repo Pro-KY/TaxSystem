@@ -4,12 +4,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.dto.PaginationDto;
 import ua.training.dto.SentReportsDto;
+import ua.training.persistance.entities.User;
 import ua.training.service.SentReportsService;
 import ua.training.service.ServiceFactory;
 import ua.training.util.constans.Attributes;
+import ua.training.util.constans.Parameters;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import static ua.training.util.constans.Attributes.SENT_REPORTS_LIST;
@@ -28,13 +31,15 @@ public class SentReportsCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         logger.info("in SentReportsCommand");
         request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
-//        final int pageSize = (int) request.getSession().getAttribute(Attributes.PAGE_SIZE);
-//        final int pageIndex = (int) request.getSession().getAttribute(Attributes.CURRENT_PAGE_INDEX);
+        final Object pageIndex = request.getSession().getAttribute(Attributes.CURRENT_PAGE_INDEX);
+        final String pageSize = request.getParameter(Parameters.PAGE_SIZE);
+        final String isNextClicked = request.getParameter(Parameters.NEXT_PAGE_CLICK);
+        final String isPreviousClicked = request.getParameter(Parameters.PREV_PAGE_CLICK);
+        final HttpSession session = request.getSession();
 
-        final int pageSize = 5;
-        final int pageIndex = 0;
-        final PaginationDto paginationDto = new PaginationDto(pageIndex, false, false, pageSize);
-        paginationDto.setUserId(3);
+        final User user = (User) session.getAttribute(Attributes.USER);
+        final PaginationDto paginationDto = new PaginationDto(pageIndex, pageSize, isNextClicked, isPreviousClicked);
+        paginationDto.setUserId(user.getId());
 
         final List<SentReportsDto> sentReports;
         try {

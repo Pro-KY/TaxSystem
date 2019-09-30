@@ -2,8 +2,9 @@ package ua.training.persistance.dao.jdbc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.training.dto.PaginationDto;
 
-public class PaginationManager  { // implements Pageable<T>
+public class PaginationHandler { // implements Pageable<T>
 //    private int[] pages;
     private long pageSize;
     private long offSet = 0;
@@ -17,23 +18,23 @@ public class PaginationManager  { // implements Pageable<T>
     private static final int DEFAULT_PAGE_SIZE = 5;
     private static final int DEFAULT_START_INDEX = 0;
 
-    private static final Logger LOGGER = LogManager.getLogger(PaginationManager.class);
+    private static final Logger LOGGER = LogManager.getLogger(PaginationHandler.class);
 
-    public PaginationManager(long pageSize, long allRowsAmount) {
-        setPageSize(pageSize);
+    public PaginationHandler(PaginationDto paginationDto) {
+        setPageSize(paginationDto.getPageSize());
+        currentPageIndex = (paginationDto.getCurrentPageIndex() != null) ? (Long) paginationDto.getCurrentPageIndex() : DEFAULT_START_INDEX;
+    }
+
+    public void setAllRowsAmount(long allRowsAmount) {
         this.allRowsAmount = allRowsAmount;
     }
 
     // 2
-    private void setPageSize(long pageSize) {
-        if(pageSize > 0) {
-            this.pageSize = pageSize;
-        } else {
-            this.pageSize = DEFAULT_PAGE_SIZE;
-        }
+    private void setPageSize(String pageSize) {
+       this.pageSize = (pageSize != null) ? Integer.valueOf(pageSize) : DEFAULT_PAGE_SIZE;
 
-        allPagesAmount = allRowsAmount / pageSize;
-        allPagesAmount += allPagesAmount % pageSize > 0 ? 1 : 0;
+        allPagesAmount = allRowsAmount / this.pageSize;
+        allPagesAmount += allPagesAmount % this.pageSize > 0 ? 1 : 0;
     }
 
     // 3
@@ -50,11 +51,11 @@ public class PaginationManager  { // implements Pageable<T>
     }
 
     // when clicked directly on the number
-    private void changePagePosition(int chosenPageIndx) { //1
-        this.currentPageIndex = chosenPageIndx;
-    }
+//    private void changePagePosition(int chosenPageIndx) { //1
+//        this.currentPageIndex = chosenPageIndx;
+//    }
 
-    public void handleNextButton() {
+    public void handleNextButtonClick() {
         if(currentPageIndex < endVisibleIndex) { // 1,1
             currentPageIndex+=1;
             // change Offset
@@ -63,7 +64,7 @@ public class PaginationManager  { // implements Pageable<T>
         }
     }
 
-    public void handleBackButton() {
+    public void handleBackButtonClick() {
         if(currentPageIndex > startVisibleIndex) { // 1.2
             currentPageIndex-=1;
             // change Offset

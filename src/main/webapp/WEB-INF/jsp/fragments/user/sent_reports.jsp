@@ -31,7 +31,7 @@
                         <tr>
                             <td>${sentReport.reportNumber}</td>
                             <td>${sentReport.state}</td>
-                            <td>${sentReport.inspector}</td>
+                            <td>${sentReport.inspector ne null ? sentReport.inspector : ''}</td>
                             <td>${sentReport.timestamp}</td>
                         </tr>
                     </c:forEach>
@@ -52,7 +52,7 @@
                     <c:forEach begin="1" end="4" varStatus="counter">
                         <li class="page-item"><a class="page-link" href="#">${counter.index}</a></li>
                     </c:forEach>
-
+                    href="<c:url value="/taxsystem/?universityId=${param.universityId}&page=${counter.count}&command=specialtySelection"/>
                     <li class="page-item"><a class="page-link" href="#">Next</a></li>
                 </div>
             </div>

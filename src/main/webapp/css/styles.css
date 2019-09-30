@@ -2,9 +2,13 @@
     padding-bottom: 20px;
 }
 
-#sendReportNavLink {
-    color: #0133b4;
+#nav-item::selection {
+    color: #d3d9df;
 }
+
+/*#sendReportNavLink {*/
+/*    color: #0133b4;*/
+/*}*/
 
 #formWrapper {
     display: block;

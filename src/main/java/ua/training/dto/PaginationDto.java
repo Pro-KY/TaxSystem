@@ -1,56 +1,56 @@
 package ua.training.dto;
 
 public class PaginationDto {
-    private long currentPageIndex;
-    private boolean selectionAction;
-    private boolean nextPageAction;
-    private int pageSize;
+    private Object currentPageIndex;
+    private String isNextClicked;
+    private String isPreviousClicked;
+    private String pageSize;
     private Long userId;
 
-    public PaginationDto(long currentPageIndex, boolean selectionAction, boolean nextPageAction, int pageSize) {
-        this.currentPageIndex = currentPageIndex;
-        this.selectionAction = selectionAction;
-        this.nextPageAction = nextPageAction;
+    public PaginationDto(Object pageIndex, String pageSize, String isNextClicked, String isPreviousClicked) {
+        currentPageIndex = pageIndex;
+        this.isNextClicked = isNextClicked;
+        this.isPreviousClicked = isPreviousClicked;
         this.pageSize = pageSize;
     }
 
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public long getCurrentPageIndex() {
+    public Object getCurrentPageIndex() {
         return currentPageIndex;
     }
 
-    public void setCurrentPageIndex(long currentPageIndex) {
+    public void setCurrentPageIndex(Object currentPageIndex) {
         this.currentPageIndex = currentPageIndex;
     }
 
-    public boolean isSelectionAction() {
-        return selectionAction;
+    public String getIsNextClicked() {
+        return isNextClicked;
     }
 
-    public void setSelectionAction(boolean selectionAction) {
-        this.selectionAction = selectionAction;
+    public void setIsNextClicked(String isNextClicked) {
+        this.isNextClicked = isNextClicked;
     }
 
-    public boolean isNextPageAction() {
-        return nextPageAction;
+    public String getIsPreviousClicked() {
+        return isPreviousClicked;
     }
 
-    public void setNextPageAction(boolean nextPageAction) {
-        this.nextPageAction = nextPageAction;
+    public void setIsPreviousClicked(String isPreviousClicked) {
+        this.isPreviousClicked = isPreviousClicked;
+    }
+
+    public String getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(String pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

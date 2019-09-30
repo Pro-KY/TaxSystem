@@ -2,10 +2,8 @@ package ua.training.persistance.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.dto.PaginationDto;
 import ua.training.persistance.dao.IReportApprovalDao;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
-import ua.training.persistance.dao.jdbc.PaginationManager;
 import ua.training.persistance.dao.mappers.impl.ReportApprovalMapper;
 import ua.training.persistance.dao.mappers.impl.StateApprovalMapperImpl;
 import ua.training.persistance.dao.mappers.impl.UserMapperImpl;
@@ -61,15 +59,13 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         }
     }
 
+    public long countAllRows() {
+        return jdbcTemplate.countRows(SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_COUNT));
+    }
+
     @Override
-    public List<ReportApproval> getPaginationList(PaginationDto dto) {
+    public List<ReportApproval> getPaginationList(long pageSize, long offSet, long userId) { // pageSize, offset
         String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_PAGINATION);
-
-        final Long allRows = jdbcTemplate.countRows(SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_COUNT));
-        final int pageSize = dto.getPageSize();
-
-        PaginationManager paginationManager = new PaginationManager(pageSize, allRows);
-        paginationManager.calculateOffset();
 
         final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper();
 
@@ -81,7 +77,7 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         userMapper.setIndexesInJoinQuery(new int[] {10, 11, 12, 13, 14, 15, 16, 17});
         reportApprovalMapper.setInspectorMapper(userMapper);
 
-        return jdbcTemplate.finAll(sql, reportApprovalMapper, dto.getUserId(), pageSize, paginationManager.getOffSet());
+        return jdbcTemplate.finAll(sql, reportApprovalMapper, userId, pageSize, offSet);
     }
 
     @Override
