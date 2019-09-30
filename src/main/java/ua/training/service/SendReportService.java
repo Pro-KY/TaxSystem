@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 import java.util.Optional;
 
 public class SendReportService {
-    private static final Logger LOGGER = LogManager.getLogger(SendReportService.class);
+    private static final Logger logger = LogManager.getLogger(SendReportService.class);
     private MysqlDaoFactory daoFactory;
 
     public SendReportService() {
@@ -27,20 +27,17 @@ public class SendReportService {
     }
 
     public void saveSentReport(SendReportDto sendReportDto) {
-//        MysqlTransactionManager tm = MysqlTransactionManager.getInstance();
         MysqlTransactionManager tm = new MysqlTransactionManager();
-        final ReportApproval reportApproval = new ReportApproval();
-//        reportApproval.setSenderId(sendReportDto.getUser().getId());
-        reportApproval.setTimestamp(new Timestamp(System.currentTimeMillis()));
-        reportApproval.setStateApproval(new StateApproval(StateApprovalEnum.PROCESSING.getStateId()));
+        final Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        final StateApproval stateApproval = new StateApproval(StateApprovalEnum.PROCESSING.getStateId());
+        //TOOD: get id from DB
 
         Report report;
 
         if(sendReportDto.getReportContentTypeId() == ReportContentType.FORM.getId()) {
             report = new Report(new TaxType(sendReportDto.getReportTaxtypeId()), sendReportDto.getReportSum(), sendReportDto.getReportQuarter());
-
+            logger.info(report.toString());
         } else {
-//            final Optional<Report> reportOptional = CommandHelper.parseReportFile.apply(sendReportDto);
             final ReportFileService reportFileService = new ReportFileService();
             final Optional<Report> reportOptional = reportFileService.parseReportFile(sendReportDto);
 
@@ -53,11 +50,11 @@ public class SendReportService {
 
         tm.doInTransaction(daoFactory -> {
             final IReportDao reportDao = daoFactory.getReportDao();
-            final IReportApprovalDao iReportApprovalDao = daoFactory.getReportApprovalDao();
-
+            final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
             final Long reportId = reportDao.save(report);
-            reportApproval.setReport(new Report(reportId));
-            iReportApprovalDao.save(reportApproval);
+            final ReportApproval reportApproval = new ReportApproval(timestamp, stateApproval, sendReportDto.getUser(), new Report(reportId));
+
+            reportApprovalDao.save(reportApproval);
         });
 
         if (tm.isRollBacked()) {

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <c:set var="pageContextPath" value="${pageContext.request.contextPath}" scope="page"/>
-<%@ page import="ua.training.util.constans.Command" %>
+<%@ page import="ua.training.util.constans.Command"%>
 
 <html>
 <head>

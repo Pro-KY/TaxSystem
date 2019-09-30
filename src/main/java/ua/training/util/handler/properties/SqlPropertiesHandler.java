@@ -10,8 +10,7 @@ public class SqlPropertiesHandler {
     public static final String ALL_TAX_TYPES = "ALL_TAX_TYPES";
     public static final String REPORT_STATE_BY_NANE = "REPORT_STATE_BY_NANE";
     public static final String SAVE_REPORT = "SAVE_REPORT";
-    public static final String SAVE_SEND_REPORT_EVENT = "SAVE_SEND_REPORT_EVENT";
-    public static final String SAVE_USER_SEND_REPORT_EVENT = "SAVE_USER_SEND_REPORT_EVENT";
+    public static final String SAVE_REPORT_APPROVAL = "SAVE_REPORT_APPROVAL";
     public static final String SAVE_USER = "SAVE_USER";
 
     public static final String REPORT_APPROVAL_PAGINATION = "REPORT_APPROVAL_PAGINATION";

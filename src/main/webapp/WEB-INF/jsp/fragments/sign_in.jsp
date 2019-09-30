@@ -8,7 +8,6 @@
     <meta charset="utf-8">
 </head>
 <body>
-${pageContext.request.contextPath == null}
     <form name="LoginForm" method="POST" action ="${pageContext.request.contextPath}/taxsystem/">
         <input type="hidden" name="command" value="${Command.SIGN_IN}"/>
         <input type="text" name="email" class="form-control mb-2" required autofocus placeholder=<fmt:message key="signin.email" bundle="${rb}"/>>

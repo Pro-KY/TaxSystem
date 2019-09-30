@@ -23,7 +23,6 @@ public class Report implements Serializable {
         this.id = id;
     }
 
-
     public Report(TaxType taxType) {
         this.taxType = taxType;
     }
@@ -34,9 +33,6 @@ public class Report implements Serializable {
         this.sum = sum;
         this.quarter = quarter;
     }
-
-
-
 
     public Report(TaxType taxType, double sum, int quarter) {
         this.taxType = taxType;
@@ -85,6 +81,7 @@ public class Report implements Serializable {
         return "Report{" +
                 "id=" + id +
                 ", sum=" + sum +
+                ", taxType =" + taxType.getId() +
                 ", quarter=" + quarter +
                 '}';
     }

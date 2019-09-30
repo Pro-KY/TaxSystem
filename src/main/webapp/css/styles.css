@@ -17,3 +17,7 @@
 #organizationWrapper {
     display: none;
 }
+
+#elementsAmountSelect {
+    padding-bottom: 10px;
+}

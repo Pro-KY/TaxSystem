@@ -4,7 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div class="container">
-    <div class="row">
+    <div id="elementsAmountSelect" class="row">
+        <div class="col-md-9"></div>
         <div class="col-md-3">
             <label for="inputGroupSelect01"> Elements on the page </label>
             <select class="custom-select" id="inputGroupSelect01" name="${Parameters.REPORT_CONTENT_TYPE}">
@@ -13,11 +14,9 @@
                 <option value="3">30</option>
             </select>
         </div>
-        <div class="col-md-9"></div>
     </div>
 
-    <div class="row h-50 d-inline-block" style="border: #0b2e13">
-<%--        <div class="h-50 d-inline-block">--%>
+    <div style="border: #0b2e13">
                 <table class="table">
                     <thead>
                     <tr>
@@ -38,7 +37,6 @@
                     </c:forEach>
                     </tbody>
                 </table>
-<%--        </div>--%>
     </div>
 </div>
 <%--MORE THAN 5 SHOW ONLY 5 ELSE SHOW LESS--%>

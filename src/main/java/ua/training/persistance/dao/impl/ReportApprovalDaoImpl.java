@@ -4,8 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.dto.PaginationDto;
 import ua.training.persistance.dao.IReportApprovalDao;
-import ua.training.persistance.dao.jdbc.PaginationManager;
 import ua.training.persistance.dao.jdbc.JdbcTemplate;
+import ua.training.persistance.dao.jdbc.PaginationManager;
 import ua.training.persistance.dao.mappers.impl.ReportApprovalMapper;
 import ua.training.persistance.dao.mappers.impl.StateApprovalMapperImpl;
 import ua.training.persistance.dao.mappers.impl.UserMapperImpl;
@@ -18,7 +18,7 @@ import ua.training.util.handler.properties.SqlPropertiesHandler;
 import java.util.List;
 import java.util.Optional;
 
-import static ua.training.util.handler.properties.SqlPropertiesHandler.SAVE_SEND_REPORT_EVENT;
+import static ua.training.util.handler.properties.SqlPropertiesHandler.SAVE_REPORT_APPROVAL;
 
 public class ReportApprovalDaoImpl implements IReportApprovalDao {
     private static ReportApprovalDaoImpl instance;
@@ -42,9 +42,14 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
 
     @Override
     public Long save(ReportApproval reportApproval) {
-        String sql = SqlPropertiesHandler.getSqlQuery(SAVE_SEND_REPORT_EVENT);
+        String sql = SqlPropertiesHandler.getSqlQuery(SAVE_REPORT_APPROVAL);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
-        Object[] params = {reportApproval.getTimestamp(), reportApproval.getStateApproval().getId(), reportApproval.getReport().getId()};
+        Object[] params = {
+                reportApproval.getTimestamp(),
+                reportApproval.getStateApproval().getId(),
+                reportApproval.getUser().getId(),
+                reportApproval.getReport().getId()
+        };
 
         try {
             return jdbcTemplate.saveOrUpdate(sql, params);

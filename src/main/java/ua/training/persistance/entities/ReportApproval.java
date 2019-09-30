@@ -18,17 +18,15 @@ public class ReportApproval implements Serializable {
         this.id = id;
     }
 
-    public ReportApproval(Long id, Timestamp timestamp, String refusalCause, StateApproval stateApproval, Report report, User user, User inspector) {
-        this.id = id;
+    public ReportApproval(Timestamp timestamp, StateApproval stateApproval, User user, Report report) {
         this.timestamp = timestamp;
-        this.refusalCause = refusalCause;
         this.stateApproval = stateApproval;
         this.report = report;
         this.user = user;
-        this.inspector = inspector;
     }
 
-    public ReportApproval(Timestamp timestamp, String refusalCause, StateApproval stateApproval, Report report, User user, User inspector) {
+    public ReportApproval(Long id, Timestamp timestamp, String refusalCause, StateApproval stateApproval, Report report, User user, User inspector) {
+        this.id = id;
         this.timestamp = timestamp;
         this.refusalCause = refusalCause;
         this.stateApproval = stateApproval;

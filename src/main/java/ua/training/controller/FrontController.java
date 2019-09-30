@@ -37,6 +37,7 @@ public class FrontController extends HttpServlet {
             response.sendRedirect("/error.jsp");
             return;
         }
+//        new ExceptioniThrower().performArithmeticOperation(1, 0);
 
         final Object language = request.getSession().getAttribute("language");
         System.out.println("language: " + language);

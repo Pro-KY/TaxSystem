@@ -52,30 +52,30 @@ public class JdbcTemplate {
 
     public <T> Optional<T> findByQuery(String sql, EnitityMapper<T> entityMapper, Object... parameters) {
         final Connection connection = mysqlDataSource.getConnection();
-        final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
+        final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
         Optional<T> t;
-        try (ResultSet result = jdbcQuery1.select(parameters)) {
+        try (ResultSet result = jdbcQuery.select(parameters)) {
             result.next();
             t = Optional.ofNullable(entityMapper.mapToEntity(result));
         } catch (SQLException e) {
             t = Optional.empty();
         }  finally {
-            mysqlDataSource.releaseResources(connection, jdbcQuery1.getPs());
+            mysqlDataSource.releaseResources(connection, jdbcQuery.getPs());
         }
         return t;
     }
 
     public Long countRows(String sql) {
         final Connection connection = mysqlDataSource.getConnection();
-        final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
+        final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
         long rowsAmount;
-        try (ResultSet result = jdbcQuery1.select()) {
+        try (ResultSet result = jdbcQuery.select()) {
             result.next();
             rowsAmount = result.getLong(1);
         } catch (SQLException e) {
             rowsAmount = 0;
         }  finally {
-            mysqlDataSource.releaseResources(connection, jdbcQuery1.getStatement());
+            mysqlDataSource.releaseResources(connection, jdbcQuery.getStatement());
         }
         return rowsAmount;
     }
@@ -83,20 +83,20 @@ public class JdbcTemplate {
     public Long saveOrUpdate(String sql, Object... parameters) {
         long insertedId;
         final Connection connection = mysqlDataSource.getConnection();
-        final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
-        insertedId = jdbcQuery1.saveOrUpdate(parameters);
-        closeResultSet(jdbcQuery1.getResult());
-        mysqlDataSource.releaseResources(connection, jdbcQuery1.getPs());
+        final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
+        insertedId = jdbcQuery.saveOrUpdate(parameters);
+        closeResultSet(jdbcQuery.getResult());
+        mysqlDataSource.releaseResources(connection, jdbcQuery.getPs());
         return insertedId;
     }
 
     public boolean delete(String sql, Object... parameters) {
         boolean isDeleted;
         final Connection connection = mysqlDataSource.getConnection();
-        final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
-        isDeleted = jdbcQuery1.delete(parameters);
-        closeResultSet(jdbcQuery1.getResult());
-        mysqlDataSource.releaseResources(connection, jdbcQuery1.getPs());
+        final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
+        isDeleted = jdbcQuery.delete(parameters);
+        closeResultSet(jdbcQuery.getResult());
+        mysqlDataSource.releaseResources(connection, jdbcQuery.getPs());
         return isDeleted;
     }
 
