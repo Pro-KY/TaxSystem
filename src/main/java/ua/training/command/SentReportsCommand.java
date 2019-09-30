@@ -48,7 +48,7 @@ public class SentReportsCommand implements ICommand {
         final List<SentReportsDto> sentReports;
         try {
             sentReports = sentReportsService.getSentReports(paginationDto);
-            request.setAttribute(Attributes.CURRENT_PAGE_INDEX, 666);
+            session.setAttribute(Attributes.CURRENT_PAGE_INDEX, paginationDto.getCurrentPageIndex());
             request.setAttribute(SENT_REPORTS_LIST, sentReports);
             System.out.println(sentReports.size());
         } catch (Exception e) {

@@ -31,15 +31,14 @@ public class SentReportsService {
     }
 
     public List<SentReportsDto> getSentReports(PaginationDto paginationDto) {
-        final IReportApprovalDao reportApprovalDao1 = daoFactory.getReportApprovalDao();
-        final long allRows = reportApprovalDao1.countAllRows();
+        final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
+        final long allRows = reportApprovalDao.countAllRows();
         final Long userId = paginationDto.getUserId();
 
         PaginationHandler paginationHandler = new PaginationHandler(paginationDto);
         paginationHandler.setAllRowsAmount(allRows);
         paginationHandler.calculateOffset();
 
-        final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
         final List<ReportApproval> paginationList = reportApprovalDao.getPaginationList(paginationHandler.getPageSize(), paginationHandler.getOffSet(), userId);
         return paginationList.stream()
                     .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))

@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    ${currentPageIndex}
+    ${pageContext.session.getAttribute(Attributes.CURRENT_PAGE_INDEX)}
 
     <div style="border: #0b2e13">
                 <table class="table">

@@ -1,24 +1,25 @@
 package ua.training.dto;
 
 public class PaginationDto {
-    private Object currentPageIndex;
+    private Long currentPageIndex;
     private String isNextClicked;
     private String isPreviousClicked;
     private String pageSize;
     private Long userId;
+    private static final int DEFAULT_START_INDEX = 0;
 
     public PaginationDto(Object pageIndex, String pageSize, String isNextClicked, String isPreviousClicked) {
-        currentPageIndex = pageIndex;
+        currentPageIndex = (pageIndex != null) ? (Long) pageIndex : DEFAULT_START_INDEX;
         this.isNextClicked = isNextClicked;
         this.isPreviousClicked = isPreviousClicked;
         this.pageSize = pageSize;
     }
 
-    public Object getCurrentPageIndex() {
+    public Long getCurrentPageIndex() {
         return currentPageIndex;
     }
 
-    public void setCurrentPageIndex(Object currentPageIndex) {
+    public void setCurrentPageIndex(Long currentPageIndex) {
         this.currentPageIndex = currentPageIndex;
     }
 
