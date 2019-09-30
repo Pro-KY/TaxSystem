@@ -1,12 +1,20 @@
 package ua.training.dto;
 
-public class PaginationDto {
+import java.io.Serializable;
+
+public class PaginationDto implements Serializable {
     private Long currentPageIndex;
     private String isNextClicked;
     private String isPreviousClicked;
     private String pageSize;
     private Long userId;
     private static final int DEFAULT_START_INDEX = 0;
+
+    private boolean isLeftButtonDisabled;
+    private boolean isRightButtonDisabled;
+    private long startVisibleIndex;
+    private long endVisibleIndex;
+
 
     public PaginationDto(Object pageIndex, String pageSize, String isNextClicked, String isPreviousClicked) {
         currentPageIndex = (pageIndex != null) ? (Long) pageIndex : DEFAULT_START_INDEX;
@@ -53,5 +61,37 @@ public class PaginationDto {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public boolean isLeftButtonDisabled() {
+        return isLeftButtonDisabled;
+    }
+
+    public void setLeftButtonDisabled(boolean leftButtonDisabled) {
+        isLeftButtonDisabled = leftButtonDisabled;
+    }
+
+    public boolean isRightButtonDisabled() {
+        return isRightButtonDisabled;
+    }
+
+    public void setRightButtonDisabled(boolean rightButtonDisabled) {
+        isRightButtonDisabled = rightButtonDisabled;
+    }
+
+    public long getStartVisibleIndex() {
+        return startVisibleIndex;
+    }
+
+    public void setStartVisibleIndex(long startVisibleIndex) {
+        this.startVisibleIndex = startVisibleIndex;
+    }
+
+    public long getEndVisibleIndex() {
+        return endVisibleIndex;
+    }
+
+    public void setEndVisibleIndex(long endVisibleIndex) {
+        this.endVisibleIndex = endVisibleIndex;
     }
 }

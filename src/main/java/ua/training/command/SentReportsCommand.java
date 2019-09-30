@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.dto.PaginationDto;
 import ua.training.dto.SentReportsDto;
+import ua.training.persistance.dao.jdbc.PaginationHandler;
 import ua.training.persistance.entities.User;
 import ua.training.service.SentReportsService;
 import ua.training.service.ServiceFactory;
@@ -38,24 +39,18 @@ public class SentReportsCommand implements ICommand {
         final String isPreviousClicked = request.getParameter(Parameters.PREV_PAGE_CLICK);
         final HttpSession session = request.getSession();
 
-        logger.info("pageSize: {}", pageSize);
-        logger.info(pageIndex);
-
         final User user = (User) session.getAttribute(Attributes.USER);
         final PaginationDto paginationDto = new PaginationDto(pageIndex, pageSize, isNextClicked, isPreviousClicked);
         paginationDto.setUserId(user.getId());
 
-        final List<SentReportsDto> sentReports;
-        try {
-            sentReports = sentReportsService.getSentReports(paginationDto);
-            session.setAttribute(Attributes.CURRENT_PAGE_INDEX, paginationDto.getCurrentPageIndex());
-            request.setAttribute(SENT_REPORTS_LIST, sentReports);
-            System.out.println(sentReports.size());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        request.setAttribute(Attributes.SENT_REPORTS_LIST, sentReports);
-        // session pas pagination parameters
+        final PaginationHandler<SentReportsDto> paginationHandler = sentReportsService.getSentReports(paginationDto);
+        final List<SentReportsDto> sentReports = paginationHandler.getPageResult();
+        paginationHandler.setPaginationDtoData(paginationDto);
+
+        session.setAttribute(Attributes.CURRENT_PAGE_INDEX, paginationDto.getCurrentPageIndex());
+        request.setAttribute(SENT_REPORTS_LIST, sentReports);
+        request.setAttribute(Attributes.PAGINATION_INFO, paginationDto);
+
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }
 }

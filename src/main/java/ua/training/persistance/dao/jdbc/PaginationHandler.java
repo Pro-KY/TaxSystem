@@ -4,7 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.dto.PaginationDto;
 
-public class PaginationHandler {
+import java.util.List;
+
+public class PaginationHandler<T> {
     private long pageSize;
     private long offSet = 0;
     private long startVisibleIndex = 0;
@@ -18,7 +20,8 @@ public class PaginationHandler {
     private static final int DEFAULT_START_INDEX = 0;
 
     private boolean isLeftButtonDisabled;
-    private boolean isRightButtonVisible;
+    private boolean isRightButtonDisabled;
+    private List<T> pageResult;
 
     private static final Logger LOGGER = LogManager.getLogger(PaginationHandler.class);
 
@@ -26,10 +29,18 @@ public class PaginationHandler {
         setPageSize(paginationDto.getPageSize());
     }
 
+    public void setPaginationDtoData(PaginationDto paginationDto) {
+        paginationDto.setCurrentPageIndex(currentPageIndex);
+        paginationDto.setEndVisibleIndex(endVisibleIndex);
+        paginationDto.setStartVisibleIndex(startVisibleIndex);
+        paginationDto.setLeftButtonDisabled(isLeftButtonDisabled);
+        paginationDto.setRightButtonDisabled(isRightButtonDisabled);
+    }
+
     public void setPageCurrentIndex(Long currentIndex) {
         currentPageIndex = (currentIndex != null) ? (Long) currentIndex : DEFAULT_START_INDEX;
         isLeftButtonDisabled = (currentPageIndex == startVisibleIndex);
-        isRightButtonVisible = currentPageIndex == endVisibleIndex;
+        isRightButtonDisabled = currentPageIndex == endVisibleIndex;
     }
 
     public void setAllRowsAmount(long allRowsAmount) {
@@ -78,8 +89,16 @@ public class PaginationHandler {
     }
 
 
-    public boolean isRightButtonVisible() {
-        return isRightButtonVisible;
+    public boolean isRightButtonDisabled() {
+        return isRightButtonDisabled;
+    }
+
+    public List<T> getPageResult() {
+        return pageResult;
+    }
+
+    public void setPageResult(List<T> pageResult) {
+        this.pageResult = pageResult;
     }
 
     public long getPageSize() {

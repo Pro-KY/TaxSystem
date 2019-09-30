@@ -30,19 +30,27 @@ public class SentReportsService {
         this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
-    public List<SentReportsDto> getSentReports(PaginationDto paginationDto) {
+    // PaginationHandler as a return type
+//    public List<SentReportsDto> getSentReports(PaginationDto paginationDto) {
+    public PaginationHandler<SentReportsDto> getSentReports(PaginationDto paginationDto) {
         final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
         final long allRows = reportApprovalDao.countAllRows();
         final Long userId = paginationDto.getUserId();
 
-        PaginationHandler paginationHandler = new PaginationHandler(paginationDto);
+        PaginationHandler<SentReportsDto> paginationHandler = new PaginationHandler<>(paginationDto);
         paginationHandler.setPageCurrentIndex(paginationDto.getCurrentPageIndex());
         paginationHandler.setAllRowsAmount(allRows);
         paginationHandler.calculateOffset();
 
         final List<ReportApproval> paginationList = reportApprovalDao.getPaginationList(paginationHandler.getPageSize(), paginationHandler.getOffSet(), userId);
-        return paginationList.stream()
-                    .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
-                    .collect(Collectors.toList());
+//        return paginationList.stream()
+//                    .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
+//                    .collect(Collectors.toList());
+
+        final List<SentReportsDto> collect = paginationList.stream()
+                .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
+                .collect(Collectors.toList());
+        paginationHandler.setPageResult(collect);
+        return paginationHandler;
     }
 }
