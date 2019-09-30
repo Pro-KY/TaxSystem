@@ -49,7 +49,7 @@ public class ReportApprovalMapper extends EnitityMapper<ReportApproval> {
                 final Long userId = resultSet.getLong(columnsIndexes.get(USER_ID));
                 final Long inspectorId = resultSet.getLong(columnsIndexes.get(INSPECTOR_ID));
 
-            final Report report = new Report(reportId);
+                final Report report = new Report(reportId);
                 final StateApproval stateApproval = new StateApproval(stateApprovalId);
                 final User inspector = new User(inspectorId);
                 final User user = new User(userId);
@@ -70,7 +70,6 @@ public class ReportApprovalMapper extends EnitityMapper<ReportApproval> {
                 if (mapUser) {
                     mappedEntity.setUser(userMapper.mapToEntity(resultSet));
                 }
-//            }
         } catch (SQLException e) {
             System.out.println(e.getCause().toString());
         }

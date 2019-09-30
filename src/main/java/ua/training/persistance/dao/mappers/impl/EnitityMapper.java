@@ -13,7 +13,6 @@ public abstract class EnitityMapper<T> {
 
     public EnitityMapper() { }
 
-    // setIndexesInJoinQuery
     public void setIndexesInJoinQuery(int[] indexes) {
         final Set<String> keys = columnsIndexes.keySet();
         final Iterator<String> iterator = keys.iterator();

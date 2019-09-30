@@ -31,11 +31,15 @@ public class SentReportsCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         logger.info("in SentReportsCommand");
         request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
+        //TODO: map via json mapper
         final Object pageIndex = request.getSession().getAttribute(Attributes.CURRENT_PAGE_INDEX);
         final String pageSize = request.getParameter(Parameters.PAGE_SIZE);
         final String isNextClicked = request.getParameter(Parameters.NEXT_PAGE_CLICK);
         final String isPreviousClicked = request.getParameter(Parameters.PREV_PAGE_CLICK);
         final HttpSession session = request.getSession();
+
+        logger.info("pageSize: {}", pageSize);
+        logger.info(pageIndex);
 
         final User user = (User) session.getAttribute(Attributes.USER);
         final PaginationDto paginationDto = new PaginationDto(pageIndex, pageSize, isNextClicked, isPreviousClicked);
@@ -44,6 +48,7 @@ public class SentReportsCommand implements ICommand {
         final List<SentReportsDto> sentReports;
         try {
             sentReports = sentReportsService.getSentReports(paginationDto);
+            request.setAttribute(Attributes.CURRENT_PAGE_INDEX, 666);
             request.setAttribute(SENT_REPORTS_LIST, sentReports);
             System.out.println(sentReports.size());
         } catch (Exception e) {

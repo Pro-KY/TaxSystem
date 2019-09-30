@@ -40,18 +40,16 @@ public class UserMapperImpl extends EnitityMapper<User> {
 
     @Override
     public User mapToEntity(ResultSet resultSet) {
-        columnsIndexes.forEach((k, v) -> System.out.println(v + " "));
 
         try {
                 long id = resultSet.getLong(columnsIndexes.get(ID));
                 final String firstName = resultSet.getString(columnsIndexes.get(FIRST_NAME));
                 final String lastName= resultSet.getString(columnsIndexes.get(LAST_NAME));
                 final String organization = resultSet.getString(columnsIndexes.get(ORGANIZATION));
-            final String email = resultSet.getString(columnsIndexes.get(EMAIL));
-            final String password = resultSet.getString(columnsIndexes.get(PASSWORD));
-            final String address = resultSet.getString(columnsIndexes.get(ADDRESS));
+                final String email = resultSet.getString(columnsIndexes.get(EMAIL));
+                final String password = resultSet.getString(columnsIndexes.get(PASSWORD));
+                final String address = resultSet.getString(columnsIndexes.get(ADDRESS));
                 final long userTypeId = resultSet.getLong(columnsIndexes.get(USER_TYPE_ID));
-//                final String type = resultSet.getString(UserTypeEntityMapperImpl.TYPE);
                 final UserType userType = new UserType(userTypeId);
 
                 mappedEntity =  new User(id, firstName, lastName, organization, email, password, address, userType);
@@ -64,5 +62,10 @@ public class UserMapperImpl extends EnitityMapper<User> {
             System.out.println(e.getCause().toString());
         }
         return mappedEntity;
+    }
+
+    public void setUserTypeMapper(EnitityMapper<UserType> userTypeMapper) {
+        mapUserType = true;
+        this.userTypeMapper = userTypeMapper;
     }
 }

@@ -14,7 +14,6 @@ public class Attributes {
     public static final String IS_SIGN_UP = "isSignUp";
 
     public static final String SENT_REPORTS_LIST = "sentReportsList";
-    public static final String PAGE_SIZE = "pageSize";
-    public static final String CURRENT_PAGE_INDEX = "pageIndex";
+    public static final String CURRENT_PAGE_INDEX = "currentPageIndex";
 
 }

@@ -32,16 +32,19 @@ public class SignInCommand implements ICommand {
         boolean isUserAuthorized = optionalUser.isPresent();
 
         String pagePathProperty = isUserAuthorized ? PATH_MAIN : PATH_ERROR;
-        final HttpSession session = request.getSession(true);
-//        session.setAttribute(Attributes.IS_USER_AUTHORIZED, isUserAuthorized);
+        final HttpSession session = request.getSession(false);
 
-        if (isUserAuthorized) {
-            final User user = optionalUser.get();
-            session.setAttribute(Attributes.USER, user);
-            request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SEND_REPORT));
-        } else {
-            request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(PATH_ERROR));
-            request.setAttribute(Attributes.ERROR_MSG, MessagePropertiesHandler.getMessage(LOGIN_ERROR));
+        if (session != null) {
+            session.setAttribute(Attributes.IS_USER_AUTHORIZED, isUserAuthorized);
+
+            if (isUserAuthorized) {
+                final User user = optionalUser.get();
+                session.setAttribute(Attributes.USER, user);
+                request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SEND_REPORT));
+            } else {
+                request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(PATH_ERROR));
+                request.setAttribute(Attributes.ERROR_MSG, MessagePropertiesHandler.getMessage(LOGIN_ERROR));
+            }
         }
 
         return ViewPropertiesHandler.getViewPath(pagePathProperty);
