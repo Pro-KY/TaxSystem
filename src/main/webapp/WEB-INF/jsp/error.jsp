@@ -1,21 +1,20 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Yuriy
-  Date: 03.09.2019
-  Time: 23:42
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8"  isErrorPage="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<c:set var="errorMsg" value="${pageContext.getAttribute('errorMessage')}" scope="request"/>
 <html>
 <head>
     <title>Error page</title>
     <meta charset="utf-8">
 </head>
 <body>
-    <h3>Error code: ${pageContext.getAttribute("errorCode")}</h3>
-    <p> Error message: ${errorMsg} != null ? ${errorMsg} : Unknown error}</p>
+    Request from ${pageContext.errorData.requestURI} is failed
+    <br/>
+    Servlet name: ${pageContext.errorData.servletName}
+    <br/>
+    Status code: ${pageContext.errorData.statusCode}
+    <br/>
+    Exception: ${pageContext.exception}
+    <br/>
+    Message from exception: ${pageContext.exception.message}
 </body>
 </html>

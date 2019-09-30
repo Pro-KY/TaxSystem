@@ -7,19 +7,19 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MysqlMysqlDataSource implements MysqlDataSource {
-    private static MysqlMysqlDataSource instance;
+public class MysqlDataSourceImpl implements MysqlDataSource {
+    private static MysqlDataSourceImpl instance;
     private DataSource dataSource;
 
-    public static MysqlMysqlDataSource getInstance() {
+    public static MysqlDataSourceImpl getInstance() {
         if (instance == null) {
-            instance = new MysqlMysqlDataSource();
+            instance = new MysqlDataSourceImpl();
         }
         return instance;
     }
 
-    private MysqlMysqlDataSource() {
-        System.out.println("MysqlMysqlDataSource private const is called");
+    private MysqlDataSourceImpl() {
+        System.out.println("MysqlDataSourceImpl private const is called");
         initDataSource();
     }
 

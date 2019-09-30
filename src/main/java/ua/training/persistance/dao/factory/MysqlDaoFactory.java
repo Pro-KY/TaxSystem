@@ -3,7 +3,7 @@ package ua.training.persistance.dao.factory;
 import ua.training.persistance.dao.*;
 import ua.training.persistance.dao.impl.*;
 import ua.training.persistance.db.datasource.MysqlDataSource;
-import ua.training.persistance.db.datasource.MysqlMysqlDataSource;
+import ua.training.persistance.db.datasource.MysqlDataSourceImpl;
 
 // get Dao's via fabric
 public class MysqlDaoFactory implements DaoFactory {
@@ -12,7 +12,7 @@ public class MysqlDaoFactory implements DaoFactory {
     private static MysqlDaoFactory instance;
 
     private MysqlDaoFactory() {
-        this.mysqlDataSource = MysqlMysqlDataSource.getInstance();
+        this.mysqlDataSource = MysqlDataSourceImpl.getInstance();
     }
 
     @Override
