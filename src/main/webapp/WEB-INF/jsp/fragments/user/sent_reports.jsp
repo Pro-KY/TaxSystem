@@ -17,7 +17,7 @@
                     <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-<%--                    <a class="dropdown-item" href="${pageSizeThreeUrl}"> 3 </a>--%>
+                    <a class="dropdown-item" href="${pageSizeThreeUrl}"> 3 </a>
                     <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=5&command=${Command.SENT_REPORTS}"/>"> 5 </a>
                     <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=10&command=${Command.SENT_REPORTS}"/>">10</a>
                     <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=15&command=${Command.SENT_REPORTS}"/>">15</a>
@@ -38,12 +38,12 @@
                 </tr>
             </thead>
             <tbody>
-            <c:forEach var="sentReport" items="${pageContext.request.getAttribute(Attributes.SENT_REPORTS_LIST)}" >
-                <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">
-                    <td>${sentReport.reportNumber}</td>
-                    <td>${sentReport.state}</td>
-                    <td>${sentReport.inspector eq null ? sentReport.inspector : not_signed_label}</td>
-                    <td>${sentReport.timestamp}</td>
+            <c:forEach var="report" items="${pageContext.request.getAttribute(Attributes.SENT_REPORTS_LIST)}" >
+                <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.REPORT_APPROVAL_ID}=${report.reportApprovalId}&command=${Command.REPORT_DETAILS}">
+                    <td>${report.reportNumber}</td>
+                    <td>${report.state}</td>
+                    <td>${report.inspector eq null ? report.inspector : not_signed_label}</td>
+                    <td>${report.timestamp}</td>
                 </tr>
             </c:forEach>
             </tbody>
