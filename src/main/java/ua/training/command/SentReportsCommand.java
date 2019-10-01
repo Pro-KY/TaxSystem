@@ -33,14 +33,22 @@ public class SentReportsCommand implements ICommand {
         logger.info("in SentReportsCommand");
         request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
         //TODO: map via json mapper
-        final Object pageIndex = request.getSession().getAttribute(Attributes.CURRENT_PAGE_INDEX);
+        final HttpSession session = request.getSession();
+        final Long sessionPageIndex = (Long) session.getAttribute(Attributes.CURRENT_PAGE_INDEX);
+        final Long startPageIndex = (Long) session.getAttribute(Attributes.START_PAGE_INDEX);
+        final Long endPageIndex = (Long) session.getAttribute(Attributes.END_PAGE_INDEX);
+
+        String pageIndex = request.getParameter(Parameters.PAGE_INDEX);
         final String pageSize = request.getParameter(Parameters.PAGE_SIZE);
         final String isNextClicked = request.getParameter(Parameters.NEXT_PAGE_CLICK);
         final String isPreviousClicked = request.getParameter(Parameters.PREV_PAGE_CLICK);
-        final HttpSession session = request.getSession();
+
+        if (pageIndex == null && sessionPageIndex != null) {
+            pageIndex = sessionPageIndex.toString();
+        }
 
         final User user = (User) session.getAttribute(Attributes.USER);
-        final PaginationDto paginationDto = new PaginationDto(pageIndex, pageSize, isNextClicked, isPreviousClicked);
+        final PaginationDto paginationDto = new PaginationDto(pageIndex, pageSize, isNextClicked, isPreviousClicked, startPageIndex, endPageIndex);
         paginationDto.setUserId(user.getId());
 
         final PaginationHandler<SentReportsDto> paginationHandler = sentReportsService.getSentReports(paginationDto);
@@ -49,6 +57,8 @@ public class SentReportsCommand implements ICommand {
         logger.info("pagination dto {}", paginationDto);
 
         session.setAttribute(Attributes.CURRENT_PAGE_INDEX, paginationDto.getCurrentPageIndex());
+        session.setAttribute(Attributes.START_PAGE_INDEX, paginationDto.getStartPageIndex());
+        session.setAttribute(Attributes.END_PAGE_INDEX, paginationDto.getEndPageIndex());
         request.setAttribute(SENT_REPORTS_LIST, sentReports);
         request.setAttribute(Attributes.PAGINATION_INFO, paginationDto);
 

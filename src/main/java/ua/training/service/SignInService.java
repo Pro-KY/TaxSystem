@@ -1,5 +1,7 @@
 package ua.training.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.training.persistance.dao.IUserDao;
 import ua.training.persistance.dao.factory.MysqlDaoFactory;
 import ua.training.persistance.entities.User;
@@ -7,6 +9,8 @@ import ua.training.persistance.entities.User;
 import java.util.Optional;
 
 public class SignInService {
+    private static final Logger log = LogManager.getLogger(SignInService.class);
+
     // userDao;
     private MysqlDaoFactory daoFactory;
 
@@ -18,7 +22,6 @@ public class SignInService {
     public Optional<User> getAuthorizedUser(String login, String password) {
         final IUserDao userDao = daoFactory.getUserDao();
         final Optional<User> userByEmailAndPassword = userDao.getUserByEmailAndPassword(login, password);
-
         userByEmailAndPassword.ifPresent(user -> {
             user.setPassword(null);
         });

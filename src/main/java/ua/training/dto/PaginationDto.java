@@ -4,23 +4,25 @@ import java.io.Serializable;
 
 public class PaginationDto implements Serializable {
     private Long currentPageIndex;
-    private String isNextClicked;
-    private String isPreviousClicked;
+    private Boolean isNextClicked;
+    private Boolean isPreviousClicked;
     private String pageSize;
     private Long userId;
     private static final int DEFAULT_START_INDEX = 0;
 
     private boolean isLeftButtonDisabled;
     private boolean isRightButtonDisabled;
-    private long startVisibleIndex;
-    private long endVisibleIndex;
+    private Long startPageIndex;
+    private Long endPageIndex;
     private long allPagesAmount;
 
-    public PaginationDto(Object pageIndex, String pageSize, String isNextClicked, String isPreviousClicked) {
-        currentPageIndex = (pageIndex != null) ? (Long) pageIndex : DEFAULT_START_INDEX;
-        this.isNextClicked = isNextClicked;
-        this.isPreviousClicked = isPreviousClicked;
+    public PaginationDto(String pageIndex, String pageSize, String isNextClicked, String isPreviousClicked, Long startPageIndex, Long endPageIndex) {
+        currentPageIndex = (pageIndex != null) ? Long.valueOf(pageIndex) : DEFAULT_START_INDEX;
+        this.isNextClicked = (isNextClicked != null) ? Boolean.valueOf(isNextClicked) : false;
+        this.isPreviousClicked = (isPreviousClicked != null) ? Boolean.valueOf(isPreviousClicked) : false;
         this.pageSize = pageSize;
+        this.startPageIndex = startPageIndex;
+        this.endPageIndex = endPageIndex;
     }
 
     public Long getCurrentPageIndex() {
@@ -31,20 +33,20 @@ public class PaginationDto implements Serializable {
         this.currentPageIndex = currentPageIndex;
     }
 
-    public String getIsNextClicked() {
+    public Boolean getNextClicked() {
         return isNextClicked;
     }
 
-    public void setIsNextClicked(String isNextClicked) {
-        this.isNextClicked = isNextClicked;
+    public void setNextClicked(Boolean nextClicked) {
+        isNextClicked = nextClicked;
     }
 
-    public String getIsPreviousClicked() {
+    public Boolean getPreviousClicked() {
         return isPreviousClicked;
     }
 
-    public void setIsPreviousClicked(String isPreviousClicked) {
-        this.isPreviousClicked = isPreviousClicked;
+    public void setPreviousClicked(Boolean previousClicked) {
+        isPreviousClicked = previousClicked;
     }
 
     public String getPageSize() {
@@ -79,20 +81,20 @@ public class PaginationDto implements Serializable {
         isRightButtonDisabled = rightButtonDisabled;
     }
 
-    public long getStartVisibleIndex() {
-        return startVisibleIndex;
+    public Long getStartPageIndex() {
+        return startPageIndex;
     }
 
-    public void setStartVisibleIndex(long startVisibleIndex) {
-        this.startVisibleIndex = startVisibleIndex;
+    public void setStartPageIndex(long startPageIndex) {
+        this.startPageIndex = startPageIndex;
     }
 
-    public long getEndVisibleIndex() {
-        return endVisibleIndex;
+    public Long getEndPageIndex() {
+        return endPageIndex;
     }
 
-    public void setEndVisibleIndex(long endVisibleIndex) {
-        this.endVisibleIndex = endVisibleIndex;
+    public void setEndPageIndex(long endPageIndex) {
+        this.endPageIndex = endPageIndex;
     }
 
     public long getAllPagesAmount() {
@@ -108,9 +110,11 @@ public class PaginationDto implements Serializable {
         return "PaginationDto{" +
                 "isLeftButtonDisabled=" + isLeftButtonDisabled +
                 ", isRightButtonDisabled=" + isRightButtonDisabled +
-                ", startVisibleIndex=" + startVisibleIndex +
-                ", endVisibleIndex=" + endVisibleIndex +
+                ", startPageIndex=" + startPageIndex +
+                ", endPageIndex=" + endPageIndex +
                 ", currentPageIndex=" + currentPageIndex +
+                ", isNextClicked=" + isNextClicked +
+                ", isPreviousClicked=" + isPreviousClicked +
                 '}';
     }
 }

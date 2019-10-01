@@ -5,8 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <fmt:message var="not_signed_label" key="sent.reports.not.assigned.label" bundle="${sessionScope.rb}" scope="request"/>
 
-<c:url scope="request" var="sizeThreeCommand" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=3&${Parameters.PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>
-
+<c:url scope="request" var="pageSizeThreeUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=3&command=${Command.SENT_REPORTS}"/>
+<c:url scope="request" var="changeIndexUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>
 
 <div class="container">
     <div id="elementsAmountSelect" class="row">
@@ -17,10 +17,11 @@
                     <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="${sizeThreeCommand}"> 3 </a>
-                    <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=5&${Parameters.PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>"> 5 </a>
-                    <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=10&${Parameters.PAGE_INDEX}=${param.currentPageIndex}&command=${Command.SENT_REPORTS}"/>">10</a>
-                    <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=15&${Parameters.PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>">15</a>
+<%--                    <a class="dropdown-item" href="${pageSizeThreeUrl}"> 3 </a>--%>
+                    <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=5&command=${Command.SENT_REPORTS}"/>"> 5 </a>
+                    <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=10&command=${Command.SENT_REPORTS}"/>">10</a>
+                    <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=15&command=${Command.SENT_REPORTS}"/>">15</a>
+                    <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=25&command=${Command.SENT_REPORTS}"/>">25</a>
                 </div>
             </div>
         </div>
@@ -50,26 +51,45 @@
     </div>
 </div>
 
-${requestScope.paginationInfo.isLeftButtonDisabled}
-${sessionScope.currentPageIndex}
-${requestScope.paginationInfo.allPagesAmount}
+<p>isLeftButtonDisabled : ${requestScope.paginationInfo.isLeftButtonDisabled}</p>
+<p>isRightButtonDisabled : ${requestScope.paginationInfo.isRightButtonDisabled}</p>
+<p>currentPageIndex ${sessionScope.currentPageIndex}</p>
+<p>allPagesAmount ${requestScope.paginationInfo.allPagesAmount}</p>
 
+<p>startPageIndex : ${requestScope.paginationInfo.startPageIndex}</p>
+<p>endPageIndex : ${requestScope.paginationInfo.endPageIndex}</p>
+
+
+<%--PAGINATION--%>
 <c:if test="${requestScope.paginationInfo.allPagesAmount > 1}">
     <nav aria-label="...">
         <ul class="pagination" style="list-style-type: none;">
             <div class="container-fluid">
                 <div class="btn-group">
-                    <li class="${requestScope.paginationInfo.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}"><span class="page-link">Previous</span></li>
+                    <c:if test="${requestScope.paginationInfo.allPagesAmount > 1}">
+                        <li class="${requestScope.paginationInfo.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Previous</a>
+                        </li>
+                    </c:if>
 
-                    <c:forEach begin="0" end="4" varStatus="counter">
-                        <li class="${(sessionScope.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}"><a class="page-link" href="#">${counter.index+1}</a></li>
+                    <c:forEach begin="${sessionScope.startPageIndex}" end="${sessionScope.endPageIndex}" varStatus="counter">
+                        <li class="${(sessionScope.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
+                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.PAGE_INDEX}=${counter.index}&command=${Command.SENT_REPORTS}"> ${counter.index+1} </a>
+                        </li>
                     </c:forEach>
-                    <li class="${requestScope.paginationInfo.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}"><a class="page-link" href="#">Next</a></li>
+
+                    <c:if test="${requestScope.paginationInfo.allPagesAmount > 1}">
+                        <li class="${requestScope.paginationInfo.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Next</a>
+                        </li>
+                    </c:if>
                 </div>
             </div>
         </ul>
     </nav>
 </c:if>
+<%--PAGINATION--%>
+
 
 
 

@@ -8,12 +8,12 @@ import java.sql.SQLException;
 
 public class UserMapperImpl extends EnitityMapper<User> {
     private static String ID = "id";
-    private static final String PASSWORD = "password";
     private static final String FIRST_NAME = "first_name";
     private static final String LAST_NAME = "last_name";
-    private static final String EMAIL = "email";
-    private static final String ADDRESS = "address";
     private static final String ORGANIZATION = "organization";
+    private static final String EMAIL = "email";
+    private static final String PASSWORD = "password";
+    private static final String ADDRESS = "address";
     private static final String USER_TYPE_ID = "user_type_id";
 
     private boolean mapUserType;
@@ -59,6 +59,7 @@ public class UserMapperImpl extends EnitityMapper<User> {
                 }
 //            }
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println(e.getCause().toString());
         }
         return mappedEntity;

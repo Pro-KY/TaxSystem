@@ -15,6 +15,8 @@ public class Attributes {
 
     public static final String SENT_REPORTS_LIST = "sentReportsList";
     public static final String CURRENT_PAGE_INDEX = "currentPageIndex";
+    public static final String START_PAGE_INDEX = "startPageIndex";
+    public static final String END_PAGE_INDEX = "endPageIndex";
     public static final String PAGINATION_INFO = "paginationInfo";
 
 }

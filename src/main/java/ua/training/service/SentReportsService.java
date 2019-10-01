@@ -38,19 +38,26 @@ public class SentReportsService {
         log.info("allRows {}", allRows);
         final Long userId = paginationDto.getUserId();
 
-        PaginationHandler<SentReportsDto> paginationHandler = new PaginationHandler<>();
+        final Long startVisibleIndex = paginationDto.getStartPageIndex();
+        final Long endVisibleIndex = paginationDto.getEndPageIndex();
+        final Long currentPageIndex = paginationDto.getCurrentPageIndex();
+
+        PaginationHandler<SentReportsDto> paginationHandler = new PaginationHandler<>(startVisibleIndex, endVisibleIndex, currentPageIndex);
         paginationHandler.setAllRowsAmount(allRows);
         paginationHandler.setPageSize(paginationDto.getPageSize());
-        paginationHandler.setPageCurrentIndex(paginationDto.getCurrentPageIndex());
-        paginationHandler.calculateOffset();
+        paginationHandler.handlePagination();
+
+        if(paginationDto.getNextClicked()) {
+            paginationHandler.handleNextButtonClick();
+        } else if (paginationDto.getPreviousClicked()) {
+            paginationHandler.handlePreviousButtonClick();
+        } else {
+            paginationHandler.calculateOffset();
+        }
 
         final List<ReportApproval> paginationList = reportApprovalDao.getPaginationList(paginationHandler.getPageSize(), paginationHandler.getOffSet(), userId);
-//        return paginationList.stream()
-//                    .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
-//                    .collect(Collectors.toList());
 
         final List<SentReportsDto> collect = paginationList.stream()
-                .peek(reportApproval -> System.out.println(reportApproval.toString()))
                 .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
                 .collect(Collectors.toList());
         paginationHandler.setPageResult(collect);
