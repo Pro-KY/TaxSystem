@@ -1,5 +1,7 @@
 package ua.training.command;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.training.command.fragments.ReportFragmentCommand;
 import ua.training.command.fragments.SignInFragmentCommand;
 import ua.training.command.fragments.SignUpFragmentCommand;
@@ -10,6 +12,8 @@ import java.util.HashMap;
 
 
 public class CommandFactory {
+    private static final Logger log = LogManager.getLogger(CommandFactory.class);
+
     private static HashMap<String, ICommand> commandHashMap = new HashMap<>();
 
     static {
@@ -24,17 +28,18 @@ public class CommandFactory {
         commandHashMap.put(Command.GET_SIGN_UP_FRAGMENT, new SignUpFragmentCommand());
         commandHashMap.put(Command.GET_SIGN_IN_FRAGMENT, new SignInFragmentCommand());
         commandHashMap.put(Command.SENT_REPORTS, new SentReportsCommand());
+        commandHashMap.put(Command.REPORT_DETAILS, new ReportDetailsCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {
         ICommand command;
-        final String cliendCommand = request.getParameter("command");
-        System.out.println("command: " + cliendCommand);
+        final String clientCommand = request.getParameter("command");
+        log.info("command - {}", clientCommand);
 
-        if (cliendCommand == null || cliendCommand.isEmpty() || commandHashMap.get(cliendCommand) == null) {
+        if (clientCommand == null || clientCommand.isEmpty() || commandHashMap.get(clientCommand) == null) {
             command = new EmptyCommand();
         } else {
-            command = commandHashMap.get(cliendCommand);
+            command = commandHashMap.get(clientCommand);
 
         }
 

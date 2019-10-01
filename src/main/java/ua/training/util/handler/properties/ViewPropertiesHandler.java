@@ -15,6 +15,8 @@ public class ViewPropertiesHandler {
     public static final String FRAGMENT_PATH_SENT_REPORTS = "FRAGMENT_PATH_SENT_REPORTS";
     public static final String FRAGMENT_PATH_SIGN_UP = "FRAGMENT_PATH_SIGN_UP";
 
+    public static final String FRAGMENT_PATH_REPORT_DETAILS = "FRAGMENT_PATH_SIGN_UP";
+
     static {
         viewProperties = PropertyResourceBundle.getBundle("view");
     }

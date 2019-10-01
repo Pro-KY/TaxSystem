@@ -25,3 +25,11 @@
 #elementsAmountSelect {
     padding-bottom: 10px;
 }
+
+.table-row{
+    cursor:pointer;
+}
+
+.table-row:hover {
+    background-color: #ebf1f7;
+}

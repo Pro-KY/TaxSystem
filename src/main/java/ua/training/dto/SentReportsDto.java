@@ -4,16 +4,18 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class SentReportsDto implements Serializable {
+    private Long reportApprovalId;
     private Long reportNumber;
     private String state;
     private String inspector;
     private Timestamp timestamp;
 
-    public SentReportsDto(Long reportNumber, String state, String inspector, Timestamp timestamp) {
+    public SentReportsDto(Long reportNumber, String state, String inspector, Timestamp timestamp, Long reportApprovalId) {
         this.reportNumber = reportNumber;
         this.state = state;
         this.inspector = inspector;
         this.timestamp = timestamp;
+        this.reportApprovalId = reportApprovalId;
     }
 
     public Long getReportNumber() {
@@ -46,5 +48,13 @@ public class SentReportsDto implements Serializable {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Long getReportApprovalId() {
+        return reportApprovalId;
+    }
+
+    public void setReportApprovalId(Long reportApprovalId) {
+        this.reportApprovalId = reportApprovalId;
     }
 }

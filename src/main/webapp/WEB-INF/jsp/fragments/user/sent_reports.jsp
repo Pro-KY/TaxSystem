@@ -28,26 +28,26 @@
     </div>
 
     <div style="border: #0b2e13">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col"><fmt:message key="sent.reports.table.header.number" bundle="${rb}"/></th>
-                        <th scope="col"><fmt:message key="sent.reports.table.header.state" bundle="${rb}"/></th>
-                        <th scope="col"><fmt:message key="sent.reports.table.header.inspector" bundle="${rb}"/></th>
-                        <th scope="col"><fmt:message key="sent.reports.table.header.datetime" bundle="${rb}"/></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="sentReport" items="${pageContext.request.getAttribute(Attributes.SENT_REPORTS_LIST)}" >
-                        <tr>
-                            <td>${sentReport.reportNumber}</td>
-                            <td>${sentReport.state}</td>
-                            <td>${sentReport.inspector eq null ? sentReport.inspector : not_signed_label}</td>
-                            <td>${sentReport.timestamp}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"><fmt:message key="sent.reports.table.header.number" bundle="${rb}"/></th>
+                    <th scope="col"><fmt:message key="sent.reports.table.header.state" bundle="${rb}"/></th>
+                    <th scope="col"><fmt:message key="sent.reports.table.header.inspector" bundle="${rb}"/></th>
+                    <th scope="col"><fmt:message key="sent.reports.table.header.datetime" bundle="${rb}"/></th>
+                </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="sentReport" items="${pageContext.request.getAttribute(Attributes.SENT_REPORTS_LIST)}" >
+                <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">
+                    <td>${sentReport.reportNumber}</td>
+                    <td>${sentReport.state}</td>
+                    <td>${sentReport.inspector eq null ? sentReport.inspector : not_signed_label}</td>
+                    <td>${sentReport.timestamp}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
 </div>
 

@@ -20,11 +20,12 @@ public class DtoMapper {
 
     public SentReportsDto mapToSentReportsDto(ReportApproval reportApproval) {
         final StateApproval stateApproval = reportApproval.getStateApproval();
-        final long id = reportApproval.getReport().getId();
+        final long reportId = reportApproval.getReport().getId();
+        final long reportApprovalId = reportApproval.getId();
         final String state = stateApproval.getState();
         final Timestamp timestamp = reportApproval.getTimestamp();
         final User inspector = reportApproval.getInspector();
         final String  inspectorName = inspector.getFirstName() + " " +inspector.getLastName();
-        return new SentReportsDto(id, state, inspectorName, timestamp);
+        return new SentReportsDto(reportId, state, inspectorName, timestamp, reportApprovalId);
     }
 }
