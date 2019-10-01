@@ -100,8 +100,8 @@ public class ReportApproval implements Serializable {
                 "id=" + id +
                 ", timestamp=" + timestamp +
                 ", refusalCause='" + refusalCause + '\'' +
-//                ", reportStateId=" + reportStateId +
-//                ", reportId=" + reportId +
+                ", stateApproval=" + (stateApproval != null ?  stateApproval : "") +
+                ", report=" + (report != null ?  report : "") +
                 '}';
     }
 }

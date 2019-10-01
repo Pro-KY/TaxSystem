@@ -16,25 +16,23 @@ public class PaginationHandler<T> {
     private long allRowsAmount;
     private long allPagesAmount;
 
-    private static final int DEFAULT_PAGE_SIZE = 5;
+    private static final int DEFAULT_PAGE_SIZE = 3; // 5
     private static final int DEFAULT_START_INDEX = 0;
 
     private boolean isLeftButtonDisabled;
     private boolean isRightButtonDisabled;
     private List<T> pageResult;
 
-    private static final Logger LOGGER = LogManager.getLogger(PaginationHandler.class);
+    private static final Logger log = LogManager.getLogger(PaginationHandler.class);
 
-    public PaginationHandler(PaginationDto paginationDto) {
-        setPageSize(paginationDto.getPageSize());
-    }
 
-    public void setPaginationDtoData(PaginationDto paginationDto) {
+    public void setPaginationInfo(PaginationDto paginationDto) {
         paginationDto.setCurrentPageIndex(currentPageIndex);
         paginationDto.setEndVisibleIndex(endVisibleIndex);
         paginationDto.setStartVisibleIndex(startVisibleIndex);
         paginationDto.setLeftButtonDisabled(isLeftButtonDisabled);
         paginationDto.setRightButtonDisabled(isRightButtonDisabled);
+        paginationDto.setAllPagesAmount(allPagesAmount);
     }
 
     public void setPageCurrentIndex(Long currentIndex) {
@@ -48,8 +46,10 @@ public class PaginationHandler<T> {
     }
 
     // 2
-    private void setPageSize(String pageSize) {
-       this.pageSize = (pageSize != null) ? Integer.valueOf(pageSize) : DEFAULT_PAGE_SIZE;
+    public void setPageSize(String pageSize) {
+        this.pageSize = (pageSize != null) ? Integer.valueOf(pageSize) : DEFAULT_PAGE_SIZE;
+        log.info("page size: {}", pageSize);
+
 
         allPagesAmount = allRowsAmount / this.pageSize;
         allPagesAmount += allPagesAmount % this.pageSize > 0 ? 1 : 0;

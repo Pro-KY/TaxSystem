@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class SentReportsDto implements Serializable {
-    Long reportNumber;
-    String state;
-    String inspector;
-    Timestamp timestamp;
+    private Long reportNumber;
+    private String state;
+    private String inspector;
+    private Timestamp timestamp;
 
     public SentReportsDto(Long reportNumber, String state, String inspector, Timestamp timestamp) {
         this.reportNumber = reportNumber;

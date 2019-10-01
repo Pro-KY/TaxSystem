@@ -45,7 +45,8 @@ public class SentReportsCommand implements ICommand {
 
         final PaginationHandler<SentReportsDto> paginationHandler = sentReportsService.getSentReports(paginationDto);
         final List<SentReportsDto> sentReports = paginationHandler.getPageResult();
-        paginationHandler.setPaginationDtoData(paginationDto);
+        paginationHandler.setPaginationInfo(paginationDto);
+        logger.info("pagination dto {}", paginationDto);
 
         session.setAttribute(Attributes.CURRENT_PAGE_INDEX, paginationDto.getCurrentPageIndex());
         request.setAttribute(SENT_REPORTS_LIST, sentReports);

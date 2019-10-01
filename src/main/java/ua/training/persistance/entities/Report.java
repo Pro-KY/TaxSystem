@@ -48,18 +48,6 @@ public class Report implements Serializable {
         this.id = id;
     }
 
-//    public Long getTaxTypeId() {
-//        return taxTypeId;
-//    }
-//
-//    public void setTaxTypeId(Long taxTypeId) {
-//        if(taxTypeId != null && taxTypeId == 0) {
-//            throw new IllegalArgumentException("wrong taxTypeId value, must be bigger than 0!");
-//        }
-//
-//        this.taxTypeId = taxTypeId;
-//    }
-
     public double getSum() {
         return sum;
     }
@@ -81,7 +69,7 @@ public class Report implements Serializable {
         return "Report{" +
                 "id=" + id +
                 ", sum=" + sum +
-                ", taxType =" + taxType.getId() +
+                ", taxType =" + (taxType != null ?  taxType : "") +
                 ", quarter=" + quarter +
                 '}';
     }

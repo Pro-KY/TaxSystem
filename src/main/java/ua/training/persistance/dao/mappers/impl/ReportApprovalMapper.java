@@ -32,8 +32,8 @@ public class ReportApprovalMapper extends EnitityMapper<ReportApproval> {
         columnsIndexes.put(ID, 1);
         columnsIndexes.put(TIMESTAMP, 2);
         columnsIndexes.put(REFUSAL_CAUSE, 3);
-        columnsIndexes.put(REPORT_ID, 4);
-        columnsIndexes.put(STATE_APPROVAL_ID, 5);
+        columnsIndexes.put(STATE_APPROVAL_ID, 4);
+        columnsIndexes.put(REPORT_ID, 5);
         columnsIndexes.put(USER_ID, 6);
         columnsIndexes.put(INSPECTOR_ID, 7);
     }

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SentReportsService {
-    private static final Logger LOGGER = LogManager.getLogger(SentReportsService.class);
+    private static final Logger log = LogManager.getLogger(SentReportsService.class);
     private MysqlDaoFactory daoFactory;
 
     private static SentReportsService instance;
@@ -35,11 +35,13 @@ public class SentReportsService {
     public PaginationHandler<SentReportsDto> getSentReports(PaginationDto paginationDto) {
         final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
         final long allRows = reportApprovalDao.countAllRows();
+        log.info("allRows {}", allRows);
         final Long userId = paginationDto.getUserId();
 
-        PaginationHandler<SentReportsDto> paginationHandler = new PaginationHandler<>(paginationDto);
-        paginationHandler.setPageCurrentIndex(paginationDto.getCurrentPageIndex());
+        PaginationHandler<SentReportsDto> paginationHandler = new PaginationHandler<>();
         paginationHandler.setAllRowsAmount(allRows);
+        paginationHandler.setPageSize(paginationDto.getPageSize());
+        paginationHandler.setPageCurrentIndex(paginationDto.getCurrentPageIndex());
         paginationHandler.calculateOffset();
 
         final List<ReportApproval> paginationList = reportApprovalDao.getPaginationList(paginationHandler.getPageSize(), paginationHandler.getOffSet(), userId);
@@ -48,6 +50,7 @@ public class SentReportsService {
 //                    .collect(Collectors.toList());
 
         final List<SentReportsDto> collect = paginationList.stream()
+                .peek(reportApproval -> System.out.println(reportApproval.toString()))
                 .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
                 .collect(Collectors.toList());
         paginationHandler.setPageResult(collect);
