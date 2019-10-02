@@ -6,7 +6,6 @@ import ua.training.persistence.dao.IReportApprovalDao;
 import ua.training.persistence.dao.jdbc.JdbcTemplate;
 import ua.training.persistence.dao.mappers.impl.*;
 import ua.training.persistence.db.datasource.MysqlDataSource;
-import ua.training.persistence.entities.Report;
 import ua.training.persistence.entities.ReportApproval;
 import ua.training.util.exceptions.DataAccessException;
 import ua.training.util.exceptions.PersistenceException;
@@ -95,16 +94,20 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
 
         final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper();
 
-        final EntityMapper<Report> reportMapper = new ReportMapperImpl();
-        reportMapper.setIndexesInJoinQuery(new int[] {8, 9, 10, 11});
+        final ReportMapperImpl reportMapper = new ReportMapperImpl();
+        reportMapper.setIndexesInJoinQuery(new int[] {2, 3, 4, 5});
         reportApprovalMapper.setReportMapper(reportMapper);
 
+        final TaxTypeMapperIml taxTypeMapperIml = new TaxTypeMapperIml();
+        taxTypeMapperIml.setIndexesInJoinQuery(new int[] {6, 7});
+        reportMapper.setTaxTypeMapper(taxTypeMapperIml);
+
         final StateApprovalMapperImpl stateApprovalMapper = new StateApprovalMapperImpl();
-        stateApprovalMapper.setIndexesInJoinQuery(new int[] {12, 13});
+        stateApprovalMapper.setIndexesInJoinQuery(new int[] {8, 9});
         reportApprovalMapper.setStateApprovalMapper(stateApprovalMapper);
 
         final UserMapperImpl userMapper = new UserMapperImpl();
-        userMapper.setIndexesInJoinQuery(new int[] {14, 15, 16, 17, 18, 19, 20, 21});
+        userMapper.setIndexesInJoinQuery(new int[] {10, 11, 12, 13, 14, 15, 16, 17});
         reportApprovalMapper.setInspectorMapper(userMapper);
 
         return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);

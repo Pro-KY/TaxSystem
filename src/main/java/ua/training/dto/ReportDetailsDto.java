@@ -6,8 +6,7 @@ public class ReportDetailsDto {
     private Long reportApprovalId;
     private Report report;
     private String refusalCause;
-    private String approvalState;
-    private String state;
+    private Long approvalStateId;
     private String inspectorName;
     private Long inspectorId;
 
@@ -15,12 +14,10 @@ public class ReportDetailsDto {
         reportApprovalId = builder.reportApprovalId;
         report = builder.report;
         refusalCause = builder.refusalCause;
-        approvalState = builder.approvalState;
-        state = builder.state;
+        approvalStateId = builder.approvalStateId;
         inspectorName = builder.inspectorName;
         inspectorId = builder.inspectorId;
     }
-
 
     public Long getReportApprovalId() {
         return reportApprovalId;
@@ -34,12 +31,8 @@ public class ReportDetailsDto {
         return refusalCause;
     }
 
-    public String getApprovalState() {
-        return approvalState;
-    }
-
-    public String getState() {
-        return state;
+    public Long getApprovalStateId() {
+        return approvalStateId;
     }
 
     public String getInspectorName() {
@@ -50,18 +43,15 @@ public class ReportDetailsDto {
         return inspectorId;
     }
 
-
     public static final class Builder {
         private Long reportApprovalId;
         private Report report;
         private String refusalCause;
-        private String approvalState;
-        private String state;
+        private Long approvalStateId;
         private String inspectorName;
         private Long inspectorId;
 
-        public Builder() {
-        }
+        public Builder() { }
 
         public Builder reportApprovalId(Long val) {
             reportApprovalId = val;
@@ -78,13 +68,8 @@ public class ReportDetailsDto {
             return this;
         }
 
-        public Builder approvalState(String val) {
-            approvalState = val;
-            return this;
-        }
-
-        public Builder state(String val) {
-            state = val;
+        public Builder approvalStateId(Long val) {
+            approvalStateId = val;
             return this;
         }
 

@@ -3,7 +3,7 @@
 <%@ page import="ua.training.util.constans.Attributes" %>
 <%@ page import="ua.training.util.constans.Command" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<fmt:message var="not_signed_label" key="sent.reports.not.assigned.label" bundle="${sessionScope.rb}" scope="request"/>
+<fmt:message var="not_signed_label" key="sent.reports.not.assigned.text" bundle="${sessionScope.rb}" scope="request"/>
 
 <c:url scope="request" var="pageSizeThreeUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=3&command=${Command.SENT_REPORTS}"/>
 <c:url scope="request" var="changeIndexUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>
@@ -51,13 +51,14 @@
     </div>
 </div>
 
-<p>isLeftButtonDisabled : ${requestScope.paginationInfo.isLeftButtonDisabled}</p>
-<p>isRightButtonDisabled : ${requestScope.paginationInfo.isRightButtonDisabled}</p>
-<p>currentPageIndex ${sessionScope.currentPageIndex}</p>
-<p>allPagesAmount ${requestScope.paginationInfo.allPagesAmount}</p>
-
-<p>startPageIndex : ${requestScope.paginationInfo.startPageIndex}</p>
-<p>endPageIndex : ${requestScope.paginationInfo.endPageIndex}</p>
+<%--TESTING--%>
+<%--<p>isLeftButtonDisabled : ${requestScope.paginationInfo.isLeftButtonDisabled}</p>--%>
+<%--<p>isRightButtonDisabled : ${requestScope.paginationInfo.isRightButtonDisabled}</p>--%>
+<%--<p>currentPageIndex ${sessionScope.currentPageIndex}</p>--%>
+<%--<p>allPagesAmount ${requestScope.paginationInfo.allPagesAmount}</p>--%>
+<%--<p>startPageIndex : ${requestScope.paginationInfo.startPageIndex}</p>--%>
+<%--<p>endPageIndex : ${requestScope.paginationInfo.endPageIndex}</p>--%>
+<%--TESTING--%>
 
 
 <%--PAGINATION--%>

@@ -21,10 +21,12 @@ public class ReportDetailsCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         final String parameter = request.getParameter(Parameters.REPORT_APPROVAL_ID);
         log.info("id - {}", parameter);
-        final Long aLong = Long.valueOf(parameter);
-        final ReportDetailsDto reportDetails = ReportDetailsService.getInstance().getReportDetails(aLong);
+        final Long reportApprovalId = Long.valueOf(parameter);
+        final ReportDetailsDto reportDetails = ReportDetailsService.getInstance().getReportDetails(reportApprovalId);
 
         final String fragmentPath = getViewPath(FRAGMENT_PATH_REPORT_DETAILS);
+
+        request.setAttribute(Attributes.REPORT_DETAILS, reportDetails);
         request.setAttribute(Attributes.FRAGMENT_PATH, fragmentPath);
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }

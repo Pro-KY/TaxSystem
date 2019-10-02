@@ -8,8 +8,6 @@ public class TaxType implements Serializable {
     private Long id;
     private String type;
 
-    public TaxType() {}
-
     public TaxType(Long id) {
         this.id = id;
     }

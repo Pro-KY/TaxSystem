@@ -9,14 +9,6 @@ public class Report implements Serializable {
     private double sum;
     private int quarter;
 
-    public TaxType getTaxType() {
-        return taxType;
-    }
-
-    public void setTaxType(TaxType taxType) {
-        this.taxType = taxType;
-    }
-
     public Report() {}
 
     public Report(Long id) {
@@ -62,6 +54,14 @@ public class Report implements Serializable {
 
     public void setQuarter(int quarter) {
         this.quarter = quarter;
+    }
+
+    public TaxType getTaxType() {
+        return taxType;
+    }
+
+    public void setTaxType(TaxType taxType) {
+        this.taxType = taxType;
     }
 
     @Override

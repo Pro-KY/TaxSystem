@@ -3,49 +3,86 @@
 <%@ page import="ua.training.util.constans.Attributes" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<fmt:message var="notAssignedText" key="sent.reports.not.assigned.text" bundle="${rb}" scope="request"/>
+<fmt:message var="approved" key="report.details.report.state.approved" bundle="${rb}" scope="request"/>
+<fmt:message var="rejected" key="report.details.report.state.rejected" bundle="${rb}" scope="request"/>
+<fmt:message var="reqchanges" key="report.details.report.state.reqchanges" bundle="${rb}" scope="request"/>
+<fmt:message var="processing" key="report.details.report.state.processing" bundle="${rb}" scope="request"/>
+<fmt:message var="changed" key="report.details.report.state.changed" bundle="${rb}" scope="request"/>
 
 <div class="card border-0 mb-4">
     <div class="card-header">
-        Inspector
+        <fmt:message key="main.usertype.inspectorName" bundle="${rb}"/>
     </div>
     <div class="card-body">
-        <h5 class="card-title">Ivanov I.G</h5>
+        <h5 class="card-title">${reportDetails.inspectorName ne null ? reportDetails.inspectorName : notAssignedText}</h5>
     </div>
     <span class="d-flex justify-content-end mt-n4">
-        <a href="#" class="btn btn-warning">Change</a>
+        <a href="#" class="btn btn-warning"><fmt:message key="report.details.change.btn" bundle="${rb}"/></a>
     </span>
 </div>
 
+${reportDetails.approvalStateId eq null}
+
 <div class="card border-0">
     <div class="card-header">
-        Status
+        <fmt:message key="sent.reports.table.header.state" bundle="${rb}"/>
     </div>
     <div class="card-body">
-        <h5 class="card-title text-danger">Rejected</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <c:choose>
+            <c:when test = "${reportDetails.approvalStateId eq 1}">
+                <h5 class="card-title text-success">
+                    ${approved}
+                </h5>
+            </c:when>
+            <c:when test = "${reportDetails.approvalStateId eq 2}">
+                <h5 class="card-title text-danger">
+                    ${rejected}
+                </h5>
+            </c:when>
+            <c:when test = "${reportDetails.approvalStateId eq 3}">
+                <h5 class="card-title text-warning">
+                    ${reqchanges}
+                </h5>
+            </c:when>
+            <c:when test = "${reportDetails.approvalStateId eq 4}">
+                <h5 class="card-title text-primary">
+                    ${processing}
+                </h5>
+            </c:when>
+            <c:otherwise>
+                <h5 class="card-title text-info">
+                    ${changed}
+                </h5>
+            </c:otherwise>
+        </c:choose>
+
+        <c:if test="${reportDetails.approvalStateId eq 2}">
+            <p class="card-text">Refusal cause will be here</p>
+        </c:if>
     </div>
 </div>
 
 <div class="card border-0">
     <div class="card-header">
-        Report details
+        <fmt:message key="report.details.report.content" bundle="${rb}"/>
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-3 text-secondary">report ID</div>
-            <div class="col-md-3 text-secondary">Tax_type</div>
-            <div class="col-md-3 text-secondary">income</div>
-            <div class="col-md-3 text-secondary">quarter</div>
+            <div class="col-md-3 text-secondary"><fmt:message key="report.details.report.id" bundle="${rb}"/></div>
+            <div class="col-md-3 text-secondary"><fmt:message key="report.details.report.taxtype" bundle="${rb}"/></div>
+            <div class="col-md-3 text-secondary"><fmt:message key="report.details.report.income" bundle="${rb}"/></div>
+            <div class="col-md-3 text-secondary"><fmt:message key="report.details.report.quarter" bundle="${rb}"/></div>
         </div>
         <div class="row p-3">
-            <div class="col-md-3 text-dark"><h5>1</h5></div>
-            <div class="col-md-3 text-dark"><h5>some type</h5></div>
-            <div class="col-md-3 text-dark"><h5>1200</h5></div>
-            <div class="col-md-3 text-dark"><h5>1</h5></div>
+            <div class="col-md-3 text-dark"><h5>${reportDetails.report.id}</h5></div>
+            <div class="col-md-3 text-dark"><h5>${reportDetails.report.taxType.type}</h5></div>
+            <div class="col-md-3 text-dark"><h5>${reportDetails.report.sum}</h5></div>
+            <div class="col-md-3 text-dark"><h5>${reportDetails.report.quarter}</h5></div>
         </div>
 
         <span class="d-flex justify-content-end mr-n4 mt-n3">
-            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="#" class="btn btn-primary"><fmt:message key="report.details.report.btn" bundle="${rb}"/></a>
         </span>
     </div>
 </div>
