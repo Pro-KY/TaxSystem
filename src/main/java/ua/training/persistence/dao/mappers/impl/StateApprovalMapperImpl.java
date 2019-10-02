@@ -7,7 +7,7 @@ import ua.training.persistence.entities.StateApproval;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class StateApprovalMapperImpl extends EnitityMapper<StateApproval> {
+public class StateApprovalMapperImpl extends EntityMapper<StateApproval> {
     private static final Logger logger = LogManager.getLogger(StateApprovalMapperImpl.class);
     private static final String ID = "id";
     private static final String STATE = "state";

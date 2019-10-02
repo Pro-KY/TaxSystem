@@ -6,19 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-public class ChangeInspectorMapper extends EnitityMapper<ChangeInspector> {
+public class ChangeInspectorMapper extends EntityMapper<ChangeInspector> {
     private static final String ID = "id";
     private static final String TIMESTAMP = "timestamp";
     private static final String REPORT_APPROVAL_ID = "report_approval_id";
     private static final String PREVIOUS_INPSPECTOR_ID = "previous_inspector_id";
 
-    private EnitityMapper<User> userMapper;
-    private EnitityMapper<ReportApproval> reportApprovalMapper;
+    private EntityMapper<User> userMapper;
+    private EntityMapper<ReportApproval> reportApprovalMapper;
 
     private boolean mapPreviousInspector;
     private boolean mapReportApprovalMapper;
 
-    public ChangeInspectorMapper(ResultSet resultSet) {
+    public ChangeInspectorMapper() {
         columnsIndexes.put(ID, 1);
         columnsIndexes.put(TIMESTAMP, 2);
         columnsIndexes.put(REPORT_APPROVAL_ID, 3);
@@ -51,12 +51,12 @@ public class ChangeInspectorMapper extends EnitityMapper<ChangeInspector> {
         return mappedEntity;
     }
 
-    public void setUserMapper(EnitityMapper<User> userMapper) {
+    public void setUserMapper(EntityMapper<User> userMapper) {
         mapPreviousInspector = true;
         this.userMapper = userMapper;
     }
 
-    public void setReportApprovalMapper(EnitityMapper<ReportApproval> reportApprovalMapper) {
+    public void setReportApprovalMapper(EntityMapper<ReportApproval> reportApprovalMapper) {
         mapReportApprovalMapper = true;
         this.reportApprovalMapper = reportApprovalMapper;
     }

@@ -33,16 +33,16 @@
                 <tr>
                     <th scope="col"><fmt:message key="sent.reports.table.header.number" bundle="${rb}"/></th>
                     <th scope="col"><fmt:message key="sent.reports.table.header.state" bundle="${rb}"/></th>
-                    <th scope="col"><fmt:message key="sent.reports.table.header.inspector" bundle="${rb}"/></th>
+                    <th scope="col"><fmt:message key="sent.reports.table.header.inspectorName" bundle="${rb}"/></th>
                     <th scope="col"><fmt:message key="sent.reports.table.header.datetime" bundle="${rb}"/></th>
                 </tr>
             </thead>
             <tbody>
             <c:forEach var="report" items="${pageContext.request.getAttribute(Attributes.SENT_REPORTS_LIST)}" >
                 <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.REPORT_APPROVAL_ID}=${report.reportApprovalId}&command=${Command.REPORT_DETAILS}">
-                    <td>${report.reportNumber}</td>
+                    <td>${report.reportId}</td>
                     <td>${report.state}</td>
-                    <td>${report.inspector eq null ? report.inspector : not_signed_label}</td>
+                    <td>${report.inspectorName eq null ? report.inspectorName : not_signed_label}</td>
                     <td>${report.timestamp}</td>
                 </tr>
             </c:forEach>

@@ -7,7 +7,7 @@ import ua.training.persistence.entities.TaxType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class TaxTypeMapperIml extends EnitityMapper<TaxType> {
+public class TaxTypeMapperIml extends EntityMapper<TaxType> {
     private static final Logger LOGGER = LogManager.getLogger(TaxTypeMapperIml.class);
 
     private static final String ID = "id";

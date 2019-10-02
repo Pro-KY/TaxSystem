@@ -18,7 +18,7 @@
 
 <fmt:message var ="userTypeIndividualText" key="main.usertype.individual" bundle="${rb}"/>
 <fmt:message var ="userTypeLegalEntityText" key="main.usertype.legal" bundle="${rb}"/>
-<fmt:message var ="userTypeInspectorText" key="main.usertype.inspector" bundle="${rb}"/>
+<fmt:message var ="userTypeInspectorText" key="main.usertype.inspectorName" bundle="${rb}"/>
 
 <%--<c:set var="UserTypeIndividual" value="1" scope="session"/>--%>
 

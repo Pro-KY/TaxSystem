@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-public class ReportApprovalMapper extends EnitityMapper<ReportApproval> {
+public class ReportApprovalMapper extends EntityMapper<ReportApproval> {
     private static final String ID = "id";
     private static final String TIMESTAMP = "timestamp";
     private static final String REFUSAL_CAUSE = "refusal_cause";
@@ -18,10 +18,10 @@ public class ReportApprovalMapper extends EnitityMapper<ReportApproval> {
     private static final String INSPECTOR_ID = "inspector_id";
     private static final String USER_ID = "user_id";
 
-    private EnitityMapper<Report> reportMapper;
-    private EnitityMapper<StateApproval> stateApprovalMapper;
-    private EnitityMapper<User> userMapper;
-    private EnitityMapper<User> inspectorMapper;
+    private EntityMapper<Report> reportMapper;
+    private EntityMapper<StateApproval> stateApprovalMapper;
+    private EntityMapper<User> userMapper;
+    private EntityMapper<User> inspectorMapper;
 
     private boolean mapReport;
     private boolean mapStateApproval;
@@ -77,22 +77,22 @@ public class ReportApprovalMapper extends EnitityMapper<ReportApproval> {
         return mappedEntity;
     }
 
-    public void setStateApprovalMapper(EnitityMapper<StateApproval> stateApprovalMapper) {
+    public void setStateApprovalMapper(EntityMapper<StateApproval> stateApprovalMapper) {
         mapStateApproval = true;
         this.stateApprovalMapper = stateApprovalMapper;
     }
 
-    public void setReportMapper(EnitityMapper<Report> reportMapper) {
+    public void setReportMapper(EntityMapper<Report> reportMapper) {
         mapReport = true;
         this.reportMapper = reportMapper;
     }
 
-    public void setUserMapper(EnitityMapper<User> userMapper) {
+    public void setUserMapper(EntityMapper<User> userMapper) {
         mapUser = true;
         this.userMapper = userMapper;
     }
 
-    public void setInspectorMapper(EnitityMapper<User> inspectorMapper) {
+    public void setInspectorMapper(EntityMapper<User> inspectorMapper) {
         mapInspector = true;
         this.inspectorMapper = inspectorMapper;
     }

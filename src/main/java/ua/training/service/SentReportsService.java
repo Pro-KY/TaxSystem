@@ -31,7 +31,7 @@ public class SentReportsService {
     }
 
     // PaginationHandler as a return type
-//    public List<SentReportsDto> getSentReports(PaginationDto paginationDto) {
+//    public List<SentReportsDto> getReportDetails(PaginationDto paginationDto) {
     public PaginationHandler<SentReportsDto> getSentReports(PaginationDto paginationDto) {
         final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
         final long allRows = reportApprovalDao.countAllRows();

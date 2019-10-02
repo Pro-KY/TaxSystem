@@ -5,25 +5,25 @@ import java.sql.Timestamp;
 
 public class SentReportsDto implements Serializable {
     private Long reportApprovalId;
-    private Long reportNumber;
+    private Long reportId;
     private String state;
-    private String inspector;
+    private String inspectorName;
     private Timestamp timestamp;
 
-    public SentReportsDto(Long reportNumber, String state, String inspector, Timestamp timestamp, Long reportApprovalId) {
-        this.reportNumber = reportNumber;
+    public SentReportsDto(Long reportId, String state, String inspector, Timestamp timestamp, Long reportApprovalId) {
+        this.reportId = reportId;
         this.state = state;
-        this.inspector = inspector;
+        this.inspectorName = inspector;
         this.timestamp = timestamp;
         this.reportApprovalId = reportApprovalId;
     }
 
-    public Long getReportNumber() {
-        return reportNumber;
+    public Long getReportId() {
+        return reportId;
     }
 
-    public void setReportNumber(Long reportNumber) {
-        this.reportNumber = reportNumber;
+    public void setReportId(Long reportId) {
+        this.reportId = reportId;
     }
 
     public String getState() {
@@ -34,12 +34,12 @@ public class SentReportsDto implements Serializable {
         this.state = state;
     }
 
-    public String getInspector() {
-        return inspector;
+    public String getInspectorName() {
+        return inspectorName;
     }
 
-    public void setInspector(String inspector) {
-        this.inspector = inspector;
+    public void setInspectorName(String inspectorName) {
+        this.inspectorName = inspectorName;
     }
 
     public Timestamp getTimestamp() {

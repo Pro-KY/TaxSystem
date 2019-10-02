@@ -6,7 +6,7 @@ import ua.training.persistence.entities.UserType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserMapperImpl extends EnitityMapper<User> {
+public class UserMapperImpl extends EntityMapper<User> {
     private static String ID = "id";
     private static final String FIRST_NAME = "first_name";
     private static final String LAST_NAME = "last_name";
@@ -17,7 +17,7 @@ public class UserMapperImpl extends EnitityMapper<User> {
     private static final String USER_TYPE_ID = "user_type_id";
 
     private boolean mapUserType;
-    private EnitityMapper<UserType> userTypeMapper;
+    private EntityMapper<UserType> userTypeMapper;
 
     public UserMapperImpl() {
         columnsIndexes.put(ID, 1);
@@ -65,7 +65,7 @@ public class UserMapperImpl extends EnitityMapper<User> {
         return mappedEntity;
     }
 
-    public void setUserTypeMapper(EnitityMapper<UserType> userTypeMapper) {
+    public void setUserTypeMapper(EntityMapper<UserType> userTypeMapper) {
         mapUserType = true;
         this.userTypeMapper = userTypeMapper;
     }

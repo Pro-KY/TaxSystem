@@ -4,10 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.persistence.dao.IReportApprovalDao;
 import ua.training.persistence.dao.jdbc.JdbcTemplate;
-import ua.training.persistence.dao.mappers.impl.ReportApprovalMapper;
-import ua.training.persistence.dao.mappers.impl.StateApprovalMapperImpl;
-import ua.training.persistence.dao.mappers.impl.UserMapperImpl;
+import ua.training.persistence.dao.mappers.impl.*;
 import ua.training.persistence.db.datasource.MysqlDataSource;
+import ua.training.persistence.entities.Report;
 import ua.training.persistence.entities.ReportApproval;
 import ua.training.util.exceptions.DataAccessException;
 import ua.training.util.exceptions.PersistenceException;
@@ -41,7 +40,7 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     @Override
     public Long save(ReportApproval reportApproval) {
         String sql = SqlPropertiesHandler.getSqlQuery(SAVE_REPORT_APPROVAL);
-        final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
+//        final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
         Object[] params = {
                 reportApproval.getTimestamp(),
                 reportApproval.getStateApproval().getId(),
@@ -81,17 +80,33 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     }
 
     @Override
-    public Long update(ReportApproval bean) {
+    public Long update(ReportApproval entity) {
         return 0L;
     }
 
     @Override
-    public boolean delete(ReportApproval bean) {
+    public boolean delete(ReportApproval entity) {
         return false;
     }
 
     @Override
     public Optional<ReportApproval> findById(Long id) {
-        return Optional.empty();
+        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_BY_ID);
+
+        final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper();
+
+        final EntityMapper<Report> reportMapper = new ReportMapperImpl();
+        reportMapper.setIndexesInJoinQuery(new int[] {8, 9, 10, 11});
+        reportApprovalMapper.setReportMapper(reportMapper);
+
+        final StateApprovalMapperImpl stateApprovalMapper = new StateApprovalMapperImpl();
+        stateApprovalMapper.setIndexesInJoinQuery(new int[] {12, 13});
+        reportApprovalMapper.setStateApprovalMapper(stateApprovalMapper);
+
+        final UserMapperImpl userMapper = new UserMapperImpl();
+        userMapper.setIndexesInJoinQuery(new int[] {14, 15, 16, 17, 18, 19, 20, 21});
+        reportApprovalMapper.setInspectorMapper(userMapper);
+
+        return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
     }
 }

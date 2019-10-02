@@ -8,14 +8,14 @@ import ua.training.persistence.entities.TaxType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ReportMapperImpl extends EnitityMapper<Report> {
+public class ReportMapperImpl extends EntityMapper<Report> {
     private static final Logger logger = LogManager.getLogger(ReportMapperImpl.class);
     private static final String ID = "id";
     private static final String TAX_TYPE_ID = "tax_type_id";
     private static final String SUM = "sum";
     private static final String QUARTER = "quarter";
 
-    private EnitityMapper<TaxType> taxTypeMapper;
+    private EntityMapper<TaxType> taxTypeMapper;
     private boolean mapTaxType;
 
     public ReportMapperImpl() {
@@ -49,7 +49,7 @@ public class ReportMapperImpl extends EnitityMapper<Report> {
     }
 
 
-    void setTaxTypeMapper(EnitityMapper<TaxType> taxTypeMapper) {
+    void setTaxTypeMapper(EntityMapper<TaxType> taxTypeMapper) {
         this.taxTypeMapper = taxTypeMapper;
     }
 

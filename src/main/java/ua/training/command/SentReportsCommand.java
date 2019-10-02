@@ -7,7 +7,6 @@ import ua.training.dto.SentReportsDto;
 import ua.training.persistence.dao.jdbc.PaginationHandler;
 import ua.training.persistence.entities.User;
 import ua.training.service.SentReportsService;
-import ua.training.service.ServiceFactory;
 import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
@@ -25,7 +24,7 @@ public class SentReportsCommand implements ICommand {
     private SentReportsService sentReportsService;
 
     public SentReportsCommand() {
-        this.sentReportsService = ServiceFactory.getSentReportsService();
+        this.sentReportsService = SentReportsService.getInstance();
     }
 
     @Override

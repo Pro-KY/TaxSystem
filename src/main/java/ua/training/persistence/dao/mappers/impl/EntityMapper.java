@@ -6,12 +6,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class EnitityMapper<T> {
+public abstract class EntityMapper<T> {
     protected T mappedEntity;
     Map<String, Integer> columnsIndexes = new LinkedHashMap<>();
     public abstract T mapToEntity(ResultSet resultSet);
 
-    public EnitityMapper() { }
+    public EntityMapper() { }
 
     public void setIndexesInJoinQuery(int[] indexes) {
         final Set<String> keys = columnsIndexes.keySet();

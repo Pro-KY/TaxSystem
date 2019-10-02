@@ -11,8 +11,8 @@
 <fmt:message var="menu_user_1" key="main.menu.user.sentreports" bundle="${sessionScope.rb}"/>
 <fmt:message var="menu_user_2" key="main.menu.user.notifications" bundle="${sessionScope.rb}"/>
 
-<fmt:message var="menu_inpector_0" key="main.menu.inspector.processreports" bundle="${sessionScope.rb}"/>
-<fmt:message var="menu_inpector_1" key="main.menu.inspector.handledreports" bundle="${sessionScope.rb}"/>
+<fmt:message var="menu_inpector_0" key="main.menu.inspectorName.processreports" bundle="${sessionScope.rb}"/>
+<fmt:message var="menu_inpector_1" key="main.menu.inspectorName.handledreports" bundle="${sessionScope.rb}"/>
 <fmt:message var="menu_admin_0" key="main.menu.admin.usermanagement" bundle="${sessionScope.rb}"/>
 
 <div class="col-md-3">

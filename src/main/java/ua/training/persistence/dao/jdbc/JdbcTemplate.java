@@ -2,7 +2,7 @@ package ua.training.persistence.dao.jdbc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.persistence.dao.mappers.impl.EnitityMapper;
+import ua.training.persistence.dao.mappers.impl.EntityMapper;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 
 import java.sql.Connection;
@@ -30,14 +30,14 @@ public class JdbcTemplate {
         return instance;
     }
 
-    public <T> List<T> finAll(String sql, EnitityMapper<T> entityEnitityMapper, Object... parameters) {
+    public <T> List<T> finAll(String sql, EntityMapper<T> entityMapper, Object... parameters) {
         final Connection connection = mysqlDataSource.getConnection();
         List<T> resultList = new ArrayList<>();
 
         final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
         try(final ResultSet result = jdbcQuery1.select(parameters)) {
             while (result.next()) {
-                final T t = entityEnitityMapper.mapToEntity(result);
+                final T t = entityMapper.mapToEntity(result);
                 resultList.add(t);
             }
         } catch (SQLException e) {
@@ -50,7 +50,7 @@ public class JdbcTemplate {
         return resultList;
     }
 
-    public <T> Optional<T> findByQuery(String sql, EnitityMapper<T> entityMapper, Object... parameters) {
+    public <T> Optional<T> findByQuery(String sql, EntityMapper<T> entityMapper, Object... parameters) {
         final Connection connection = mysqlDataSource.getConnection();
         final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
         Optional<T> t;
@@ -100,7 +100,7 @@ public class JdbcTemplate {
         return isDeleted;
     }
 
-//    public <T> List<T> getPage(String sql, EnitityMapper<T> beanMapper, Object...params) {
+//    public <T> List<T> getPage(String sql, EntityMapper<T> beanMapper, Object...params) {
 //        return finAll(sql, beanMapper, params);
 //    }
 

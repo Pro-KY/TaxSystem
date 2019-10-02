@@ -1,5 +1,6 @@
 package ua.training.dto;
 
+import ua.training.persistence.entities.Report;
 import ua.training.persistence.entities.ReportApproval;
 import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.User;
@@ -16,6 +17,32 @@ public class DtoMapper {
             instance = new DtoMapper();
         }
         return instance;
+    }
+
+    public ReportDetailsDto mapToReportDetailsDto(ReportApproval reportApproval) {
+        Long reportApprovalId = reportApproval.getId();
+        Report report = reportApproval.getReport();
+        String refusalCause = reportApproval.getRefusalCause();
+        String approvalState = reportApproval.getStateApproval().getState();
+
+        String inspectorName = null;
+        Long inspectorId = null;
+
+        final User inspector = reportApproval.getInspector();
+
+        if(inspector != null) {
+            inspectorName = inspector.getFirstName() + " " + inspector.getLastName();
+            inspectorId = inspector.getId();
+        }
+
+        return new ReportDetailsDto.Builder()
+                .reportApprovalId(reportApprovalId)
+                .report(report)
+                .refusalCause(refusalCause)
+                .approvalState(approvalState)
+                .inspectorName(inspectorName)
+                .inspectorId(inspectorId)
+                .build();
     }
 
     public SentReportsDto mapToSentReportsDto(ReportApproval reportApproval) {

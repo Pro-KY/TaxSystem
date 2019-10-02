@@ -5,7 +5,7 @@ import ua.training.persistence.entities.UserType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserTypeMapperImpl extends EnitityMapper<UserType> {
+public class UserTypeMapperImpl extends EntityMapper<UserType> {
     private static final String ID = "id";
     private static final String TYPE = "type";
 
