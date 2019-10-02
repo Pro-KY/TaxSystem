@@ -1,5 +1,6 @@
 package ua.training.persistence.dao.mappers.impl;
 
+import ua.training.persistence.dao.mappers.EntityMapper;
 import ua.training.persistence.entities.Report;
 import ua.training.persistence.entities.ReportApproval;
 import ua.training.persistence.entities.StateApproval;
@@ -11,6 +12,7 @@ import java.sql.Timestamp;
 
 public class ReportApprovalMapper extends EntityMapper<ReportApproval> {
     private static final String ID = "id";
+    private static final String ID_IN_JOIN = "ra_id";
     private static final String TIMESTAMP = "timestamp";
     private static final String REFUSAL_CAUSE = "refusal_cause";
     private static final String REPORT_ID  = "report_id";
@@ -28,26 +30,22 @@ public class ReportApprovalMapper extends EntityMapper<ReportApproval> {
     private boolean mapUser;
     private boolean mapInspector;
 
-    public ReportApprovalMapper() {
-        columnsIndexes.put(ID, 1);
-        columnsIndexes.put(TIMESTAMP, 2);
-        columnsIndexes.put(REFUSAL_CAUSE, 3);
-        columnsIndexes.put(STATE_APPROVAL_ID, 4);
-        columnsIndexes.put(REPORT_ID, 5);
-        columnsIndexes.put(USER_ID, 6);
-        columnsIndexes.put(INSPECTOR_ID, 7);
+    public ReportApprovalMapper(boolean usedInJoin) {
+        String idColumn = usedInJoin ? ID_IN_JOIN : ID;
+        columnNames = new String[]{idColumn, TIMESTAMP, REFUSAL_CAUSE, REPORT_ID, STATE_APPROVAL_ID, INSPECTOR_ID, USER_ID};
     }
 
     @Override
     public ReportApproval mapToEntity(ResultSet resultSet) {
         try {
-                final long id = resultSet.getLong(columnsIndexes.get(ID));
-                final Timestamp timestamp = resultSet.getTimestamp(columnsIndexes.get(TIMESTAMP));
-                final String refusalCause = resultSet.getString(columnsIndexes.get(REFUSAL_CAUSE));
-                final Long stateApprovalId = resultSet.getLong(columnsIndexes.get(STATE_APPROVAL_ID));
-                final Long reportId = resultSet.getLong(columnsIndexes.get(REPORT_ID));
-                final Long userId = resultSet.getLong(columnsIndexes.get(USER_ID));
-                final Long inspectorId = resultSet.getLong(columnsIndexes.get(INSPECTOR_ID));
+
+                final long id = resultSet.getLong(columnNames[0]);
+                final Timestamp timestamp = resultSet.getTimestamp(columnNames[1]);
+                final String refusalCause = resultSet.getString(columnNames[2]);
+                final Long stateApprovalId = resultSet.getLong(columnNames[3]);
+                final Long reportId = resultSet.getLong(columnNames[4]);
+                final Long userId = resultSet.getLong(columnNames[5]);
+                final Long inspectorId = resultSet.getLong(columnNames[6]);
 
                 final Report report = new Report(reportId);
                 final StateApproval stateApproval = new StateApproval(stateApprovalId);
@@ -77,23 +75,23 @@ public class ReportApprovalMapper extends EntityMapper<ReportApproval> {
         return mappedEntity;
     }
 
-    public void setStateApprovalMapper(EntityMapper<StateApproval> stateApprovalMapper) {
-        mapStateApproval = true;
+    public void mapStateApprovalRelation(EntityMapper<StateApproval> stateApprovalMapper) {
         this.stateApprovalMapper = stateApprovalMapper;
+        mapStateApproval = true;
     }
 
-    public void setReportMapper(EntityMapper<Report> reportMapper) {
-        mapReport = true;
+    public void mapReportRelation(EntityMapper<Report> reportMapper) {
         this.reportMapper = reportMapper;
+        mapReport = true;
     }
 
-    public void setUserMapper(EntityMapper<User> userMapper) {
-        mapUser = true;
+    public void mapUserRelation(EntityMapper<User> userMapper) {
         this.userMapper = userMapper;
+        mapUser = true;
     }
 
-    public void setInspectorMapper(EntityMapper<User> inspectorMapper) {
-        mapInspector = true;
+    public void mapInspectorRelation(EntityMapper<User> inspectorMapper) {
         this.inspectorMapper = inspectorMapper;
+        mapInspector = true;
     }
 }

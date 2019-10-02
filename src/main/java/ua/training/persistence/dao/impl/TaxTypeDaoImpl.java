@@ -41,14 +41,14 @@ public class TaxTypeDaoImpl implements ITaxTypeDao {
         final String type = taxType.getType();
         final Object[] parameters = {type};
 
-        return jdbcTemplate.findByQuery(sql, new TaxTypeMapperIml(), parameters);
+        return jdbcTemplate.findByQuery(sql, new TaxTypeMapperIml(false), parameters);
     }
 
     @Override
     public List<TaxType> getAllTaxTypes() {
         final Object[] parameters = {};
         String sql = SqlPropertiesHandler.getSqlQuery(ALL_TAX_TYPES);
-        return jdbcTemplate.finAll(sql, new TaxTypeMapperIml(), parameters);
+        return jdbcTemplate.finAll(sql, new TaxTypeMapperIml(false), parameters);
     }
 
     @Override

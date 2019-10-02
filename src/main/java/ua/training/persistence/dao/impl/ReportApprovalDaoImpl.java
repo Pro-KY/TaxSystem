@@ -39,7 +39,7 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     @Override
     public Long save(ReportApproval reportApproval) {
         String sql = SqlPropertiesHandler.getSqlQuery(SAVE_REPORT_APPROVAL);
-//        final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
+//        final JdbcTemplate jdbcTemplate = JdbcTemplate.getIn/stance();
         Object[] params = {
                 reportApproval.getTimestamp(),
                 reportApproval.getStateApproval().getId(),
@@ -65,15 +65,9 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     public List<ReportApproval> getPaginationList(long pageSize, long offSet, long userId) { // pageSize, offset
         String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_PAGINATION);
 
-        final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper();
-
-        final StateApprovalMapperImpl stateApprovalMapper = new StateApprovalMapperImpl();
-        stateApprovalMapper.setIndexesInJoinQuery(new int[] {8, 9});
-        reportApprovalMapper.setStateApprovalMapper(stateApprovalMapper);
-
-        final UserMapperImpl userMapper = new UserMapperImpl();
-        userMapper.setIndexesInJoinQuery(new int[] {10, 11, 12, 13, 14, 15, 16, 17});
-        reportApprovalMapper.setInspectorMapper(userMapper);
+        final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);
+        reportApprovalMapper.mapStateApprovalRelation(new StateApprovalMapperImpl(true));
+        reportApprovalMapper.mapUserRelation(new UserMapperImpl(true, true));
 
         return jdbcTemplate.finAll(sql, reportApprovalMapper, userId, pageSize, offSet);
     }
@@ -92,23 +86,13 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     public Optional<ReportApproval> findById(Long id) {
         String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_BY_ID);
 
-        final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper();
+        final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);
 
-        final ReportMapperImpl reportMapper = new ReportMapperImpl();
-        reportMapper.setIndexesInJoinQuery(new int[] {2, 3, 4, 5});
-        reportApprovalMapper.setReportMapper(reportMapper);
-
-        final TaxTypeMapperIml taxTypeMapperIml = new TaxTypeMapperIml();
-        taxTypeMapperIml.setIndexesInJoinQuery(new int[] {6, 7});
-        reportMapper.setTaxTypeMapper(taxTypeMapperIml);
-
-        final StateApprovalMapperImpl stateApprovalMapper = new StateApprovalMapperImpl();
-        stateApprovalMapper.setIndexesInJoinQuery(new int[] {8, 9});
-        reportApprovalMapper.setStateApprovalMapper(stateApprovalMapper);
-
-        final UserMapperImpl userMapper = new UserMapperImpl();
-        userMapper.setIndexesInJoinQuery(new int[] {10, 11, 12, 13, 14, 15, 16, 17});
-        reportApprovalMapper.setInspectorMapper(userMapper);
+        final ReportMapperImpl reportMapper = new ReportMapperImpl(true);
+        reportMapper.mapTaxTypeRelation(new TaxTypeMapperIml(true));
+        reportApprovalMapper.mapReportRelation(reportMapper);
+        reportApprovalMapper.mapStateApprovalRelation(new StateApprovalMapperImpl(true));
+        reportApprovalMapper.mapInspectorRelation(new UserMapperImpl(true, true));
 
         return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
     }

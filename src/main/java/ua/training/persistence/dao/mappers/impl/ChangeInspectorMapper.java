@@ -1,5 +1,6 @@
 package ua.training.persistence.dao.mappers.impl;
 
+import ua.training.persistence.dao.mappers.EntityMapper;
 import ua.training.persistence.entities.*;
 
 import java.sql.ResultSet;
@@ -19,19 +20,16 @@ public class ChangeInspectorMapper extends EntityMapper<ChangeInspector> {
     private boolean mapReportApprovalMapper;
 
     public ChangeInspectorMapper() {
-        columnsIndexes.put(ID, 1);
-        columnsIndexes.put(TIMESTAMP, 2);
-        columnsIndexes.put(REPORT_APPROVAL_ID, 3);
-        columnsIndexes.put(PREVIOUS_INPSPECTOR_ID, 4);
+        columnNames = new String[]{ID, TIMESTAMP, REPORT_APPROVAL_ID, PREVIOUS_INPSPECTOR_ID};
     }
 
     @Override
     public ChangeInspector mapToEntity(ResultSet resultSet) {
         try {
-                final long id = resultSet.getLong(columnsIndexes.get(ID));
-                final Timestamp timestamp = resultSet.getTimestamp(columnsIndexes.get(TIMESTAMP));
-                final Long reportApprovalId = resultSet.getLong(columnsIndexes.get(REPORT_APPROVAL_ID));
-                final Long previousInspectorId = resultSet.getLong(columnsIndexes.get(PREVIOUS_INPSPECTOR_ID));
+                final long id = resultSet.getLong(columnNames[0]);
+                final Timestamp timestamp = resultSet.getTimestamp(columnNames[1]);
+                final Long reportApprovalId = resultSet.getLong(columnNames[2]);
+                final Long previousInspectorId = resultSet.getLong(columnNames[3]);
 
                 final ReportApproval reportApproval = new ReportApproval(reportApprovalId);
                 final User previousInspector = new User(reportApprovalId);

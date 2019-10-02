@@ -1,5 +1,6 @@
 package ua.training.persistence.dao.mappers.impl;
 
+import ua.training.persistence.dao.mappers.EntityMapper;
 import ua.training.persistence.entities.UserType;
 
 import java.sql.ResultSet;
@@ -7,22 +8,21 @@ import java.sql.SQLException;
 
 public class UserTypeMapperImpl extends EntityMapper<UserType> {
     private static final String ID = "id";
+    private static final String ID_IN_JOIN = "ut_id";
     private static final String TYPE = "type";
 
-    public UserTypeMapperImpl() {
-//        super(resultSet);
-        columnsIndexes.put(ID, 1);
-        columnsIndexes.put(TYPE, 2);
+
+    public UserTypeMapperImpl(boolean usedInJoin) {
+        String idColumn = usedInJoin ? ID_IN_JOIN : ID;
+        columnNames = new String[]{idColumn, TYPE};
     }
 
     @Override
     public UserType mapToEntity(ResultSet resultSet) {
         try {
-//            if (resultSet.next()) {
-                long id = resultSet.getLong(columnsIndexes.get(ID));
-                final String type = resultSet.getString(columnsIndexes.get(TYPE));
-               mappedEntity =  new UserType(id, type);
-//            }
+            long id = resultSet.getLong(columnNames[0]);
+            final String type = resultSet.getString(columnNames[1]);
+            mappedEntity =  new UserType(id, type);
         } catch (SQLException e) {
             System.out.println(e.getCause().toString());
         }
