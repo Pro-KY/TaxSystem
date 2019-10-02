@@ -3,6 +3,7 @@
 <%@ page import="ua.training.util.constans.Attributes" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
 <div class="card border-0 mb-4">
     <div class="card-header">
         Inspector
