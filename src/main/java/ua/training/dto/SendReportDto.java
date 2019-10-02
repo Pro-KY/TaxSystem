@@ -1,7 +1,7 @@
 package ua.training.dto;
 
 
-import ua.training.persistance.entities.User;
+import ua.training.persistence.entities.User;
 
 import java.io.Serializable;
 

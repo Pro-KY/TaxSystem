@@ -5,10 +5,10 @@ import org.apache.logging.log4j.Logger;
 import ua.training.dto.DtoMapper;
 import ua.training.dto.PaginationDto;
 import ua.training.dto.SentReportsDto;
-import ua.training.persistance.dao.IReportApprovalDao;
-import ua.training.persistance.dao.factory.MysqlDaoFactory;
-import ua.training.persistance.dao.jdbc.PaginationHandler;
-import ua.training.persistance.entities.ReportApproval;
+import ua.training.persistence.dao.IReportApprovalDao;
+import ua.training.persistence.dao.factory.MysqlDaoFactory;
+import ua.training.persistence.dao.jdbc.PaginationHandler;
+import ua.training.persistence.entities.ReportApproval;
 
 import java.util.List;
 import java.util.stream.Collectors;

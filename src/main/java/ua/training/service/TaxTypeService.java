@@ -1,8 +1,8 @@
 package ua.training.service;
 
-import ua.training.persistance.dao.ITaxTypeDao;
-import ua.training.persistance.dao.factory.MysqlDaoFactory;
-import ua.training.persistance.entities.TaxType;
+import ua.training.persistence.dao.ITaxTypeDao;
+import ua.training.persistence.dao.factory.MysqlDaoFactory;
+import ua.training.persistence.entities.TaxType;
 
 import java.util.List;
 

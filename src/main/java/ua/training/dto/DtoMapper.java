@@ -1,8 +1,8 @@
 package ua.training.dto;
 
-import ua.training.persistance.entities.ReportApproval;
-import ua.training.persistance.entities.StateApproval;
-import ua.training.persistance.entities.User;
+import ua.training.persistence.entities.ReportApproval;
+import ua.training.persistence.entities.StateApproval;
+import ua.training.persistence.entities.User;
 
 import java.sql.Timestamp;
 

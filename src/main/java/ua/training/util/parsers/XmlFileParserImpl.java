@@ -5,8 +5,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import ua.training.persistance.entities.Report;
-import ua.training.persistance.entities.TaxType;
+import ua.training.persistence.entities.Report;
+import ua.training.persistence.entities.TaxType;
 import ua.training.util.exceptions.FileParsingException;
 
 import javax.xml.parsers.DocumentBuilder;
