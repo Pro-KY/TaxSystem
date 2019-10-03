@@ -30,7 +30,7 @@ public class CommandFactory {
         commandHashMap.put(Command.GET_SIGN_IN_FRAGMENT, new SignInFragmentCommand());
         commandHashMap.put(Command.SENT_REPORTS, new SentReportsCommand());
         commandHashMap.put(Command.REPORT_DETAILS, new ReportDetailsCommand());
-        commandHashMap.put(Command.EDIT_REPORT, new EditReportCommand());
+        commandHashMap.put(Command.EDIT_REPORT, new GetReportCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

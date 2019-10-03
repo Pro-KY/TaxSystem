@@ -33,7 +33,7 @@ public class EditReportService {
                 .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(REPORT_ERROR_MSG), reportId));
     }
 
-    public Long updateEditedReport() {
+    public Long updateReport() {
 //        TODO: impl
         return null;
     }

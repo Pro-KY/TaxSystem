@@ -55,4 +55,13 @@ public class DtoMapper {
         final String  inspectorName = inspector.getFirstName() + " " +inspector.getLastName();
         return new SentReportsDto(reportId, state, inspectorName, timestamp, reportApprovalId);
     }
+
+    public ReportDto mapToReportDto(Report report) {
+        final long reportId = report.getId();
+        final double sum = report.getSum();
+        final long quarter = report.getQuarter();
+        final long taxTypeId = report.getTaxType().getId();
+
+        return new ReportDto(reportId, taxTypeId, quarter, sum);
+    }
 }

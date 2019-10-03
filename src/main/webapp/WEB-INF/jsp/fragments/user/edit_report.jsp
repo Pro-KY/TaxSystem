@@ -8,6 +8,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
+            <c:set var="taxTypeId" value="${reportDto.taxtypeId}" scope="request"/>
+            <c:set var="quarterId" value="${reportDto.quarterId}" scope="request"/>
             <!-- form -->
             <form>
                 <div id ="formWrapper">
@@ -15,10 +17,10 @@
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">${taxTypeLabel}</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="${Parameters.REPORT_TAXTYPE_ID}">
-                            <option value="1" selected>${singleTaxType}</option>
-                            <option value="2"> ${propertyTaxType}</option>
-                            <option value="3">${touristTaxType}</option>
-                            <option value="4">${parkingTaxType}</option>
+                            <option value="1" ${taxTypeId eq 1 ? 'selected' : ''}>${singleTaxType}</option>
+                            <option value="2" ${taxTypeId eq 2 ? 'selected' : ''}> ${propertyTaxType}</option>
+                            <option value="3" ${taxTypeId eq 3 ? 'selected' : ''}>${touristTaxType}</option>
+                            <option value="4" ${taxTypeId eq 4 ? 'selected' : ''}>${parkingTaxType}</option>
                         </select>
                     </div>
 
@@ -26,17 +28,17 @@
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">${quarterLabel}</label>
                         <select class="form-control" id="exampleFormControlSelect2" name="${Parameters.REPORT_QUARTER}">
-                            <option selected>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                            <option ${quarterId eq 1 ? 'selected' : ''}>1</option>
+                            <option ${quarterId eq 2 ? 'selected' : ''}>2</option>
+                            <option ${quarterId eq 3 ? 'selected' : ''}>3</option>
+                            <option ${quarterId eq 4 ? 'selected' : ''}>4</option>
                         </select>
                     </div>
 
                     <!-- sum-->
                     <div class="form-group">
                         <label for="exampleFormControlInput2">${sumLabel}</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="sum" name="${Parameters.REPORT_SUM}">
+                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="sum" value="${reportDto.income}" name="${Parameters.REPORT_SUM}">
                     </div>
                 </div>
 
@@ -48,6 +50,7 @@
         </div>
         <div class="col-md-8"></div>
     </div>
+    <!-- alert -->
     <c:if test="${pageContext.request.getAttribute('alert')}">
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             ${alertReportSendSuccess}
@@ -56,10 +59,7 @@
             </button>
         </div>
     </c:if>
+    <!-- alert -->
 </div>
-
-<script>
-    document.getElementById("filesInput").addEventListener('change', openFile, false);
-</script>
 
 

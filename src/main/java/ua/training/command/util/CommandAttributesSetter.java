@@ -2,6 +2,9 @@ package ua.training.command.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.training.dto.DtoMapper;
+import ua.training.dto.ReportDto;
+import ua.training.persistence.entities.Report;
 import ua.training.service.ReportDetailsService;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
@@ -24,7 +27,9 @@ public class CommandAttributesSetter {
         request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SEND_REPORT));
     }
 
-    public static void setEditReportCommandAttributes(HttpServletRequest request) {
+    public static void setEditReportCommandAttributes(HttpServletRequest request, Report report) {
+        final ReportDto reportDto = DtoMapper.getInstance().mapToReportDto(report);
+        request.setAttribute(REPORT_DTO, reportDto);
         request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_EDIT_REPORT));
     }
 }

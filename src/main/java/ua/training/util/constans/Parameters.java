@@ -4,6 +4,7 @@ public class Parameters {
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
 
+    public static final String REPORT_ID = "reportId";
     public static final String REPORT_FILE_CONTENT = "reportFileContent";
     public static final String REPORT_QUARTER = "reportQuarter";
     public static final String REPORT_TAXTYPE_ID = "reportTaxtype";
@@ -21,7 +22,6 @@ public class Parameters {
     public static final String NEXT_PAGE_CLICK = "nextPageClick";
     public static final String PREV_PAGE_CLICK = "prevPageClick";
     public static final String REPORT_APPROVAL_ID = "reportApprovalId";
-    public static final String REPORT_ID = "reportId";
     public static final String SIDEBAR_ACTIVE_INDEX = "sideBarIndex";
 
 }

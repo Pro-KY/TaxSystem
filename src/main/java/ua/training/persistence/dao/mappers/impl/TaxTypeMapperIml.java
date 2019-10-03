@@ -12,7 +12,7 @@ public class TaxTypeMapperIml extends EntityMapper<TaxType> {
     private static final Logger LOGGER = LogManager.getLogger(TaxTypeMapperIml.class);
 
     private static final String ID = "id";
-    private static final String ID_IN_JOIN = "ra_id";
+    private static final String ID_IN_JOIN = "tp_id";
     private static final String TYPE = "type";
 
     public TaxTypeMapperIml(boolean usedInJoin) {

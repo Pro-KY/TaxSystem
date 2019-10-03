@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ua.training.persistence.dao.IReportDao;
 import ua.training.persistence.dao.jdbc.JdbcTemplate;
 import ua.training.persistence.dao.mappers.impl.ReportMapperImpl;
+import ua.training.persistence.dao.mappers.impl.TaxTypeMapperIml;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.Report;
 import ua.training.util.exceptions.DataAccessException;
@@ -64,6 +65,9 @@ public class ReportDaoImpl implements IReportDao {
     @Override
     public Optional<Report> findById(Long id) {
         String sql = SqlPropertiesHandler.getSqlQuery(FIND_REPORT_BY_ID);
-        return jdbcTemplate.findByQuery(sql, new ReportMapperImpl(false), id);
+
+        final ReportMapperImpl reportMapper = new ReportMapperImpl(false);
+        reportMapper.mapTaxTypeRelation(new TaxTypeMapperIml(true));
+        return jdbcTemplate.findByQuery(sql, reportMapper, id);
     }
 }

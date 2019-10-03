@@ -21,4 +21,5 @@ public class Attributes {
     public static final String REPORT_DETAILS = "reportDetails";
 
     public static final String SIDEBAR_ACTIVE_INDEX = "sideBarIndex";
+    public static final String REPORT_DTO = "reportDto";
 }

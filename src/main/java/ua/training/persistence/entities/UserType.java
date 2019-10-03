@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class UserType implements Serializable {
 
-    private long id;
+    private Long id;
     private String role;
 
     public UserType(long id) {

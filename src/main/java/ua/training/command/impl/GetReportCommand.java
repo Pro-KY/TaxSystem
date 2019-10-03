@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_MAIN;
 
-public class EditReportCommand implements ICommand {
-    private static final Logger log = LogManager.getLogger(EditReportCommand.class);
+public class GetReportCommand implements ICommand {
+    private static final Logger log = LogManager.getLogger(GetReportCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
-        log.info("editReport command executed");
+        log.info("getReport command executed");
 
         final Long reportId = Long.valueOf(request.getParameter(Parameters.REPORT_ID));
         log.info("reportId: {}", reportId);
