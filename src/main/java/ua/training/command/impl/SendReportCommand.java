@@ -3,7 +3,7 @@ package ua.training.command.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.command.ICommand;
-import ua.training.command.util.CommandHelper;
+import ua.training.command.util.CommandAttributesSetter;
 import ua.training.command.util.CommandParamsExtractor;
 import ua.training.dto.SendReportDto;
 import ua.training.persistence.entities.User;
@@ -43,13 +43,13 @@ public class SendReportCommand implements ICommand {
                     final SendReportDto sendReportDto = reportOptional.get();
                     sendReportDto.setUser(user);
                     sendReportService.saveSentReport(sendReportDto);
-                    CommandHelper.setSendReportCommandAttributes(request);
+                    CommandAttributesSetter.setSendReportCommandAttributes(request);
                     page = ViewPropertiesHandler.getViewPath(PATH_MAIN);
                 } else {
-                    page = CommandHelper.getErrorPage(request, "err_msg");
+                    page = CommandAttributesSetter.getErrorPage(request, "err_msg");
                 }
             } catch (ServiceException e) {
-                page = CommandHelper.getErrorPage(request, "err_msg");
+                page = CommandAttributesSetter.getErrorPage(request, "err_msg");
             }
         } else {
             page = ViewPropertiesHandler.getViewPath(PATH_INDEX);

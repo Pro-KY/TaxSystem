@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import static ua.training.util.constans.Attributes.*;
 import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 
-public class CommandHelper {
+public class CommandAttributesSetter {
     private static final Logger log = LogManager.getLogger(ReportDetailsService.class);
 
     public static String getErrorPage(HttpServletRequest request, String msg) {

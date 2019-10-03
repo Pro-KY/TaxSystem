@@ -8,6 +8,7 @@ public class MessagePropertiesHandler {
     public static final String LOGIN_ERROR = "SIGNIN_ERROR";
     public static final String ERROR_PARSING = "PARSING_ERROR";
     public static final String REPORT_DETAILS_ERROR_MSG = "REPORT_DETAILS_ERROR_MSG";
+    public static final String REPORT_ERROR_MSG = "REPORT_ERROR_MSG";
 
     static {
         messageProperties = PropertyResourceBundle.getBundle("message");

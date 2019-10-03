@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.persistence.dao.IReportDao;
 import ua.training.persistence.dao.jdbc.JdbcTemplate;
+import ua.training.persistence.dao.mappers.impl.ReportMapperImpl;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.Report;
 import ua.training.util.exceptions.DataAccessException;
@@ -12,6 +13,7 @@ import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.Optional;
 
+import static ua.training.util.handler.properties.SqlPropertiesHandler.FIND_REPORT_BY_ID;
 import static ua.training.util.handler.properties.SqlPropertiesHandler.SAVE_REPORT;
 
 public class ReportDaoImpl implements IReportDao {
@@ -61,6 +63,7 @@ public class ReportDaoImpl implements IReportDao {
 
     @Override
     public Optional<Report> findById(Long id) {
-        return Optional.empty();
+        String sql = SqlPropertiesHandler.getSqlQuery(FIND_REPORT_BY_ID);
+        return jdbcTemplate.findByQuery(sql, new ReportMapperImpl(false), id);
     }
 }

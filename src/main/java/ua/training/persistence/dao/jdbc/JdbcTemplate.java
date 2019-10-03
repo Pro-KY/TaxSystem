@@ -14,7 +14,7 @@ import java.util.Optional;
 
 //TODO: refactor as simple object no singleton?
 public class JdbcTemplate {
-    private static final Logger LOGGER = LogManager.getLogger(JdbcTemplate.class);
+    private static final Logger log = LogManager.getLogger(JdbcTemplate.class);
     private static JdbcTemplate instance;
     private MysqlDataSource mysqlDataSource;
     public void setDataSource(MysqlDataSource mysqlDataSource) {
@@ -99,10 +99,6 @@ public class JdbcTemplate {
         mysqlDataSource.releaseResources(connection, jdbcQuery.getPs());
         return isDeleted;
     }
-
-//    public <T> List<T> getPage(String sql, EntityMapper<T> beanMapper, Object...params) {
-//        return finAll(sql, beanMapper, params);
-//    }
 
     private void closeResultSet(ResultSet resultSet) {
         try {
