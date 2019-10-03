@@ -21,5 +21,6 @@ public class Parameters {
     public static final String NEXT_PAGE_CLICK = "nextPageClick";
     public static final String PREV_PAGE_CLICK = "prevPageClick";
     public static final String REPORT_APPROVAL_ID = "reportApprovalId";
+    public static final String SIDEBAR_ACTIVE_INDEX = "sideBarIndex";
 
 }

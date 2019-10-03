@@ -66,3 +66,15 @@ $(document).ready(function($) {
         window.document.location = $(this).data("href");
     });
 });
+
+$(function(){
+    $('.list-group a').click(function(e) {
+        console.log("ready");
+        // e.preventDefault();
+
+        $that = $(this);
+
+        $that.parent().find('a').removeClass('active');
+        $that.addClass('active');
+    });
+});

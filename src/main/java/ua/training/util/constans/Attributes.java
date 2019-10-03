@@ -19,4 +19,6 @@ public class Attributes {
     public static final String END_PAGE_INDEX = "endPageIndex";
     public static final String PAGINATION_INFO = "paginationInfo";
     public static final String REPORT_DETAILS = "reportDetails";
+
+    public static final String SIDEBAR_ACTIVE_INDEX = "sideBarIndex";
 }

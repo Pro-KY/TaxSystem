@@ -6,10 +6,6 @@
     color: #d3d9df;
 }
 
-/*#sendReportNavLink {*/
-/*    color: #0133b4;*/
-/*}*/
-
 #formWrapper {
     display: block;
 }
@@ -37,3 +33,7 @@
 .title {
      color: #acb2b8;
  }
+
+/*.active {*/
+/*    background: #f00;*/
+/*}*/

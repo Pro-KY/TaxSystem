@@ -20,7 +20,7 @@ import static ua.training.util.handler.properties.ViewPropertiesHandler.FRAGMENT
 import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_MAIN;
 
 public class SentReportsCommand implements ICommand {
-    private static final Logger logger = LogManager.getLogger(SentReportsCommand.class);
+    private static final Logger log = LogManager.getLogger(SentReportsCommand.class);
     private SentReportsService sentReportsService;
 
     public SentReportsCommand() {
@@ -29,7 +29,7 @@ public class SentReportsCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        logger.info("in SentReportsCommand");
+        log.info("in SentReportsCommand");
         request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
         //TODO: map via json mapper
         final HttpSession session = request.getSession();
@@ -53,13 +53,15 @@ public class SentReportsCommand implements ICommand {
         final PaginationHandler<SentReportsDto> paginationHandler = sentReportsService.getSentReports(paginationDto);
         final List<SentReportsDto> sentReports = paginationHandler.getPageResult();
         paginationHandler.setPaginationInfo(paginationDto);
-        logger.info("pagination dto {}", paginationDto);
+        log.info("pagination dto {}", paginationDto);
 
         session.setAttribute(Attributes.CURRENT_PAGE_INDEX, paginationDto.getCurrentPageIndex());
         session.setAttribute(Attributes.START_PAGE_INDEX, paginationDto.getStartPageIndex());
         session.setAttribute(Attributes.END_PAGE_INDEX, paginationDto.getEndPageIndex());
         request.setAttribute(SENT_REPORTS_LIST, sentReports);
         request.setAttribute(Attributes.PAGINATION_INFO, paginationDto);
+        log.info("sidebarIndex {}", request.getParameter("sidebarIndex"));
+        request.setAttribute(Attributes.SIDEBAR_ACTIVE_INDEX, request.getParameter(Parameters.SIDEBAR_ACTIVE_INDEX));
 
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }
