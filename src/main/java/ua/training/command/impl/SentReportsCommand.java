@@ -1,7 +1,8 @@
-package ua.training.command;
+package ua.training.command.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.training.command.ICommand;
 import ua.training.dto.PaginationDto;
 import ua.training.dto.SentReportsDto;
 import ua.training.persistence.dao.jdbc.PaginationHandler;

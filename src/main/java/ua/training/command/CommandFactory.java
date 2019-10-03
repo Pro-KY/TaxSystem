@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ua.training.command.fragments.ReportFragmentCommand;
 import ua.training.command.fragments.SignInFragmentCommand;
 import ua.training.command.fragments.SignUpFragmentCommand;
+import ua.training.command.impl.*;
 import ua.training.util.constans.Command;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,7 @@ public class CommandFactory {
         commandHashMap.put(Command.GET_SIGN_IN_FRAGMENT, new SignInFragmentCommand());
         commandHashMap.put(Command.SENT_REPORTS, new SentReportsCommand());
         commandHashMap.put(Command.REPORT_DETAILS, new ReportDetailsCommand());
+        commandHashMap.put(Command.EDIT_REPORT, new EditReportCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

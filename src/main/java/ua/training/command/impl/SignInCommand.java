@@ -1,5 +1,6 @@
-package ua.training.command;
+package ua.training.command.impl;
 
+import ua.training.command.ICommand;
 import ua.training.persistence.entities.User;
 import ua.training.service.SignInService;
 import ua.training.util.constans.Attributes;
@@ -17,7 +18,7 @@ import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 public class SignInCommand implements ICommand {
     private SignInService signInService;
 
-    SignInCommand() {
+    public SignInCommand() {
         this.signInService = new SignInService();
     }
 

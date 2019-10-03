@@ -1,7 +1,8 @@
-package ua.training.command;
+package ua.training.command.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.training.command.ICommand;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;

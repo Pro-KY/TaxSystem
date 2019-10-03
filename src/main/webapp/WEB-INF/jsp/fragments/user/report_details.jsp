@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="ua.training.util.constans.Parameters" %>
 <%@ page import="ua.training.util.constans.Attributes" %>
+<%@ page import="ua.training.util.constans.Command" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <fmt:message var="notAssignedText" key="sent.reports.not.assigned.text" bundle="${rb}" scope="request"/>
@@ -121,7 +122,9 @@
         <%--EDIT_REPORT_BTN--%>
         <c:if test="${reportDetails.approvalStateId eq 3}">
             <span class="d-flex justify-content-end mr-n4 mt-n3">
-                <a href="#" class="btn btn-primary"><fmt:message key="report.details.report.btn" bundle="${rb}"/></a>
+                <a href="taxsystem/?command=${Command.EDIT_REPORT}" class="btn btn-primary">
+                    <fmt:message key="report.details.report.btn" bundle="${rb}"/>
+                </a>
             </span>
         </c:if>
         <%--EDIT_REPORT_BTN--%>

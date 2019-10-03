@@ -1,5 +1,6 @@
-package ua.training.command;
+package ua.training.command.impl;
 
+import ua.training.command.ICommand;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
