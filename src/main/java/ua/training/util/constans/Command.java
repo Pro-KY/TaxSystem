@@ -13,6 +13,7 @@ public class Command {
     public static final String SENT_REPORTS = "sentReports";
     public static final String HANDLED_REPORTS = "handledReports";
     public static final String REPORT_DETAILS = "reportDetails";
+    public static final String GET_REPORT = "getReport";
     public static final String EDIT_REPORT = "editReport";
 
 }

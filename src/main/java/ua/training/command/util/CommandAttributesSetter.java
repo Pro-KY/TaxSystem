@@ -27,9 +27,15 @@ public class CommandAttributesSetter {
         request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SEND_REPORT));
     }
 
-    public static void setEditReportCommandAttributes(HttpServletRequest request, Report report) {
+    public static void setGetReportCommandAttributes(HttpServletRequest request, Report report, Long reportApprovalId) {
         final ReportDto reportDto = DtoMapper.getInstance().mapToReportDto(report);
+        reportDto.setReportApprovalId(reportApprovalId);
         request.setAttribute(REPORT_DTO, reportDto);
+        request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_EDIT_REPORT));
+    }
+
+    public static void setEditReportCommandAttributes(HttpServletRequest request) {
+        request.setAttribute(ALERT_SUCCESS, "true");
         request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_EDIT_REPORT));
     }
 }

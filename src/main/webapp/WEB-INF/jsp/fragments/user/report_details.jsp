@@ -11,11 +11,11 @@
 <fmt:message var="processing" key="report.details.report.state.processing" bundle="${rb}" scope="request"/>
 <fmt:message var="changed" key="report.details.report.state.changed" bundle="${rb}" scope="request"/>
 
-<fmt:message var="notAssignedText" key="sent.reports.not.assigned.text" bundle="${rb}" scope="request"/>
-<fmt:message var="approved" key="report.details.report.state.approved" bundle="${rb}" scope="request"/>
-<fmt:message var="rejected" key="report.details.report.state.rejected" bundle="${rb}" scope="request"/>
-<fmt:message var="reqchanges" key="report.details.report.state.reqchanges" bundle="${rb}" scope="request"/>
-<fmt:message var="processing" key="report.details.report.state.processing" bundle="${rb}" scope="request"/>
+<%--<fmt:message var="notAssignedText" key="sent.reports.not.assigned.text" bundle="${rb}" scope="request"/>--%>
+<%--<fmt:message var="approved" key="report.details.report.state.approved" bundle="${rb}" scope="request"/>--%>
+<%--<fmt:message var="rejected" key="report.details.report.state.rejected" bundle="${rb}" scope="request"/>--%>
+<%--<fmt:message var="reqchanges" key="report.details.report.state.reqchanges" bundle="${rb}" scope="request"/>--%>
+<%--<fmt:message var="processing" key="report.details.report.state.processing" bundle="${rb}" scope="request"/>--%>
 
 <div class="card border-0 mb-4">
     <div class="card-header">
@@ -122,7 +122,7 @@
         <%--EDIT_REPORT_BTN--%>
         <c:if test="${reportDetails.approvalStateId eq 3}">
             <span class="d-flex justify-content-end mr-n4 mt-n3">
-                <a href="taxsystem/?command=${Command.EDIT_REPORT}&${Parameters.REPORT_ID}=${reportDetails.report.id}" class="btn btn-primary">
+                <a href="taxsystem/?command=${Command.GET_REPORT}&${Parameters.REPORT_ID}=${reportDetails.report.id}&${Parameters.REPORT_APPROVAL_ID}=${reportDetails.reportApprovalId}" class="btn btn-primary">
                     <fmt:message key="report.details.report.btn" bundle="${rb}"/>
                 </a>
             </span>

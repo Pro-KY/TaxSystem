@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="ua.training.util.constans.Parameters" %>
 <%@ page import="ua.training.util.constans.Attributes" %>
+<%@ page import="ua.training.util.constans.Command" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ include file="/WEB-INF/jsp/fmt_messages.jsp"%>
@@ -8,11 +9,18 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-            <c:set var="taxTypeId" value="${reportDto.taxtypeId}" scope="request"/>
+            <c:set var="taxTypeId" value="${reportDto.taxTypeId}" scope="request"/>
             <c:set var="quarterId" value="${reportDto.quarterId}" scope="request"/>
             <!-- form -->
+
+            <div class="mb-2">
+                <span class="text-secondary">${reportIdLabel}</span>
+                <span>${reportDto.reportId}</span>
+            </div>
+            ${reportDto.reportApprovalId}
             <form>
                 <div id ="formWrapper">
+                    <!-- id -->
                     <!-- type -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">${taxTypeLabel}</label>
@@ -42,24 +50,15 @@
                     </div>
                 </div>
 
-                <input type="hidden" name="command" value="sendReport">
-                <input type="hidden" id="fileContentInput" name="${Parameters.REPORT_FILE_CONTENT}">
+                <input type="hidden" name="${Parameters.REPORT_APPROVAL_ID}" value="${reportDto.reportApprovalId}">
+                <input type="hidden" name="${Parameters.REPORT_ID}" value="${reportDto.reportId}">
+                <input type="hidden" name="command" value="${Command.EDIT_REPORT}">
                 <button type="submit" class="btn btn-primary">${submitButton}</button>
             </form>
             <!-- form -->
         </div>
         <div class="col-md-8"></div>
     </div>
-    <!-- alert -->
-    <c:if test="${pageContext.request.getAttribute('alert')}">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            ${alertReportSendSuccess}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </c:if>
-    <!-- alert -->
 </div>
 
 

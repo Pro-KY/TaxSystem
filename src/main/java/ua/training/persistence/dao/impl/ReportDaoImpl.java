@@ -14,8 +14,7 @@ import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.Optional;
 
-import static ua.training.util.handler.properties.SqlPropertiesHandler.FIND_REPORT_BY_ID;
-import static ua.training.util.handler.properties.SqlPropertiesHandler.SAVE_REPORT;
+import static ua.training.util.handler.properties.SqlPropertiesHandler.*;
 
 public class ReportDaoImpl implements IReportDao {
     private static ReportDaoImpl instance;
@@ -38,27 +37,33 @@ public class ReportDaoImpl implements IReportDao {
     }
 
     @Override
-    public Long save(Report report) {
+    public Long save(Report entity) {
         String sql = SqlPropertiesHandler.getSqlQuery(SAVE_REPORT);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
-        Object[] params = {report.getTaxType().getId(), report.getSum(), report.getQuarter()};
 
         try {
-            return jdbcTemplate.saveOrUpdate(sql, params);
+            return jdbcTemplate.saveOrUpdate(sql, entity.getTaxType().getId(), entity.getSum(), entity.getQuarter());
         } catch (DataAccessException e) {
-            logger.debug("exp here _ 1");
-            e.printStackTrace();
+            logger.debug(e.getMessage(), e.getCause());
             throw new PersistenceException(e.getMessage(), e);
         }
     }
 
     @Override
-    public Long update(Report bean) {
-        return 0L;
+    public Long update(Report entity) {
+        String sql = SqlPropertiesHandler.getSqlQuery(UPDATE_REPORT_BY_ID);
+        final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
+
+        try {
+            return jdbcTemplate.saveOrUpdate(sql, entity.getTaxType().getId(), entity.getSum(), entity.getQuarter(), entity.getId());
+        } catch (DataAccessException e) {
+            logger.debug(e.getMessage(), e.getCause());
+            throw new PersistenceException(e.getMessage(), e);
+        }
     }
 
     @Override
-    public boolean delete(Report bean) {
+    public boolean delete(Report entity) {
         return false;
     }
 

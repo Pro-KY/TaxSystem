@@ -15,8 +15,8 @@ public class StateApprovalMapperImpl extends EntityMapper<StateApproval> {
     private static final String STATE = "state";
 
 
-    public StateApprovalMapperImpl(boolean usedInJoin) {
-        String idColumn = usedInJoin ? ID_IN_JOIN : ID;
+    public StateApprovalMapperImpl(boolean useInJoin) {
+        String idColumn = useInJoin ? ID_IN_JOIN : ID;
         columnNames = new String[]{idColumn, STATE};
     }
 

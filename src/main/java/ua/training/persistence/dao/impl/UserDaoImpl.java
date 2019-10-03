@@ -47,9 +47,9 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
-    public Long save(User user) {
-        Object[] params = {user.getFirstName(), user.getLastName(), user.getOrganization(),
-                user.getEmail(), user.getPassword(), user.getAddress(), user.getUserType().getId()};
+    public Long save(User entity) {
+        Object[] params = {entity.getFirstName(), entity.getLastName(), entity.getOrganization(),
+                entity.getEmail(), entity.getPassword(), entity.getAddress(), entity.getUserType().getId()};
 
         String sql = SqlPropertiesHandler.getSqlQuery(SAVE_USER);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
@@ -57,18 +57,18 @@ public class UserDaoImpl implements IUserDao {
         try {
             return jdbcTemplate.saveOrUpdate(sql, params);
         } catch (DataAccessException e) {
-            logger.debug("exp here _ 1");
-            throw new PersistenceException("", e);
+            logger.debug(e.getMessage(), e.getCause());
+            throw new PersistenceException(e.getMessage(), e);
         }
     }
 
     @Override
-    public Long update(User bean) {
+    public Long update(User entity) {
         return 0L;
     }
 
     @Override
-    public boolean delete(User bean) {
+    public boolean delete(User entity) {
         return false;
     }
 

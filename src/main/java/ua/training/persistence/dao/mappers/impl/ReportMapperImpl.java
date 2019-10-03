@@ -20,8 +20,8 @@ public class ReportMapperImpl extends EntityMapper<Report> {
     private EntityMapper<TaxType> taxTypeMapper;
     private boolean mapTaxType;
 
-    public ReportMapperImpl(boolean usedInJoin) {
-        String idColumn = usedInJoin ? ID_IN_JOIN : ID;
+    public ReportMapperImpl(boolean useInJoin) {
+        String idColumn = useInJoin ? ID_IN_JOIN : ID;
         columnNames = new String[]{idColumn, TAX_TYPE_ID, SUM, QUARTER};
     }
 

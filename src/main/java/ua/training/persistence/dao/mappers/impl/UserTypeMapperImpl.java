@@ -12,8 +12,8 @@ public class UserTypeMapperImpl extends EntityMapper<UserType> {
     private static final String TYPE = "type";
 
 
-    public UserTypeMapperImpl(boolean usedInJoin) {
-        String idColumn = usedInJoin ? ID_IN_JOIN : ID;
+    public UserTypeMapperImpl(boolean useInJoin) {
+        String idColumn = useInJoin ? ID_IN_JOIN : ID;
         columnNames = new String[]{idColumn, TYPE};
     }
 

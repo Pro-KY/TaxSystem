@@ -22,15 +22,15 @@ public class UserMapperImpl extends EntityMapper<User> {
     private boolean mapUserType;
     private EntityMapper<UserType> userTypeEntityMapper;
 
-//    public UserMapperImpl(boolean usedInJoin) {
-//        String idColumn = usedInJoin ? USER_ALIAS_IN_JOIN : ID;
+//    public UserMapperImpl(boolean useInJoin) {
+//        String idColumn = useInJoin ? USER_ALIAS_IN_JOIN : ID;
 //        columnNames = new String[]{idColumn, FIRST_NAME, LAST_NAME, ORGANIZATION, EMAIL, PASSWORD, ADDRESS, USER_TYPE_ID};
 //    }
 
-    public UserMapperImpl(boolean usedInJoin, boolean isInspector) {
+    public UserMapperImpl(boolean useInJoin, boolean isInspector) {
         String idColumn;
 
-       if(usedInJoin) {
+       if(useInJoin) {
            idColumn = isInspector ? INSPECTOR_ALIAS_IN_JOIN : USER_ALIAS_IN_JOIN;
        } else {
            idColumn = ID;

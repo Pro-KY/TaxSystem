@@ -6,10 +6,10 @@ public class Parameters {
 
     public static final String REPORT_ID = "reportId";
     public static final String REPORT_FILE_CONTENT = "reportFileContent";
-    public static final String REPORT_QUARTER = "reportQuarter";
-    public static final String REPORT_TAXTYPE_ID = "reportTaxtype";
+    public static final String REPORT_QUARTER = "quarterId";
+    public static final String REPORT_TAXTYPE_ID = "taxTypeId";
     public static final String REPORT_CONTENT_TYPE = "reportContentType";
-    public static final String REPORT_SUM = "reportSum";
+    public static final String REPORT_SUM = "income";
 
     public static final String USER_TYPE = "userTypeId";
     public static final String USER_FIRST_NAME = "firstName";

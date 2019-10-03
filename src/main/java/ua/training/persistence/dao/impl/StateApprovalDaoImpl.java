@@ -36,17 +36,17 @@ public class StateApprovalDaoImpl implements IStateApprovalDao {
     }
 
     @Override
-    public Long save(StateApproval bean) {
+    public Long save(StateApproval entity) {
         return 0L;
     }
 
     @Override
-    public Long update(StateApproval bean) {
+    public Long update(StateApproval entity) {
         return 0L;
     }
 
     @Override
-    public boolean delete(StateApproval bean) {
+    public boolean delete(StateApproval entity) {
         return false;
     }
 

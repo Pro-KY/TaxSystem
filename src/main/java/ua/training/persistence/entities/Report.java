@@ -1,6 +1,4 @@
 package ua.training.persistence.entities;
-
-
 import java.io.Serializable;
 
 public class Report implements Serializable {
@@ -48,7 +46,7 @@ public class Report implements Serializable {
         this.sum = sum;
     }
 
-    public long getQuarter() {
+    public int getQuarter() {
         return quarter;
     }
 

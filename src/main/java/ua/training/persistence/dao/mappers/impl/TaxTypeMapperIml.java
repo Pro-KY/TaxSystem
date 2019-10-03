@@ -15,8 +15,8 @@ public class TaxTypeMapperIml extends EntityMapper<TaxType> {
     private static final String ID_IN_JOIN = "tp_id";
     private static final String TYPE = "type";
 
-    public TaxTypeMapperIml(boolean usedInJoin) {
-        String idColumn = usedInJoin ? ID_IN_JOIN : ID;
+    public TaxTypeMapperIml(boolean useInJoin) {
+        String idColumn = useInJoin ? ID_IN_JOIN : ID;
         columnNames = new String[]{idColumn, TYPE};
     }
 

@@ -14,18 +14,18 @@ public class UserTypeDaoImpl implements IUserTypeDao {
     }
 
     @Override
-    public Long save(UserType bean) {
+    public Long save(UserType entity) {
         // stub
         return 1L;
     }
 
     @Override
-    public Long update(UserType bean) {
+    public Long update(UserType entity) {
         return 1L;
     }
 
     @Override
-    public boolean delete(UserType bean) {
+    public boolean delete(UserType entity) {
         return false;
     }
 

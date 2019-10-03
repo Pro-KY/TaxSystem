@@ -9,7 +9,7 @@ import ua.training.persistence.entities.ReportApproval;
 import ua.training.util.exceptions.ServiceException;
 import ua.training.util.handler.properties.MessagePropertiesHandler;
 
-import static ua.training.util.handler.properties.MessagePropertiesHandler.REPORT_DETAILS_ERROR_MSG;
+import static ua.training.util.handler.properties.MessagePropertiesHandler.REPORT_DETAILS_ERROR;
 
 public class ReportDetailsService {
     private static final Logger log = LogManager.getLogger(ReportDetailsService.class);
@@ -31,8 +31,8 @@ public class ReportDetailsService {
     public ReportDetailsDto getReportDetails(Long reportApprovalId) {
         final ReportApproval reportApproval = daoFactory
                 .getReportApprovalDao()
-                .findById(reportApprovalId)
-                .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(REPORT_DETAILS_ERROR_MSG)));
+                .findByIdJoinReportJoinInspector(reportApprovalId)
+                .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(REPORT_DETAILS_ERROR)));
 
         return DtoMapper.getInstance().mapToReportDetailsDto(reportApproval);
     }

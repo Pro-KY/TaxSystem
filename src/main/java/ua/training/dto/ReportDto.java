@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 public class ReportDto implements Serializable {
     private long reportId;
-    private long taxtypeId;
-    private long quarterId;
+    private long taxTypeId;
+    private int quarterId;
     private double income;
+    private long reportApprovalId;
 
-    public ReportDto(long reportId, long reportTaxtypeId, long quarterId, double income) {
+    public ReportDto(long reportId, long reportTaxtypeId, int quarterId, double income) {
         this.reportId = reportId;
-        this.taxtypeId = reportTaxtypeId;
+        this.taxTypeId = reportTaxtypeId;
         this.quarterId = quarterId;
         this.income = income;
     }
@@ -23,19 +24,19 @@ public class ReportDto implements Serializable {
         this.reportId = reportId;
     }
 
-    public long getTaxtypeId() {
-        return taxtypeId;
+    public long getTaxTypeId() {
+        return taxTypeId;
     }
 
-    public void setTaxtypeId(long taxtypeId) {
-        this.taxtypeId = taxtypeId;
+    public void setTaxTypeId(long taxTypeId) {
+        this.taxTypeId = taxTypeId;
     }
 
-    public long getQuarterId() {
+    public int getQuarterId() {
         return quarterId;
     }
 
-    public void setQuarterId(long quarterId) {
+    public void setQuarterId(int quarterId) {
         this.quarterId = quarterId;
     }
 
@@ -45,5 +46,25 @@ public class ReportDto implements Serializable {
 
     public void setIncome(double income) {
         this.income = income;
+    }
+
+
+    public long getReportApprovalId() {
+        return reportApprovalId;
+    }
+
+    public void setReportApprovalId(long reportApprovalId) {
+        this.reportApprovalId = reportApprovalId;
+    }
+
+    @Override
+    public String toString() {
+        return "ReportDto{" +
+                "reportId=" + reportId +
+                ", taxTypeId=" + taxTypeId +
+                ", quarterId=" + quarterId +
+                ", income=" + income +
+                ", reportApprovalId=" + reportApprovalId +
+                '}';
     }
 }

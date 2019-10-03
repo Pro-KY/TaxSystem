@@ -1,9 +1,11 @@
 <fmt:message var="selectFormItem" key="sendreport.dropdown.item.form" bundle="${sessionScope.rb}" scope="request"/>
 <fmt:message var="dropDownBtnLabel" key="sendreport.dropdown.label" bundle="${sessionScope.rb}" scope="request"/>
 <%--form--%>
+<fmt:message var="reportIdLabel" key="report.details.report.id" bundle="${sessionScope.rb}" scope="request"/>
 <fmt:message var="taxTypeLabel" key="sendreport.form.label.taxtype" bundle="${sessionScope.rb}" scope="request"/>
 <fmt:message var="quarterLabel" key="sendreport.form.label.quorter" bundle="${sessionScope.rb}" scope="request"/>
 <fmt:message var="sumLabel" key="sendreport.form.label.sum" bundle="${sessionScope.rb}" scope="request"/>
+
 <fmt:message var="submitButton" key="sendreport.form.button.submit" bundle="${sessionScope.rb}" scope="request"/>
 <fmt:message var="singleTaxType" key="sendreport.form.select.taxtype.first" bundle="${sessionScope.rb}" scope="request"/>
 <fmt:message var="propertyTaxType" key="sendreport.form.select.taxtype.second" bundle="${sessionScope.rb}" scope="request"/>
@@ -14,5 +16,6 @@
 <fmt:message var="inputFilePlaceholder" key="sendreport.input.file.placeholder" bundle="${sessionScope.rb}" scope="request"/>
 <fmt:message var="inputFileButtonName" key="sendreport.input.file.button" bundle="${sessionScope.rb}" scope="request"/>
 
-<fmt:message var="alertReportSendSuccess" key="alert.sendreport.success" bundle="${sessionScope.rb}" scope="request"/>
+<fmt:message var="alertSuccess" key="alert.success" bundle="${sessionScope.rb}" scope="request"/>
+<fmt:message var="alertError" key="alert.fail" bundle="${sessionScope.rb}" scope="request"/>
 

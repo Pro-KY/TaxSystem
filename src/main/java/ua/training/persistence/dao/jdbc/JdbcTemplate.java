@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//TODO: refactor as simple object no singleton?
 public class JdbcTemplate {
     private static final Logger log = LogManager.getLogger(JdbcTemplate.class);
     private static JdbcTemplate instance;

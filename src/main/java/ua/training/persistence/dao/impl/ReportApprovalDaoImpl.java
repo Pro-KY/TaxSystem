@@ -37,14 +37,13 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     }
 
     @Override
-    public Long save(ReportApproval reportApproval) {
+    public Long save(ReportApproval entity) {
         String sql = SqlPropertiesHandler.getSqlQuery(SAVE_REPORT_APPROVAL);
-//        final JdbcTemplate jdbcTemplate = JdbcTemplate.getIn/stance();
         Object[] params = {
-                reportApproval.getTimestamp(),
-                reportApproval.getStateApproval().getId(),
-                reportApproval.getUser().getId(),
-                reportApproval.getReport().getId()
+                entity.getTimestamp(),
+                entity.getStateApproval().getId(),
+                entity.getUser().getId(),
+                entity.getReport().getId()
         };
 
         try {
@@ -74,7 +73,18 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
 
     @Override
     public Long update(ReportApproval entity) {
-        return 0L;
+        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.UPDATE_REPORT_APPROVAL_BY_ID);
+        Object[] params = {
+                entity.getTimestamp(),
+                entity.getRefusalCause(),
+                entity.getStateApproval().getId(),
+                entity.getReport().getId(),
+                entity.getUser().getId(),
+                entity.getInspector() != null && entity.getInspector().getId() > 0 ? entity.getInspector().getId() : null,
+                entity.getId()
+        };
+
+        return jdbcTemplate.saveOrUpdate(sql, params);
     }
 
     @Override
@@ -82,9 +92,8 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         return false;
     }
 
-    @Override
-    public Optional<ReportApproval> findById(Long id) {
-        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_BY_ID);
+    public Optional<ReportApproval> findByIdJoinReportJoinInspector(Long id) {
+        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_WITH_RELATIONS_BY_ID);
 
         final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);
 
@@ -94,6 +103,13 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         reportApprovalMapper.mapStateApprovalRelation(new StateApprovalMapperImpl(true));
         reportApprovalMapper.mapInspectorRelation(new UserMapperImpl(true, true));
 
+        return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
+    }
+
+    @Override
+    public Optional<ReportApproval> findById(Long id) {
+        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_BY_ID);
+        final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(false);
         return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
     }
 }

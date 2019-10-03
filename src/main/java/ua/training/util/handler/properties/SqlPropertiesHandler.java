@@ -15,9 +15,11 @@ public class SqlPropertiesHandler {
 
     public static final String REPORT_APPROVAL_PAGINATION = "REPORT_APPROVAL_PAGINATION";
     public static final String REPORT_APPROVAL_COUNT = "REPORT_APPROVAL_COUNT";
-    public static final String REPORT_APPROVAL_BY_ID = "REPORT_APPROVAL_BY_ID";
+    public static final String REPORT_APPROVAL_WITH_RELATIONS_BY_ID = "REPORT_APPROVAL_WITH_RELATIONS_BY_ID";
     public static final String FIND_REPORT_BY_ID = "FIND_REPORT_BY_ID";
-
+    public static final String UPDATE_REPORT_BY_ID = "UPDATE_REPORT_BY_ID";
+    public static final String REPORT_APPROVAL_BY_ID = "REPORT_APPROVAL_BY_ID";
+    public static final String UPDATE_REPORT_APPROVAL_BY_ID = "UPDATE_REPORT_APPROVAL_BY_ID";
 
     static {
         sqlProperties = PropertyResourceBundle.getBundle("sql");

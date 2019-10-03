@@ -52,17 +52,17 @@ public class TaxTypeDaoImpl implements ITaxTypeDao {
     }
 
     @Override
-    public Long save(TaxType bean) {
+    public Long save(TaxType entity) {
         return null;
     }
 
     @Override
-    public Long update(TaxType bean) {
+    public Long update(TaxType entity) {
         return null;
     }
 
     @Override
-    public boolean delete(TaxType bean) {
+    public boolean delete(TaxType entity) {
         return false;
     }
 

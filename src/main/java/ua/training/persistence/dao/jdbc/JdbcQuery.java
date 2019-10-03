@@ -83,7 +83,6 @@ public class JdbcQuery {
         }
     }
 
-
     public boolean modifyAll() {
         try {
             ps = connection.prepareStatement(sql);

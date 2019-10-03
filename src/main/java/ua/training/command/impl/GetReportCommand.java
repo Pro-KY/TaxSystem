@@ -21,10 +21,11 @@ public class GetReportCommand implements ICommand {
         log.info("getReport command executed");
 
         final Long reportId = Long.valueOf(request.getParameter(Parameters.REPORT_ID));
+        final Long reportApprovalId = Long.valueOf(request.getParameter(Parameters.REPORT_APPROVAL_ID));
         log.info("reportId: {}", reportId);
 
         final Report report = EditReportService.getInstance().findReportById(reportId);
-        CommandAttributesSetter.setEditReportCommandAttributes(request, report);
+        CommandAttributesSetter.setGetReportCommandAttributes(request, report, reportApprovalId);
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }
 }

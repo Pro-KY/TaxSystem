@@ -30,9 +30,9 @@ public class ReportApprovalMapper extends EntityMapper<ReportApproval> {
     private boolean mapUser;
     private boolean mapInspector;
 
-    public ReportApprovalMapper(boolean usedInJoin) {
-        String idColumn = usedInJoin ? ID_IN_JOIN : ID;
-        columnNames = new String[]{idColumn, TIMESTAMP, REFUSAL_CAUSE, REPORT_ID, STATE_APPROVAL_ID, INSPECTOR_ID, USER_ID};
+    public ReportApprovalMapper(boolean useInJoin) {
+        String idColumn = useInJoin ? ID_IN_JOIN : ID;
+        columnNames = new String[]{idColumn, TIMESTAMP, REFUSAL_CAUSE, STATE_APPROVAL_ID, REPORT_ID, USER_ID, INSPECTOR_ID};
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ReportApprovalMapper extends EntityMapper<ReportApproval> {
                 final StateApproval stateApproval = new StateApproval(stateApprovalId);
                 final User inspector = new User(inspectorId);
                 final User user = new User(userId);
-                mappedEntity = new ReportApproval(id, timestamp, refusalCause, stateApproval, report, inspector, user);
+                mappedEntity = new ReportApproval(id, timestamp, refusalCause, stateApproval, report, user, inspector);
 
                 if(mapReport) {
                     mappedEntity.setReport(reportMapper.mapToEntity(resultSet));

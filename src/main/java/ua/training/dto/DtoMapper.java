@@ -59,7 +59,7 @@ public class DtoMapper {
     public ReportDto mapToReportDto(Report report) {
         final long reportId = report.getId();
         final double sum = report.getSum();
-        final long quarter = report.getQuarter();
+        final int quarter = report.getQuarter();
         final long taxTypeId = report.getTaxType().getId();
 
         return new ReportDto(reportId, taxTypeId, quarter, sum);

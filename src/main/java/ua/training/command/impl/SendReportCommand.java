@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.command.ICommand;
 import ua.training.command.util.CommandAttributesSetter;
-import ua.training.command.util.CommandParamsExtractor;
+import ua.training.command.util.CommandParametersExtractor;
 import ua.training.dto.SendReportDto;
 import ua.training.persistence.entities.User;
 import ua.training.service.SendReportService;
@@ -14,7 +14,6 @@ import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_INDEX;
 import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_MAIN;
@@ -35,12 +34,12 @@ public class SendReportCommand implements ICommand {
         if(session != null) {
             final User user = (User) session.getAttribute(Attributes.USER);
 
-            final CommandParamsExtractor paramsExtractor = CommandParamsExtractor.getInstance();
-            final Optional<SendReportDto> reportOptional = paramsExtractor.extractParamsIntoBean(request, SendReportDto.class);
+            final CommandParametersExtractor paramsExtractor = CommandParametersExtractor.getInstance();
+            final SendReportDto sendReportDto = paramsExtractor.extractParameters(request, SendReportDto.class);
 
             try {
-                if (reportOptional.isPresent()) {
-                    final SendReportDto sendReportDto = reportOptional.get();
+                if (sendReportDto != null) {
+//                    final SendReportDto sendReportDto = reportOptional.get();
                     sendReportDto.setUser(user);
                     sendReportService.saveSentReport(sendReportDto);
                     CommandAttributesSetter.setSendReportCommandAttributes(request);
