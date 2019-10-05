@@ -8,7 +8,7 @@ public class PaginationDto implements Serializable {
     private Boolean isPreviousClicked;
     private String pageSize;
     private Long userId;
-    private static final int DEFAULT_START_INDEX = 0;
+    private static final long DEFAULT_START_INDEX = 0;
 
     private boolean isLeftButtonDisabled;
     private boolean isRightButtonDisabled;
@@ -23,6 +23,12 @@ public class PaginationDto implements Serializable {
         this.pageSize = pageSize;
         this.startPageIndex = startPageIndex;
         this.endPageIndex = endPageIndex;
+    }
+
+    public PaginationDto() {
+        currentPageIndex = DEFAULT_START_INDEX;
+        this.isNextClicked =  false;
+        this.isPreviousClicked = false;
     }
 
     public Long getCurrentPageIndex() {

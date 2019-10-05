@@ -34,9 +34,15 @@ public class SentReportsCommand implements ICommand {
         request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
         //TODO: map via json mapper
         final HttpSession session = request.getSession();
-        final Long currentPageIndex = (Long) session.getAttribute(Attributes.CURRENT_PAGE_INDEX);
-        final Long startPageIndex = (Long) session.getAttribute(Attributes.START_PAGE_INDEX);
-        final Long endPageIndex = (Long) session.getAttribute(Attributes.END_PAGE_INDEX);
+        final PaginationDto previousPaginationDto = (PaginationDto) session.getAttribute(Attributes.PAGINATION_INFO);
+
+        Long currentPageIndex = null, startPageIndex = null, endPageIndex = null;
+
+        if (previousPaginationDto != null) {
+            currentPageIndex = previousPaginationDto.getCurrentPageIndex();
+            startPageIndex = previousPaginationDto.getStartPageIndex();
+            endPageIndex = previousPaginationDto.getEndPageIndex();
+        }
 
         String selectedPageIndex = request.getParameter(Parameters.SELECTED_PAGE_INDEX);
         final String pageSize = request.getParameter(Parameters.PAGE_SIZE);
@@ -48,21 +54,22 @@ public class SentReportsCommand implements ICommand {
         }
 
         final User user = (User) session.getAttribute(Attributes.USER);
-        final PaginationDto paginationDto = new PaginationDto(selectedPageIndex, pageSize, isNextClicked, isPreviousClicked, startPageIndex, endPageIndex);
-        paginationDto.setUserId(user.getId());
+        final PaginationDto newPaginationDto = new PaginationDto(selectedPageIndex, pageSize, isNextClicked, isPreviousClicked, startPageIndex, endPageIndex);
+        newPaginationDto.setUserId(user.getId());
 
-        final PaginationHandler<SentReportsDto> paginationHandler = sentReportsService.getSentReports(paginationDto);
+        final PaginationHandler<SentReportsDto> paginationHandler = sentReportsService.getSentReports(newPaginationDto);
         final List<SentReportsDto> sentReports = paginationHandler.getPageResult();
-        paginationHandler.setPaginationInfo(paginationDto);
-        log.info("pagination dto {}", paginationDto);
+        paginationHandler.setPaginationInfo(newPaginationDto);
+        log.info("pagination dto {}", newPaginationDto);
 
-        session.setAttribute(Attributes.CURRENT_PAGE_INDEX, paginationDto.getCurrentPageIndex());
-        session.setAttribute(Attributes.START_PAGE_INDEX, paginationDto.getStartPageIndex());
-        session.setAttribute(Attributes.END_PAGE_INDEX, paginationDto.getEndPageIndex());
         request.setAttribute(SENT_REPORTS_LIST, sentReports);
-        request.setAttribute(Attributes.PAGINATION_INFO, paginationDto);
-        log.info("sidebarIndex {}", request.getParameter("sidebarIndex"));
-        request.setAttribute(Attributes.SIDEBAR_ACTIVE_INDEX, request.getParameter(Parameters.SIDEBAR_ACTIVE_INDEX));
+        session.setAttribute(Attributes.PAGINATION_INFO, newPaginationDto);
+        log.info("sidebarIndex {}", request.getParameter("sideBarIndex"));
+
+        final String sideBarIndex = request.getParameter(Parameters.SIDEBAR_ACTIVE_INDEX);
+        if (sideBarIndex != null) {
+            session.setAttribute(Attributes.SIDEBAR_ACTIVE_INDEX, request.getParameter(Parameters.SIDEBAR_ACTIVE_INDEX));
+        }
 
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }

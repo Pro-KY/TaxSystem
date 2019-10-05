@@ -39,7 +39,6 @@ public class SendReportCommand implements ICommand {
 
             try {
                 if (sendReportDto != null) {
-//                    final SendReportDto sendReportDto = reportOptional.get();
                     sendReportDto.setUser(user);
                     sendReportService.saveSentReport(sendReportDto);
                     CommandAttributesSetter.setSendReportCommandAttributes(request);

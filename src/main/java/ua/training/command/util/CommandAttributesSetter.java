@@ -33,8 +33,8 @@ public class CommandAttributesSetter {
         request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_EDIT_REPORT));
     }
 
-    public static void setEditReportCommandAttributes(HttpServletRequest request) {
-        request.setAttribute(ALERT_SUCCESS, "true");
+    public static void setEditReportCommandAttributes(HttpServletRequest request, boolean isOperationSuccessful) {
+        request.setAttribute(ALERT_SUCCESS, isOperationSuccessful);
         request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
     }
 }

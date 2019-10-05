@@ -28,7 +28,7 @@ public class EditReportCommand implements ICommand {
         log.info("reportApprovalId: {}", reportApprovalId);
 
         EditReportService.getInstance().updateReport(reportDto, reportApprovalId);
-        CommandAttributesSetter.setEditReportCommandAttributes(request);
+        CommandAttributesSetter.setEditReportCommandAttributes(request, true);
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }
 }

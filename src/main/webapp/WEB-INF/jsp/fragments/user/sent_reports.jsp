@@ -6,7 +6,7 @@
 <fmt:message var="not_signed_label" key="sent.reports.not.assigned.text" bundle="${sessionScope.rb}" scope="request"/>
 
 <c:url scope="request" var="pageSizeThreeUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=3&command=${Command.SENT_REPORTS}"/>
-<%--<c:url scope="request" var="changeIndexUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>--%>
+<%--<c:url scope="request" var="changeIndexUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>--%>
 
 <div class="container">
     <div id="elementsAmountSelect" class="row">
@@ -54,36 +54,36 @@
 </div>
 
 <%--TESTING--%>
-<%--<p>isLeftButtonDisabled : ${requestScope.paginationInfo.isLeftButtonDisabled}</p>--%>
-<%--<p>isRightButtonDisabled : ${requestScope.paginationInfo.isRightButtonDisabled}</p>--%>
+<%--<p>isLeftButtonDisabled : ${sessionScope.paginationInfo.isLeftButtonDisabled}</p>--%>
+<%--<p>isRightButtonDisabled : ${sessionScope.paginationInfo.isRightButtonDisabled}</p>--%>
 <%--<p>currentPageIndex ${sessionScope.currentPageIndex}</p>--%>
-<%--<p>allPagesAmount ${requestScope.paginationInfo.allPagesAmount}</p>--%>
-<%--<p>startPageIndex : ${requestScope.paginationInfo.startPageIndex}</p>--%>
-<%--<p>endPageIndex : ${requestScope.paginationInfo.endPageIndex}</p>--%>
+<%--<p>allPagesAmount ${sessionScope.paginationInfo.allPagesAmount}</p>--%>
+<%--<p>startPageIndex : ${sessionScope.paginationInfo.startPageIndex}</p>--%>
+<%--<p>endPageIndex : ${sessionScope.paginationInfo.endPageIndex}</p>--%>
 <%--TESTING--%>
 
 
 <%--PAGINATION--%>
-<c:if test="${requestScope.paginationInfo.allPagesAmount > 1}">
+<c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
     <nav aria-label="...">
         <ul class="pagination" style="list-style-type: none;">
             <div class="container-fluid">
                 <div class="btn-group">
-                    <c:if test="${requestScope.paginationInfo.allPagesAmount > 1}">
-                        <li class="${requestScope.paginationInfo.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Previous</a>
+                    <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
+                        <li class="${sessionScope.paginationInfo.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Previous</a>
                         </li>
                     </c:if>
 
-                    <c:forEach begin="${sessionScope.startPageIndex}" end="${sessionScope.endPageIndex}" varStatus="counter">
-                        <li class="${(sessionScope.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Command.SENT_REPORTS}"> ${counter.index+1} </a>
+                    <c:forEach begin="${sessionScope.paginationInfo.startPageIndex}" end="${sessionScope.paginationInfo.endPageIndex}" varStatus="counter">
+                        <li class="${(sessionScope.paginationInfo.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
+                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Command.SENT_REPORTS}"> ${counter.index+1} </a>
                         </li>
                     </c:forEach>
 
-                    <c:if test="${requestScope.paginationInfo.allPagesAmount > 1}">
-                        <li class="${requestScope.paginationInfo.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Next</a>
+                    <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
+                        <li class="${sessionScope.paginationInfo.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Next</a>
                         </li>
                     </c:if>
                 </div>

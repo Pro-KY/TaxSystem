@@ -18,7 +18,8 @@
 <fmt:message var="menu_admin_0" key="main.menu.admin.usermanagement" bundle="${sessionScope.rb}"/>
 
 
-<c:set var="sideBarIndex" value="${pageContext.request.getAttribute(Attributes.SIDEBAR_ACTIVE_INDEX)}" scope="request"/>
+<%--<c:set var="sideBarIndex" value="${pageContext.request.getAttribute(Attributes.SIDEBAR_ACTIVE_INDEX)}" scope="request"/>--%>
+<c:set var="sideBarIndex" value="${sessionScope.get(Attributes.SIDEBAR_ACTIVE_INDEX)}"/>
 
 <div class="col-md-3">
 
