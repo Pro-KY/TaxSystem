@@ -44,4 +44,9 @@ public class CommandAttributesSetter {
         String attributeName = isOperationSuccessful ? ALERT_SUCCESS : ALERT_ERROR;
         request.setAttribute(attributeName, true);
     }
+
+    public static void setInspectorChangingCommandAttributes(HttpServletRequest request) {
+        request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
+        request.setAttribute(ALERT_SUCCESS, true);
+    }
 }

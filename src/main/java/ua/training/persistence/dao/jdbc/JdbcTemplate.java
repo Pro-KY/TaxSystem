@@ -33,8 +33,8 @@ public class JdbcTemplate {
         final Connection connection = mysqlDataSource.getConnection();
         List<T> resultList = new ArrayList<>();
 
-        final JdbcQuery jdbcQuery1 = new JdbcQuery(connection, sql);
-        try(final ResultSet result = jdbcQuery1.select(parameters)) {
+        final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
+        try(final ResultSet result = jdbcQuery.select(parameters)) {
             while (result.next()) {
                 final T t = entityMapper.mapToEntity(result);
                 resultList.add(t);
@@ -43,7 +43,7 @@ public class JdbcTemplate {
             e.printStackTrace();
             resultList = new ArrayList<>();
         }  finally {
-            mysqlDataSource.releaseResources(connection, jdbcQuery1.getPs());
+            mysqlDataSource.releaseResources(connection, jdbcQuery.getPs());
         }
 
         return resultList;

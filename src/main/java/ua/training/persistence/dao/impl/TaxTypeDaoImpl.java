@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-import static ua.training.util.handler.properties.SqlPropertiesHandler.ALL_TAX_TYPES;
-import static ua.training.util.handler.properties.SqlPropertiesHandler.GET_TAX_TYPE_BY_NAME;
+import static ua.training.util.handler.properties.SqlPropertiesHandler.FIND_ALL_TAX_TYPES;
+import static ua.training.util.handler.properties.SqlPropertiesHandler.FIND_TAX_TYPE_BY_NAME;
 
 public class TaxTypeDaoImpl implements ITaxTypeDao {
     private static TaxTypeDaoImpl instance;
@@ -37,7 +37,7 @@ public class TaxTypeDaoImpl implements ITaxTypeDao {
 
     @Override
     public Optional<TaxType> getTaxTypeByType(TaxType taxType) {
-        String sql = SqlPropertiesHandler.getSqlQuery(GET_TAX_TYPE_BY_NAME);
+        String sql = SqlPropertiesHandler.getSqlQuery(FIND_TAX_TYPE_BY_NAME);
         final String type = taxType.getType();
         final Object[] parameters = {type};
 
@@ -47,7 +47,7 @@ public class TaxTypeDaoImpl implements ITaxTypeDao {
     @Override
     public List<TaxType> getAllTaxTypes() {
         final Object[] parameters = {};
-        String sql = SqlPropertiesHandler.getSqlQuery(ALL_TAX_TYPES);
+        String sql = SqlPropertiesHandler.getSqlQuery(FIND_ALL_TAX_TYPES);
         return jdbcTemplate.finAll(sql, new TaxTypeMapperIml(false), parameters);
     }
 

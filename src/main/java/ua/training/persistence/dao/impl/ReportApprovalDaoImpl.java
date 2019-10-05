@@ -19,7 +19,7 @@ import static ua.training.util.handler.properties.SqlPropertiesHandler.SAVE_REPO
 public class ReportApprovalDaoImpl implements IReportApprovalDao {
     private static ReportApprovalDaoImpl instance;
     private JdbcTemplate jdbcTemplate;
-    private static final Logger logger = LogManager.getLogger(ReportApprovalDaoImpl.class);
+    private static final Logger log = LogManager.getLogger(ReportApprovalDaoImpl.class);
 
     public void setDataSource(MysqlDataSource dataSource) {
         jdbcTemplate.setDataSource(dataSource);
@@ -49,7 +49,7 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         try {
             return jdbcTemplate.saveOrUpdate(sql, params);
         } catch (DataAccessException e) {
-            logger.debug("exp here_2");
+            log.debug("exp here_2");
             e.printStackTrace();
             // log
             throw new PersistenceException("", e);
@@ -108,7 +108,7 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
 
     @Override
     public Optional<ReportApproval> findById(Long id) {
-        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_BY_ID);
+        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.FIND_REPORT_APPROVAL_BY_ID);
         final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(false);
         return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
     }

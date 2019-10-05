@@ -2,13 +2,14 @@ package ua.training.persistence.dao.impl;
 
 import ua.training.persistence.dao.IStateApprovalDao;
 import ua.training.persistence.dao.jdbc.JdbcTemplate;
+import ua.training.persistence.dao.mappers.impl.StateApprovalMapperImpl;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.StateApproval;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.Optional;
 
-import static ua.training.util.handler.properties.SqlPropertiesHandler.REPORT_STATE_BY_NANE;
+import static ua.training.util.handler.properties.SqlPropertiesHandler.FIND_REPORT_STATE_BY_NANE;
 
 public class StateApprovalDaoImpl implements IStateApprovalDao {
     private static StateApprovalDaoImpl instance;
@@ -29,24 +30,26 @@ public class StateApprovalDaoImpl implements IStateApprovalDao {
         return instance;
     }
 
-    public StateApproval findByName(String name) {
-        String sql = SqlPropertiesHandler.getSqlQuery(REPORT_STATE_BY_NANE);
-//        jdbcTemplate.findByQuery(sql, );
-        return null;
+    public Optional<StateApproval> findByState(String state) {
+        String sql = SqlPropertiesHandler.getSqlQuery(FIND_REPORT_STATE_BY_NANE);
+        return jdbcTemplate.findByQuery(sql, new StateApprovalMapperImpl(false), state);
     }
 
     @Override
     public Long save(StateApproval entity) {
+        //TODO: implement
         return 0L;
     }
 
     @Override
     public Long update(StateApproval entity) {
+        //TODO: implement
         return 0L;
     }
 
     @Override
     public boolean delete(StateApproval entity) {
+        //TODO: implement
         return false;
     }
 

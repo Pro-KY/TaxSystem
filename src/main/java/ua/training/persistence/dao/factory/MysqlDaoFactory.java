@@ -43,7 +43,7 @@ public class MysqlDaoFactory implements DaoFactory {
 
     @Override
     public IUserTypeDao getUserTypeDao() {
-        final UserTypeDaoImpl userTypeDao = new UserTypeDaoImpl();
+        final UserTypeDaoImpl userTypeDao = UserTypeDaoImpl.getInstance();
         userTypeDao.setDataSource(mysqlDataSource);
         return userTypeDao;
     }
@@ -56,7 +56,7 @@ public class MysqlDaoFactory implements DaoFactory {
     }
 
     @Override
-    public IStateApprovalDao getReportStateDao() {
+    public IStateApprovalDao getStateApprovalDao() {
         final StateApprovalDaoImpl iReportDaoIml = StateApprovalDaoImpl.getInstance();
         iReportDaoIml.setDataSource(mysqlDataSource);
         return iReportDaoIml;
@@ -68,4 +68,12 @@ public class MysqlDaoFactory implements DaoFactory {
         sendReportEventDaoImpl.setDataSource(mysqlDataSource);
         return sendReportEventDaoImpl;
     }
+
+    @Override
+    public IInspectorChangingDao getInspectorChangingDao() {
+        final InspectorChangingDaoImpl inspectorChangingDao = InspectorChangingDaoImpl.getInstance();
+        inspectorChangingDao.setDataSource(mysqlDataSource);
+        return inspectorChangingDao;
+    }
+
 }

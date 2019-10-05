@@ -16,6 +16,12 @@ public class InspectorChanging implements Serializable {
       this.previousInspector = previousInspector;
     }
 
+    public InspectorChanging(Timestamp date, ReportApproval reportApproval, User previousInspector) {
+        this.date = date;
+        this.reportApproval = reportApproval;
+        this.previousInspector = previousInspector;
+    }
+
     public ReportApproval getReportApproval() {
         return reportApproval;
     }

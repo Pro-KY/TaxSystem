@@ -9,6 +9,7 @@ public interface DaoFactory {
     IUserTypeDao getUserTypeDao();
     ITaxTypeDao getTaxTypeDao();
     IReportDao getReportDao();
-    IStateApprovalDao getReportStateDao();
+    IStateApprovalDao getStateApprovalDao();
     IReportApprovalDao getReportApprovalDao();
+    IInspectorChangingDao getInspectorChangingDao();
 }

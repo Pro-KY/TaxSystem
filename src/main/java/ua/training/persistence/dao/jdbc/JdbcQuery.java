@@ -12,11 +12,11 @@ public class JdbcQuery {
     private String sql;
     private int rowsAffected;
 
-    public ResultSet getResult() {
+     ResultSet getResult() {
         return rs;
     }
 
-    public JdbcQuery(Connection connection, String sql) {
+     JdbcQuery(Connection connection, String sql) {
         this.connection = connection;
         this.sql = sql;
     }
@@ -31,7 +31,7 @@ public class JdbcQuery {
         }
     }
 
-    public Long saveOrUpdate(Object... parameters) {
+     Long saveOrUpdate(Object... parameters) {
         performModyingQuery(parameters);
         long generatedKey = 0L;
 
@@ -94,21 +94,11 @@ public class JdbcQuery {
         return rowsAffected > 0;
     }
 
-    public Statement getStatement() {
+     Statement getStatement() {
         return statement;
     }
 
-    public PreparedStatement getPs() {
+     PreparedStatement getPs() {
         return ps;
     }
-
-//    public void releaseResources() {
-//        try {
-//            if(rs != null) { rs.close(); }
-//            if(ps != null) {ps.close();}
-//            connection.close();
-//        } catch (SQLException e) {
-//            // log here
-//        }
-//    }
 }
