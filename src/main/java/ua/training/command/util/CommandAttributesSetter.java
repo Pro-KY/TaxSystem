@@ -20,8 +20,9 @@ public class CommandAttributesSetter {
         return ViewPropertiesHandler.getViewPath(PATH_ERROR);
     }
 
-    public static void setSendReportCommandAttributes(HttpServletRequest request) {
-        request.setAttribute(ALERT_SUCCESS, true);
+    public static void setSendReportCommandAttributes(HttpServletRequest request, boolean isOperationSuccessful) {
+        String attributeName = isOperationSuccessful ? ALERT_SUCCESS : ALERT_ERROR;
+        request.setAttribute(attributeName, true);
         request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SEND_REPORT));
     }
 

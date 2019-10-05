@@ -8,6 +8,7 @@ import ua.training.util.constans.Parameters;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 
@@ -18,12 +19,13 @@ public class ReportFragmentCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         System.out.println("ReportFragmentCommand command");
 
-        log.info("sidebarIndex {}", request.getParameter("sidebarIndex"));
-        request.setAttribute(Attributes.SIDEBAR_ACTIVE_INDEX, request.getParameter(Parameters.SIDEBAR_ACTIVE_INDEX));
+        final HttpSession session = request.getSession();
+
+        log.info("sidebarIndex {}", request.getParameter(Parameters.SIDEBAR_ACTIVE_INDEX));
+        session.setAttribute(Attributes.SIDEBAR_ACTIVE_INDEX, request.getParameter(Parameters.SIDEBAR_ACTIVE_INDEX));
 
         final String viewPath = getViewPath(FRAGMENT_PATH_SEND_REPORT);
         request.setAttribute(Attributes.FRAGMENT_PATH, viewPath);
-//        request.setAttribute(ALERT, true);
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }
 }

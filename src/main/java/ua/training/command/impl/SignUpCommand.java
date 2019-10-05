@@ -20,7 +20,6 @@ import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_IND
 public class SignUpCommand implements ICommand {
     private static final Logger logger = LogManager.getLogger(SignUpCommand.class);
 
-
     @Override
     public String execute(HttpServletRequest request) {
         final CommandParametersExtractor paramsExtractor = CommandParametersExtractor.getInstance();

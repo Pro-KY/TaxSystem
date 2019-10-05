@@ -14,9 +14,12 @@ import ua.training.persistence.transaction.MysqlTransactionManager;
 import ua.training.util.constans.ReportContentType;
 import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.exceptions.ServiceException;
+import ua.training.util.handler.properties.MessagePropertiesHandler;
 
 import java.sql.Timestamp;
 import java.util.Optional;
+
+import static ua.training.util.handler.properties.MessagePropertiesHandler.SERVICE_TRANSACTION_ERROR;
 
 public class SendReportService {
     private static final Logger logger = LogManager.getLogger(SendReportService.class);
@@ -57,8 +60,7 @@ public class SendReportService {
         });
 
         if (tm.isRollBacked()) {
-            // TODO: add error message
-            throw new ServiceException("msg");
+            throw new ServiceException(MessagePropertiesHandler.getMessage(SERVICE_TRANSACTION_ERROR));
         }
     }
 }
