@@ -12,12 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 
-public class ReportFragmentCommand implements ICommand {
-    private static final Logger log = LogManager.getLogger(ReportFragmentCommand.class);
+public class SendReportFragmentCommand implements ICommand {
+    private static final Logger log = LogManager.getLogger(SendReportFragmentCommand.class);
 
     @Override
     public String execute(HttpServletRequest request) {
-        System.out.println("ReportFragmentCommand command");
+        System.out.println("SendReportFragmentCommand command");
 
         final HttpSession session = request.getSession();
 

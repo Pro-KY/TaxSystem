@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="ua.training.util.constans.Parameters" %>
-<%@ page import="ua.training.util.constans.Attributes" %>
 <%@ page import="ua.training.util.constans.Command" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -22,8 +21,7 @@
     <%--CHANGE_BTN--%>
     <c:if test="${reportDetails.approvalStateId eq 2}">
         <span class="d-flex justify-content-end mt-n4">
-            <a href="taxsystem/?command=${Command.CHANGE_INSPECTOR}" class="btn btn-warning"><fmt:message key="report.details.change.btn" bundle="${rb}"/></a>
-
+            <a href="taxsystem/?command=${Command.CHANGE_INSPECTOR}&${Parameters.REPORT_APPROVAL_ID}=${reportDetails.reportApprovalId}&${Parameters.INSPECTOR_ID}=${reportDetails.inspectorId}" class="btn btn-warning"><fmt:message key="report.details.change.btn" bundle="${rb}"/></a>
         </span>
     </c:if>
     <%--CHANGE_BTN--%>

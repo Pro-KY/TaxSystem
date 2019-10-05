@@ -3,19 +3,18 @@ package ua.training.persistence.entities;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class ChangeInspector implements Serializable {
-    private long id;
+public class InspectorChanging implements Serializable {
+    private Long id;
     private Timestamp date;
     private ReportApproval reportApproval;
     private User previousInspector;
 
-    public ChangeInspector(long id, Timestamp date, ReportApproval reportApproval, User previousInspector) {
+    public InspectorChanging(long id, Timestamp date, ReportApproval reportApproval, User previousInspector) {
       this.id = id;
       this.date = date;
       this.reportApproval = reportApproval;
       this.previousInspector = previousInspector;
     }
-
 
     public ReportApproval getReportApproval() {
         return reportApproval;
@@ -33,7 +32,7 @@ public class ChangeInspector implements Serializable {
         this.previousInspector = previousInspector;
     }
 
-    public long getId() {
+    public Long getId() {
       return id;
     }
 

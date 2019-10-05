@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-public class ChangeInspectorMapper extends EntityMapper<ChangeInspector> {
+public class ChangeInspectorMapper extends EntityMapper<InspectorChanging> {
     private static final String ID = "id";
     private static final String TIMESTAMP = "timestamp";
     private static final String REPORT_APPROVAL_ID = "report_approval_id";
@@ -24,7 +24,7 @@ public class ChangeInspectorMapper extends EntityMapper<ChangeInspector> {
     }
 
     @Override
-    public ChangeInspector mapToEntity(ResultSet resultSet) {
+    public InspectorChanging mapToEntity(ResultSet resultSet) {
         try {
                 final long id = resultSet.getLong(columnNames[0]);
                 final Timestamp timestamp = resultSet.getTimestamp(columnNames[1]);
@@ -34,7 +34,7 @@ public class ChangeInspectorMapper extends EntityMapper<ChangeInspector> {
                 final ReportApproval reportApproval = new ReportApproval(reportApprovalId);
                 final User previousInspector = new User(reportApprovalId);
 
-                mappedEntity = new ChangeInspector(id, timestamp, reportApproval, previousInspector);
+                mappedEntity = new InspectorChanging(id, timestamp, reportApproval, previousInspector);
 
                 if(mapPreviousInspector) {
                     mappedEntity.setPreviousInspector(userMapper.mapToEntity(resultSet));

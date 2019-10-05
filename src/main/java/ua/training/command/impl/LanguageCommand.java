@@ -14,7 +14,6 @@ public class LanguageCommand implements ICommand {
         final String chosenLanguage = request.getParameter("language");
         final HttpSession session = request.getSession(true);
         session.setAttribute("language", chosenLanguage);
-//        Config.set(session, Config.FMT_LOCALE, Locale.forLanguageTag(chosenLanguage));
 
         return ViewPropertiesHandler.getViewPath(PATH_INDEX);
     }

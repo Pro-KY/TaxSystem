@@ -2,7 +2,7 @@ package ua.training.command;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.command.fragments.ReportFragmentCommand;
+import ua.training.command.fragments.SendReportFragmentCommand;
 import ua.training.command.fragments.SignInFragmentCommand;
 import ua.training.command.fragments.SignUpFragmentCommand;
 import ua.training.command.impl.*;
@@ -24,14 +24,14 @@ public class CommandFactory {
         commandHashMap.put(Command.SEND_REPORT, new SendReportCommand());
         commandHashMap.put(Command.PROCESS_REPORT, new ProcessReportCommand());
         commandHashMap.put(Command.SIGN_UP, new SignUpCommand());
-        commandHashMap.put(Command.GET_REPORT_FRAGMENT, new ReportFragmentCommand());
+        commandHashMap.put(Command.GET_REPORT_FRAGMENT, new SendReportFragmentCommand());
         commandHashMap.put(Command.GET_SIGN_UP_FRAGMENT, new SignUpFragmentCommand());
         commandHashMap.put(Command.GET_SIGN_IN_FRAGMENT, new SignInFragmentCommand());
         commandHashMap.put(Command.SENT_REPORTS, new SentReportsCommand());
         commandHashMap.put(Command.REPORT_DETAILS, new ReportDetailsCommand());
         commandHashMap.put(Command.GET_REPORT, new GetReportCommand());
         commandHashMap.put(Command.EDIT_REPORT, new EditReportCommand());
-        commandHashMap.put(Command.CHANGE_INSPECTOR, new ChangeInspectorCommand());
+        commandHashMap.put(Command.CHANGE_INSPECTOR, new InspectorChangingCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

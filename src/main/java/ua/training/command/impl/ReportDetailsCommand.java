@@ -16,13 +16,9 @@ import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 public class ReportDetailsCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(ReportDetailsCommand.class);
 
-    ReportDetailsService reportDetailsService;
-
     @Override
     public String execute(HttpServletRequest request) {
-        final String parameter = request.getParameter(Parameters.REPORT_APPROVAL_ID);
-        log.info("id - {}", parameter);
-        final Long reportApprovalId = Long.valueOf(parameter);
+        final Long reportApprovalId = Long.valueOf(request.getParameter(Parameters.REPORT_APPROVAL_ID));
         final ReportDetailsDto reportDetails = ReportDetailsService.getInstance().getReportDetails(reportApprovalId);
 
         final String fragmentPath = getViewPath(FRAGMENT_PATH_REPORT_DETAILS);
