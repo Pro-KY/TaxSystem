@@ -34,14 +34,14 @@ public class SentReportsCommand implements ICommand {
         request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
         //TODO: map via json mapper
         final HttpSession session = request.getSession();
-        final PaginationDto previousPaginationDto = (PaginationDto) session.getAttribute(Attributes.PAGINATION_INFO);
+        final PaginationDto currentPaginationDto = (PaginationDto) session.getAttribute(Attributes.PAGINATION_INFO);
 
         Long currentPageIndex = null, startPageIndex = null, endPageIndex = null;
 
-        if (previousPaginationDto != null) {
-            currentPageIndex = previousPaginationDto.getCurrentPageIndex();
-            startPageIndex = previousPaginationDto.getStartPageIndex();
-            endPageIndex = previousPaginationDto.getEndPageIndex();
+        if (currentPaginationDto != null) {
+            currentPageIndex = currentPaginationDto.getCurrentPageIndex();
+            startPageIndex = currentPaginationDto.getStartPageIndex();
+            endPageIndex = currentPaginationDto.getEndPageIndex();
         }
 
         String selectedPageIndex = request.getParameter(Parameters.SELECTED_PAGE_INDEX);

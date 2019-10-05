@@ -87,14 +87,15 @@
         </div>
     </div>
 
+    <!-- FOR TESTING -->
         <div>
             param.alertError is null => ${empty alertError}
         </div>
         <div>
             param.alertSuccess is null =>  ${empty alertSuccess}
         </div>
+    <!-- FOR TESTING -->
 
-<%--    {alertError eq null}--%>
     <!-- ALERT -->
     <c:if test="${(not empty alertError and alertError eq true) or (not empty alertSuccess and alertSuccess eq true)}">
         <div class="container-fluid mt-3">

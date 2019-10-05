@@ -12,6 +12,7 @@ import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.TaxType;
 import ua.training.persistence.transaction.MysqlTransactionManager;
 import ua.training.util.constans.StateApprovalEnum;
+import ua.training.util.exceptions.ExceptionThrower;
 import ua.training.util.exceptions.ServiceException;
 import ua.training.util.handler.properties.MessagePropertiesHandler;
 
@@ -53,6 +54,7 @@ public class EditReportService {
             reportApproval.setStateApproval(stateApproval);
 
             reportDao.update(report);
+//            ExceptionThrower.sneakyThrow(new ServiceException("msg"));
             reportApprovalDao.update(reportApproval);
         });
 

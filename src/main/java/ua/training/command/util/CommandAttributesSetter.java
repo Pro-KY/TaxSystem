@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import ua.training.dto.DtoMapper;
 import ua.training.dto.ReportDto;
 import ua.training.persistence.entities.Report;
-import ua.training.service.ReportDetailsService;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +13,7 @@ import static ua.training.util.constans.Attributes.*;
 import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 
 public class CommandAttributesSetter {
-    private static final Logger log = LogManager.getLogger(ReportDetailsService.class);
+    private static final Logger log = LogManager.getLogger(CommandAttributesSetter.class);
 
     public static String getErrorPage(HttpServletRequest request, String msg) {
         request.setAttribute(ALERT_ERROR, true);
@@ -33,8 +32,15 @@ public class CommandAttributesSetter {
         request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_EDIT_REPORT));
     }
 
-    public static void setEditReportCommandAttributes(HttpServletRequest request, boolean isOperationSuccessful) {
-        request.setAttribute(ALERT_SUCCESS, isOperationSuccessful);
-        request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
+    public static void setEditReportCommandAttributes(HttpServletRequest request, ReportDto reportDto, boolean isOperationSuccessful) {
+        if(isOperationSuccessful) {
+            request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
+        } else {
+            request.setAttribute(REPORT_DTO, reportDto);
+            request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_EDIT_REPORT));
+        }
+
+        String attributeName = isOperationSuccessful ? ALERT_SUCCESS : ALERT_ERROR;
+        request.setAttribute(attributeName, true);
     }
 }
