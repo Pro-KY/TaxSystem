@@ -6,11 +6,12 @@
 <fmt:message var="not_signed_label" key="sent.reports.not.assigned.text" bundle="${sessionScope.rb}" scope="request"/>
 
 <c:url scope="request" var="pageSizeThreeUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=3&command=${Command.SENT_REPORTS}"/>
-<c:url scope="request" var="changeIndexUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>
+<%--<c:url scope="request" var="changeIndexUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>--%>
 
 <div class="container">
     <div id="elementsAmountSelect" class="row">
         <div class="col-md-9"></div>
+<%--        page size--%>
         <div class="col-md-3">
             <div class="dropdown show">
                 <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -25,6 +26,7 @@
                 </div>
             </div>
         </div>
+<%--        page size--%>
     </div>
 
     <div style="border: #0b2e13">
@@ -75,7 +77,7 @@
 
                     <c:forEach begin="${sessionScope.startPageIndex}" end="${sessionScope.endPageIndex}" varStatus="counter">
                         <li class="${(sessionScope.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.PAGE_INDEX}=${counter.index}&command=${Command.SENT_REPORTS}"> ${counter.index+1} </a>
+                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${requestScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Command.SENT_REPORTS}"> ${counter.index+1} </a>
                         </li>
                     </c:forEach>
 

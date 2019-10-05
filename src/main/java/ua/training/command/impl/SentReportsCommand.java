@@ -34,21 +34,21 @@ public class SentReportsCommand implements ICommand {
         request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
         //TODO: map via json mapper
         final HttpSession session = request.getSession();
-        final Long sessionPageIndex = (Long) session.getAttribute(Attributes.CURRENT_PAGE_INDEX);
+        final Long currentPageIndex = (Long) session.getAttribute(Attributes.CURRENT_PAGE_INDEX);
         final Long startPageIndex = (Long) session.getAttribute(Attributes.START_PAGE_INDEX);
         final Long endPageIndex = (Long) session.getAttribute(Attributes.END_PAGE_INDEX);
 
-        String pageIndex = request.getParameter(Parameters.PAGE_INDEX);
+        String selectedPageIndex = request.getParameter(Parameters.SELECTED_PAGE_INDEX);
         final String pageSize = request.getParameter(Parameters.PAGE_SIZE);
         final String isNextClicked = request.getParameter(Parameters.NEXT_PAGE_CLICK);
         final String isPreviousClicked = request.getParameter(Parameters.PREV_PAGE_CLICK);
 
-        if (pageIndex == null && sessionPageIndex != null) {
-            pageIndex = sessionPageIndex.toString();
+        if (selectedPageIndex == null && currentPageIndex != null) {
+            selectedPageIndex = currentPageIndex.toString();
         }
 
         final User user = (User) session.getAttribute(Attributes.USER);
-        final PaginationDto paginationDto = new PaginationDto(pageIndex, pageSize, isNextClicked, isPreviousClicked, startPageIndex, endPageIndex);
+        final PaginationDto paginationDto = new PaginationDto(selectedPageIndex, pageSize, isNextClicked, isPreviousClicked, startPageIndex, endPageIndex);
         paginationDto.setUserId(user.getId());
 
         final PaginationHandler<SentReportsDto> paginationHandler = sentReportsService.getSentReports(paginationDto);

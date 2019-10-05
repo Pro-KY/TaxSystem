@@ -5,14 +5,12 @@ import ua.training.persistence.entities.User;
 import ua.training.service.SignInService;
 import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
-import ua.training.util.handler.properties.MessagePropertiesHandler;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-import static ua.training.util.handler.properties.MessagePropertiesHandler.LOGIN_ERROR;
 import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 
 public class SignInCommand implements ICommand {
@@ -44,7 +42,8 @@ public class SignInCommand implements ICommand {
                 request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SEND_REPORT));
             } else {
                 request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(PATH_ERROR));
-                request.setAttribute(Attributes.ERROR_MSG, MessagePropertiesHandler.getMessage(LOGIN_ERROR));
+                request.setAttribute(Attributes.ALERT_ERROR, true);
+//                request.setAttribute(Attributes.ALERT_ERROR, MessagePropertiesHandler.getMessage(LOGIN_ERROR));
             }
         }
 

@@ -18,7 +18,7 @@ public class Parameters {
     public static final String USER_ADDRESS = "address";
 
     public static final String PAGE_SIZE = "pageSize";
-    public static final String PAGE_INDEX = "pageIndex";
+    public static final String SELECTED_PAGE_INDEX = "pageIndex";
     public static final String NEXT_PAGE_CLICK = "nextPageClick";
     public static final String PREV_PAGE_CLICK = "prevPageClick";
     public static final String REPORT_APPROVAL_ID = "reportApprovalId";

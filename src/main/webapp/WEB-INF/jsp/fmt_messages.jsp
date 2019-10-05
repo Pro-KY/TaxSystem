@@ -16,6 +16,6 @@
 <fmt:message var="inputFilePlaceholder" key="sendreport.input.file.placeholder" bundle="${sessionScope.rb}" scope="request"/>
 <fmt:message var="inputFileButtonName" key="sendreport.input.file.button" bundle="${sessionScope.rb}" scope="request"/>
 
-<fmt:message var="alertSuccess" key="alert.success" bundle="${sessionScope.rb}" scope="request"/>
-<fmt:message var="alertError" key="alert.fail" bundle="${sessionScope.rb}" scope="request"/>
-
+<%-- alert --%>
+<fmt:message var="alertSuccessMsg" key="alert.success" bundle="${sessionScope.rb}" scope="request"/>
+<fmt:message var="alertErrorMsg" key="alert.fail" bundle="${sessionScope.rb}" scope="request"/>

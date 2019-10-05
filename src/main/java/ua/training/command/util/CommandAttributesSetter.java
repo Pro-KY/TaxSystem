@@ -17,13 +17,12 @@ public class CommandAttributesSetter {
     private static final Logger log = LogManager.getLogger(ReportDetailsService.class);
 
     public static String getErrorPage(HttpServletRequest request, String msg) {
-        request.setAttribute(ERROR_MSG, msg);
+        request.setAttribute(ALERT_ERROR, true);
         return ViewPropertiesHandler.getViewPath(PATH_ERROR);
     }
 
     public static void setSendReportCommandAttributes(HttpServletRequest request) {
-        request.setAttribute(ALERT, "true");
-        request.setAttribute(ALERT_MSG, ALERT_MSG_REPORT_SUCCES_KEY);
+        request.setAttribute(ALERT_SUCCESS, true);
         request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SEND_REPORT));
     }
 
@@ -36,6 +35,6 @@ public class CommandAttributesSetter {
 
     public static void setEditReportCommandAttributes(HttpServletRequest request) {
         request.setAttribute(ALERT_SUCCESS, "true");
-        request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_EDIT_REPORT));
+        request.setAttribute(FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
     }
 }
