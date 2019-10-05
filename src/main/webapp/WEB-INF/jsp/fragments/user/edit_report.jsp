@@ -13,14 +13,14 @@
             <c:set var="quarterId" value="${reportDto.quarterId}" scope="request"/>
             <!-- form -->
 
+            <!-- id -->
             <div class="mb-2">
                 <span class="text-secondary">${reportIdLabel}</span>
                 <span>${reportDto.reportId}</span>
             </div>
-            ${reportDto.reportApprovalId}
+
             <form>
                 <div id ="formWrapper">
-                    <!-- id -->
                     <!-- type -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">${taxTypeLabel}</label>

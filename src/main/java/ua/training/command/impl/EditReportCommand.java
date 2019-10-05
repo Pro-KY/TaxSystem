@@ -47,6 +47,7 @@ public class EditReportCommand implements ICommand {
             request.setAttribute(SENT_REPORTS_LIST, sentReports);
             isOperationSuccessful = true;
         } catch (Exception e) {
+            log.debug(e.getMessage(), e.getCause());
             isOperationSuccessful = false;
         }
 

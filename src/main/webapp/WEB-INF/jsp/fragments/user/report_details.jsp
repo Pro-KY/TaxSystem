@@ -11,11 +11,6 @@
 <fmt:message var="processing" key="report.details.report.state.processing" bundle="${rb}" scope="request"/>
 <fmt:message var="changed" key="report.details.report.state.changed" bundle="${rb}" scope="request"/>
 
-<%--<fmt:message var="notAssignedText" key="sent.reports.not.assigned.text" bundle="${rb}" scope="request"/>--%>
-<%--<fmt:message var="approved" key="report.details.report.state.approved" bundle="${rb}" scope="request"/>--%>
-<%--<fmt:message var="rejected" key="report.details.report.state.rejected" bundle="${rb}" scope="request"/>--%>
-<%--<fmt:message var="reqchanges" key="report.details.report.state.reqchanges" bundle="${rb}" scope="request"/>--%>
-<%--<fmt:message var="processing" key="report.details.report.state.processing" bundle="${rb}" scope="request"/>--%>
 
 <div class="card border-0 mb-4">
     <div class="card-header">
@@ -27,7 +22,8 @@
     <%--CHANGE_BTN--%>
     <c:if test="${reportDetails.approvalStateId eq 2}">
         <span class="d-flex justify-content-end mt-n4">
-            <a href="#" class="btn btn-warning"><fmt:message key="report.details.change.btn" bundle="${rb}"/></a>
+            <a href="taxsystem/?command=${Command.CHANGE_INSPECTOR}" class="btn btn-warning"><fmt:message key="report.details.change.btn" bundle="${rb}"/></a>
+
         </span>
     </c:if>
     <%--CHANGE_BTN--%>

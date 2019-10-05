@@ -31,6 +31,7 @@ public class CommandFactory {
         commandHashMap.put(Command.REPORT_DETAILS, new ReportDetailsCommand());
         commandHashMap.put(Command.GET_REPORT, new GetReportCommand());
         commandHashMap.put(Command.EDIT_REPORT, new EditReportCommand());
+        commandHashMap.put(Command.CHANGE_INSPECTOR, new ChangeInspectorCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {
