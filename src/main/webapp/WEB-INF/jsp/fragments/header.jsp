@@ -24,13 +24,13 @@
                             <fmt:message key="header.language" bundle="${rb}"/>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="taxsystem/?command=${Command.CHANGE_LANGUAGE}&language=ua"><span class="flag-icon flag-icon-ua"> </span>  Ukrainian</a>
+                            <a class="dropdown-item" href="taxsystem/?command=${Command.CHANGE_LANGUAGE}&language=ua"><span class="flag-icon flag-icon-ua"> </span> Ukrainian</a>
                             <a class="dropdown-item" href="taxsystem/?command=${Command.CHANGE_LANGUAGE}&language=en"><span class="flag-icon flag-icon-us"> </span> English</a>
                         </div>
                     </li>
                 </ul>
         </nav>
-    </div>>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>

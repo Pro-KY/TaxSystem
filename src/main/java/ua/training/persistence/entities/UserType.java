@@ -3,7 +3,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class UserType implements Serializable {
-
     private Long id;
     private String role;
 

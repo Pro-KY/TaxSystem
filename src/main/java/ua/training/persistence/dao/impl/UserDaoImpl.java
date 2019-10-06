@@ -42,7 +42,7 @@ public class UserDaoImpl implements IUserDao {
     public Optional<User> getUserByEmailAndPassword(String login, String password)  {
         String sql = SqlPropertiesHandler.getSqlQuery(FIND_BY_LOGIN_AND_PASSWORD);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
-        final UserMapperImpl userMapper = new UserMapperImpl(false, false);
+        final UserMapperImpl userMapper = new UserMapperImpl(true, false);
         userMapper.mapUserTypeRelation(new UserTypeMapperImpl(true));
         return jdbcTemplate.findByQuery(sql, userMapper, login, password);
     }

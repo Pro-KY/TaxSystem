@@ -19,9 +19,7 @@ public class SignInService {
     public Optional<User> getAuthorizedUser(String login, String password) {
         final IUserDao userDao = daoFactory.getUserDao();
         final Optional<User> userByEmailAndPassword = userDao.getUserByEmailAndPassword(login, password);
-        userByEmailAndPassword.ifPresent(user -> {
-            user.setPassword(null);
-        });
+        userByEmailAndPassword.ifPresent(user -> user.setPassword(null));
 
         return userByEmailAndPassword;
     }
