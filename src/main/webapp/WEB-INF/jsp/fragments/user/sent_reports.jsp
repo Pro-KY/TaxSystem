@@ -10,11 +10,11 @@
 
 <div class="container">
     <div id="elementsAmountSelect" class="row">
-        <div class="col-md-9"></div>
+        <div class="col-md-10"></div>
 <%--        page size--%>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="dropdown show">
-                <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="dropdown-toggle nav-link" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -51,6 +51,43 @@
             </tbody>
         </table>
     </div>
+
+    <div class="row mt-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <%--PAGINATION--%>
+            <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
+                <nav aria-label="...">
+                    <ul class="pagination" style="list-style-type: none;">
+                        <div class="container-fluid">
+                            <div class="btn-group">
+                                <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
+                                    <li class="${sessionScope.paginationInfo.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                        <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Previous</a>
+                                    </li>
+                                </c:if>
+
+                                <c:forEach begin="${sessionScope.paginationInfo.startPageIndex}" end="${sessionScope.paginationInfo.endPageIndex}" varStatus="counter">
+                                    <li class="${(sessionScope.paginationInfo.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
+                                        <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Command.SENT_REPORTS}"> ${counter.index+1} </a>
+                                    </li>
+                                </c:forEach>
+
+                                <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
+                                    <li class="${sessionScope.paginationInfo.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
+                                        <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Next</a>
+                                    </li>
+                                </c:if>
+                            </div>
+                        </div>
+                    </ul>
+                </nav>
+            </c:if>
+            <%--PAGINATION--%>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
 </div>
 
 <%--TESTING--%>
@@ -63,35 +100,7 @@
 <%--TESTING--%>
 
 
-<%--PAGINATION--%>
-<c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
-    <nav aria-label="...">
-        <ul class="pagination" style="list-style-type: none;">
-            <div class="container-fluid">
-                <div class="btn-group">
-                    <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
-                        <li class="${sessionScope.paginationInfo.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Previous</a>
-                        </li>
-                    </c:if>
 
-                    <c:forEach begin="${sessionScope.paginationInfo.startPageIndex}" end="${sessionScope.paginationInfo.endPageIndex}" varStatus="counter">
-                        <li class="${(sessionScope.paginationInfo.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Command.SENT_REPORTS}"> ${counter.index+1} </a>
-                        </li>
-                    </c:forEach>
-
-                    <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
-                        <li class="${sessionScope.paginationInfo.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                            <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Next</a>
-                        </li>
-                    </c:if>
-                </div>
-            </div>
-        </ul>
-    </nav>
-</c:if>
-<%--PAGINATION--%>
 
 
 

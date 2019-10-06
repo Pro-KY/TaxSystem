@@ -15,12 +15,11 @@
 </head>
 <body>
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <nav class="navbar navbar-expand-lg navbar-dark main-bg-color">
             <a class="navbar-brand" href="#">Tax Reports System</a>
-
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown show">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item dropdown">
+                        <a class="nav-item nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <fmt:message key="header.language" bundle="${rb}"/>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">

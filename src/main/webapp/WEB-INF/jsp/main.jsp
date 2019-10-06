@@ -9,16 +9,15 @@
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="localization.pagecontent" var = "rb" scope="session"/>
 
-<%--<c:set var="session" value="${pageContext.session}" scope="session"/>--%>
 <c:set var="userTypeId" value="${user.userType.id}" scope="session"/>
 
-<c:set var="userTypeIndividualId" value="1" scope="session"/>
-<c:set var="userTypeLegalEntityId" value="2" scope="session"/>
-<c:set var="userTypeInspectorId" value="3" scope="session"/>
+<c:set var="userTypeIndividualId" value="1" scope="page"/>
+<c:set var="userTypeLegalEntityId" value="2" scope="page"/>
+<c:set var="userTypeInspectorId" value="3" scope="page"/>
 
 <fmt:message var ="userTypeIndividualText" key="main.usertype.individual" bundle="${rb}"/>
 <fmt:message var ="userTypeLegalEntityText" key="main.usertype.legal" bundle="${rb}"/>
-<fmt:message var ="userTypeInspectorText" key="main.usertype.inspectorName" bundle="${rb}"/>
+<fmt:message var ="userTypeInspectorText" key="main.usertype.inspector" bundle="${rb}"/>
 
 <%@ include file="/WEB-INF/jsp/fmt_messages.jsp"%>
 <html>
@@ -40,7 +39,7 @@
 <body>
     <!-- TOP navbar -->
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark main-bg-color">
 <%--            <a class="navbar-brand" href="#">User Name</a>--%>
             <div>
                 <!-- user name -->
@@ -56,6 +55,12 @@
                 </span>
                 <!-- user type -->
             </div>
+
+            <!-- address -->
+            <span class="navbar-text text-white mt-md-n4 ml-md-5">
+                ${not empty user.address ? user.address : ''}
+            </span>
+            <!-- address -->
 
             <!-- sign out link-->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -74,17 +79,26 @@
 
     <div class="container-fluid mt-3">
         <div class="row">
-            <!-- sidebar -->
-            <c:import url="fragments/sidebar.jsp" />
-            <!-- sidebar -->
+            <!-- SIDEBAR -->
+            <c:set var = "isUser" value = "${userTypeId eq userTypeIndividualId or userTypeId eq userTypeLegalEntityId}"/>
+            <c:choose>
+                <c:when test = "${isUser}">
+                    <c:import url="fragments/user/sidebar.jsp" />
+                </c:when>
+                <c:otherwise>
+                    <c:import url="fragments/inspector/sidebar.jsp" />
+                </c:otherwise>
+            </c:choose>
+<%--            <c:import url="fragments/sidebar.jsp" />--%>
+            <!-- SIDEBAR -->
 
-            <!-- center page content -->
+            <!--MAIN CONTENT-->
             <div class="col-md-9">
-                <c:if test="${requestScope.get(Attributes.FRAGMENT_PATH) ne null}">
+                <c:if test="${not empty requestScope.get(Attributes.FRAGMENT_PATH)}">
                     <c:import url="${requestScope.get(Attributes.FRAGMENT_PATH)}" />
                 </c:if>
             </div>
-            <!-- center page content -->
+            <!--MAIN CONTENT-->
         </div>
     </div>
 

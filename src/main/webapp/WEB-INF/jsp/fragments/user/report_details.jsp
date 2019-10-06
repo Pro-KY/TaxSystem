@@ -13,7 +13,7 @@
 
 <div class="card border-0 mb-4">
     <div class="card-header">
-        <fmt:message key="main.usertype.inspectorName" bundle="${rb}"/>
+        <fmt:message key="main.usertype.inspector" bundle="${rb}"/>
     </div>
     <div class="card-body">
         <h5 class="card-title">${reportDetails.inspectorName ne null ? reportDetails.inspectorName : notAssignedText}</h5>
