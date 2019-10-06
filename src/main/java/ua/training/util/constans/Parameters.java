@@ -24,5 +24,4 @@ public class Parameters {
     public static final String REPORT_APPROVAL_ID = "reportApprovalId";
     public static final String INSPECTOR_ID = "inspectorId";
     public static final String SIDEBAR_ACTIVE_INDEX = "sideBarIndex";
-
 }

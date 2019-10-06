@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<c:set var="pageContextPath" value="${pageContext.request.contextPath}" scope="page"/>
 <%@ page import="ua.training.util.constans.Command"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <html>
 <head>
@@ -15,22 +15,22 @@
 </head>
 <body>
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
             <a class="navbar-brand" href="#">Tax Reports System</a>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="${pageContextPath}/taxsystem/?command=changeLanguage&language=en" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> English</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown09">
-                            <a class="dropdown-item" href="${pageContextPath}/taxsystem/?command=${Command.CHANGE_LANGUAGE}&language=ua"><span class="flag-icon flag-icon-ua"> </span>  Ukrainian</a>
-                            <a class="dropdown-item" href="${pageContextPath}/taxsystem/?command=${Command.CHANGE_LANGUAGE}&language=ru"><span class="flag-icon flag-icon-ru"> </span>  Russian</a>
+                    <li class="nav-item dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <fmt:message key="header.language" bundle="${rb}"/>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="taxsystem/?command=${Command.CHANGE_LANGUAGE}&language=ua"><span class="flag-icon flag-icon-ua"> </span>  Ukrainian</a>
+                            <a class="dropdown-item" href="taxsystem/?command=${Command.CHANGE_LANGUAGE}&language=en"><span class="flag-icon flag-icon-us"> </span> English</a>
                         </div>
                     </li>
                 </ul>
-            </div>
         </nav>
-    </div>
+    </div>>
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>

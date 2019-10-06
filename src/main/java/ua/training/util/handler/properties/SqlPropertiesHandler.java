@@ -5,7 +5,8 @@ import java.util.ResourceBundle;
 
 public class SqlPropertiesHandler {
     private static ResourceBundle sqlProperties;
-    public static final String LOGIN_AND_PASSWORD = "LOGIN_AND_PASSWORD";
+
+    public static final String FIND_BY_LOGIN_AND_PASSWORD = "FIND_BY_LOGIN_AND_PASSWORD";
     public static final String FIND_TAX_TYPE_BY_NAME = "FIND_TAX_TYPE_BY_NAME";
     public static final String FIND_ALL_TAX_TYPES = "FIND_ALL_TAX_TYPES";
     public static final String FIND_REPORT_STATE_BY_NANE = "FIND_REPORT_STATE_BY_NANE";

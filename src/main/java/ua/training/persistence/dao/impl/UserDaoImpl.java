@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ua.training.persistence.dao.IUserDao;
 import ua.training.persistence.dao.jdbc.JdbcTemplate;
 import ua.training.persistence.dao.mappers.impl.UserMapperImpl;
+import ua.training.persistence.dao.mappers.impl.UserTypeMapperImpl;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.User;
 import ua.training.persistence.entities.UserType;
@@ -39,9 +40,10 @@ public class UserDaoImpl implements IUserDao {
     }
 
     public Optional<User> getUserByEmailAndPassword(String login, String password)  {
-        String sql = SqlPropertiesHandler.getSqlQuery(LOGIN_AND_PASSWORD);
+        String sql = SqlPropertiesHandler.getSqlQuery(FIND_BY_LOGIN_AND_PASSWORD);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
         final UserMapperImpl userMapper = new UserMapperImpl(false, false);
+        userMapper.mapUserTypeRelation(new UserTypeMapperImpl(true));
         return jdbcTemplate.findByQuery(sql, userMapper, login, password);
     }
 

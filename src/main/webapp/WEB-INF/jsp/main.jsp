@@ -46,7 +46,7 @@
                 <!-- user name -->
                 <h5 class="text-white h5">
 <%--                 TODO: add organization name if user type is legal--%>
-                    ${user.organization eq null ? (user.firstName.concat(" ").concat(user.lastName)) : (user.organization)}
+                    ${empty user.organization ? (user.firstName.concat(" ").concat(user.lastName)) : (user.organization)}
                 </h5>
                 <!-- user name -->
 
@@ -70,6 +70,7 @@
             <!-- sign out link -->
         </nav>
     </div>
+    <!-- TOP navbar -->
 
     <div class="container-fluid mt-3">
         <div class="row">

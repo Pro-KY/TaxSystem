@@ -10,15 +10,12 @@ import java.util.Optional;
 
 public class SignInService {
     private static final Logger log = LogManager.getLogger(SignInService.class);
-
-    // userDao;
     private MysqlDaoFactory daoFactory;
 
     public SignInService() {
         this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
-    // return authorized user if one exist in DB
     public Optional<User> getAuthorizedUser(String login, String password) {
         final IUserDao userDao = daoFactory.getUserDao();
         final Optional<User> userByEmailAndPassword = userDao.getUserByEmailAndPassword(login, password);
