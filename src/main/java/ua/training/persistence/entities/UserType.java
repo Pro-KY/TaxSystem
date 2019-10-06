@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class UserType implements Serializable {
     private Long id;
-    private String role;
+    private String type;
 
     public UserType(long id) {
         this.id = id;
     }
 
-    public UserType(long id, String role) {
+    public UserType(long id, String type) {
         this.id = id;
-        this.role = role;
+        this.type = type;
     }
 
     public long getId() {
@@ -24,19 +24,19 @@ public class UserType implements Serializable {
     }
 
 
-    public String getRole() {
-        return role;
+    public String getType() {
+        return type;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return "UserType{" +
                 "id=" + id +
-                ", role='" + role + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 
@@ -46,11 +46,11 @@ public class UserType implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         UserType userType1 = (UserType) o;
         return id == userType1.id &&
-                Objects.equals(role, userType1.role);
+                Objects.equals(type, userType1.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, role);
+        return Objects.hash(id, type);
     }
 }

@@ -1,14 +1,14 @@
 package ua.training.util.constans;
 
 public enum  UserTypes {
-    INDIVIDUAL(1), LEGAL_ENTITY(2), INSPECTOR(3), ADMIN(4);
-    int id;
+    INDIVIDUAL("individual"), LEGAL_ENTITY("legal entity"), INSPECTOR("inspector"), ADMIN("admin");
+    String type;
 
-    UserTypes(int id) {
-        this.id = id;
+    UserTypes(String type) {
+        this.type = type;
     }
 
-    public int getId() {
-        return id;
+    public String getType() {
+        return type;
     }
 }

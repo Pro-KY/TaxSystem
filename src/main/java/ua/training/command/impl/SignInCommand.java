@@ -5,6 +5,7 @@ import ua.training.persistence.entities.User;
 import ua.training.service.SignInService;
 import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
+import ua.training.util.constans.UserTypes;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +23,9 @@ public class SignInCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-
         final String email = request.getParameter(Parameters.EMAIL);
         final String password = request.getParameter(Parameters.PASSWORD);
 
-        //TODO: validate request params here or on the frontend
         final Optional<User> optionalUser = signInService.getAuthorizedUser(email, password);
         boolean isUserAuthorized = optionalUser.isPresent();
 
@@ -39,7 +38,9 @@ public class SignInCommand implements ICommand {
             if (isUserAuthorized) {
                 final User user = optionalUser.get();
                 session.setAttribute(Attributes.USER, user);
-                request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SEND_REPORT));
+                final String type = user.getUserType().getType();
+                String fragmentPath = type.equals(UserTypes.INSPECTOR.getType()) ? FRAGMENT_PATH_PROCESS_REPORT : FRAGMENT_PATH_SEND_REPORT;
+                request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(fragmentPath));
             } else {
                 request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(PATH_ERROR));
                 request.setAttribute(Attributes.ALERT_ERROR, true);

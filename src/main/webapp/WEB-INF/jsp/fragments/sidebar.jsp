@@ -22,15 +22,14 @@
 <c:set var="sideBarIndex" value="${sessionScope.get(Attributes.SIDEBAR_ACTIVE_INDEX)}"/>
 
 <div class="col-md-3">
-
-    <div class="list-group" id="list-tab" role="tablist">
-        <a class="list-group-item list-group-item-action ${sideBarIndex eq 0 or sideBarIndex eq null? ' active' : ''}" id="list-home-list" href="${pageContext.request.contextPath}/taxsystem/?command=${command_0}&${Parameters.SIDEBAR_ACTIVE_INDEX}=0" role="tab">
+    <div class="list-group" id="list-tab" type="tablist">
+        <a class="list-group-item list-group-item-action ${sideBarIndex eq 0 or sideBarIndex eq null? ' active' : ''}" id="list-home-list" href="${pageContext.request.contextPath}/taxsystem/?command=${command_0}&${Parameters.SIDEBAR_ACTIVE_INDEX}=0" type="tab">
             ${isTypeUser ? menu_user_0 : menu_inpector_0}
         </a>
-        <a class="list-group-item list-group-item-action ${sideBarIndex eq 1 ? ' active' : ''}" id="list-profile-list" href="${pageContext.request.contextPath}/taxsystem/?command=${command_1}&${Parameters.SIDEBAR_ACTIVE_INDEX}=1" role="tab" >
+        <a class="list-group-item list-group-item-action ${sideBarIndex eq 1 ? ' active' : ''}" id="list-profile-list" href="${pageContext.request.contextPath}/taxsystem/?command=${command_1}&${Parameters.SIDEBAR_ACTIVE_INDEX}=1" type="tab" >
             ${isTypeUser ? menu_user_1 : menu_inpector_1}
         </a>
-        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#" role="tab">
+        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#" type="tab">
             ${menu_user_2}
         </a>
     </div>

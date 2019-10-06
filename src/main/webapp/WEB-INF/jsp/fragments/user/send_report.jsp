@@ -73,7 +73,7 @@
         <div class="col-md-8"></div>
     </div>
     <c:if test="${pageContext.request.getAttribute('alert')}">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-success alert-dismissible fade show" type="alert">
             ${alertSuccess}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
