@@ -6,7 +6,6 @@
 <fmt:message var="not_signed_label" key="sent.reports.not.assigned.text" bundle="${sessionScope.rb}" scope="request"/>
 
 <c:url scope="request" var="pageSizeThreeUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=3&command=${Command.SENT_REPORTS}"/>
-<%--<c:url scope="request" var="changeIndexUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${Attributes.CURRENT_PAGE_INDEX}&command=${Command.SENT_REPORTS}"/>--%>
 
 <div class="container">
     <div id="elementsAmountSelect" class="row">
@@ -44,7 +43,7 @@
                 <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.REPORT_APPROVAL_ID}=${report.reportApprovalId}&command=${Command.REPORT_DETAILS}">
                     <td>${report.reportId}</td>
                     <td>${report.state}</td>
-                    <td>${report.inspectorName eq null ? report.inspectorName : not_signed_label}</td>
+                    <td>${not empty report.inspectorName ? report.inspectorName : not_signed_label}</td>
                     <td>${report.timestamp}</td>
                 </tr>
             </c:forEach>

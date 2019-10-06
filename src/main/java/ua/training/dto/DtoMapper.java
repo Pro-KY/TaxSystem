@@ -1,5 +1,7 @@
 package ua.training.dto;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.training.persistence.entities.Report;
 import ua.training.persistence.entities.ReportApproval;
 import ua.training.persistence.entities.StateApproval;
@@ -9,6 +11,7 @@ import java.sql.Timestamp;
 
 public class DtoMapper {
     private static DtoMapper instance;
+    private static final Logger log = LogManager.getLogger(DtoMapper.class);
 
     private DtoMapper() {}
 
@@ -52,7 +55,7 @@ public class DtoMapper {
         final String state = stateApproval.getState();
         final Timestamp timestamp = reportApproval.getTimestamp();
         final User inspector = reportApproval.getInspector();
-        final String  inspectorName = inspector.getFirstName() + " " +inspector.getLastName();
+        final String  inspectorName = (inspector.getId() > 0) ? inspector.getFirstName() + " " +inspector.getLastName() : "";
         return new SentReportsDto(reportId, state, inspectorName, timestamp, reportApprovalId);
     }
 

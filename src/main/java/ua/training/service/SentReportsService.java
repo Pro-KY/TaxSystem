@@ -30,8 +30,6 @@ public class SentReportsService {
         this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
-    // PaginationHandler as a return type
-//    public List<SentReportsDto> getReportDetails(PaginationDto paginationDto) {
     public PaginationHandler<SentReportsDto> getSentReports(PaginationDto paginationDto) {
         final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
         final long allRows = reportApprovalDao.countAllRows();
@@ -55,10 +53,13 @@ public class SentReportsService {
             paginationHandler.calculateOffset();
         }
 
-        final List<ReportApproval> paginationList = reportApprovalDao.getPaginationList(paginationHandler.getPageSize(), paginationHandler.getOffSet(), userId);
+        final List<ReportApproval> paginationList = reportApprovalDao.
+                getReportApprovalByUserId(paginationHandler.getPageSize(), paginationHandler.getOffSet(), userId);
 
         final List<SentReportsDto> collect = paginationList.stream()
+                .peek(reportApproval -> System.out.println("before mapping: " +reportApproval.toString()))
                 .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
+                .peek(reportApproval -> System.out.println("after mapping: " + reportApproval.toString()))
                 .collect(Collectors.toList());
         paginationHandler.setPageResult(collect);
         return paginationHandler;

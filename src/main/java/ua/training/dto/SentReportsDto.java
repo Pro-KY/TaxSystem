@@ -10,10 +10,10 @@ public class SentReportsDto implements Serializable {
     private String inspectorName;
     private Timestamp timestamp;
 
-    public SentReportsDto(Long reportId, String state, String inspector, Timestamp timestamp, Long reportApprovalId) {
+    public SentReportsDto(Long reportId, String state, String inspectorName, Timestamp timestamp, Long reportApprovalId) {
         this.reportId = reportId;
         this.state = state;
-        this.inspectorName = inspector;
+        this.inspectorName = inspectorName;
         this.timestamp = timestamp;
         this.reportApprovalId = reportApprovalId;
     }
@@ -56,5 +56,16 @@ public class SentReportsDto implements Serializable {
 
     public void setReportApprovalId(Long reportApprovalId) {
         this.reportApprovalId = reportApprovalId;
+    }
+
+    @Override
+    public String toString() {
+        return "SentReportsDto{" +
+                "reportApprovalId=" + reportApprovalId +
+                ", reportId=" + reportId +
+                ", state='" + state + '\'' +
+                ", inspectorName='" + inspectorName + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
     }
 }

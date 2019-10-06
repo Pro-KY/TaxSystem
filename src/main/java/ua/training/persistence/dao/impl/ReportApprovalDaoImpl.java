@@ -61,12 +61,12 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     }
 
     @Override
-    public List<ReportApproval> getPaginationList(long pageSize, long offSet, long userId) { // pageSize, offset
+    public List<ReportApproval> getReportApprovalByUserId(long pageSize, long offSet, long userId) {
         String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_PAGINATION);
 
         final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);
         reportApprovalMapper.mapStateApprovalRelation(new StateApprovalMapperImpl(true));
-        reportApprovalMapper.mapUserRelation(new UserMapperImpl(true, true));
+        reportApprovalMapper.mapInspectorRelation(new UserMapperImpl(true, true));
 
         return jdbcTemplate.finAll(sql, reportApprovalMapper, userId, pageSize, offSet);
     }
