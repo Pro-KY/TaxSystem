@@ -1,5 +1,7 @@
 package ua.training.persistence.dao.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.training.persistence.dao.ITaxTypeDao;
 import ua.training.persistence.dao.jdbc.JdbcTemplate;
 import ua.training.persistence.dao.mappers.impl.TaxTypeMapperIml;
@@ -9,18 +11,16 @@ import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 import static ua.training.util.handler.properties.SqlPropertiesHandler.FIND_ALL_TAX_TYPES;
 import static ua.training.util.handler.properties.SqlPropertiesHandler.FIND_TAX_TYPE_BY_NAME;
 
 public class TaxTypeDaoImpl implements ITaxTypeDao {
     private static TaxTypeDaoImpl instance;
-//    private MysqlDataSource myDataSource;
     private JdbcTemplate jdbcTemplate;
+    private static final Logger logger = LogManager.getLogger(ReportDaoImpl.class);
 
     public void setDataSource(MysqlDataSource mysqlDataSource) {
-//        this.mysqlDataSource = mysqlDataSource;
         jdbcTemplate.setDataSource(mysqlDataSource);
     }
 
@@ -40,7 +40,6 @@ public class TaxTypeDaoImpl implements ITaxTypeDao {
         String sql = SqlPropertiesHandler.getSqlQuery(FIND_TAX_TYPE_BY_NAME);
         final String type = taxType.getType();
         final Object[] parameters = {type};
-
         return jdbcTemplate.findByQuery(sql, new TaxTypeMapperIml(false), parameters);
     }
 
@@ -70,9 +69,4 @@ public class TaxTypeDaoImpl implements ITaxTypeDao {
     public Optional<TaxType> findById(Long id) {
         return Optional.empty();
     }
-
-    private Function<TaxType, Object[]> paramsSupplier = taxType -> {
-        final String type = taxType.getType();
-        return new Object[] {type};
-    };
 }

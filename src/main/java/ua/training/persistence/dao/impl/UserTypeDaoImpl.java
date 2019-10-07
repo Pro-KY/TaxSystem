@@ -1,5 +1,7 @@
 package ua.training.persistence.dao.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ua.training.persistence.dao.IUserTypeDao;
 import ua.training.persistence.dao.jdbc.JdbcTemplate;
 import ua.training.persistence.dao.mappers.impl.UserTypeMapperImpl;
@@ -14,6 +16,8 @@ import static ua.training.util.handler.properties.SqlPropertiesHandler.USER_TYPE
 public class UserTypeDaoImpl implements IUserTypeDao {
     private JdbcTemplate jdbcTemplate;
     private static UserTypeDaoImpl instance;
+    private static final Logger logger = LogManager.getLogger(UserTypeDaoImpl.class);
+
 
     public void setDataSource(MysqlDataSource mysqlDataSource) {
         jdbcTemplate.setDataSource(mysqlDataSource);
@@ -42,6 +46,7 @@ public class UserTypeDaoImpl implements IUserTypeDao {
         String sql = SqlPropertiesHandler.getSqlQuery(USER_TYPE_BY_TYPE);
         final UserTypeMapperImpl userTypeMapper = new UserTypeMapperImpl(false);
         return jdbcTemplate.findByQuery(sql, userTypeMapper, type);
+
     }
 
     @Override

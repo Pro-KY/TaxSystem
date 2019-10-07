@@ -52,12 +52,13 @@ public class JdbcTemplate {
     public <T> Optional<T> findByQuery(String sql, EntityMapper<T> entityMapper, Object... parameters) {
         final Connection connection = mysqlDataSource.getConnection();
         final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
-        Optional<T> t;
+        Optional<T> t = Optional.empty();
         try (ResultSet result = jdbcQuery.select(parameters)) {
-            result.next();
-            t = Optional.ofNullable(entityMapper.mapToEntity(result));
+            if(result.next()) {
+                t = Optional.ofNullable(entityMapper.mapToEntity(result));
+            }
         } catch (SQLException e) {
-            t = Optional.empty();
+            log.error(e.getMessage(), e);
         }  finally {
             mysqlDataSource.releaseResources(connection, jdbcQuery.getPreparedStatement());
         }
@@ -67,12 +68,13 @@ public class JdbcTemplate {
     public Long countRows(String sql, Object...parameters) {
         final Connection connection = mysqlDataSource.getConnection();
         final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
-        long rowsAmount;
+        long rowsAmount = 0;
         try (ResultSet result = jdbcQuery.select(parameters)) {
-            result.next();
-            rowsAmount = result.getLong(1);
+            if (result.next()) {
+                rowsAmount = result.getLong(1);
+            }
         } catch (SQLException e) {
-            rowsAmount = 0;
+            log.error(e.getMessage(), e);
         }  finally {
             mysqlDataSource.releaseResources(connection, jdbcQuery.getPreparedStatement());
         }

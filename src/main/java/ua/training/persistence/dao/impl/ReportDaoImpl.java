@@ -57,7 +57,7 @@ public class ReportDaoImpl implements IReportDao {
         try {
             return jdbcTemplate.saveOrUpdate(sql, entity.getTaxType().getId(), entity.getSum(), entity.getQuarter(), entity.getId());
         } catch (DataAccessException e) {
-            logger.debug(e.getMessage(), e.getCause());
+            logger.error(e.getMessage(), e.getCause());
             throw new PersistenceException(e.getMessage(), e);
         }
     }

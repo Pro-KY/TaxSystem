@@ -137,7 +137,6 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         reportApprovalMapper.mapReportRelation(reportMapper);
         reportApprovalMapper.mapStateApprovalRelation(new StateApprovalMapperImpl(true));
         reportApprovalMapper.mapInspectorRelation(new UserMapperImpl(true, true));
-
         return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
     }
 
@@ -151,15 +150,14 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         reportApprovalMapper.mapReportRelation(reportMapper);
         reportApprovalMapper.mapStateApprovalRelation(new StateApprovalMapperImpl(true));
         reportApprovalMapper.mapUserRelation(new UserMapperImpl(true, false));
-
         return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
+
     }
 
     public Optional<ReportApproval> findByIdJoinUser(Long id) {
         String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_JOIN_USER);
         final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);
         reportApprovalMapper.mapUserRelation(new UserMapperImpl(true, false));
-
         return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
     }
 

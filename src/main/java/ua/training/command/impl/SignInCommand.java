@@ -36,7 +36,7 @@ public class SignInCommand implements ICommand {
         final Optional<User> optionalUser = signInService.getAuthorizedUser(email, password);
         boolean isUserAuthorized = optionalUser.isPresent();
 
-        String pagePathProperty = isUserAuthorized ? PATH_MAIN : PATH_INDEX;
+        String pagePath = isUserAuthorized ? PATH_MAIN : PATH_INDEX;
         final HttpSession session = request.getSession(false);
 
         if (session != null) {
@@ -64,6 +64,6 @@ public class SignInCommand implements ICommand {
             }
         }
 
-        return ViewPropertiesHandler.getViewPath(pagePathProperty);
+        return ViewPropertiesHandler.getViewPath(pagePath);
     }
 }
