@@ -35,6 +35,7 @@ public class ReportApprovalService {
         this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
+
     public ReportApproval getReportApprovalById(Long id) {
         return daoFactory.getReportApprovalDao()
                 .findByIdJoinUser(id)

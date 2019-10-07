@@ -15,9 +15,9 @@
 <c:set var="userTypeLegalEntityId" value="2" scope="session"/>
 <c:set var="userTypeInspectorId" value="3" scope="session"/>
 
-<fmt:message var ="userTypeIndividualText" key="main.usertype.individual" bundle="${rb}"/>
-<fmt:message var ="userTypeLegalEntityText" key="main.usertype.legal" bundle="${rb}"/>
-<fmt:message var ="userTypeInspectorText" key="main.usertype.inspector" bundle="${rb}"/>
+<fmt:message var ="userTypeIndividualText" key="main.usertype.individual" bundle="${rb}" scope="request"/>
+<fmt:message var ="userTypeLegalEntityText" key="main.usertype.legal" bundle="${rb}" scope="request"/>
+<fmt:message var ="userTypeInspectorText" key="main.usertype.inspector" bundle="${rb}" scope="request"/>
 
 <%@ include file="/WEB-INF/jsp/fmt_messages.jsp"%>
 <html>
@@ -94,7 +94,8 @@
             <!--MAIN CONTENT-->
             <div class="col-md-9">
                 <c:if test="${not empty requestScope.get(Attributes.FRAGMENT_PATH)}">
-                    <c:import url="${requestScope.get(Attributes.FRAGMENT_PATH)}" />
+<%--                    <c:import url="${requestScope.get(Attributes.FRAGMENT_PATH)}" />--%>
+                    <jsp:include page="${requestScope.get(Attributes.FRAGMENT_PATH)}"/>
                 </c:if>
             </div>
             <!--MAIN CONTENT-->

@@ -36,12 +36,12 @@ public class DtoMapper {
         final User inspector = reportApproval.getInspector();
         final User user = reportApproval.getUser();
 
-        if(inspector != null && inspector.getId() > 0) {
+        if(inspector != null && inspector.getFirstName() != null) {
             inspectorName = inspector.getFirstName() + " " + inspector.getLastName();
             inspectorId = inspector.getId();
         }
 
-        if(user != null && user.getId() > 0) {
+        if(user != null && user.getFirstName() != null) {
             userName = user.getFirstName() + " " + user.getLastName();
         }
 

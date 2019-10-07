@@ -4,7 +4,7 @@ $(function(){
     $('#inputGroupSelect01').change(function() {
         // console.log(event.targetElement);
         // console.log(event.targetElement);
-        let selectedText = $(this).find("option:selected").text();
+        let selectedText = $(this).find("option:selected").text(); // val
         console.log(selectedText);
 
         if (selectedText === form) {
@@ -77,3 +77,4 @@ $(function(){
         $that.addClass('active');
     });
 });
+

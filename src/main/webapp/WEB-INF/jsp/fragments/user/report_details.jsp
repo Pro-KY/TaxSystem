@@ -6,7 +6,7 @@
 <fmt:message var="notAssignedText" key="sent.reports.not.assigned.text" bundle="${rb}" scope="request"/>
 <fmt:message var="approved" key="report.details.report.state.approved" bundle="${rb}" scope="request"/>
 <fmt:message var="rejected" key="report.details.report.state.rejected" bundle="${rb}" scope="request"/>
-<fmt:message var="reqchanges" key="report.details.report.state.reqchanges" bundle="${rb}" scope="request"/>
+<fmt:message var="require_changes" key="report.details.report.state.reqchanges" bundle="${rb}" scope="request"/>
 <fmt:message var="processing" key="report.details.report.state.processing" bundle="${rb}" scope="request"/>
 <fmt:message var="changed" key="report.details.report.state.changed" bundle="${rb}" scope="request"/>
 
@@ -46,7 +46,7 @@
             </c:when>
             <c:when test = "${reportDetails.approvalStateId eq 3}">
                 <h5 class="card-title text-warning">
-                    ${reqchanges}
+                    ${require_changes}
                 </h5>
             </c:when>
             <c:when test = "${reportDetails.approvalStateId eq 4}">

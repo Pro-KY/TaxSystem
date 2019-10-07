@@ -6,41 +6,17 @@
 <fmt:message var="notAssignedText" key="sent.reports.not.assigned.text" bundle="${rb}" scope="request"/>
 <fmt:message var="approved" key="report.details.report.state.approved" bundle="${rb}" scope="request"/>
 <fmt:message var="rejected" key="report.details.report.state.rejected" bundle="${rb}" scope="request"/>
-<fmt:message var="reqchanges" key="report.details.report.state.reqchanges" bundle="${rb}" scope="request"/>
+<fmt:message var="require_changes" key="report.details.report.state.reqchanges" bundle="${rb}" scope="request"/>
 <fmt:message var="processing" key="report.details.report.state.processing" bundle="${rb}" scope="request"/>
 <fmt:message var="changed" key="report.details.report.state.changed" bundle="${rb}" scope="request"/>
 
-<fmt:message var="changed" key="report.details.report.state.changed" bundle="${rb}" scope="page"/>
-<fmt:message var="changed" key="report.details.report.state.changed" bundle="${rb}" scope="page"/>
 
-
-<div class="card border-0 mb-4">
+<div class="card border-0 mb-2">
     <div class="card-header">
-        <fmt:message key="main.usertype.inspector" bundle="${rb}"/>
-        ${userTypeId eq userTypeIndividualId ? userTypeIndividualText : userTypeLegalEntityText}
+        ${reportDetails.userTypeId eq userTypeIndividualId ? userTypeIndividualText : userTypeLegalEntityText}
     </div>
     <div class="card-body">
-        <h5 class="card-title">${reportDetails.inspectorName ne null ? reportDetails.inspectorName : notAssignedText}</h5>
-    </div>
-    <%--CHANGE_BTN--%>
-    <c:if test="${reportDetails.approvalStateId eq 2}">
-        <span class="d-flex justify-content-end mt-n4">
-            <a href="taxsystem/?command=${Commands.CHANGE_INSPECTOR}&${Parameters.REPORT_APPROVAL_ID}=${reportDetails.reportApprovalId}&${Parameters.INSPECTOR_ID}=${reportDetails.inspectorId}" class="btn btn-warning"><fmt:message key="report.details.change.btn" bundle="${rb}"/></a>
-        </span>
-    </c:if>
-    <%--CHANGE_BTN--%>
-</div>
-
-<div class="card border-0">
-    <div class="card-header">
-        <fmt:message key="sent.reports.table.header.state" bundle="${rb}"/>
-    </div>
-    <div class="card-body">
-        <%--REFUSAL_CAUSE--%>
-        <c:if test="${reportDetails.approvalStateId eq 2}">
-            <p class="card-text">${reportDetails.refusalCause}</p>
-        </c:if>
-        <%--REFUSAL_CAUSE--%>
+        <h5 class="card-title">${reportDetails.userName}</h5>
     </div>
 </div>
 
@@ -87,20 +63,50 @@
             <div class="col-md-3 text-dark"><h5>${reportDetails.report.sum}</h5></div>
             <div class="col-md-3 text-dark"><h5>${reportDetails.report.quarter}</h5></div>
         </div>
-
-        <%--EDIT_REPORT_BTN--%>
-        <c:if test="${reportDetails.approvalStateId eq 3}">
-            <span class="d-flex justify-content-end mr-n4 mt-n3">
-                <a href="taxsystem/?command=${Commands.GET_REPORT}&${Parameters.REPORT_ID}=${reportDetails.report.id}&${Parameters.REPORT_APPROVAL_ID}=${reportDetails.reportApprovalId}" class="btn btn-primary">
-                    <fmt:message key="report.details.report.btn" bundle="${rb}"/>
-                </a>
-            </span>
-        </c:if>
-        <%--EDIT_REPORT_BTN--%>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-9"></div>
-    <div class="col-md-3"></div>
-</div>
+<form>
+    <div class="form-group">
+        <div class="row container-fluid">
+            <div class="col-md-3">
+                <div class="input-group mt-4">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect02"><fmt:message key="sent.reports.table.header.state" bundle="${rb}"/></label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect02" name="${Parameters.REPORTS_APPROVAL_TYPE}">
+                        <option value="1" selected >${approved}</option>
+                        <option value="2">${rejected}</option>
+                        <option value="3">${require_changes}</option>
+                    </select>
+                </div>
+                <input type="hidden" name="command" value="${Commands.APPROVE_REPORT}">
+                <input type="hidden" name="${Parameters.REPORT_APPROVAL_ID}" value="${reportDetails.reportApprovalId}">
+                <button type="submit" class="btn btn-primary mt-md-5"><fmt:message key="sendreport.form.button.submit" bundle="${rb}"/></button>
+            </div>
+            <div class="col-md-9 mt-n2">
+                <div class="form-group" id="refusal_cause_textfield">
+                    <label for="comment"><fmt:message key="report.approve.refusal.case" bundle="${rb}"/></label>
+                    <textarea class="form-control" rows="4" id="comment" name="${Parameters.REFUSAL_CAUSE}"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+$(function(){
+    $('#inputGroupSelect02').change(function() {
+        let selectedValue = $('#inputGroupSelect02').val();
+
+        if(selectedValue === '2') {
+            $('#refusal_cause_textfield').show();
+        } else {
+            $('#refusal_cause_textfield').hide();
+        }
+
+        console.log(selectedValue);
+    })
+});
+</script>
+

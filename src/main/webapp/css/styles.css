@@ -10,6 +10,10 @@
     display: block;
 }
 
+#refusal_cause_textfield {
+    display: none;
+}
+
 #inputFileWrapper {
     display: none;
 }
