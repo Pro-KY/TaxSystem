@@ -8,8 +8,6 @@ import ua.training.persistence.dao.mappers.impl.ReportMapperImpl;
 import ua.training.persistence.dao.mappers.impl.TaxTypeMapperIml;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.Report;
-import ua.training.util.exceptions.DataAccessException;
-import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.Optional;
@@ -40,26 +38,15 @@ public class ReportDaoImpl implements IReportDao {
     public Long save(Report entity) {
         String sql = SqlPropertiesHandler.getSqlQuery(SAVE_REPORT);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
+        return jdbcTemplate.saveOrUpdate(sql, entity.getTaxType().getId(), entity.getSum(), entity.getQuarter());
 
-        try {
-            return jdbcTemplate.saveOrUpdate(sql, entity.getTaxType().getId(), entity.getSum(), entity.getQuarter());
-        } catch (DataAccessException e) {
-            logger.debug(e.getMessage(), e.getCause());
-            throw new PersistenceException(e.getMessage(), e);
-        }
     }
 
     @Override
     public Long update(Report entity) {
         String sql = SqlPropertiesHandler.getSqlQuery(UPDATE_REPORT_BY_ID);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
-
-        try {
-            return jdbcTemplate.saveOrUpdate(sql, entity.getTaxType().getId(), entity.getSum(), entity.getQuarter(), entity.getId());
-        } catch (DataAccessException e) {
-            logger.error(e.getMessage(), e.getCause());
-            throw new PersistenceException(e.getMessage(), e);
-        }
+        return jdbcTemplate.saveOrUpdate(sql, entity.getTaxType().getId(), entity.getSum(), entity.getQuarter(), entity.getId());
     }
 
     @Override

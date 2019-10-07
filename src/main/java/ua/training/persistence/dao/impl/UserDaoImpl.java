@@ -9,8 +9,6 @@ import ua.training.persistence.dao.mappers.impl.UserTypeMapperImpl;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.User;
 import ua.training.persistence.entities.UserType;
-import ua.training.util.exceptions.DataAccessException;
-import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.List;
@@ -54,13 +52,7 @@ public class UserDaoImpl implements IUserDao {
 
         String sql = SqlPropertiesHandler.getSqlQuery(SAVE_USER);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
-
-        try {
-            return jdbcTemplate.saveOrUpdate(sql, params);
-        } catch (DataAccessException e) {
-            logger.debug(e.getMessage(), e.getCause());
-            throw new PersistenceException(e.getMessage(), e);
-        }
+        return jdbcTemplate.saveOrUpdate(sql, params);
     }
 
     @Override

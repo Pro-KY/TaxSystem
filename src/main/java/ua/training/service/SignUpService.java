@@ -3,8 +3,6 @@ package ua.training.service;
 import ua.training.persistence.dao.IUserDao;
 import ua.training.persistence.dao.factory.MysqlDaoFactory;
 import ua.training.persistence.entities.User;
-import ua.training.util.exceptions.PersistenceException;
-import ua.training.util.exceptions.ServiceException;
 
 public class SignUpService {
     private static SignUpService instance;
@@ -25,10 +23,6 @@ public class SignUpService {
     // return authorized user if one exist in DB
     public Long saveSignedUpUser(User userBean) {
         final IUserDao userDao = daoFactory.getUserDao();
-        try {
-            return userDao.save(userBean);
-        } catch (PersistenceException e) {
-            throw new ServiceException(e.getMessage(), e);
-        }
+        return userDao.save(userBean);
     }
 }

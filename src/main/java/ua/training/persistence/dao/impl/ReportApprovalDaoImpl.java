@@ -9,8 +9,6 @@ import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.ReportApproval;
 import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.User;
-import ua.training.util.exceptions.DataAccessException;
-import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.List;
@@ -48,14 +46,7 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
                 entity.getReport().getId()
         };
 
-        try {
-            return jdbcTemplate.saveOrUpdate(sql, params);
-        } catch (DataAccessException e) {
-            log.debug("exp here_2");
-            e.printStackTrace();
-            // log
-            throw new PersistenceException("", e);
-        }
+        return jdbcTemplate.saveOrUpdate(sql, params);
     }
 
     public long countAllForUserById(Long userId) {

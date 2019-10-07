@@ -6,8 +6,6 @@ import ua.training.persistence.dao.IInspectorChangingDao;
 import ua.training.persistence.dao.jdbc.JdbcTemplate;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.InspectorChanging;
-import ua.training.util.exceptions.DataAccessException;
-import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
 
 import java.util.Optional;
@@ -44,12 +42,7 @@ public class InspectorChangingDaoImpl implements IInspectorChangingDao {
                 entity.getPreviousInspector().getId()
         };
 
-        try {
-            return jdbcTemplate.saveOrUpdate(sql, parameters);
-        } catch (DataAccessException e) {
-            log.debug(e.getMessage(), e.getCause());
-            throw new PersistenceException(e.getMessage(), e);
-        }
+        return jdbcTemplate.saveOrUpdate(sql, parameters);
     }
 
     @Override
