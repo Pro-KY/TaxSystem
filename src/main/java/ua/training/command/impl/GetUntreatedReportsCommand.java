@@ -34,7 +34,7 @@ public class GetUntreatedReportsCommand implements ICommand {
         final Long approvalReportsTypeId = currentPaginationDto.getApprovalReportsTypeId();
         final StateApproval stateApproval = new StateApproval(approvalReportsTypeId);
         final User inspector = (User) session.getAttribute(Attributes.USER);
-        PaginationDto updatedPaginationDto = reportApprovalService.getUntreatedReports(currentPaginationDto, approvalReportsTypeId, stateApproval,inspector);
+        PaginationDto updatedPaginationDto = reportApprovalService.getUntreatedReports(currentPaginationDto, stateApproval, inspector);
 
         session.setAttribute(Attributes.PAGINATION_INFO, updatedPaginationDto);
 

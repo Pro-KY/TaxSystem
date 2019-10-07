@@ -46,12 +46,17 @@ public class SignInCommand implements ICommand {
                 final User user = optionalUser.get();
                 session.setAttribute(Attributes.USER, user);
                 final String type = user.getUserType().getType();
-                String fragmentPath = type.equals(UserTypes.INSPECTOR.getType()) ? FRAGMENT_PATH_SENT_REPORTS : FRAGMENT_PATH_SEND_REPORT;
-                final PaginationDto currentPaginationDto = CommandUtil.getInstance().getCurrentPaginationDto(session);
-                final StateApproval stateApproval = new StateApproval(StateApprovalEnum.PROCESSING.getStateId());
-                final PaginationDto updatedPaginationDto = reportApprovalService.getUntreatedReportsForInspector(currentPaginationDto, stateApproval);
 
-                session.setAttribute(Attributes.PAGINATION_INFO, updatedPaginationDto);
+                boolean isInspector = type.equals(UserTypes.INSPECTOR.getType());
+
+                if (isInspector) {
+                    final PaginationDto currentPaginationDto = CommandUtil.getInstance().getCurrentPaginationDto(session);
+                    final StateApproval stateApproval = new StateApproval(StateApprovalEnum.PROCESSING.getStateId());
+                    final PaginationDto updatedPaginationDto = reportApprovalService.getUntreatedReports(currentPaginationDto, stateApproval, user);
+                    session.setAttribute(Attributes.PAGINATION_INFO, updatedPaginationDto);
+                }
+
+                String fragmentPath = isInspector ? FRAGMENT_PATH_SENT_REPORTS : FRAGMENT_PATH_SEND_REPORT;
                 request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(fragmentPath));
             } else {
                 request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(PATH_ERROR));

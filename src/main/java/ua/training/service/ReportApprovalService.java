@@ -36,21 +36,30 @@ public class ReportApprovalService {
         this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
-    public PaginationDto getUntreatedReports(PaginationDto paginationDto, Long approvalReportsTypeId, StateApproval stateApproval, User inspector) {
+    public PaginationDto getUntreatedReports(PaginationDto paginationDto, StateApproval stateApproval, User inspector) {
         final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
 
+        boolean isStateApprovalProcessing = stateApproval.getId().equals(StateApprovalEnum.PROCESSING.getStateId());
+
         final PaginationHandler paginationHandler = new PaginationHandler(paginationDto);
-        final long allRows = reportApprovalDao.countAllByStateApproval(stateApproval);
+        final long allRows = isStateApprovalProcessing ?
+                reportApprovalDao.countAllByStateApproval(stateApproval) :
+                reportApprovalDao.countAllByStateApprovalAndInspector(stateApproval, inspector);
+
         paginationHandler.setAllRowsAmount(allRows);
         paginationHandler.handlePagination();
 
         List<ReportApproval> paginationList;
+        final long pageSize = paginationHandler.getPageSize();
+        final long offSet = paginationHandler.getOffSet();
 
-        if(approvalReportsTypeId.equals(StateApprovalEnum.PROCESSING.getStateId())) {
-            paginationList = reportApprovalDao.getReportApprovalListByStateApproval(paginationHandler.getPageSize(), paginationHandler.getOffSet(), stateApproval);
+        if(isStateApprovalProcessing) {
+            paginationList = reportApprovalDao.getReportApprovalListByStateApproval(pageSize, offSet, stateApproval);
         } else {
-            paginationList = reportApprovalDao.getReportApprovalListByStateAndInspector(paginationHandler.getPageSize(), paginationHandler.getOffSet(), stateApproval, inspector);
+            paginationList = reportApprovalDao.getReportApprovalListByStateAndInspector(pageSize, offSet, stateApproval, inspector);
         }
+
+        log.info("paginationList size: {}", paginationList.size());
 
         final List<SentReportsDto> collect = paginationList.stream()
                 .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
