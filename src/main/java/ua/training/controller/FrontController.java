@@ -36,11 +36,7 @@ public class FrontController extends HttpServlet {
             return;
         }
 
-        if(page.equals("/index.jsp")) {
-            response.sendRedirect("/");
-        } else {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-            dispatcher.forward(request, response);
-        }
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+        dispatcher.forward(request, response);
     }
 }
