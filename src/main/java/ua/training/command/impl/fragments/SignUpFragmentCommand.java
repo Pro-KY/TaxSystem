@@ -1,4 +1,4 @@
-package ua.training.command.fragments;
+package ua.training.command.impl.fragments;
 
 import ua.training.command.ICommand;
 import ua.training.util.constans.Attributes;
@@ -9,17 +9,18 @@ import javax.servlet.http.HttpSession;
 
 import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 
-public class SignInFragmentCommand implements ICommand {
+public class SignUpFragmentCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        System.out.println("SignInFragmentCommand command");
+        System.out.println("SignUpFragmentCommand command");
 
-//        final String viewPath = getViewPath(FRAGMENT_PATH_SIGN_IN);
+//        final String viewPath = getViewPath(FRAGMENT_PATH_SIGN_UP);
 
         final HttpSession session = request.getSession(false);
         if (session != null) {
-            session.setAttribute(Attributes.IS_SIGN_UP, false);
+//            session.setAttribute(Attributes.FRAGMENT_PATH, viewPath);
+            session.setAttribute(Attributes.IS_SIGN_UP, true);
         }
         return ViewPropertiesHandler.getViewPath(PATH_INDEX);
     }

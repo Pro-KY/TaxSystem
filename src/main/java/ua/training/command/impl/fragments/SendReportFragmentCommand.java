@@ -1,4 +1,4 @@
-package ua.training.command.fragments;
+package ua.training.command.impl.fragments;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

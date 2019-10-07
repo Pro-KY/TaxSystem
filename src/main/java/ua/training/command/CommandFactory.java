@@ -2,9 +2,9 @@ package ua.training.command;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ua.training.command.fragments.SendReportFragmentCommand;
-import ua.training.command.fragments.SignInFragmentCommand;
-import ua.training.command.fragments.SignUpFragmentCommand;
+import ua.training.command.impl.fragments.SendReportFragmentCommand;
+import ua.training.command.impl.fragments.SignInFragmentCommand;
+import ua.training.command.impl.fragments.SignUpFragmentCommand;
 import ua.training.command.impl.*;
 import ua.training.util.constans.Commands;
 

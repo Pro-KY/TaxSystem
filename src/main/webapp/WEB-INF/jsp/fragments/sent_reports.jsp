@@ -78,8 +78,6 @@
                                 ${not_signed_label}
                             </c:otherwise>
                         </c:choose>
-
-<%--                            ${not empty report.inspectorName ? report.inspectorName : not_signed_label}--%>
                     </td>
                     <td>${report.timestamp}</td>
                 </tr>
