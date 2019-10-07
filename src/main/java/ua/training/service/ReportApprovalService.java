@@ -11,6 +11,7 @@ import ua.training.persistence.dao.jdbc.PaginationHandler;
 import ua.training.persistence.entities.ReportApproval;
 import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.User;
+import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.exceptions.ServiceException;
 import ua.training.util.handler.properties.MessagePropertiesHandler;
 
@@ -35,6 +36,33 @@ public class ReportApprovalService {
         this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
+    public PaginationDto getUntreatedReports(PaginationDto paginationDto, Long approvalReportsTypeId, StateApproval stateApproval, User inspector) {
+        final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
+
+        final PaginationHandler paginationHandler = new PaginationHandler(paginationDto);
+        final long allRows = reportApprovalDao.countAllByStateApproval(stateApproval);
+        paginationHandler.setAllRowsAmount(allRows);
+        paginationHandler.handlePagination();
+
+        List<ReportApproval> paginationList;
+
+        if(approvalReportsTypeId.equals(StateApprovalEnum.PROCESSING.getStateId())) {
+            paginationList = reportApprovalDao.getReportApprovalListByStateApproval(paginationHandler.getPageSize(), paginationHandler.getOffSet(), stateApproval);
+        } else {
+            paginationList = reportApprovalDao.getReportApprovalListByStateAndInspector(paginationHandler.getPageSize(), paginationHandler.getOffSet(), stateApproval, inspector);
+        }
+
+        final List<SentReportsDto> collect = paginationList.stream()
+                .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
+                .collect(Collectors.toList());
+
+        paginationDto.setPaginationList(collect);
+        paginationHandler.updatePaginationInfo();
+
+        return paginationHandler.getPaginationDto();
+    }
+
+
     public void updateReportApproval(Long reportApprovalId, String refusalCause, Long stateApprovalId) {
         final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
 
@@ -55,48 +83,6 @@ public class ReportApprovalService {
 
     public long countAllReportsApprovalForUser(Long userId) {
         return daoFactory.getReportApprovalDao().countAllForUserById(userId);
-    }
-
-    public PaginationDto getChangedReportsForInspector(PaginationDto paginationDto, StateApproval stateApproval, User inspector) {
-        final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
-
-        final PaginationHandler paginationHandler = new PaginationHandler(paginationDto);
-        final long allRows = reportApprovalDao.countAllByStateApprovalAndInspector(stateApproval, inspector);
-        paginationHandler.setAllRowsAmount(allRows);
-        paginationHandler.handlePagination();
-
-        final List<ReportApproval> paginationList = reportApprovalDao.
-                getReportApprovalListByStateAndInspector(paginationHandler.getPageSize(), paginationHandler.getOffSet(), stateApproval, inspector);
-
-        final List<SentReportsDto> collect = paginationList.stream()
-                .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
-                .collect(Collectors.toList());
-
-        paginationDto.setPaginationList(collect);
-        paginationHandler.updatePaginationInfo();
-
-        return paginationHandler.getPaginationDto();
-    }
-
-    public PaginationDto getUntreatedReportsForInspector(PaginationDto paginationDto, StateApproval stateApproval) {
-        final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
-
-        final PaginationHandler paginationHandler = new PaginationHandler(paginationDto);
-        final long allRows = reportApprovalDao.countAllByStateApproval(stateApproval);
-        paginationHandler.setAllRowsAmount(allRows);
-        paginationHandler.handlePagination();
-
-        final List<ReportApproval> paginationList = reportApprovalDao.
-                getReportApprovalListByStateApproval(paginationHandler.getPageSize(), paginationHandler.getOffSet(), stateApproval);
-
-        final List<SentReportsDto> collect = paginationList.stream()
-                .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
-                .collect(Collectors.toList());
-
-        paginationDto.setPaginationList(collect);
-        paginationHandler.updatePaginationInfo();
-
-        return paginationHandler.getPaginationDto();
     }
 
     public PaginationDto getReportsApprovalForUser(PaginationDto paginationDto, Long userId) {
