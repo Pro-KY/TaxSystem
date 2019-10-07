@@ -18,8 +18,9 @@ public class SqlPropertiesHandler {
     public static final String USER_TYPE_BY_TYPE = "USER_TYPE_BY_TYPE";
 
     public static final String REPORT_APPROVAL_PAGINATION = "REPORT_APPROVAL_PAGINATION";
-    public static final String REPORT_APPROVAL_COUNT = "REPORT_APPROVAL_COUNT";
-    public static final String REPORT_APPROVAL_WITH_RELATIONS_BY_ID = "REPORT_APPROVAL_WITH_RELATIONS_BY_ID";
+    public static final String REPORT_APPROVAL_COUNT_FOR_USER = "REPORT_APPROVAL_COUNT_FOR_USER";
+    public static final String REPORT_APPROVAL_JOIN_REPORT_JOIN_INSPECTOR = "REPORT_APPROVAL_JOIN_REPORT_JOIN_INSPECTOR";
+    public static final String REPORT_APPROVAL_JOIN_USER = "REPORT_APPROVAL_JOIN_USER";
     public static final String FIND_REPORT_BY_ID = "FIND_REPORT_BY_ID";
     public static final String UPDATE_REPORT_BY_ID = "UPDATE_REPORT_BY_ID";
     public static final String FIND_REPORT_APPROVAL_BY_ID = "FIND_REPORT_APPROVAL_BY_ID";

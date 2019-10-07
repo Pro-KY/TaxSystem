@@ -4,9 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.dto.PaginationDto;
 
-import java.util.List;
-
-public class PaginationHandler<T> {
+public class PaginationHandler {
     private long pageSize;
     private long offSet = 0;
     private long startVisibleIndex;
@@ -22,24 +20,44 @@ public class PaginationHandler<T> {
 
     private boolean isLeftButtonDisabled;
     private boolean isRightButtonDisabled;
-    private List<T> pageResult;
+    private PaginationDto paginationDto;
+
+
+    public PaginationDto getPaginationDto() {
+        return paginationDto;
+    }
 
     private static final Logger log = LogManager.getLogger(PaginationHandler.class);
 
-    public PaginationHandler(Long startVisibleIndex, Long endVisibleIndex, Long currentPageIndex) {
-        this.startVisibleIndex = (startVisibleIndex != null) ? startVisibleIndex : DEFAULT_START_INDEX;
-        this.endVisibleIndex = (endVisibleIndex != null) ? endVisibleIndex : DEFAULT_END_INDEX;
-        this.currentPageIndex = (currentPageIndex != null) ? (Long) currentPageIndex : DEFAULT_START_INDEX;
-//        changeButtonsState();
+    public PaginationHandler(PaginationDto paginationDto) {
+        this.paginationDto = paginationDto;
     }
 
     public void handlePagination() {
+        final Long startVisibleIndex = paginationDto.getStartPageIndex();
+        final Long endVisibleIndex = paginationDto.getEndPageIndex();
+        final Long currentPageIndex = paginationDto.getCurrentPageIndex();
+
+        this.startVisibleIndex = (startVisibleIndex != null) ? startVisibleIndex : DEFAULT_START_INDEX;
+        this.endVisibleIndex = (endVisibleIndex != null) ? endVisibleIndex : DEFAULT_END_INDEX;
+        this.currentPageIndex = (currentPageIndex != null) ? (Long) currentPageIndex : DEFAULT_START_INDEX;
+        final String pageSize = paginationDto.getPageSize();
+        this.pageSize = (pageSize != null) ? Integer.valueOf(pageSize) : DEFAULT_PAGE_SIZE;
+
         calculateAllPagesAmount();
         calculateEndVisibleIndex();
         changeButtonsState();
+
+        if(paginationDto.getNextClicked()) {
+            handleNextButtonClick();
+        } else if (paginationDto.getPreviousClicked()) {
+            handlePreviousButtonClick();
+        } else {
+            calculateOffset();
+        }
     }
 
-    public void setPaginationInfo(PaginationDto paginationDto) {
+    public void updatePaginationInfo() {
         paginationDto.setCurrentPageIndex(currentPageIndex);
         paginationDto.setStartPageIndex(startVisibleIndex);
         paginationDto.setEndPageIndex(endVisibleIndex);
@@ -53,11 +71,6 @@ public class PaginationHandler<T> {
         this.allRowsAmount = allRowsAmount;
     }
 
-    public void setPageSize(String pageSize) {
-        this.pageSize = (pageSize != null) ? Integer.valueOf(pageSize) : DEFAULT_PAGE_SIZE;
-        log.info("page size: {}", pageSize);
-//        calculateAllPagesAmount();
-    }
 
     public void calculateAllPagesAmount() {
         allPagesAmount = allRowsAmount / this.pageSize;
@@ -115,14 +128,6 @@ public class PaginationHandler<T> {
         log.info("shift indexes");
         log.info("startVisibleIndex - {}", startVisibleIndex);
         log.info("endVisibleIndex - {}", endVisibleIndex);
-    }
-
-    public List<T> getPageResult() {
-        return pageResult;
-    }
-
-    public void setPageResult(List<T> pageResult) {
-        this.pageResult = pageResult;
     }
 
     public long getPageSize() {

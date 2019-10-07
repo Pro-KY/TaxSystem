@@ -43,7 +43,7 @@ public class JdbcTemplate {
             e.printStackTrace();
             resultList = new ArrayList<>();
         }  finally {
-            mysqlDataSource.releaseResources(connection, jdbcQuery.getPs());
+            mysqlDataSource.releaseResources(connection, jdbcQuery.getPreparedStatement());
         }
 
         return resultList;
@@ -59,22 +59,22 @@ public class JdbcTemplate {
         } catch (SQLException e) {
             t = Optional.empty();
         }  finally {
-            mysqlDataSource.releaseResources(connection, jdbcQuery.getPs());
+            mysqlDataSource.releaseResources(connection, jdbcQuery.getPreparedStatement());
         }
         return t;
     }
 
-    public Long countRows(String sql) {
+    public Long countRows(String sql, Object...parameters) {
         final Connection connection = mysqlDataSource.getConnection();
         final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
         long rowsAmount;
-        try (ResultSet result = jdbcQuery.select()) {
+        try (ResultSet result = jdbcQuery.select(parameters)) {
             result.next();
             rowsAmount = result.getLong(1);
         } catch (SQLException e) {
             rowsAmount = 0;
         }  finally {
-            mysqlDataSource.releaseResources(connection, jdbcQuery.getStatement());
+            mysqlDataSource.releaseResources(connection, jdbcQuery.getPreparedStatement());
         }
         return rowsAmount;
     }
@@ -85,7 +85,7 @@ public class JdbcTemplate {
         final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
         insertedId = jdbcQuery.saveOrUpdate(parameters);
         closeResultSet(jdbcQuery.getResult());
-        mysqlDataSource.releaseResources(connection, jdbcQuery.getPs());
+        mysqlDataSource.releaseResources(connection, jdbcQuery.getPreparedStatement());
         return insertedId;
     }
 
@@ -95,7 +95,7 @@ public class JdbcTemplate {
         final JdbcQuery jdbcQuery = new JdbcQuery(connection, sql);
         isDeleted = jdbcQuery.delete(parameters);
         closeResultSet(jdbcQuery.getResult());
-        mysqlDataSource.releaseResources(connection, jdbcQuery.getPs());
+        mysqlDataSource.releaseResources(connection, jdbcQuery.getPreparedStatement());
         return isDeleted;
     }
 

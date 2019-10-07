@@ -7,19 +7,16 @@ import ua.training.command.util.CommandAttributesSetter;
 import ua.training.command.util.CommandParametersExtractor;
 import ua.training.dto.PaginationDto;
 import ua.training.dto.ReportDto;
-import ua.training.dto.SentReportsDto;
-import ua.training.persistence.dao.jdbc.PaginationHandler;
+import ua.training.persistence.entities.ReportApproval;
 import ua.training.service.EditReportService;
-import ua.training.service.SentReportsService;
+import ua.training.service.ReportApprovalService;
 import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
-import static ua.training.util.constans.Attributes.SENT_REPORTS_LIST;
 import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_MAIN;
 
 public class EditReportCommand implements ICommand {
@@ -42,9 +39,11 @@ public class EditReportCommand implements ICommand {
 
         try {
             EditReportService.getInstance().updateReport(reportDto, reportApprovalId);
-            final PaginationHandler<SentReportsDto> paginationHandler = SentReportsService.getInstance().getSentReports(currentPaginationDto);
-            final List<SentReportsDto> sentReports = paginationHandler.getPageResult();
-            request.setAttribute(SENT_REPORTS_LIST, sentReports);
+
+            final ReportApprovalService reportApprovalService = ReportApprovalService.getInstance();
+            final ReportApproval reportApproval = reportApprovalService.getReportApprovalById(reportApprovalId);
+            final PaginationDto updatedPaginationDto = reportApprovalService.getReportsApprovalForUser(currentPaginationDto, reportApproval.getUser().getId());
+            request.setAttribute(Attributes.PAGINATION_INFO, updatedPaginationDto);
             isOperationSuccessful = true;
         } catch (Exception e) {
             log.debug(e.getMessage(), e.getCause());

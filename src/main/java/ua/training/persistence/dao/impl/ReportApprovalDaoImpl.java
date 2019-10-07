@@ -56,12 +56,12 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         }
     }
 
-    public long countAllRows() {
-        return jdbcTemplate.countRows(SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_COUNT));
+    public long countAllRowsForUserById(Long userId) {
+        return jdbcTemplate.countRows(SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_COUNT_FOR_USER), userId);
     }
 
     @Override
-    public List<ReportApproval> getReportApprovalByUserId(long pageSize, long offSet, long userId) {
+    public List<ReportApproval> getReportApprovalListByUserId(long pageSize, long offSet, long userId) {
         String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_PAGINATION);
 
         final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);
@@ -93,7 +93,7 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     }
 
     public Optional<ReportApproval> findByIdJoinReportJoinInspector(Long id) {
-        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_WITH_RELATIONS_BY_ID);
+        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_JOIN_REPORT_JOIN_INSPECTOR);
 
         final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);
 
@@ -102,6 +102,14 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         reportApprovalMapper.mapReportRelation(reportMapper);
         reportApprovalMapper.mapStateApprovalRelation(new StateApprovalMapperImpl(true));
         reportApprovalMapper.mapInspectorRelation(new UserMapperImpl(true, true));
+
+        return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
+    }
+
+    public Optional<ReportApproval> findByIdJoinUser(Long id) {
+        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_JOIN_USER);
+        final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);
+        reportApprovalMapper.mapUserRelation(new UserMapperImpl(true, false));
 
         return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
     }

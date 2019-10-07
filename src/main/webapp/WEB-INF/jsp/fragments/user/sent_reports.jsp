@@ -39,10 +39,10 @@
                 </tr>
             </thead>
             <tbody>
-            <c:forEach var="report" items="${pageContext.request.getAttribute(Attributes.SENT_REPORTS_LIST)}" >
+            <c:forEach var="report" items="${paginationInfo.paginationList}" >
                 <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.REPORT_APPROVAL_ID}=${report.reportApprovalId}&command=${Command.REPORT_DETAILS}">
                     <td>${report.reportId}</td>
-                    <td>${report.state}</td>
+                    <td>${report.state eq 'changed' ? 'processing' : report.state}</td>
                     <td>${not empty report.inspectorName ? report.inspectorName : not_signed_label}</td>
                     <td>${report.timestamp}</td>
                 </tr>
@@ -53,7 +53,7 @@
 
     <div class="row mt-4">
         <div class="col-md-3"></div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <%--PAGINATION--%>
             <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
                 <nav aria-label="...">
@@ -84,7 +84,7 @@
             </c:if>
             <%--PAGINATION--%>
         </div>
-        <div class="col-md-3"></div>
+<%--        <div class="col-md-3"></div>--%>
     </div>
 
 </div>
@@ -92,7 +92,7 @@
 <%--TESTING--%>
 <%--<p>isLeftButtonDisabled : ${sessionScope.paginationInfo.isLeftButtonDisabled}</p>--%>
 <%--<p>isRightButtonDisabled : ${sessionScope.paginationInfo.isRightButtonDisabled}</p>--%>
-<%--<p>currentPageIndex ${sessionScope.currentPageIndex}</p>--%>
+<%--<p>currentPageIndex ${sessionScope.paginationInfo.currentPageIndex}</p>--%>
 <%--<p>allPagesAmount ${sessionScope.paginationInfo.allPagesAmount}</p>--%>
 <%--<p>startPageIndex : ${sessionScope.paginationInfo.startPageIndex}</p>--%>
 <%--<p>endPageIndex : ${sessionScope.paginationInfo.endPageIndex}</p>--%>

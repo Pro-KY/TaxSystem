@@ -1,6 +1,10 @@
 package ua.training.dto;
 
+import ua.training.util.constans.Parameters;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.List;
 
 public class PaginationDto implements Serializable {
     private Long currentPageIndex;
@@ -16,13 +20,31 @@ public class PaginationDto implements Serializable {
     private Long endPageIndex;
     private long allPagesAmount;
 
-    public PaginationDto(String pageIndex, String pageSize, String isNextClicked, String isPreviousClicked, Long startPageIndex, Long endPageIndex) {
-        currentPageIndex = (pageIndex != null) ? Long.valueOf(pageIndex) : DEFAULT_START_INDEX;
+    private List paginationList;
+
+
+    public void setPaginationRequestData(HttpServletRequest request) {
+        String selectedPageIndex = request.getParameter(Parameters.SELECTED_PAGE_INDEX);
+        final String pageSize = request.getParameter(Parameters.PAGE_SIZE);
+        final String isNextClicked = request.getParameter(Parameters.NEXT_PAGE_CLICK);
+        final String isPreviousClicked = request.getParameter(Parameters.PREV_PAGE_CLICK);
+
+        if (selectedPageIndex == null && currentPageIndex != null) {
+            selectedPageIndex = currentPageIndex.toString();
+        }
+
+        this.currentPageIndex = (selectedPageIndex != null) ? Long.valueOf(selectedPageIndex) : DEFAULT_START_INDEX;
         this.isNextClicked = (isNextClicked != null) ? Boolean.valueOf(isNextClicked) : false;
         this.isPreviousClicked = (isPreviousClicked != null) ? Boolean.valueOf(isPreviousClicked) : false;
         this.pageSize = pageSize;
-        this.startPageIndex = startPageIndex;
-        this.endPageIndex = endPageIndex;
+    }
+
+    public List getPaginationList() {
+        return paginationList;
+    }
+
+    public void setPaginationList(List paginationList) {
+        this.paginationList = paginationList;
     }
 
     public PaginationDto() {
@@ -35,8 +57,8 @@ public class PaginationDto implements Serializable {
         return currentPageIndex;
     }
 
-    public void setCurrentPageIndex(Long currentPageIndex) {
-        this.currentPageIndex = currentPageIndex;
+    public void setCurrentPageIndex(Long selectedPageIndex) {
+        this.currentPageIndex = selectedPageIndex;
     }
 
     public Boolean getNextClicked() {

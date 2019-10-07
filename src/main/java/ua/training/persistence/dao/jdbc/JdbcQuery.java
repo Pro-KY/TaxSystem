@@ -16,7 +16,7 @@ public class JdbcQuery {
         return rs;
     }
 
-     JdbcQuery(Connection connection, String sql) {
+    JdbcQuery(Connection connection, String sql) {
         this.connection = connection;
         this.sql = sql;
     }
@@ -32,7 +32,7 @@ public class JdbcQuery {
     }
 
      Long saveOrUpdate(Object... parameters) {
-        performModyingQuery(parameters);
+        performModyfingQuery(parameters);
         long generatedKey = 0L;
 
         try {
@@ -47,11 +47,11 @@ public class JdbcQuery {
     }
 
     public boolean delete(Object... parameters) {
-        performModyingQuery(parameters);
+        performModyfingQuery(parameters);
         return rowsAffected > 0;
     }
 
-    private void performModyingQuery(Object... parameters) {
+    private void performModyfingQuery(Object... parameters) {
         try {
             ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             setParameters(parameters);
@@ -98,7 +98,7 @@ public class JdbcQuery {
         return statement;
     }
 
-     PreparedStatement getPs() {
+    PreparedStatement getPreparedStatement() {
         return ps;
     }
 }
