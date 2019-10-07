@@ -1,6 +1,6 @@
 package ua.training.util.constans;
 
-public class Command {
+public class Commands {
     public static final String SIGN_IN = "signin";
     public static final String SIGN_OUT = "signout";
     public static final String SIGN_UP = "signup";

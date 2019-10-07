@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="ua.training.util.constans.Command" %>
+<%@ page import="ua.training.util.constans.Commands" %>
 <%@ page import="ua.training.util.constans.Parameters" %>
 
 <html>

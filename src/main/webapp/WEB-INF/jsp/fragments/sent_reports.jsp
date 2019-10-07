@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="ua.training.util.constans.Parameters" %>
 <%@ page import="ua.training.util.constans.Attributes" %>
-<%@ page import="ua.training.util.constans.Command" %>
+<%@ page import="ua.training.util.constans.Commands" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <fmt:message var="not_signed_label" key="sent.reports.not.assigned.text" bundle="${sessionScope.rb}" scope="request"/>
 <fmt:message var="checking_label" key="sent.reports.table.header.checking" bundle="${sessionScope.rb}" scope="page"/>

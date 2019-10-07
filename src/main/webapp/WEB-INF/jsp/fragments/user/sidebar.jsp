@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page import="ua.training.util.constans.Command" %>
+<%@ page import="ua.training.util.constans.Commands" %>
 <%@ page import="ua.training.util.constans.Parameters" %>
 <%@ page import="ua.training.util.constans.Attributes" %>
 
