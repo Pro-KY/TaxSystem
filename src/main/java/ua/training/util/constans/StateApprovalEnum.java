@@ -1,14 +1,14 @@
 package ua.training.util.constans;
 
 public enum StateApprovalEnum {
-    APPROVED(1), CANCELED(2), REQUIRE_CHANGES(3), PROCESSING(4), CHANGED(5);
-    long stateId;
+    APPROVED(1L), CANCELED(2L), REQUIRE_CHANGES(3L), PROCESSING(4L), CHANGED(5L);
+    Long stateId;
 
-    StateApprovalEnum(long stateId) {
+    StateApprovalEnum(Long stateId) {
         this.stateId = stateId;
     }
 
-    public long getStateId() {
+    public Long getStateId() {
         return stateId;
     }
 }

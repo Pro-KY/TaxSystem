@@ -25,5 +25,5 @@ public class Parameters {
     public static final String INSPECTOR_ID = "inspectorId";
     public static final String SIDEBAR_ACTIVE_INDEX = "sideBarIndex";
 
-    public static final String INSPECTOR_ALL_REPORTS_TYPE = "inspectorAllReportsType";
+    public static final String REPORTS_APPROVAL_TYPE = "reportApprovalType";
 }

@@ -11,8 +11,17 @@ import java.util.Optional;
 public class SignInService {
     private static final Logger log = LogManager.getLogger(SignInService.class);
     private MysqlDaoFactory daoFactory;
+    private static SignInService instance;
 
-    public SignInService() {
+    public static SignInService getInstance() {
+        if (instance == null) {
+            instance = new SignInService();
+        }
+        return instance;
+    }
+
+
+    private SignInService() {
         this.daoFactory = MysqlDaoFactory.getInstance();
     }
 

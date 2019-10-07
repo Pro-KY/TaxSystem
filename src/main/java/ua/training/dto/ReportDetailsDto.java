@@ -8,6 +8,7 @@ public class ReportDetailsDto {
     private String refusalCause;
     private Long approvalStateId;
     private String inspectorName;
+    private String userName;
     private Long inspectorId;
 
     private ReportDetailsDto(Builder builder) {
@@ -16,8 +17,10 @@ public class ReportDetailsDto {
         refusalCause = builder.refusalCause;
         approvalStateId = builder.approvalStateId;
         inspectorName = builder.inspectorName;
+        userName = builder.userName;
         inspectorId = builder.inspectorId;
     }
+
 
     public Long getReportApprovalId() {
         return reportApprovalId;
@@ -43,15 +46,22 @@ public class ReportDetailsDto {
         return inspectorId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+
     public static final class Builder {
         private Long reportApprovalId;
         private Report report;
         private String refusalCause;
         private Long approvalStateId;
         private String inspectorName;
+        private String userName;
         private Long inspectorId;
 
-        public Builder() { }
+        public Builder() {
+        }
 
         public Builder reportApprovalId(Long val) {
             reportApprovalId = val;
@@ -75,6 +85,11 @@ public class ReportDetailsDto {
 
         public Builder inspectorName(String val) {
             inspectorName = val;
+            return this;
+        }
+
+        public Builder userName(String val) {
+            userName = val;
             return this;
         }
 

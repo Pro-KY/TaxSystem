@@ -32,7 +32,7 @@ public class CommandFactory {
         commandHashMap.put(Command.GET_REPORT, new GetReportCommand());
         commandHashMap.put(Command.EDIT_REPORT, new EditReportCommand());
         commandHashMap.put(Command.CHANGE_INSPECTOR, new InspectorChangingCommand());
-        commandHashMap.put(Command.GET_INSPECTOR_ALL_REPORTS, new GetInspectorAllReports());
+        commandHashMap.put(Command.GET_UNTREATED_REPORTS, new GetUntreatedReportsCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

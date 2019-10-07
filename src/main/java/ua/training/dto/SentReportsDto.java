@@ -8,14 +8,24 @@ public class SentReportsDto implements Serializable {
     private Long reportId;
     private String state;
     private String inspectorName;
+    private String userName;
     private Timestamp timestamp;
 
-    public SentReportsDto(Long reportId, String state, String inspectorName, Timestamp timestamp, Long reportApprovalId) {
+    public SentReportsDto(Long reportId, String state, String inspectorName, String userName, Timestamp timestamp, Long reportApprovalId) {
         this.reportId = reportId;
         this.state = state;
         this.inspectorName = inspectorName;
+        this.userName = userName;
         this.timestamp = timestamp;
         this.reportApprovalId = reportApprovalId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Long getReportId() {

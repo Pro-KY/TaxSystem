@@ -29,13 +29,19 @@ public class DtoMapper {
         Long approvalStateId = reportApproval.getStateApproval().getId();
 
         String inspectorName = null;
+        String userName = null;
         Long inspectorId = null;
 
         final User inspector = reportApproval.getInspector();
+        final User user = reportApproval.getUser();
 
         if(inspector != null && inspector.getId() > 0) {
             inspectorName = inspector.getFirstName() + " " + inspector.getLastName();
             inspectorId = inspector.getId();
+        }
+
+        if(user != null && user.getId() > 0) {
+            userName = user.getFirstName() + " " + user.getLastName();
         }
 
         return new ReportDetailsDto.Builder()
@@ -45,6 +51,7 @@ public class DtoMapper {
                 .approvalStateId(approvalStateId)
                 .inspectorName(inspectorName)
                 .inspectorId(inspectorId)
+                .userName(userName)
                 .build();
     }
 
@@ -55,8 +62,10 @@ public class DtoMapper {
         final String state = stateApproval.getState();
         final Timestamp timestamp = reportApproval.getTimestamp();
         final User inspector = reportApproval.getInspector();
-        final String  inspectorName = (inspector.getId() > 0) ? inspector.getFirstName() + " " +inspector.getLastName() : "";
-        return new SentReportsDto(reportId, state, inspectorName, timestamp, reportApprovalId);
+        final User user = reportApproval.getUser();
+        final String inspectorName = (inspector != null && inspector.getId() > 0) ? inspector.getFirstName() + " " + inspector.getLastName() : "";
+        final String userName = (user.getId() > 0) ? user.getFirstName() + " " + user.getLastName() : "";
+        return new SentReportsDto(reportId, state, inspectorName, userName, timestamp, reportApprovalId);
     }
 
     public ReportDto mapToReportDto(Report report) {

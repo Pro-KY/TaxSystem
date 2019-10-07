@@ -1,10 +1,15 @@
 package ua.training.command.impl;
 
 import ua.training.command.ICommand;
+import ua.training.command.util.CommandUtil;
+import ua.training.dto.PaginationDto;
+import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.User;
+import ua.training.service.ReportApprovalService;
 import ua.training.service.SignInService;
 import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
+import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.constans.UserTypes;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
@@ -16,9 +21,11 @@ import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 
 public class SignInCommand implements ICommand {
     private SignInService signInService;
+    private ReportApprovalService reportApprovalService;
 
     public SignInCommand() {
-        this.signInService = new SignInService();
+        this.signInService = SignInService.getInstance();
+        this.reportApprovalService = ReportApprovalService.getInstance();
     }
 
     @Override
@@ -40,6 +47,11 @@ public class SignInCommand implements ICommand {
                 session.setAttribute(Attributes.USER, user);
                 final String type = user.getUserType().getType();
                 String fragmentPath = type.equals(UserTypes.INSPECTOR.getType()) ? FRAGMENT_PATH_SENT_REPORTS : FRAGMENT_PATH_SEND_REPORT;
+                final PaginationDto currentPaginationDto = CommandUtil.getInstance().getCurrentPaginationDto(session);
+                final StateApproval stateApproval = new StateApproval(StateApprovalEnum.PROCESSING.getStateId());
+                final PaginationDto updatedPaginationDto = reportApprovalService.getUntreatedReportsForInspector(currentPaginationDto, stateApproval);
+
+                session.setAttribute(Attributes.PAGINATION_INFO, updatedPaginationDto);
                 request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(fragmentPath));
             } else {
                 request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(PATH_ERROR));

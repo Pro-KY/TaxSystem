@@ -17,5 +17,5 @@ public class Command {
     public static final String EDIT_REPORT = "editReport";
     public static final String CHANGE_INSPECTOR = "getNewRandomInspector";
 
-    public static final String GET_INSPECTOR_ALL_REPORTS = "inspectorAllReports";
+    public static final String GET_UNTREATED_REPORTS = "getUntreatedReports";
 }

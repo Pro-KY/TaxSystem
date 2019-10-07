@@ -4,8 +4,11 @@
 <%@ page import="ua.training.util.constans.Command" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <fmt:message var="not_signed_label" key="sent.reports.not.assigned.text" bundle="${sessionScope.rb}" scope="request"/>
+<fmt:message var="checking_label" key="sent.reports.table.header.checking" bundle="${sessionScope.rb}" scope="page"/>
+<fmt:message var="sender_label" key="sent.reports.table.header.sender" bundle="${sessionScope.rb}" scope="page"/>
 
 <c:url scope="request" var="pageSizeThreeUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=3&command=${Command.SENT_REPORTS}"/>
+<c:set var="command" value="${userTypeId eq userTypeInspectorId ? Command.GET_UNTREATED_REPORTS : Command.SENT_REPORTS}" scope="page"/>
 
 <div class="container">
     <div id="elementsAmountSelect" class="row">
@@ -17,10 +20,10 @@
                             <fmt:message key="report.types.text" bundle="${rb}"/>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="reportsTypeDropdown">
-                            <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.INSPECTOR_ALL_REPORTS_TYPE}=4&command=${Command.GET_INSPECTOR_ALL_REPORTS}"/>">
+                            <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.REPORTS_APPROVAL_TYPE}=4&command=${command}"/>">
                                 <fmt:message key="report.types.allReports" bundle="${rb}"/>
                             </a>
-                            <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.INSPECTOR_ALL_REPORTS_TYPE}=5&command=${Command.GET_INSPECTOR_ALL_REPORTS}"/>">
+                            <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.REPORTS_APPROVAL_TYPE}=5&command=${command}"/>">
                                 <fmt:message key="report.types.changed" bundle="${rb}"/>
                             </a>
                         </div>
@@ -37,11 +40,11 @@
                     <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="pageSizeDropdown">
-                    <a class="dropdown-item" href="${pageSizeThreeUrl}"> 3 </a>
-                    <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=5&command=${Command.SENT_REPORTS}"/>"> 5 </a>
-                    <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=10&command=${Command.SENT_REPORTS}"/>">10</a>
-                    <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=15&command=${Command.SENT_REPORTS}"/>">15</a>
-                    <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=25&command=${Command.SENT_REPORTS}"/>">25</a>
+                    <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=3&command=${command}"/>"> 3 </a>
+                    <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=5&command=${command}"/>"> 5 </a>
+                    <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=10&command=${command}"/>">10</a>
+                    <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=15&command=${command}"/>">15</a>
+                    <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=25&command=${command}"/>">25</a>
                 </div>
             </div>
         </div>
@@ -54,7 +57,7 @@
                 <tr>
                     <th scope="col"><fmt:message key="sent.reports.table.header.number" bundle="${rb}"/></th>
                     <th scope="col"><fmt:message key="sent.reports.table.header.state" bundle="${rb}"/></th>
-                    <th scope="col"><fmt:message key="sent.reports.table.header.inspectorName" bundle="${rb}"/></th>
+                    <th scope="col">${userTypeId eq userTypeInspectorId ? sender_label : checking_label}</th>
                     <th scope="col"><fmt:message key="sent.reports.table.header.datetime" bundle="${rb}"/></th>
                 </tr>
             </thead>
@@ -63,7 +66,21 @@
                 <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.REPORT_APPROVAL_ID}=${report.reportApprovalId}&command=${Command.REPORT_DETAILS}">
                     <td>${report.reportId}</td>
                     <td>${report.state eq 'changed' ? 'processing' : report.state}</td>
-                    <td>${not empty report.inspectorName ? report.inspectorName : not_signed_label}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${not empty report.inspectorName}">
+                                ${report.inspectorName}
+                            </c:when>
+                            <c:when test="${not empty report.userName}">
+                                ${report.userName}
+                            </c:when>
+                            <c:otherwise>
+                                ${not_signed_label}
+                            </c:otherwise>
+                        </c:choose>
+
+<%--                            ${not empty report.inspectorName ? report.inspectorName : not_signed_label}--%>
+                    </td>
                     <td>${report.timestamp}</td>
                 </tr>
             </c:forEach>
@@ -82,19 +99,19 @@
                             <div class="btn-group">
                                 <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
                                     <li class="${sessionScope.paginationInfo.isLeftButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                        <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Previous</a>
+                                        <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.PREV_PAGE_CLICK}=true&command=${command}">Previous</a>
                                     </li>
                                 </c:if>
 
                                 <c:forEach begin="${sessionScope.paginationInfo.startPageIndex}" end="${sessionScope.paginationInfo.endPageIndex}" varStatus="counter">
                                     <li class="${(sessionScope.paginationInfo.currentPageIndex) eq counter.index ? 'page-item active' : 'page-item'}">
-                                        <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${Command.SENT_REPORTS}"> ${counter.index+1} </a>
+                                        <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.SELECTED_PAGE_INDEX}=${counter.index}&command=${command}"> ${counter.index+1} </a>
                                     </li>
                                 </c:forEach>
 
                                 <c:if test="${sessionScope.paginationInfo.allPagesAmount > 1}">
                                     <li class="${sessionScope.paginationInfo.isRightButtonDisabled ? 'page-item disabled' : 'page-item'}">
-                                        <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${Command.SENT_REPORTS}">Next</a>
+                                        <a class="page-link" href="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=${sessionScope.paginationInfo.pageSize}&${Parameters.NEXT_PAGE_CLICK}=true&command=${command}">Next</a>
                                     </li>
                                 </c:if>
                             </div>

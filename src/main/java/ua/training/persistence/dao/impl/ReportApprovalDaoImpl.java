@@ -8,6 +8,7 @@ import ua.training.persistence.dao.mappers.impl.*;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.ReportApproval;
 import ua.training.persistence.entities.StateApproval;
+import ua.training.persistence.entities.User;
 import ua.training.util.exceptions.DataAccessException;
 import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
@@ -57,13 +58,19 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         }
     }
 
-    public long countAllRowsForUserById(Long userId) {
+    public long countAllForUserById(Long userId) {
         return jdbcTemplate.countRows(SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_COUNT_FOR_USER), userId);
     }
 
     @Override
-    public long countAllRowsByStateApproval(StateApproval stateApproval) {
+    public long countAllByStateApproval(StateApproval stateApproval) {
         return jdbcTemplate.countRows(SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.COUNT_ALL_REPORT_APPROVAL_BY_STATE_APPROVAL), stateApproval.getId());
+    }
+
+    @Override
+    public long countAllByStateApprovalAndInspector(StateApproval stateApproval, User user) {
+        final String sqlQuery = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.COUNT_ALL_REPORT_APPROVAL_BY_STATE_APPROVAL_AND_INSPECTOR_ID);
+        return jdbcTemplate.countRows(sqlQuery, stateApproval.getId(), user.getId());
     }
 
     @Override
@@ -86,6 +93,17 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         reportApprovalMapper.mapUserRelation(new UserMapperImpl(true, false));
 
         return jdbcTemplate.finAll(sql, reportApprovalMapper, stateApproval.getId(), pageSize, offSet);
+    }
+
+    @Override
+    public List<ReportApproval> getReportApprovalListByStateAndInspector(long pageSize, long offSet, StateApproval stateApproval, User inspector) {
+        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_BY_APPROVAL_STATE_AND_INSPECTOR_ID);
+
+        final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);
+        reportApprovalMapper.mapStateApprovalRelation(new StateApprovalMapperImpl(true));
+        reportApprovalMapper.mapUserRelation(new UserMapperImpl(true, false));
+
+        return jdbcTemplate.finAll(sql, reportApprovalMapper, stateApproval.getId(), inspector.getId(), pageSize, offSet);
     }
 
     @Override

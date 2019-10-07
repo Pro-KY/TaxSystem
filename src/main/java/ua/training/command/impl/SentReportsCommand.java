@@ -3,6 +3,7 @@ package ua.training.command.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.command.ICommand;
+import ua.training.command.util.CommandUtil;
 import ua.training.dto.PaginationDto;
 import ua.training.persistence.entities.User;
 import ua.training.service.ReportApprovalService;
@@ -29,15 +30,8 @@ public class SentReportsCommand implements ICommand {
         log.info("in SentReportsCommand");
         request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(FRAGMENT_PATH_SENT_REPORTS));
         final HttpSession session = request.getSession();
-        PaginationDto currentPaginationDto = (PaginationDto) session.getAttribute(Attributes.PAGINATION_INFO);
-
-        if (currentPaginationDto != null) {
-            currentPaginationDto.setPaginationRequestData(request);
-            log.info("after session: {}", currentPaginationDto.toString());
-        } else {
-            currentPaginationDto = new PaginationDto();
-        }
-
+        final PaginationDto currentPaginationDto = CommandUtil.getInstance().getCurrentPaginationDto(session);
+        currentPaginationDto.setPaginationRequestContent(request);
         final User user = (User) session.getAttribute(Attributes.USER);
 
         PaginationDto updatedPaginationDto = reportApprovalService.getReportsApprovalForUser(currentPaginationDto, user.getId());
