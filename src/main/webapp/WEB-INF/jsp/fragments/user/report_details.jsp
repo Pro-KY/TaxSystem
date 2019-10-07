@@ -116,7 +116,7 @@
         <%--EDIT_REPORT_BTN--%>
         <c:if test="${reportDetails.approvalStateId eq 3}">
             <span class="d-flex justify-content-end mr-n4 mt-n3">
-                <a href="taxsystem/?command=${Command.GET_REPORT}&${Parameters.REPORT_ID}=${reportDetails.report.id}&${Parameters.REPORT_APPROVAL_ID}=${reportDetails.reportApprovalId}" class="btn btn-primary">
+                <a href="taxsystem/?command=${Commands.GET_REPORT}&${Parameters.REPORT_ID}=${reportDetails.report.id}&${Parameters.REPORT_APPROVAL_ID}=${reportDetails.reportApprovalId}" class="btn btn-primary">
                     <fmt:message key="report.details.report.btn" bundle="${rb}"/>
                 </a>
             </span>

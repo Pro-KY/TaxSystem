@@ -52,7 +52,7 @@
 
                 <input type="hidden" name="${Parameters.REPORT_APPROVAL_ID}" value="${reportDto.reportApprovalId}">
                 <input type="hidden" name="${Parameters.REPORT_ID}" value="${reportDto.reportId}">
-                <input type="hidden" name="command" value="${Command.EDIT_REPORT}">
+                <input type="hidden" name="command" value="${Commands.EDIT_REPORT}">
                 <button type="submit" class="btn btn-primary">${submitButton}</button>
             </form>
             <!-- form -->

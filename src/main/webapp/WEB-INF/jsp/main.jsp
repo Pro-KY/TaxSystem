@@ -44,7 +44,6 @@
             <div>
                 <!-- user name -->
                 <h5 class="text-white h5">
-<%--                 TODO: add organization name if user type is legal--%>
                     ${empty user.organization ? (user.firstName.concat(" ").concat(user.lastName)) : (user.organization)}
                 </h5>
                 <!-- user name -->
@@ -66,7 +65,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/taxsystem/?command=${Command.SIGN_OUT}">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/taxsystem/?command=${Commands.SIGN_OUT}">
                             <fmt:message key="header.singout" bundle="${rb}"/>
                         </a>
                     </li>

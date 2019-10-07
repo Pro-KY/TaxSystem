@@ -7,8 +7,8 @@
 <fmt:message var="checking_label" key="sent.reports.table.header.checking" bundle="${sessionScope.rb}" scope="page"/>
 <fmt:message var="sender_label" key="sent.reports.table.header.sender" bundle="${sessionScope.rb}" scope="page"/>
 
-<c:url scope="request" var="pageSizeThreeUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=3&command=${Command.SENT_REPORTS}"/>
-<c:set var="command" value="${userTypeId eq userTypeInspectorId ? Command.GET_UNTREATED_REPORTS : Command.SENT_REPORTS}" scope="page"/>
+<c:url scope="request" var="pageSizeThreeUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=3&command=${Commands.SENT_REPORTS}"/>
+<c:set var="command" value="${userTypeId eq userTypeInspectorId ? Commands.GET_UNTREATED_REPORTS : Commands.SENT_REPORTS}" scope="page"/>
 
 <div class="container">
     <div id="elementsAmountSelect" class="row">
@@ -63,7 +63,7 @@
             </thead>
             <tbody>
             <c:forEach var="report" items="${paginationInfo.paginationList}" >
-                <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.REPORT_APPROVAL_ID}=${report.reportApprovalId}&command=${Command.REPORT_DETAILS}">
+                <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.REPORT_APPROVAL_ID}=${report.reportApprovalId}&command=${Commands.REPORT_DETAILS}">
                     <td>${report.reportId}</td>
                     <td>${report.state eq 'changed' ? 'processing' : report.state}</td>
                     <td>

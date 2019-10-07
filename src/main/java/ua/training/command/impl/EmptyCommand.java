@@ -9,6 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 public class EmptyCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
-        return ViewPropertiesHandler.getViewPath(ViewPropertiesHandler.FRAGMENT_PATH_SIGN_IN);
+        return ViewPropertiesHandler.getViewPath(ViewPropertiesHandler.PATH_INDEX);
     }
 }
