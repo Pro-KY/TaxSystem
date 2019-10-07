@@ -9,7 +9,6 @@ import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.User;
 import ua.training.service.ReportApprovalService;
 import ua.training.util.constans.Attributes;
-import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,15 +33,8 @@ public class GetUntreatedReportsCommand implements ICommand {
 
         final Long approvalReportsTypeId = currentPaginationDto.getApprovalReportsTypeId();
         final StateApproval stateApproval = new StateApproval(approvalReportsTypeId);
-
-        PaginationDto updatedPaginationDto;
-
-        if(approvalReportsTypeId.equals(StateApprovalEnum.PROCESSING.getStateId())) {
-            updatedPaginationDto = reportApprovalService.getUntreatedReportsForInspector(currentPaginationDto, stateApproval);
-        } else {
-            final User inspector = (User) session.getAttribute(Attributes.USER);
-            updatedPaginationDto = reportApprovalService.getChangedReportsForInspector(currentPaginationDto, stateApproval, inspector);
-        }
+        final User inspector = (User) session.getAttribute(Attributes.USER);
+        PaginationDto updatedPaginationDto = reportApprovalService.getUntreatedReports(currentPaginationDto, approvalReportsTypeId, stateApproval,inspector);
 
         session.setAttribute(Attributes.PAGINATION_INFO, updatedPaginationDto);
 
