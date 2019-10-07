@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 public class MessagePropertiesHandler {
     private static ResourceBundle messageProperties;
-    public static final String LOGIN_ERROR = "SIGNIN_ERROR";
+    public static final String SIGNIN_ERROR = "SIGNIN_ERROR";
     public static final String ERROR_PARSING = "PARSING_ERROR";
     public static final String REPORT_DETAILS_ERROR = "REPORT_DETAILS_ERROR";
     public static final String SERVICE_NULL_ENTITY_ERROR = "SERVICE_NULL_ENTITY_ERROR";

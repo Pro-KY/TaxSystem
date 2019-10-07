@@ -5,6 +5,7 @@ public class Attributes {
 
     public static final String ALERT_ERROR = "alertError";
     public static final String ALERT_SUCCESS = "alertSuccess";
+    public static final String ALERT_MSG = "alertMsg";
 
     public static final String IS_USER_AUTHORIZED = "isUserAuthorized";
 

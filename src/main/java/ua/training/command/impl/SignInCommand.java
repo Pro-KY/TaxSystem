@@ -36,7 +36,7 @@ public class SignInCommand implements ICommand {
         final Optional<User> optionalUser = signInService.getAuthorizedUser(email, password);
         boolean isUserAuthorized = optionalUser.isPresent();
 
-        String pagePathProperty = isUserAuthorized ? PATH_MAIN : PATH_ERROR;
+        String pagePathProperty = isUserAuthorized ? PATH_MAIN : PATH_INDEX;
         final HttpSession session = request.getSession(false);
 
         if (session != null) {
@@ -59,8 +59,8 @@ public class SignInCommand implements ICommand {
                 String fragmentPath = isInspector ? FRAGMENT_PATH_SENT_REPORTS : FRAGMENT_PATH_SEND_REPORT;
                 request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(fragmentPath));
             } else {
-                request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(PATH_ERROR));
                 request.setAttribute(Attributes.ALERT_ERROR, true);
+//                request.setAttribute(Attributes.ALERT_MSG, MessagePropertiesHandler.getMessage(SIGNIN_ERROR));
             }
         }
 
