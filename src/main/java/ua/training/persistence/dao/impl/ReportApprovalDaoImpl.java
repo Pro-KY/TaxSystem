@@ -7,6 +7,7 @@ import ua.training.persistence.dao.jdbc.JdbcTemplate;
 import ua.training.persistence.dao.mappers.impl.*;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.ReportApproval;
+import ua.training.persistence.entities.StateApproval;
 import ua.training.util.exceptions.DataAccessException;
 import ua.training.util.exceptions.PersistenceException;
 import ua.training.util.handler.properties.SqlPropertiesHandler;
@@ -61,6 +62,11 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
     }
 
     @Override
+    public long countAllRowsByStateApproval(StateApproval stateApproval) {
+        return jdbcTemplate.countRows(SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.COUNT_ALL_REPORT_APPROVAL_BY_STATE_APPROVAL), stateApproval.getId());
+    }
+
+    @Override
     public List<ReportApproval> getReportApprovalListByUserId(long pageSize, long offSet, long userId) {
         String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_FOR_USER);
 
@@ -69,6 +75,17 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         reportApprovalMapper.mapInspectorRelation(new UserMapperImpl(true, true));
 
         return jdbcTemplate.finAll(sql, reportApprovalMapper, userId, pageSize, offSet);
+    }
+
+    @Override
+    public List<ReportApproval> getReportApprovalListByStateApproval(long pageSize, long offSet, StateApproval stateApproval) {
+        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_BY_APPROVAL_STATE);
+
+        final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);
+        reportApprovalMapper.mapStateApprovalRelation(new StateApprovalMapperImpl(true));
+        reportApprovalMapper.mapUserRelation(new UserMapperImpl(true, false));
+
+        return jdbcTemplate.finAll(sql, reportApprovalMapper, stateApproval.getId(), pageSize, offSet);
     }
 
     @Override

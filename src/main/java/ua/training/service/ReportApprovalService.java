@@ -9,6 +9,7 @@ import ua.training.persistence.dao.IReportApprovalDao;
 import ua.training.persistence.dao.factory.MysqlDaoFactory;
 import ua.training.persistence.dao.jdbc.PaginationHandler;
 import ua.training.persistence.entities.ReportApproval;
+import ua.training.persistence.entities.StateApproval;
 import ua.training.util.exceptions.ServiceException;
 import ua.training.util.handler.properties.MessagePropertiesHandler;
 
@@ -42,6 +43,27 @@ public class ReportApprovalService {
 
     public long countAllReportsApprovalForUser(Long userId) {
         return daoFactory.getReportApprovalDao().countAllRowsForUserById(userId);
+    }
+
+    public PaginationDto getReportsApprovalByStateApproval(PaginationDto paginationDto, StateApproval stateApproval) {
+        final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
+
+        final PaginationHandler paginationHandler = new PaginationHandler(paginationDto);
+        final long allRows = reportApprovalDao.countAllRowsByStateApproval(stateApproval);
+        paginationHandler.setAllRowsAmount(allRows);
+        paginationHandler.handlePagination();
+
+        final List<ReportApproval> paginationList = reportApprovalDao.
+                getReportApprovalListByStateApproval(paginationHandler.getPageSize(), paginationHandler.getOffSet(), stateApproval);
+
+        final List<SentReportsDto> collect = paginationList.stream()
+                .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
+                .collect(Collectors.toList());
+
+        paginationDto.setPaginationList(collect);
+        paginationHandler.updatePaginationInfo();
+
+        return paginationHandler.getPaginationDto();
     }
 
     public PaginationDto getReportsApprovalForUser(PaginationDto paginationDto, Long userId) {

@@ -35,7 +35,6 @@ public class CommandParametersExtractor {
             log.debug(e.getMessage(), e.getCause());
             dto = null;
         }
-
         return dto;
     }
 }
