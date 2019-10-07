@@ -141,6 +141,20 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
     }
 
+    public Optional<ReportApproval> findByIdJoinReportJoinUser(Long id) {
+        String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_JOIN_REPORT_JOIN_USER);
+
+        final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);
+
+        final ReportMapperImpl reportMapper = new ReportMapperImpl(true);
+        reportMapper.mapTaxTypeRelation(new TaxTypeMapperIml(true));
+        reportApprovalMapper.mapReportRelation(reportMapper);
+        reportApprovalMapper.mapStateApprovalRelation(new StateApprovalMapperImpl(true));
+        reportApprovalMapper.mapUserRelation(new UserMapperImpl(true, false));
+
+        return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
+    }
+
     public Optional<ReportApproval> findByIdJoinUser(Long id) {
         String sql = SqlPropertiesHandler.getSqlQuery(SqlPropertiesHandler.REPORT_APPROVAL_JOIN_USER);
         final ReportApprovalMapper reportApprovalMapper = new ReportApprovalMapper(true);

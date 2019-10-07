@@ -28,10 +28,19 @@ public class ReportDetailsService {
         this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
-    public ReportDetailsDto getReportDetails(Long reportApprovalId) {
+    public ReportDetailsDto getUserReportDetails(Long reportApprovalId) {
         final ReportApproval reportApproval = daoFactory
                 .getReportApprovalDao()
                 .findByIdJoinReportJoinInspector(reportApprovalId)
+                .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(REPORT_DETAILS_ERROR)));
+
+        return DtoMapper.getInstance().mapToReportDetailsDto(reportApproval);
+    }
+
+    public ReportDetailsDto getInspectorReportDetails(Long reportApprovalId) {
+        final ReportApproval reportApproval = daoFactory
+                .getReportApprovalDao()
+                .findByIdJoinReportJoinUser(reportApprovalId)
                 .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(REPORT_DETAILS_ERROR)));
 
         return DtoMapper.getInstance().mapToReportDetailsDto(reportApproval);

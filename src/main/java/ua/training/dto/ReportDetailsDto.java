@@ -10,6 +10,7 @@ public class ReportDetailsDto {
     private String inspectorName;
     private String userName;
     private Long inspectorId;
+    private Long userTypeId;
 
     private ReportDetailsDto(Builder builder) {
         reportApprovalId = builder.reportApprovalId;
@@ -19,8 +20,8 @@ public class ReportDetailsDto {
         inspectorName = builder.inspectorName;
         userName = builder.userName;
         inspectorId = builder.inspectorId;
+        userTypeId = builder.userTypeId;
     }
-
 
     public Long getReportApprovalId() {
         return reportApprovalId;
@@ -46,6 +47,10 @@ public class ReportDetailsDto {
         return inspectorId;
     }
 
+    public Long getUserTypeId() {
+        return userTypeId;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -59,6 +64,7 @@ public class ReportDetailsDto {
         private String inspectorName;
         private String userName;
         private Long inspectorId;
+        private Long userTypeId;
 
         public Builder() {
         }
@@ -95,6 +101,11 @@ public class ReportDetailsDto {
 
         public Builder inspectorId(Long val) {
             inspectorId = val;
+            return this;
+        }
+
+        public Builder userTypeId(Long val) {
+            userTypeId = val;
             return this;
         }
 

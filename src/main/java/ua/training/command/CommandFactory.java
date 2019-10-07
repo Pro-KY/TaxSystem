@@ -2,10 +2,11 @@ package ua.training.command;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ua.training.command.impl.*;
+import ua.training.command.impl.fragments.ApprovingFragmentCommand;
 import ua.training.command.impl.fragments.SendReportFragmentCommand;
 import ua.training.command.impl.fragments.SignInFragmentCommand;
 import ua.training.command.impl.fragments.SignUpFragmentCommand;
-import ua.training.command.impl.*;
 import ua.training.util.constans.Commands;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +34,7 @@ public class CommandFactory {
         commandHashMap.put(Commands.EDIT_REPORT, new EditReportCommand());
         commandHashMap.put(Commands.CHANGE_INSPECTOR, new InspectorChangingCommand());
         commandHashMap.put(Commands.GET_UNTREATED_REPORTS, new GetUntreatedReportsCommand());
+        commandHashMap.put(Commands.GET_APPROVING_FRAGMENT, new ApprovingFragmentCommand());
     }
 
     public static ICommand getCommand(HttpServletRequest request) {

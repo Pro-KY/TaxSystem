@@ -19,7 +19,7 @@ public class ReportDetailsCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         final Long reportApprovalId = Long.valueOf(request.getParameter(Parameters.REPORT_APPROVAL_ID));
-        final ReportDetailsDto reportDetails = ReportDetailsService.getInstance().getReportDetails(reportApprovalId);
+        final ReportDetailsDto reportDetails = ReportDetailsService.getInstance().getUserReportDetails(reportApprovalId);
 
         final String fragmentPath = getViewPath(FRAGMENT_PATH_REPORT_DETAILS);
 

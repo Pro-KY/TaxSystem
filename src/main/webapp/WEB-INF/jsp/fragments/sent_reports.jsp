@@ -9,6 +9,7 @@
 
 <c:url scope="request" var="pageSizeThreeUrl" value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=3&command=${Commands.SENT_REPORTS}"/>
 <c:set var="command" value="${userTypeId eq userTypeInspectorId ? Commands.GET_UNTREATED_REPORTS : Commands.SENT_REPORTS}" scope="page"/>
+<c:set var="command_1" value="${userTypeId eq userTypeInspectorId ? Commands.GET_APPROVING_FRAGMENT : Commands.REPORT_DETAILS}" scope="page"/>
 
 <div class="container">
     <div id="elementsAmountSelect" class="row">
@@ -63,7 +64,7 @@
             </thead>
             <tbody>
             <c:forEach var="report" items="${paginationInfo.paginationList}" >
-                <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.REPORT_APPROVAL_ID}=${report.reportApprovalId}&command=${Commands.REPORT_DETAILS}">
+                <tr class="table-row" data-href="${pageContext.request.contextPath}?${Parameters.REPORT_APPROVAL_ID}=${report.reportApprovalId}&command=${command_1}">
                     <td>${report.reportId}</td>
                     <td>${report.state eq 'changed' ? 'processing' : report.state}</td>
                     <td>

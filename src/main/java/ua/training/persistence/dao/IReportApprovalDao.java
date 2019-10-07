@@ -13,6 +13,7 @@ public interface IReportApprovalDao extends IDao<ReportApproval> {
     long countAllByStateApproval(StateApproval stateApproval);
     long countAllByStateApprovalAndInspector(StateApproval stateApproval, User user);
     Optional<ReportApproval> findByIdJoinReportJoinInspector(Long id);
+    Optional<ReportApproval> findByIdJoinReportJoinUser(Long id);
     Optional<ReportApproval> findByIdJoinUser(Long id);
     List<ReportApproval> getReportApprovalListByStateApproval(long pageSize, long offSet, StateApproval stateApproval);
     List<ReportApproval> getReportApprovalListByStateAndInspector(long pageSize, long offSet, StateApproval stateApproval, User inspector);
