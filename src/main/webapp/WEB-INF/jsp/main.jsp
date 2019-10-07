@@ -11,9 +11,9 @@
 
 <c:set var="userTypeId" value="${user.userType.id}" scope="session"/>
 
-<c:set var="userTypeIndividualId" value="1" scope="page"/>
-<c:set var="userTypeLegalEntityId" value="2" scope="page"/>
-<c:set var="userTypeInspectorId" value="3" scope="page"/>
+<c:set var="userTypeIndividualId" value="1" scope="session"/>
+<c:set var="userTypeLegalEntityId" value="2" scope="session"/>
+<c:set var="userTypeInspectorId" value="3" scope="session"/>
 
 <fmt:message var ="userTypeIndividualText" key="main.usertype.individual" bundle="${rb}"/>
 <fmt:message var ="userTypeLegalEntityText" key="main.usertype.legal" bundle="${rb}"/>

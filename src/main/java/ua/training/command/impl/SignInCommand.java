@@ -39,12 +39,11 @@ public class SignInCommand implements ICommand {
                 final User user = optionalUser.get();
                 session.setAttribute(Attributes.USER, user);
                 final String type = user.getUserType().getType();
-                String fragmentPath = type.equals(UserTypes.INSPECTOR.getType()) ? FRAGMENT_PATH_PROCESS_REPORT : FRAGMENT_PATH_SEND_REPORT;
+                String fragmentPath = type.equals(UserTypes.INSPECTOR.getType()) ? FRAGMENT_PATH_SENT_REPORTS : FRAGMENT_PATH_SEND_REPORT;
                 request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(fragmentPath));
             } else {
                 request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(PATH_ERROR));
                 request.setAttribute(Attributes.ALERT_ERROR, true);
-//                request.setAttribute(Attributes.ALERT_ERROR, MessagePropertiesHandler.getMessage(LOGIN_ERROR));
             }
         }
 

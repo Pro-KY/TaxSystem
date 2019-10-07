@@ -9,14 +9,34 @@
 
 <div class="container">
     <div id="elementsAmountSelect" class="row">
-        <div class="col-md-10"></div>
+        <%--  reports type (inspector) --%>
+            <div class="col-md-2">
+                <c:if test="${userTypeId eq userTypeInspectorId}">
+                    <div class="dropdown show">
+                        <a class="dropdown-toggle nav-link" href="#" id="reportsTypeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <fmt:message key="report.types.text" bundle="${rb}"/>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="reportsTypeDropdown">
+                            <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.INSPECTOR_ALL_REPORTS}=0&command=${Command.GET_INSPECTOR_ALL_REPORTS}"/>">
+                                <fmt:message key="report.types.allReports" bundle="${rb}"/>
+                            </a>
+                            <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.INSPECTOR_ALL_REPORTS}=1&command=${Command.GET_INSPECTOR_ALL_REPORTS}"/>">
+                                <fmt:message key="report.types.changed" bundle="${rb}"/>
+                            </a>
+                        </div>
+                    </div>
+                </c:if>
+            </div>
+        <%--  reports type (inspector) --%>
+
+        <div class="col-md-8"></div>
 <%--        page size--%>
         <div class="col-md-2">
             <div class="dropdown show">
-                <a class="dropdown-toggle nav-link" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="dropdown-toggle nav-link" href="#" id="pageSizeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <fmt:message key="sent.reports.page.size" bundle="${rb}"/>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-menu" aria-labelledby="pageSizeDropdown">
                     <a class="dropdown-item" href="${pageSizeThreeUrl}"> 3 </a>
                     <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.PAGE_SIZE}=5&command=${Command.SENT_REPORTS}"/>"> 5 </a>
                     <a class="dropdown-item" href="<c:url value="/taxsystem/?${Parameters.PAGE_SIZE}=10&command=${Command.SENT_REPORTS}"/>">10</a>

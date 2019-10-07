@@ -3,9 +3,12 @@ package ua.training.command.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.command.ICommand;
+import ua.training.util.constans.Attributes;
+import ua.training.util.constans.Parameters;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 
@@ -15,10 +18,17 @@ public class ProcessReportCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        System.out.println("process report command");
-        final String viewPath = getViewPath(FRAGMENT_PATH_PROCESS_REPORT);
+        log.info("process report command");
+        final String viewPath = getViewPath(FRAGMENT_PATH_SENT_REPORTS);
+        final String sideBarIndex = request.getParameter(Parameters.SIDEBAR_ACTIVE_INDEX);
 
-        request.setAttribute("fragmentPath", viewPath);
+        final HttpSession session = request.getSession();
+
+        if (sideBarIndex != null) {
+            session.setAttribute(Attributes.SIDEBAR_ACTIVE_INDEX, request.getParameter(Parameters.SIDEBAR_ACTIVE_INDEX));
+        }
+
+        request.setAttribute(Attributes.FRAGMENT_PATH, viewPath);
         return ViewPropertiesHandler.getViewPath(PATH_MAIN);
     }
 }
