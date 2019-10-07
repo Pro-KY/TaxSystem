@@ -17,10 +17,10 @@
                             <fmt:message key="report.types.text" bundle="${rb}"/>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="reportsTypeDropdown">
-                            <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.INSPECTOR_ALL_REPORTS_TYPE}=0&command=${Command.GET_INSPECTOR_ALL_REPORTS}"/>">
+                            <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.INSPECTOR_ALL_REPORTS_TYPE}=4&command=${Command.GET_INSPECTOR_ALL_REPORTS}"/>">
                                 <fmt:message key="report.types.allReports" bundle="${rb}"/>
                             </a>
-                            <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.INSPECTOR_ALL_REPORTS_TYPE}=1&command=${Command.GET_INSPECTOR_ALL_REPORTS}"/>">
+                            <a class="dropdown-item" href="<c:url value="${pageContext.request.contextPath}?${Parameters.INSPECTOR_ALL_REPORTS_TYPE}=5&command=${Command.GET_INSPECTOR_ALL_REPORTS}"/>">
                                 <fmt:message key="report.types.changed" bundle="${rb}"/>
                             </a>
                         </div>
