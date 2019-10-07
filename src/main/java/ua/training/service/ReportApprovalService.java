@@ -35,6 +35,17 @@ public class ReportApprovalService {
         this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
+    public void updateReportApproval(Long reportApprovalId, String refusalCause, Long stateApprovalId) {
+        final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
+
+        final ReportApproval reportApproval = reportApprovalDao
+                .findById(reportApprovalId)
+                .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(SERVICE_NULL_ENTITY_ERROR)));
+
+        reportApproval.setRefusalCause(refusalCause);
+        reportApproval.setStateApproval(new StateApproval(stateApprovalId));
+        reportApprovalDao.update(reportApproval);
+    }
 
     public ReportApproval getReportApprovalById(Long id) {
         return daoFactory.getReportApprovalDao()

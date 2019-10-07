@@ -29,17 +29,12 @@ public class FrontController extends HttpServlet {
 
     private void handleRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final ICommand command = CommandFactory.getCommand(request);
-
         final String page = command.execute(request);
-        System.out.println(page);
 
         if (page == null) {
             response.sendRedirect("/error.jsp");
             return;
         }
-
-        final Object language = request.getSession().getAttribute("language");
-        System.out.println("language: " + language);
 
         if(page.equals("/index.jsp")) {
             response.sendRedirect("/");

@@ -46,7 +46,7 @@ public class EditReportCommand implements ICommand {
             request.setAttribute(Attributes.PAGINATION_INFO, updatedPaginationDto);
             isOperationSuccessful = true;
         } catch (Exception e) {
-            log.debug(e.getMessage(), e.getCause());
+            log.error(e.getMessage(), e.getCause());
             isOperationSuccessful = false;
         }
 
