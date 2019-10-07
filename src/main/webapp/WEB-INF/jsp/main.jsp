@@ -113,16 +113,7 @@
 
     <!-- ALERT -->
     <c:if test="${(not empty alertError and alertError eq true) or (not empty alertSuccess and alertSuccess eq true)}">
-        <div class="container-fluid mt-3">
-            <div class="row fixed-bottom">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <%@ include file="/WEB-INF/jsp/alert.jsp"%>
-                </div>
-                <div class="col-md-3"></div>
-            </div>
-        </div>
-
+        <%@ include file="/WEB-INF/jsp/alert.jsp"%>
     </c:if>
     <!-- ALERT -->
 </body>

@@ -11,12 +11,14 @@ import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
 import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.constans.UserTypes;
+import ua.training.util.handler.properties.MessagePropertiesHandler;
 import ua.training.util.handler.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+import static ua.training.util.handler.properties.MessagePropertiesHandler.SIGNIN_ERROR;
 import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
 
 public class SignInCommand implements ICommand {
@@ -60,7 +62,7 @@ public class SignInCommand implements ICommand {
                 request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(fragmentPath));
             } else {
                 request.setAttribute(Attributes.ALERT_ERROR, true);
-//                request.setAttribute(Attributes.ALERT_MSG, MessagePropertiesHandler.getMessage(SIGNIN_ERROR));
+                request.setAttribute(Attributes.ALERT_MSG, MessagePropertiesHandler.getMessage(SIGNIN_ERROR));
             }
         }
 

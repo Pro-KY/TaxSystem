@@ -20,7 +20,6 @@ public class SignInService {
         return instance;
     }
 
-
     private SignInService() {
         this.daoFactory = MysqlDaoFactory.getInstance();
     }
