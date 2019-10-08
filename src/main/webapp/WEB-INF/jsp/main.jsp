@@ -103,12 +103,12 @@
     </div>
 
     <!-- FOR TESTING -->
-        <div>
-            param.alertError is null => ${empty alertError}
-        </div>
-        <div>
-            param.alertSuccess is null =>  ${empty alertSuccess}
-        </div>
+<%--        <div>--%>
+<%--            param.alertError is null => ${empty alertError}--%>
+<%--        </div>--%>
+<%--        <div>--%>
+<%--            param.alertSuccess is null =>  ${empty alertSuccess}--%>
+<%--        </div>--%>
     <!-- FOR TESTING -->
 
     <!-- ALERT -->

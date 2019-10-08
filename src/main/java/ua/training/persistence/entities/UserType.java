@@ -32,25 +32,26 @@ public class UserType implements Serializable {
         this.type = type;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserType userType = (UserType) o;
+        return Objects.equals(id, userType.id) &&
+                Objects.equals(type, userType.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, type);
+    }
+
     @Override
     public String toString() {
         return "UserType{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserType userType1 = (UserType) o;
-        return id == userType1.id &&
-                Objects.equals(type, userType1.type);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, type);
     }
 }

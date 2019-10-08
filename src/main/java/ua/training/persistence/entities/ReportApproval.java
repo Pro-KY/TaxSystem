@@ -3,6 +3,7 @@ package ua.training.persistence.entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class ReportApproval implements Serializable {
     private Long id;
@@ -93,6 +94,25 @@ public class ReportApproval implements Serializable {
         this.refusalCause = refusalCause;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReportApproval that = (ReportApproval) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(timestamp, that.timestamp) &&
+                Objects.equals(refusalCause, that.refusalCause) &&
+                Objects.equals(stateApproval, that.stateApproval) &&
+                Objects.equals(report, that.report) &&
+                Objects.equals(user, that.user) &&
+                Objects.equals(inspector, that.inspector);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, timestamp, refusalCause, stateApproval, report, user, inspector);
+    }
 
     @Override
     public String toString() {

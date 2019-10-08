@@ -1,5 +1,6 @@
 package ua.training.persistence.entities;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Report implements Serializable {
     private Long id;
@@ -60,6 +61,23 @@ public class Report implements Serializable {
 
     public void setTaxType(TaxType taxType) {
         this.taxType = taxType;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Report report = (Report) o;
+        return Double.compare(report.sum, sum) == 0 &&
+                quarter == report.quarter &&
+                Objects.equals(id, report.id) &&
+                Objects.equals(taxType, report.taxType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, taxType, sum, quarter);
     }
 
     @Override

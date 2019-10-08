@@ -36,25 +36,26 @@ public class StateApproval implements Serializable {
         this.state = state;
     }
 
-    @Override
-    public String toString() {
-        return "StateApprovalEnum{" +
-                "id=" + id +
-                ", state='" + state + '\'' +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StateApproval that = (StateApproval) o;
-        return id == that.id &&
+        return Objects.equals(id, that.id) &&
                 Objects.equals(state, that.state);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, state);
+    }
+
+    @Override
+    public String toString() {
+        return "StateApprovalEnum{" +
+                "id=" + id +
+                ", state='" + state + '\'' +
+                '}';
     }
 }

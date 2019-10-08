@@ -1,6 +1,7 @@
 package ua.training.persistence.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class User implements Serializable {
     private Long id;
@@ -96,6 +97,27 @@ public class User implements Serializable {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(organization, user.organization) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(address, user.address) &&
+                Objects.equals(userType, user.userType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, organization, email, password, address, userType);
     }
 
     @Override

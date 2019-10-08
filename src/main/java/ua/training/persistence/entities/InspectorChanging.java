@@ -2,6 +2,7 @@ package ua.training.persistence.entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class InspectorChanging implements Serializable {
     private Long id;
@@ -56,5 +57,19 @@ public class InspectorChanging implements Serializable {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InspectorChanging that = (InspectorChanging) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(timestamp, that.timestamp) &&
+                Objects.equals(reportApproval, that.reportApproval) &&
+                Objects.equals(previousInspector, that.previousInspector);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, timestamp, reportApproval, previousInspector);
+    }
 }
