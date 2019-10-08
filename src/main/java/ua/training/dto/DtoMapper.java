@@ -65,8 +65,8 @@ public class DtoMapper {
         final Timestamp timestamp = reportApproval.getTimestamp();
         final User inspector = reportApproval.getInspector();
         final User user = reportApproval.getUser();
-        final String inspectorName = (inspector != null && inspector.getId() > 0) ? inspector.getFirstName() + " " + inspector.getLastName() : "";
-        final String userName = (user.getId() > 0) ? user.getFirstName() + " " + user.getLastName() : "";
+        final String inspectorName = (inspector != null && inspector.getFirstName() != null) ? inspector.getFirstName() + " " + inspector.getLastName() : "";
+        final String userName = (user.getFirstName() != null) ? user.getFirstName() + " " + user.getLastName() : "";
         return new SentReportsDto(reportId, state, inspectorName, userName, timestamp, reportApprovalId);
     }
 
