@@ -16,7 +16,6 @@ import java.util.Optional;
 
 import static ua.training.util.properties.SqlProperties.*;
 
-// move all SQl queries to fields or in properties file
 public class UserDaoImpl implements IUserDao {
     private static UserDaoImpl instance;
     private JdbcTemplate jdbcTemplate;
@@ -57,12 +56,17 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Long update(User entity) {
-        return 0L;
+        String sql = SqlProperties.getSqlQuery(UPDATE_USER);
+        Object[] params = {entity.getFirstName(), entity.getLastName(), entity.getOrganization(),
+                entity.getEmail(), entity.getPassword(), entity.getAddress(), entity.getUserType().getId(), entity.getId()};
+
+        return jdbcTemplate.saveOrUpdate(sql, params);
     }
 
     @Override
     public boolean delete(User entity) {
-        return false;
+        String sql = SqlProperties.getSqlQuery(DELETE_USER_BY_ID);
+        return jdbcTemplate.delete(sql, entity.getId());
     }
 
     @Override
