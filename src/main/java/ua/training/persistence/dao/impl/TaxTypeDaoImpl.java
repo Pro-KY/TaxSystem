@@ -18,7 +18,7 @@ import static ua.training.util.properties.SqlProperties.FIND_TAX_TYPE_BY_NAME;
 public class TaxTypeDaoImpl implements ITaxTypeDao {
     private static TaxTypeDaoImpl instance;
     private JdbcTemplate jdbcTemplate;
-    private static final Logger logger = LogManager.getLogger(ReportDaoImpl.class);
+    private static final Logger logger = LogManager.getLogger(TaxTypeDaoImpl.class);
 
     public void setDataSource(MysqlDataSource mysqlDataSource) {
         jdbcTemplate.setDataSource(mysqlDataSource);

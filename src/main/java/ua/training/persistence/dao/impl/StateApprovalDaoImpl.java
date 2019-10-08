@@ -9,7 +9,7 @@ import ua.training.util.properties.SqlProperties;
 
 import java.util.Optional;
 
-import static ua.training.util.properties.SqlProperties.FIND_REPORT_STATE_BY_NANE;
+import static ua.training.util.properties.SqlProperties.*;
 
 public class StateApprovalDaoImpl implements IStateApprovalDao {
     private static StateApprovalDaoImpl instance;
@@ -31,30 +31,32 @@ public class StateApprovalDaoImpl implements IStateApprovalDao {
     }
 
     public Optional<StateApproval> findByState(String state) {
-        String sql = SqlProperties.getSqlQuery(FIND_REPORT_STATE_BY_NANE);
+        String sql = SqlProperties.getSqlQuery(FIND_STATE_APPROVAL_BY_STATE);
         return jdbcTemplate.findByQuery(sql, new StateApprovalMapperImpl(false), state);
     }
 
     @Override
     public Long save(StateApproval entity) {
-        //TODO: implement
-        return 0L;
+        String sql = SqlProperties.getSqlQuery(SAVE_STATE_APPROVAL);
+        return jdbcTemplate.saveOrUpdate(sql, entity.getState());
     }
 
     @Override
     public Long update(StateApproval entity) {
-        //TODO: implement
-        return 0L;
+        String sql = SqlProperties.getSqlQuery(UPDATE_STATE_APPROVAL);
+        return jdbcTemplate.saveOrUpdate(sql, entity.getState(), entity.getId());
     }
 
     @Override
     public boolean delete(StateApproval entity) {
-        //TODO: implement
-        return false;
+        String sql = SqlProperties.getSqlQuery(DELETE_STATE_APPROVAL);
+        return jdbcTemplate.delete(sql, entity.getId());
     }
 
     @Override
     public Optional<StateApproval> findById(Long id) {
-        return Optional.empty();
+        String sql = SqlProperties.getSqlQuery(SqlProperties.FIND_INSPECTOR_CHANGING_BY_ID);
+        final StateApprovalMapperImpl stateApprovalMapper = new StateApprovalMapperImpl(false);
+        return jdbcTemplate.findByQuery(sql, stateApprovalMapper, id);
     }
 }
