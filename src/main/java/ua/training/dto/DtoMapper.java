@@ -27,14 +27,15 @@ public class DtoMapper {
         Report report = reportApproval.getReport();
         String refusalCause = reportApproval.getRefusalCause();
         Long approvalStateId = reportApproval.getStateApproval().getId();
-        Long userTypeId = reportApproval.getUser().getUserType().getId();
 
         String inspectorName = null;
         String userName = null;
         Long inspectorId = null;
+        Long userTypeId = null;
 
         final User inspector = reportApproval.getInspector();
         final User user = reportApproval.getUser();
+
 
         if(inspector != null && inspector.getFirstName() != null) {
             inspectorName = inspector.getFirstName() + " " + inspector.getLastName();
@@ -43,6 +44,7 @@ public class DtoMapper {
 
         if(user != null && user.getFirstName() != null) {
             userName = user.getFirstName() + " " + user.getLastName();
+            userTypeId = user.getUserType().getId();
         }
 
         return new ReportDetailsDto.Builder()
