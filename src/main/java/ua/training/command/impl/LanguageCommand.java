@@ -1,12 +1,12 @@
 package ua.training.command.impl;
 
 import ua.training.command.ICommand;
-import ua.training.util.handler.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_INDEX;
+import static ua.training.util.properties.ViewPropertiesHandler.PATH_INDEX;
 
 public class LanguageCommand implements ICommand {
     @Override

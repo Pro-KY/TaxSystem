@@ -5,12 +5,12 @@ import org.apache.logging.log4j.Logger;
 import ua.training.dto.DtoMapper;
 import ua.training.dto.ReportDto;
 import ua.training.persistence.entities.Report;
-import ua.training.util.handler.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 
 import static ua.training.util.constans.Attributes.*;
-import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
+import static ua.training.util.properties.ViewPropertiesHandler.*;
 
 public class CommandAttributesSetter {
     private static final Logger log = LogManager.getLogger(CommandAttributesSetter.class);

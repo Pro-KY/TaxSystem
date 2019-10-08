@@ -1,4 +1,4 @@
-package ua.training.util.handler.properties;
+package ua.training.util.properties;
 
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;

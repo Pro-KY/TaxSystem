@@ -8,11 +8,11 @@ import ua.training.persistence.dao.mappers.impl.ReportMapperImpl;
 import ua.training.persistence.dao.mappers.impl.TaxTypeMapperIml;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.Report;
-import ua.training.util.handler.properties.SqlPropertiesHandler;
+import ua.training.util.properties.SqlPropertiesHandler;
 
 import java.util.Optional;
 
-import static ua.training.util.handler.properties.SqlPropertiesHandler.*;
+import static ua.training.util.properties.SqlPropertiesHandler.*;
 
 public class ReportDaoImpl implements IReportDao {
     private static ReportDaoImpl instance;

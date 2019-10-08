@@ -7,9 +7,9 @@ import ua.training.dto.ReportDetailsDto;
 import ua.training.persistence.dao.factory.MysqlDaoFactory;
 import ua.training.persistence.entities.ReportApproval;
 import ua.training.util.exceptions.ServiceException;
-import ua.training.util.handler.properties.MessagePropertiesHandler;
+import ua.training.util.properties.MessagePropertiesHandler;
 
-import static ua.training.util.handler.properties.MessagePropertiesHandler.REPORT_DETAILS_ERROR;
+import static ua.training.util.properties.MessagePropertiesHandler.REPORT_DETAILS_ERROR;
 
 public class ReportDetailsService {
     private static final Logger log = LogManager.getLogger(ReportDetailsService.class);

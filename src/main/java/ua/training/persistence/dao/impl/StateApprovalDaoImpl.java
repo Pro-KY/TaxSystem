@@ -5,11 +5,11 @@ import ua.training.persistence.dao.jdbc.JdbcTemplate;
 import ua.training.persistence.dao.mappers.impl.StateApprovalMapperImpl;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.StateApproval;
-import ua.training.util.handler.properties.SqlPropertiesHandler;
+import ua.training.util.properties.SqlPropertiesHandler;
 
 import java.util.Optional;
 
-import static ua.training.util.handler.properties.SqlPropertiesHandler.FIND_REPORT_STATE_BY_NANE;
+import static ua.training.util.properties.SqlPropertiesHandler.FIND_REPORT_STATE_BY_NANE;
 
 public class StateApprovalDaoImpl implements IStateApprovalDao {
     private static StateApprovalDaoImpl instance;

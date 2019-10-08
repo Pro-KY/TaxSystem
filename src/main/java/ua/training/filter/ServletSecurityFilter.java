@@ -3,7 +3,7 @@ package ua.training.filter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.util.constans.Attributes;
-import ua.training.util.handler.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewPropertiesHandler;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static ua.training.util.handler.properties.ViewPropertiesHandler.FRAGMENT_PATH_SENT_REPORTS;
-import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_MAIN;
+import static ua.training.util.properties.ViewPropertiesHandler.FRAGMENT_PATH_SENT_REPORTS;
+import static ua.training.util.properties.ViewPropertiesHandler.PATH_MAIN;
 
 public class ServletSecurityFilter implements Filter {
     private static final Logger logger = LogManager.getLogger(ServletSecurityFilter.class);

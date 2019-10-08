@@ -7,11 +7,11 @@ import ua.training.dto.ReportDetailsDto;
 import ua.training.service.ReportDetailsService;
 import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
-import ua.training.util.handler.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
+import static ua.training.util.properties.ViewPropertiesHandler.*;
 
 public class ApprovingFragmentCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(ApprovingFragmentCommand.class);

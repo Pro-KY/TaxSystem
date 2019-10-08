@@ -2,12 +2,12 @@ package ua.training.command.impl.fragments;
 
 import ua.training.command.ICommand;
 import ua.training.util.constans.Attributes;
-import ua.training.util.handler.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
+import static ua.training.util.properties.ViewPropertiesHandler.*;
 
 public class SignUpFragmentCommand implements ICommand {
 

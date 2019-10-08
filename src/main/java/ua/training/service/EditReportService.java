@@ -12,11 +12,10 @@ import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.TaxType;
 import ua.training.persistence.transaction.MysqlTransactionManager;
 import ua.training.util.constans.StateApprovalEnum;
-import ua.training.util.exceptions.ExceptionThrower;
 import ua.training.util.exceptions.ServiceException;
-import ua.training.util.handler.properties.MessagePropertiesHandler;
+import ua.training.util.properties.MessagePropertiesHandler;
 
-import static ua.training.util.handler.properties.MessagePropertiesHandler.*;
+import static ua.training.util.properties.MessagePropertiesHandler.*;
 
 public class EditReportService {
     private static final Logger log = LogManager.getLogger(EditReportService.class);

@@ -13,12 +13,12 @@ import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.User;
 import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.exceptions.ServiceException;
-import ua.training.util.handler.properties.MessagePropertiesHandler;
+import ua.training.util.properties.MessagePropertiesHandler;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ua.training.util.handler.properties.MessagePropertiesHandler.SERVICE_NULL_ENTITY_ERROR;
+import static ua.training.util.properties.MessagePropertiesHandler.SERVICE_NULL_ENTITY_ERROR;
 
 public class ReportApprovalService {
     private static final Logger log = LogManager.getLogger(ReportApprovalService.class);

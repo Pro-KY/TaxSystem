@@ -9,12 +9,12 @@ import ua.training.dto.SendReportDto;
 import ua.training.persistence.entities.User;
 import ua.training.service.SendReportService;
 import ua.training.util.constans.Attributes;
-import ua.training.util.handler.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_MAIN;
+import static ua.training.util.properties.ViewPropertiesHandler.PATH_MAIN;
 
 public class SendReportCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(SendReportCommand.class);

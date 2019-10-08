@@ -9,12 +9,12 @@ import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.ReportApproval;
 import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.User;
-import ua.training.util.handler.properties.SqlPropertiesHandler;
+import ua.training.util.properties.SqlPropertiesHandler;
 
 import java.util.List;
 import java.util.Optional;
 
-import static ua.training.util.handler.properties.SqlPropertiesHandler.SAVE_REPORT_APPROVAL;
+import static ua.training.util.properties.SqlPropertiesHandler.SAVE_REPORT_APPROVAL;
 
 public class ReportApprovalDaoImpl implements IReportApprovalDao {
     private static ReportApprovalDaoImpl instance;

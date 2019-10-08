@@ -12,12 +12,12 @@ import ua.training.service.EditReportService;
 import ua.training.service.ReportApprovalService;
 import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
-import ua.training.util.handler.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_MAIN;
+import static ua.training.util.properties.ViewPropertiesHandler.PATH_MAIN;
 
 public class EditReportCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(EditReportCommand.class);

@@ -8,14 +8,14 @@ import ua.training.persistence.entities.User;
 import ua.training.service.SignUpService;
 import ua.training.util.constans.Attributes;
 import ua.training.util.exceptions.ServiceException;
-import ua.training.util.handler.properties.MessagePropertiesHandler;
-import ua.training.util.handler.properties.ViewPropertiesHandler;
+import ua.training.util.properties.MessagePropertiesHandler;
+import ua.training.util.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static ua.training.util.handler.properties.MessagePropertiesHandler.ERROR_PARSING;
-import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_ERROR;
-import static ua.training.util.handler.properties.ViewPropertiesHandler.PATH_INDEX;
+import static ua.training.util.properties.MessagePropertiesHandler.ERROR_PARSING;
+import static ua.training.util.properties.ViewPropertiesHandler.PATH_ERROR;
+import static ua.training.util.properties.ViewPropertiesHandler.PATH_INDEX;
 
 public class SignUpCommand implements ICommand {
     private static final Logger logger = LogManager.getLogger(SignUpCommand.class);

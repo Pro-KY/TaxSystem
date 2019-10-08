@@ -11,15 +11,15 @@ import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
 import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.constans.UserTypes;
-import ua.training.util.handler.properties.MessagePropertiesHandler;
-import ua.training.util.handler.properties.ViewPropertiesHandler;
+import ua.training.util.properties.MessagePropertiesHandler;
+import ua.training.util.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-import static ua.training.util.handler.properties.MessagePropertiesHandler.SIGNIN_ERROR;
-import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
+import static ua.training.util.properties.MessagePropertiesHandler.SIGNIN_ERROR;
+import static ua.training.util.properties.ViewPropertiesHandler.*;
 
 public class SignInCommand implements ICommand {
     private SignInService signInService;

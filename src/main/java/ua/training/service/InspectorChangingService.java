@@ -7,14 +7,14 @@ import ua.training.persistence.dao.factory.MysqlDaoFactory;
 import ua.training.persistence.entities.*;
 import ua.training.persistence.transaction.MysqlTransactionManager;
 import ua.training.util.exceptions.ServiceException;
-import ua.training.util.handler.properties.MessagePropertiesHandler;
+import ua.training.util.properties.MessagePropertiesHandler;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Random;
 
-import static ua.training.util.handler.properties.MessagePropertiesHandler.SERVICE_NULL_ENTITY_ERROR;
-import static ua.training.util.handler.properties.MessagePropertiesHandler.SERVICE_TRANSACTION_ERROR;
+import static ua.training.util.properties.MessagePropertiesHandler.SERVICE_NULL_ENTITY_ERROR;
+import static ua.training.util.properties.MessagePropertiesHandler.SERVICE_TRANSACTION_ERROR;
 
 public class InspectorChangingService {
     private static final Logger log = LogManager.getLogger(InspectorChangingService.class);

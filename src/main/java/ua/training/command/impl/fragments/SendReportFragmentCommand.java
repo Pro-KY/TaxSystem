@@ -5,12 +5,12 @@ import org.apache.logging.log4j.Logger;
 import ua.training.command.ICommand;
 import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
-import ua.training.util.handler.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewPropertiesHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static ua.training.util.handler.properties.ViewPropertiesHandler.*;
+import static ua.training.util.properties.ViewPropertiesHandler.*;
 
 public class SendReportFragmentCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(SendReportFragmentCommand.class);

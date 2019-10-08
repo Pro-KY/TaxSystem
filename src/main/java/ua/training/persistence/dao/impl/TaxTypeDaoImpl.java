@@ -7,13 +7,13 @@ import ua.training.persistence.dao.jdbc.JdbcTemplate;
 import ua.training.persistence.dao.mappers.impl.TaxTypeMapperIml;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.TaxType;
-import ua.training.util.handler.properties.SqlPropertiesHandler;
+import ua.training.util.properties.SqlPropertiesHandler;
 
 import java.util.List;
 import java.util.Optional;
 
-import static ua.training.util.handler.properties.SqlPropertiesHandler.FIND_ALL_TAX_TYPES;
-import static ua.training.util.handler.properties.SqlPropertiesHandler.FIND_TAX_TYPE_BY_NAME;
+import static ua.training.util.properties.SqlPropertiesHandler.FIND_ALL_TAX_TYPES;
+import static ua.training.util.properties.SqlPropertiesHandler.FIND_TAX_TYPE_BY_NAME;
 
 public class TaxTypeDaoImpl implements ITaxTypeDao {
     private static TaxTypeDaoImpl instance;

@@ -9,12 +9,12 @@ import ua.training.persistence.dao.mappers.impl.UserTypeMapperImpl;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.User;
 import ua.training.persistence.entities.UserType;
-import ua.training.util.handler.properties.SqlPropertiesHandler;
+import ua.training.util.properties.SqlPropertiesHandler;
 
 import java.util.List;
 import java.util.Optional;
 
-import static ua.training.util.handler.properties.SqlPropertiesHandler.*;
+import static ua.training.util.properties.SqlPropertiesHandler.*;
 
 // move all SQl queries to fields or in properties file
 public class UserDaoImpl implements IUserDao {
