@@ -6,7 +6,7 @@ public class ReportDetailsDto {
     private Long reportApprovalId;
     private Report report;
     private String refusalCause;
-    private Long approvalStateId;
+    private Long stateApprovalId;
     private String inspectorName;
     private String userName;
     private Long inspectorId;
@@ -16,7 +16,7 @@ public class ReportDetailsDto {
         reportApprovalId = builder.reportApprovalId;
         report = builder.report;
         refusalCause = builder.refusalCause;
-        approvalStateId = builder.approvalStateId;
+        stateApprovalId = builder.approvalStateId;
         inspectorName = builder.inspectorName;
         userName = builder.userName;
         inspectorId = builder.inspectorId;
@@ -35,8 +35,8 @@ public class ReportDetailsDto {
         return refusalCause;
     }
 
-    public Long getApprovalStateId() {
-        return approvalStateId;
+    public Long getStateApprovalId() {
+        return stateApprovalId;
     }
 
     public String getInspectorName() {
@@ -120,7 +120,7 @@ public class ReportDetailsDto {
                 "reportApprovalId=" + reportApprovalId +
                 ", report=" + report +
                 ", refusalCause='" + refusalCause + '\'' +
-                ", approvalStateId=" + approvalStateId +
+                ", stateApprovalId=" + stateApprovalId +
                 ", inspectorName='" + inspectorName + '\'' +
                 ", userName='" + userName + '\'' +
                 ", inspectorId=" + inspectorId +

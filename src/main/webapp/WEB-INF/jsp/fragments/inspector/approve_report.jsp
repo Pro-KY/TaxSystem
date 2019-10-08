@@ -74,7 +74,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect02"><fmt:message key="sent.reports.table.header.state" bundle="${rb}"/></label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect02" name="${Parameters.REPORTS_APPROVAL_TYPE}">
+                    <select class="custom-select" id="inputGroupSelect02" name="${Parameters.STATE_APPROVAL_ID}">
                         <option value="1" selected >${approved}</option>
                         <option value="2">${rejected}</option>
                         <option value="3">${require_changes}</option>

@@ -28,11 +28,12 @@ public class GetUntreatedReportsCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         log.info("in GetUntreatedReportsCommand command");
         final HttpSession session = request.getSession();
+        final Long reportsApprovalTypeId = CommandUtil.getInstance().getReportsApprovalTypeId(session, request);
+
         final PaginationDto currentPaginationDto = CommandUtil.getInstance().getCurrentPaginationDto(session);
         currentPaginationDto.setPaginationRequestContent(request);
 
-        final Long approvalReportsTypeId = currentPaginationDto.getApprovalReportsTypeId();
-        final StateApproval stateApproval = new StateApproval(approvalReportsTypeId);
+        final StateApproval stateApproval = new StateApproval(reportsApprovalTypeId);
         final User inspector = (User) session.getAttribute(Attributes.USER);
         PaginationDto updatedPaginationDto = reportApprovalService.getUntreatedReports(currentPaginationDto, stateApproval, inspector);
 

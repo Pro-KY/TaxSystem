@@ -17,4 +17,6 @@ public class Attributes {
 
     public static final String SIDEBAR_ACTIVE_INDEX = "sideBarIndex";
     public static final String REPORT_DTO = "reportDto";
+
+    public static final String REPORTS_APPROVAL_TYPE = "approvalStateId";
 }

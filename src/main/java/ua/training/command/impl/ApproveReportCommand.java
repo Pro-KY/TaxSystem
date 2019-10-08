@@ -32,15 +32,16 @@ public class ApproveReportCommand implements ICommand {
         final HttpSession session = request.getSession();
         PaginationDto currentPaginationDto = CommandUtil.getInstance().getCurrentPaginationDto(session);
         final User inspector = (User) session.getAttribute(Attributes.USER);
-
-        final Long approvalStateId = reportDetailsDto.getApprovalStateId();
+        final Long stateApprovalId = reportDetailsDto.getStateApprovalId();
+        log.info("stateApprovalId = {}", stateApprovalId);
+        final Long reportsApprovalTypeId = CommandUtil.getInstance().getReportsApprovalTypeId(session, request);
 
         boolean isOperationSuccessful;
 
         try {
             final ReportApprovalService reportApprovalService = ReportApprovalService.getInstance();
-            reportApprovalService.updateReportApproval(reportDetailsDto.getReportApprovalId(), reportDetailsDto.getRefusalCause(), approvalStateId);
-            currentPaginationDto = reportApprovalService.getUntreatedReports(currentPaginationDto, new StateApproval(approvalStateId), inspector);
+            reportApprovalService.updateReportApproval(reportDetailsDto.getReportApprovalId(), reportDetailsDto.getRefusalCause(), stateApprovalId);
+            currentPaginationDto = reportApprovalService.getUntreatedReports(currentPaginationDto, new StateApproval(reportsApprovalTypeId), inspector);
             isOperationSuccessful = true;
         } catch (Exception e) {
             log.error(e.getMessage(), e);

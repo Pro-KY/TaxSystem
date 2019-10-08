@@ -55,6 +55,7 @@ public class SignInCommand implements ICommand {
                     final PaginationDto currentPaginationDto = CommandUtil.getInstance().getCurrentPaginationDto(session);
                     final StateApproval stateApproval = new StateApproval(StateApprovalEnum.PROCESSING.getStateId());
                     final PaginationDto updatedPaginationDto = reportApprovalService.getUntreatedReports(currentPaginationDto, stateApproval, user);
+                    session.setAttribute(Attributes.REPORTS_APPROVAL_TYPE, stateApproval.getId());
                     session.setAttribute(Attributes.PAGINATION_INFO, updatedPaginationDto);
                 }
 
