@@ -28,7 +28,6 @@ public class PaginationDto implements Serializable {
 
     private List paginationList;
 
-
     public void setPaginationRequestContent(HttpServletRequest request) {
         String selectedPageIndex = request.getParameter(Parameters.SELECTED_PAGE_INDEX);
         final String pageSize = request.getParameter(Parameters.PAGE_SIZE);
@@ -161,6 +160,9 @@ public class PaginationDto implements Serializable {
                 ", currentPageIndex=" + currentPageIndex +
                 ", isNextClicked=" + isNextClicked +
                 ", isPreviousClicked=" + isPreviousClicked +
+                ", allPagesAmount=" + allPagesAmount +
+                ", pageSize=" + pageSize +
+                ", paginationListSize=" + (paginationList != null ? paginationList.size() : "empty") +
                 '}';
     }
 }

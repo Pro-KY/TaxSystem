@@ -23,12 +23,10 @@ public class CommandUtil {
 
     public PaginationDto getCurrentPaginationDto(HttpSession session) {
         PaginationDto currentPaginationDto = (PaginationDto) session.getAttribute(Attributes.PAGINATION_INFO);
-
-        if (currentPaginationDto != null) {
-            log.info("after session: {}", currentPaginationDto.toString());
-        } else {
+        if (currentPaginationDto == null) {
             currentPaginationDto = new PaginationDto();
         }
+
         return currentPaginationDto;
     }
 
