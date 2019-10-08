@@ -12,8 +12,7 @@ import ua.training.util.properties.SqlProperties;
 import java.util.List;
 import java.util.Optional;
 
-import static ua.training.util.properties.SqlProperties.FIND_ALL_TAX_TYPES;
-import static ua.training.util.properties.SqlProperties.FIND_TAX_TYPE_BY_NAME;
+import static ua.training.util.properties.SqlProperties.*;
 
 public class TaxTypeDaoImpl implements ITaxTypeDao {
     private static TaxTypeDaoImpl instance;
@@ -52,21 +51,26 @@ public class TaxTypeDaoImpl implements ITaxTypeDao {
 
     @Override
     public Long save(TaxType entity) {
-        return null;
+        String sql = SqlProperties.getSqlQuery(SAVE_TAX_TYPE);
+        return jdbcTemplate.saveOrUpdate(sql, entity.getType());
     }
 
     @Override
     public Long update(TaxType entity) {
-        return null;
+        String sql = SqlProperties.getSqlQuery(UPDATE_TAX_TYPE);
+        return jdbcTemplate.saveOrUpdate(sql, entity.getType(), entity.getId());
     }
 
     @Override
     public boolean delete(TaxType entity) {
-        return false;
+        String sql = SqlProperties.getSqlQuery(DELETE_TAX_TYPE);
+        return jdbcTemplate.delete(sql, entity.getId());
     }
 
     @Override
     public Optional<TaxType> findById(Long id) {
-        return Optional.empty();
+        String sql = SqlProperties.getSqlQuery(SqlProperties.FIND_INSPECTOR_CHANGING_BY_ID);
+        final TaxTypeMapperIml taxTypeMapperIml = new TaxTypeMapperIml(false);
+        return jdbcTemplate.findByQuery(sql, taxTypeMapperIml, id);
     }
 }

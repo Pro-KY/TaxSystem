@@ -6,9 +6,13 @@ import java.util.ResourceBundle;
 public class SqlProperties {
     private static ResourceBundle sqlProperties;
 
-    public static final String FIND_BY_LOGIN_AND_PASSWORD = "FIND_BY_LOGIN_AND_PASSWORD";
     public static final String FIND_TAX_TYPE_BY_NAME = "FIND_TAX_TYPE_BY_NAME";
     public static final String FIND_ALL_TAX_TYPES = "FIND_ALL_TAX_TYPES";
+
+    public static final String SAVE_TAX_TYPE = "SAVE_TAX_TYPE";
+    public static final String UPDATE_TAX_TYPE = "UPDATE_TAX_TYPE";
+    public static final String DELETE_TAX_TYPE = "DELETE_TAX_TYPE";
+    public static final String FIND_TAX_TYPE_BY_ID = "FIND_TAX_TYPE_BY_ID";
 
     public static final String FIND_STATE_APPROVAL_BY_STATE = "FIND_STATE_APPROVAL_BY_STATE";
     public static final String SAVE_STATE_APPROVAL = "SAVE_STATE_APPROVAL";
@@ -21,6 +25,7 @@ public class SqlProperties {
     public static final String FIND_REPORT_BY_ID = "FIND_REPORT_BY_ID";
     public static final String UPDATE_REPORT_BY_ID = "UPDATE_REPORT_BY_ID";
 
+    public static final String FIND_BY_LOGIN_AND_PASSWORD = "FIND_BY_LOGIN_AND_PASSWORD";
     public static final String SAVE_USER = "SAVE_USER";
     public static final String FIND_USER_BY_ID = "FIND_USER_BY_ID";
     public static final String FIND_USER_BY_USER_TYPE_AND_NOT_EQUAL_ID = "FIND_USER_BY_USER_TYPE_AND_NOT_EQUAL_ID";

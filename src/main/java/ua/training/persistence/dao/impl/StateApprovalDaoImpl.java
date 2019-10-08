@@ -55,7 +55,7 @@ public class StateApprovalDaoImpl implements IStateApprovalDao {
 
     @Override
     public Optional<StateApproval> findById(Long id) {
-        String sql = SqlProperties.getSqlQuery(SqlProperties.FIND_INSPECTOR_CHANGING_BY_ID);
+        String sql = SqlProperties.getSqlQuery(SqlProperties.FIND_STATE_APPROVAL_BY_ID);
         final StateApprovalMapperImpl stateApprovalMapper = new StateApprovalMapperImpl(false);
         return jdbcTemplate.findByQuery(sql, stateApprovalMapper, id);
     }
