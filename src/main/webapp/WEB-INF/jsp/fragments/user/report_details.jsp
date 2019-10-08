@@ -19,9 +19,9 @@
         <h5 class="card-title">${reportDetails.inspectorName ne null ? reportDetails.inspectorName : notAssignedText}</h5>
     </div>
     <%--CHANGE_BTN--%>
-    <c:if test="${reportDetails.approvalStateId eq 2}">
+    <c:if test="${reportDetails.stateApprovalId eq 2}">
         <span class="d-flex justify-content-end mt-n4">
-            <a href="taxsystem/?command=${Command.CHANGE_INSPECTOR}&${Parameters.REPORT_APPROVAL_ID}=${reportDetails.reportApprovalId}&${Parameters.INSPECTOR_ID}=${reportDetails.inspectorId}" class="btn btn-warning"><fmt:message key="report.details.change.btn" bundle="${rb}"/></a>
+            <a href="taxsystem/?command=${Commands.CHANGE_INSPECTOR}&${Parameters.REPORT_APPROVAL_ID}=${reportDetails.reportApprovalId}&${Parameters.INSPECTOR_ID}=${reportDetails.inspectorId}" class="btn btn-warning"><fmt:message key="report.details.change.btn" bundle="${rb}"/></a>
         </span>
     </c:if>
     <%--CHANGE_BTN--%>
@@ -34,22 +34,22 @@
     <div class="card-body">
         <%--APPROVAL_STATE--%>
         <c:choose>
-            <c:when test = "${reportDetails.approvalStateId eq 1}">
+            <c:when test = "${reportDetails.stateApprovalId eq 1}">
                 <h5 class="card-title text-success">
                     ${approved}
                 </h5>
             </c:when>
-            <c:when test = "${reportDetails.approvalStateId eq 2}">
+            <c:when test = "${reportDetails.stateApprovalId eq 2}">
                 <h5 class="card-title text-danger">
                     ${rejected}
                 </h5>
             </c:when>
-            <c:when test = "${reportDetails.approvalStateId eq 3}">
+            <c:when test = "${reportDetails.stateApprovalId eq 3}">
                 <h5 class="card-title text-warning">
                     ${require_changes}
                 </h5>
             </c:when>
-            <c:when test = "${reportDetails.approvalStateId eq 4}">
+            <c:when test = "${reportDetails.stateApprovalId eq 4}">
                 <h5 class="card-title text-primary">
                     ${processing}
                 </h5>
@@ -62,7 +62,7 @@
         </c:choose>
         <%--APPROVAL_STATE--%>
         <%--REFUSAL_CAUSE--%>
-        <c:if test="${reportDetails.approvalStateId eq 2}">
+        <c:if test="${reportDetails.stateApprovalId eq 2}">
             <p class="card-text">${reportDetails.refusalCause}</p>
         </c:if>
         <%--REFUSAL_CAUSE--%>
@@ -114,7 +114,7 @@
         </div>
 
         <%--EDIT_REPORT_BTN--%>
-        <c:if test="${reportDetails.approvalStateId eq 3}">
+        <c:if test="${reportDetails.stateApprovalId eq 3}">
             <span class="d-flex justify-content-end mr-n4 mt-n3">
                 <a href="taxsystem/?command=${Commands.GET_REPORT}&${Parameters.REPORT_ID}=${reportDetails.report.id}&${Parameters.REPORT_APPROVAL_ID}=${reportDetails.reportApprovalId}" class="btn btn-primary">
                     <fmt:message key="report.details.report.btn" bundle="${rb}"/>
