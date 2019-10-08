@@ -14,7 +14,7 @@ import ua.training.util.properties.SqlProperties;
 import java.util.List;
 import java.util.Optional;
 
-import static ua.training.util.properties.SqlProperties.SAVE_REPORT_APPROVAL;
+import static ua.training.util.properties.SqlProperties.*;
 
 public class ReportApprovalDaoImpl implements IReportApprovalDao {
     private static ReportApprovalDaoImpl instance;
@@ -115,7 +115,8 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
 
     @Override
     public boolean delete(ReportApproval entity) {
-        return false;
+        String sql = SqlProperties.getSqlQuery(DELETE_REPORT_APPROVAL_BY_ID);
+        return jdbcTemplate.delete(sql, entity.getId());
     }
 
     public Optional<ReportApproval> findByIdJoinReportJoinInspector(Long id) {
