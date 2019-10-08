@@ -3,6 +3,8 @@
 <%@ page import="ua.training.util.constans.Attributes" %>
 <%@ page import="ua.training.util.constans.Commands" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="myTag" uri="/WEB-INF/datetag.tld" %>
+
 <fmt:message var="not_signed_label" key="sent.reports.not.assigned.text" bundle="${sessionScope.rb}" scope="request"/>
 <fmt:message var="checking_label" key="sent.reports.table.header.checking" bundle="${sessionScope.rb}" scope="page"/>
 <fmt:message var="sender_label" key="sent.reports.table.header.sender" bundle="${sessionScope.rb}" scope="page"/>
@@ -80,7 +82,9 @@
                             </c:otherwise>
                         </c:choose>
                     </td>
-                    <td>${report.timestamp}</td>
+                    <td>
+                        <myTag:sentdate timestamp="${report.timestamp}"/>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
