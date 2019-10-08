@@ -9,9 +9,12 @@ public class SqlProperties {
     public static final String FIND_BY_LOGIN_AND_PASSWORD = "FIND_BY_LOGIN_AND_PASSWORD";
     public static final String FIND_TAX_TYPE_BY_NAME = "FIND_TAX_TYPE_BY_NAME";
     public static final String FIND_ALL_TAX_TYPES = "FIND_ALL_TAX_TYPES";
+
     public static final String FIND_REPORT_STATE_BY_NANE = "FIND_REPORT_STATE_BY_NANE";
     public static final String SAVE_REPORT = "SAVE_REPORT";
     public static final String SAVE_REPORT_APPROVAL = "SAVE_REPORT_APPROVAL";
+    public static final String DELETE_REPORT_BY_ID = "DELETE_REPORT_BY_ID";
+
     public static final String SAVE_USER = "SAVE_USER";
     public static final String FIND_USER_BY_ID = "FIND_USER_BY_ID";
     public static final String FIND_USER_BY_USER_TYPE_AND_NOT_EQUAL_ID = "FIND_USER_BY_USER_TYPE_AND_NOT_EQUAL_ID";

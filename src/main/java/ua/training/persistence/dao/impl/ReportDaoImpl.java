@@ -51,7 +51,8 @@ public class ReportDaoImpl implements IReportDao {
 
     @Override
     public boolean delete(Report entity) {
-        return false;
+        String sql = SqlProperties.getSqlQuery(DELETE_REPORT_BY_ID);
+        return jdbcTemplate.delete(sql, entity.getId());
     }
 
     @Override
