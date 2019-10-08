@@ -3,11 +3,14 @@ package ua.training.command.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.command.ICommand;
+import ua.training.command.util.CommandParametersExtractor;
 import ua.training.command.util.CommandUtil;
 import ua.training.dto.PaginationDto;
+import ua.training.dto.ReportDetailsDto;
+import ua.training.persistence.entities.StateApproval;
+import ua.training.persistence.entities.User;
 import ua.training.service.ReportApprovalService;
 import ua.training.util.constans.Attributes;
-import ua.training.util.constans.Parameters;
 import ua.training.util.properties.ViewProperties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,16 +26,21 @@ public class ApproveReportCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         log.info("approve report command");
-        final Long reportApprovalId = Long.valueOf(request.getParameter(Parameters.REPORT_APPROVAL_ID));
-        final String refusalCause = request.getParameter(Parameters.REFUSAL_CAUSE);
-        final Long stateApprovalId = Long.valueOf(request.getParameter(Parameters.REPORTS_APPROVAL_TYPE));
+        final CommandParametersExtractor paramsExtractor = CommandParametersExtractor.getInstance();
+        final ReportDetailsDto reportDetailsDto = paramsExtractor.extractParameters(request, ReportDetailsDto.class);
+
         final HttpSession session = request.getSession();
-        final PaginationDto currentPaginationDto = CommandUtil.getInstance().getCurrentPaginationDto(session);
+        PaginationDto currentPaginationDto = CommandUtil.getInstance().getCurrentPaginationDto(session);
+        final User inspector = (User) session.getAttribute(Attributes.USER);
+
+        final Long approvalStateId = reportDetailsDto.getApprovalStateId();
 
         boolean isOperationSuccessful;
 
         try {
-            ReportApprovalService.getInstance().updateReportApproval(reportApprovalId, refusalCause, stateApprovalId);
+            final ReportApprovalService reportApprovalService = ReportApprovalService.getInstance();
+            reportApprovalService.updateReportApproval(reportDetailsDto.getReportApprovalId(), reportDetailsDto.getRefusalCause(), approvalStateId);
+            currentPaginationDto = reportApprovalService.getUntreatedReports(currentPaginationDto, new StateApproval(approvalStateId), inspector);
             isOperationSuccessful = true;
         } catch (Exception e) {
             log.error(e.getMessage(), e);

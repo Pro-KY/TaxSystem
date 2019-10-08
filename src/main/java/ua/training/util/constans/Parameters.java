@@ -26,5 +26,5 @@ public class Parameters {
     public static final String SIDEBAR_ACTIVE_INDEX = "sideBarIndex";
     public static final String REFUSAL_CAUSE = "refusalCause";
 
-    public static final String REPORTS_APPROVAL_TYPE = "reportApprovalType";
+    public static final String REPORTS_APPROVAL_TYPE = "approvalStateId";
 }

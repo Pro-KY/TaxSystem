@@ -113,4 +113,18 @@ public class ReportDetailsDto {
             return new ReportDetailsDto(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "ReportDetailsDto{" +
+                "reportApprovalId=" + reportApprovalId +
+                ", report=" + report +
+                ", refusalCause='" + refusalCause + '\'' +
+                ", approvalStateId=" + approvalStateId +
+                ", inspectorName='" + inspectorName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", inspectorId=" + inspectorId +
+                ", userTypeId=" + userTypeId +
+                '}';
+    }
 }
