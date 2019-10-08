@@ -5,19 +5,19 @@ import java.sql.Timestamp;
 
 public class InspectorChanging implements Serializable {
     private Long id;
-    private Timestamp date;
+    private Timestamp timestamp;
     private ReportApproval reportApproval;
     private User previousInspector;
 
-    public InspectorChanging(long id, Timestamp date, ReportApproval reportApproval, User previousInspector) {
+    public InspectorChanging(long id, Timestamp timestamp, ReportApproval reportApproval, User previousInspector) {
       this.id = id;
-      this.date = date;
+      this.timestamp = timestamp;
       this.reportApproval = reportApproval;
       this.previousInspector = previousInspector;
     }
 
-    public InspectorChanging(Timestamp date, ReportApproval reportApproval, User previousInspector) {
-        this.date = date;
+    public InspectorChanging(Timestamp timestamp, ReportApproval reportApproval, User previousInspector) {
+        this.timestamp = timestamp;
         this.reportApproval = reportApproval;
         this.previousInspector = previousInspector;
     }
@@ -47,12 +47,12 @@ public class InspectorChanging implements Serializable {
     }
 
 
-    public Timestamp getDate() {
-      return date;
+    public Timestamp getTimestamp() {
+      return timestamp;
     }
 
-    public void setDate(Timestamp date) {
-      this.date = date;
+    public void setTimestamp(Timestamp timestamp) {
+      this.timestamp = timestamp;
     }
 
 

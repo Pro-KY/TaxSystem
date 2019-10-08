@@ -4,18 +4,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.persistence.dao.IInspectorChangingDao;
 import ua.training.persistence.dao.jdbc.JdbcTemplate;
+import ua.training.persistence.dao.mappers.impl.InspectorChangingMapper;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.InspectorChanging;
 import ua.training.util.properties.SqlProperties;
 
 import java.util.Optional;
 
-import static ua.training.util.properties.SqlProperties.SAVE_INSPECTOR_CHANGING;
+import static ua.training.util.properties.SqlProperties.*;
 
 public class InspectorChangingDaoImpl implements IInspectorChangingDao {
     private JdbcTemplate jdbcTemplate;
     private static InspectorChangingDaoImpl instance;
-    private static final Logger log = LogManager.getLogger(ReportApprovalDaoImpl.class);
+    private static final Logger log = LogManager.getLogger(InspectorChangingDaoImpl.class);
 
     public void setDataSource(MysqlDataSource dataSource) {
         jdbcTemplate.setDataSource(dataSource);
@@ -37,7 +38,7 @@ public class InspectorChangingDaoImpl implements IInspectorChangingDao {
         String sql = SqlProperties.getSqlQuery(SAVE_INSPECTOR_CHANGING);
 
         Object[] parameters = {
-                entity.getDate(),
+                entity.getTimestamp(),
                 entity.getReportApproval().getId(),
                 entity.getPreviousInspector().getId()
         };
@@ -47,16 +48,27 @@ public class InspectorChangingDaoImpl implements IInspectorChangingDao {
 
     @Override
     public Long update(InspectorChanging entity) {
-        return null;
+        String sql = SqlProperties.getSqlQuery(UPDATE_INSPECTOR_CHANGING_BY_ID);
+        Object[] parameters = {
+                entity.getTimestamp(),
+                entity.getReportApproval().getId(),
+                entity.getPreviousInspector().getId(),
+                entity.getId()
+        };
+
+        return jdbcTemplate.saveOrUpdate(sql, parameters);
     }
 
     @Override
     public boolean delete(InspectorChanging entity) {
-        return false;
+        String sql = SqlProperties.getSqlQuery(DELETE_INSPECTOR_CHANGING_BY_ID);
+        return jdbcTemplate.delete(sql, entity.getId());
     }
 
     @Override
     public Optional<InspectorChanging> findById(Long id) {
-        return Optional.empty();
+        String sql = SqlProperties.getSqlQuery(SqlProperties.FIND_INSPECTOR_CHANGING_BY_ID);
+        final InspectorChangingMapper reportApprovalMapper = new InspectorChangingMapper(false);
+        return jdbcTemplate.findByQuery(sql, reportApprovalMapper, id);
     }
 }

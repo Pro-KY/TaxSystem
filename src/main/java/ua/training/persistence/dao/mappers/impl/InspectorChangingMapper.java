@@ -7,8 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-public class ChangeInspectorMapper extends EntityMapper<InspectorChanging> {
+public class InspectorChangingMapper extends EntityMapper<InspectorChanging> {
     private static final String ID = "id";
+    private static final String ID_IN_JOIN = "ic_id";
     private static final String TIMESTAMP = "timestamp";
     private static final String REPORT_APPROVAL_ID = "report_approval_id";
     private static final String PREVIOUS_INPSPECTOR_ID = "previous_inspector_id";
@@ -19,8 +20,9 @@ public class ChangeInspectorMapper extends EntityMapper<InspectorChanging> {
     private boolean mapPreviousInspector;
     private boolean mapReportApprovalMapper;
 
-    public ChangeInspectorMapper() {
-        columnNames = new String[]{ID, TIMESTAMP, REPORT_APPROVAL_ID, PREVIOUS_INPSPECTOR_ID};
+    public InspectorChangingMapper(boolean useInJoin) {
+        String idColumn = useInJoin ? ID_IN_JOIN : ID;
+        columnNames = new String[]{idColumn, TIMESTAMP, REPORT_APPROVAL_ID, PREVIOUS_INPSPECTOR_ID};
     }
 
     @Override
@@ -32,7 +34,7 @@ public class ChangeInspectorMapper extends EntityMapper<InspectorChanging> {
                 final Long previousInspectorId = resultSet.getLong(columnNames[3]);
 
                 final ReportApproval reportApproval = new ReportApproval(reportApprovalId);
-                final User previousInspector = new User(reportApprovalId);
+                final User previousInspector = new User(previousInspectorId);
 
                 mappedEntity = new InspectorChanging(id, timestamp, reportApproval, previousInspector);
 
@@ -49,7 +51,7 @@ public class ChangeInspectorMapper extends EntityMapper<InspectorChanging> {
         return mappedEntity;
     }
 
-    public void setUserMapper(EntityMapper<User> userMapper) {
+    public void setInspectorMapper(EntityMapper<User> userMapper) {
         mapPreviousInspector = true;
         this.userMapper = userMapper;
     }
