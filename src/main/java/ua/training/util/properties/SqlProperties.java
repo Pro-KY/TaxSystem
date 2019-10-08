@@ -29,9 +29,14 @@ public class SqlProperties {
     public static final String SAVE_USER = "SAVE_USER";
     public static final String FIND_USER_BY_ID = "FIND_USER_BY_ID";
     public static final String FIND_USER_BY_USER_TYPE_AND_NOT_EQUAL_ID = "FIND_USER_BY_USER_TYPE_AND_NOT_EQUAL_ID";
-    public static final String USER_TYPE_BY_TYPE = "USER_TYPE_BY_TYPE";
     public static final String UPDATE_USER = "UPDATE_USER";
     public static final String DELETE_USER_BY_ID = "DELETE_USER_BY_ID";
+
+    public static final String FIND_USER_TYPE_BY_TYPE = "FIND_USER_TYPE_BY_TYPE";
+    public static final String SAVE_USER_TYPE = "SAVE_USER_TYPE";
+    public static final String UPDATE_USER_TYPE = "UPDATE_USER_TYPE";
+    public static final String DELETE_USER_TYPE = "DELETE_USER_TYPE";
+    public static final String FIND_USER_TYPE_BY_ID = "FIND_USER_TYPE_BY_ID";
 
     public static final String SAVE_REPORT_APPROVAL = "SAVE_REPORT_APPROVAL";
     public static final String REPORT_APPROVAL_FOR_USER = "REPORT_APPROVAL_FOR_USER";

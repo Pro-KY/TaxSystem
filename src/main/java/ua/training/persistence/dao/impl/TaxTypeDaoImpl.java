@@ -69,7 +69,7 @@ public class TaxTypeDaoImpl implements ITaxTypeDao {
 
     @Override
     public Optional<TaxType> findById(Long id) {
-        String sql = SqlProperties.getSqlQuery(SqlProperties.FIND_INSPECTOR_CHANGING_BY_ID);
+        String sql = SqlProperties.getSqlQuery(SqlProperties.FIND_TAX_TYPE_BY_ID);
         final TaxTypeMapperIml taxTypeMapperIml = new TaxTypeMapperIml(false);
         return jdbcTemplate.findByQuery(sql, taxTypeMapperIml, id);
     }
