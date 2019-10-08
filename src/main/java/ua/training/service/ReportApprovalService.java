@@ -15,6 +15,7 @@ import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.exceptions.ServiceException;
 import ua.training.util.properties.MessageProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +41,7 @@ public class ReportApprovalService {
         final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
 
         boolean isStateApprovalProcessing = stateApproval.getId().equals(StateApprovalEnum.PROCESSING.getStateId());
+        boolean isStateApprovalChanged = stateApproval.getId().equals(StateApprovalEnum.CHANGED.getStateId());
 
         final PaginationHandler paginationHandler = new PaginationHandler(paginationDto);
         final long allRows = isStateApprovalProcessing ?
@@ -55,11 +57,11 @@ public class ReportApprovalService {
 
         if(isStateApprovalProcessing) {
             paginationList = reportApprovalDao.getReportApprovalListByStateApproval(pageSize, offSet, stateApproval);
-        } else {
+        } else if (isStateApprovalChanged){
             paginationList = reportApprovalDao.getReportApprovalListByStateAndInspector(pageSize, offSet, stateApproval, inspector);
+        } else {
+            paginationList = new ArrayList<>();
         }
-
-        log.info("paginationList size: {}", paginationList.size());
 
         final List<SentReportsDto> collect = paginationList.stream()
                 .map(reportApproval -> DtoMapper.getInstance().mapToSentReportsDto(reportApproval))
