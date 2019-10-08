@@ -6,11 +6,11 @@ import ua.training.persistence.dao.IInspectorChangingDao;
 import ua.training.persistence.dao.jdbc.JdbcTemplate;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.InspectorChanging;
-import ua.training.util.properties.SqlPropertiesHandler;
+import ua.training.util.properties.SqlProperties;
 
 import java.util.Optional;
 
-import static ua.training.util.properties.SqlPropertiesHandler.SAVE_INSPECTOR_CHANGING;
+import static ua.training.util.properties.SqlProperties.SAVE_INSPECTOR_CHANGING;
 
 public class InspectorChangingDaoImpl implements IInspectorChangingDao {
     private JdbcTemplate jdbcTemplate;
@@ -34,7 +34,7 @@ public class InspectorChangingDaoImpl implements IInspectorChangingDao {
 
     @Override
     public Long save(InspectorChanging entity) {
-        String sql = SqlPropertiesHandler.getSqlQuery(SAVE_INSPECTOR_CHANGING);
+        String sql = SqlProperties.getSqlQuery(SAVE_INSPECTOR_CHANGING);
 
         Object[] parameters = {
                 entity.getDate(),

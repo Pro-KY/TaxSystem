@@ -11,7 +11,6 @@ public class CommandUtil {
     private static CommandUtil instance;
     private static final Logger log = LogManager.getLogger(CommandUtil.class);
 
-
     private CommandUtil() { }
 
     public static CommandUtil getInstance() {

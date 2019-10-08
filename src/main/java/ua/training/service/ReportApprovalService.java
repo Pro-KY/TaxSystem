@@ -13,12 +13,12 @@ import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.User;
 import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.exceptions.ServiceException;
-import ua.training.util.properties.MessagePropertiesHandler;
+import ua.training.util.properties.MessageProperties;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ua.training.util.properties.MessagePropertiesHandler.SERVICE_NULL_ENTITY_ERROR;
+import static ua.training.util.properties.MessageProperties.SERVICE_NULL_ENTITY_ERROR;
 
 public class ReportApprovalService {
     private static final Logger log = LogManager.getLogger(ReportApprovalService.class);
@@ -77,7 +77,7 @@ public class ReportApprovalService {
 
         final ReportApproval reportApproval = reportApprovalDao
                 .findById(reportApprovalId)
-                .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(SERVICE_NULL_ENTITY_ERROR)));
+                .orElseThrow(() -> new ServiceException(MessageProperties.getMessage(SERVICE_NULL_ENTITY_ERROR)));
 
         reportApproval.setRefusalCause(refusalCause);
         reportApproval.setStateApproval(new StateApproval(stateApprovalId));
@@ -87,7 +87,7 @@ public class ReportApprovalService {
     public ReportApproval getReportApprovalById(Long id) {
         return daoFactory.getReportApprovalDao()
                 .findByIdJoinUser(id)
-                .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(SERVICE_NULL_ENTITY_ERROR)));
+                .orElseThrow(() -> new ServiceException(MessageProperties.getMessage(SERVICE_NULL_ENTITY_ERROR)));
     }
 
     public long countAllReportsApprovalForUser(Long userId) {

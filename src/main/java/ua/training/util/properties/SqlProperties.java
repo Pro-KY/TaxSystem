@@ -3,7 +3,7 @@ package ua.training.util.properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-public class SqlPropertiesHandler {
+public class SqlProperties {
     private static ResourceBundle sqlProperties;
 
     public static final String FIND_BY_LOGIN_AND_PASSWORD = "FIND_BY_LOGIN_AND_PASSWORD";

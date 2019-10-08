@@ -7,11 +7,11 @@ import ua.training.command.util.CommandAttributesSetter;
 import ua.training.persistence.entities.Report;
 import ua.training.service.EditReportService;
 import ua.training.util.constans.Parameters;
-import ua.training.util.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewProperties;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static ua.training.util.properties.ViewPropertiesHandler.PATH_MAIN;
+import static ua.training.util.properties.ViewProperties.PATH_MAIN;
 
 public class GetReportCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(GetReportCommand.class);
@@ -26,7 +26,7 @@ public class GetReportCommand implements ICommand {
 
         final Report report = EditReportService.getInstance().findReportById(reportId);
         CommandAttributesSetter.setGetReportCommandAttributes(request, report, reportApprovalId);
-        return ViewPropertiesHandler.getViewPath(PATH_MAIN);
+        return ViewProperties.getViewPath(PATH_MAIN);
     }
 }
 

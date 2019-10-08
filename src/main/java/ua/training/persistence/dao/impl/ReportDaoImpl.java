@@ -8,11 +8,11 @@ import ua.training.persistence.dao.mappers.impl.ReportMapperImpl;
 import ua.training.persistence.dao.mappers.impl.TaxTypeMapperIml;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.Report;
-import ua.training.util.properties.SqlPropertiesHandler;
+import ua.training.util.properties.SqlProperties;
 
 import java.util.Optional;
 
-import static ua.training.util.properties.SqlPropertiesHandler.*;
+import static ua.training.util.properties.SqlProperties.*;
 
 public class ReportDaoImpl implements IReportDao {
     private static ReportDaoImpl instance;
@@ -36,7 +36,7 @@ public class ReportDaoImpl implements IReportDao {
 
     @Override
     public Long save(Report entity) {
-        String sql = SqlPropertiesHandler.getSqlQuery(SAVE_REPORT);
+        String sql = SqlProperties.getSqlQuery(SAVE_REPORT);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
         return jdbcTemplate.saveOrUpdate(sql, entity.getTaxType().getId(), entity.getSum(), entity.getQuarter());
 
@@ -44,7 +44,7 @@ public class ReportDaoImpl implements IReportDao {
 
     @Override
     public Long update(Report entity) {
-        String sql = SqlPropertiesHandler.getSqlQuery(UPDATE_REPORT_BY_ID);
+        String sql = SqlProperties.getSqlQuery(UPDATE_REPORT_BY_ID);
         final JdbcTemplate jdbcTemplate = JdbcTemplate.getInstance();
         return jdbcTemplate.saveOrUpdate(sql, entity.getTaxType().getId(), entity.getSum(), entity.getQuarter(), entity.getId());
     }
@@ -56,7 +56,7 @@ public class ReportDaoImpl implements IReportDao {
 
     @Override
     public Optional<Report> findById(Long id) {
-        String sql = SqlPropertiesHandler.getSqlQuery(FIND_REPORT_BY_ID);
+        String sql = SqlProperties.getSqlQuery(FIND_REPORT_BY_ID);
 
         final ReportMapperImpl reportMapper = new ReportMapperImpl(false);
         reportMapper.mapTaxTypeRelation(new TaxTypeMapperIml(true));

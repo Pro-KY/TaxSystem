@@ -8,14 +8,14 @@ import ua.training.dto.PaginationDto;
 import ua.training.service.ReportApprovalService;
 import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
-import ua.training.util.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static ua.training.util.constans.Attributes.ALERT_ERROR;
 import static ua.training.util.constans.Attributes.ALERT_SUCCESS;
-import static ua.training.util.properties.ViewPropertiesHandler.*;
+import static ua.training.util.properties.ViewProperties.*;
 
 public class ApproveReportCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(ApproveReportCommand.class);
@@ -44,6 +44,6 @@ public class ApproveReportCommand implements ICommand {
 
         session.setAttribute(Attributes.PAGINATION_INFO, currentPaginationDto);
         request.setAttribute(Attributes.FRAGMENT_PATH, getViewPath(FRAGMENT_PATH_SENT_REPORTS));
-        return ViewPropertiesHandler.getViewPath(PATH_MAIN);
+        return ViewProperties.getViewPath(PATH_MAIN);
     }
 }

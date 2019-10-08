@@ -7,11 +7,11 @@ import ua.training.dto.ReportDetailsDto;
 import ua.training.service.ReportDetailsService;
 import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
-import ua.training.util.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewProperties;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static ua.training.util.properties.ViewPropertiesHandler.*;
+import static ua.training.util.properties.ViewProperties.*;
 
 public class ReportDetailsCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(ReportDetailsCommand.class);
@@ -25,6 +25,6 @@ public class ReportDetailsCommand implements ICommand {
 
         request.setAttribute(Attributes.REPORT_DETAILS, reportDetails);
         request.setAttribute(Attributes.FRAGMENT_PATH, fragmentPath);
-        return ViewPropertiesHandler.getViewPath(PATH_MAIN);
+        return ViewProperties.getViewPath(PATH_MAIN);
     }
 }

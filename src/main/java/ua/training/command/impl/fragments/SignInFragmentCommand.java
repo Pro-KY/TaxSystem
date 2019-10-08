@@ -2,12 +2,12 @@ package ua.training.command.impl.fragments;
 
 import ua.training.command.ICommand;
 import ua.training.util.constans.Attributes;
-import ua.training.util.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static ua.training.util.properties.ViewPropertiesHandler.*;
+import static ua.training.util.properties.ViewProperties.*;
 
 public class SignInFragmentCommand implements ICommand {
 
@@ -21,6 +21,6 @@ public class SignInFragmentCommand implements ICommand {
         if (session != null) {
             session.setAttribute(Attributes.IS_SIGN_UP, false);
         }
-        return ViewPropertiesHandler.getViewPath(PATH_INDEX);
+        return ViewProperties.getViewPath(PATH_INDEX);
     }
 }

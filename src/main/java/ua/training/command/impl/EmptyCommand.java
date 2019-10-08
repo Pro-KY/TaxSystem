@@ -2,7 +2,7 @@ package ua.training.command.impl;
 
 import ua.training.command.ICommand;
 import ua.training.util.constans.Attributes;
-import ua.training.util.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,7 +18,7 @@ public class EmptyCommand implements ICommand {
             isAuthorized = (boolean) session.getAttribute(Attributes.IS_USER_AUTHORIZED);
         }
 
-        String property = isAuthorized ? ViewPropertiesHandler.PATH_MAIN : ViewPropertiesHandler.PATH_INDEX;
-        return ViewPropertiesHandler.getViewPath(property);
+        String property = isAuthorized ? ViewProperties.PATH_MAIN : ViewProperties.PATH_INDEX;
+        return ViewProperties.getViewPath(property);
     }
 }

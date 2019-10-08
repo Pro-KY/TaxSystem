@@ -3,7 +3,7 @@ package ua.training.util.properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-public class ViewPropertiesHandler {
+public class ViewProperties {
     private static ResourceBundle viewProperties;
 
     public static final String PATH_MAIN = "PATH_MAIN";

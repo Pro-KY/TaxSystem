@@ -13,9 +13,9 @@ import ua.training.persistence.entities.TaxType;
 import ua.training.persistence.transaction.MysqlTransactionManager;
 import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.exceptions.ServiceException;
-import ua.training.util.properties.MessagePropertiesHandler;
+import ua.training.util.properties.MessageProperties;
 
-import static ua.training.util.properties.MessagePropertiesHandler.*;
+import static ua.training.util.properties.MessageProperties.*;
 
 public class EditReportService {
     private static final Logger log = LogManager.getLogger(EditReportService.class);
@@ -37,7 +37,7 @@ public class EditReportService {
         return daoFactory
                 .getReportDao()
                 .findById(reportId)
-                .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(SERVICE_NULL_ENTITY_ERROR), reportId));
+                .orElseThrow(() -> new ServiceException(MessageProperties.getMessage(SERVICE_NULL_ENTITY_ERROR), reportId));
     }
 
     public void updateReport(ReportDto reportDto, Long reportApprovalId) {
@@ -49,7 +49,7 @@ public class EditReportService {
             final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
             final IReportDao reportDao = daoFactory.getReportDao();
             final ReportApproval reportApproval = reportApprovalDao.findById(reportApprovalId)
-                    .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(SERVICE_NULL_ENTITY_ERROR)));
+                    .orElseThrow(() -> new ServiceException(MessageProperties.getMessage(SERVICE_NULL_ENTITY_ERROR)));
             reportApproval.setStateApproval(stateApproval);
 
             reportDao.update(report);
@@ -58,7 +58,7 @@ public class EditReportService {
         });
 
         if (tm.isRollBacked()) {
-            throw new ServiceException(MessagePropertiesHandler.getMessage(SERVICE_TRANSACTION_ERROR));
+            throw new ServiceException(MessageProperties.getMessage(SERVICE_TRANSACTION_ERROR));
         }
     }
 }

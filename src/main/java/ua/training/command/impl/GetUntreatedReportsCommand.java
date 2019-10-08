@@ -9,12 +9,12 @@ import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.User;
 import ua.training.service.ReportApprovalService;
 import ua.training.util.constans.Attributes;
-import ua.training.util.properties.ViewPropertiesHandler;
+import ua.training.util.properties.ViewProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static ua.training.util.properties.ViewPropertiesHandler.*;
+import static ua.training.util.properties.ViewProperties.*;
 
 public class GetUntreatedReportsCommand implements ICommand {
     private static final Logger log = LogManager.getLogger(GetUntreatedReportsCommand.class);
@@ -40,6 +40,6 @@ public class GetUntreatedReportsCommand implements ICommand {
 
         final String viewPath = getViewPath(FRAGMENT_PATH_SENT_REPORTS);
         request.setAttribute(Attributes.FRAGMENT_PATH, viewPath);
-        return ViewPropertiesHandler.getViewPath(PATH_MAIN);
+        return ViewProperties.getViewPath(PATH_MAIN);
     }
 }

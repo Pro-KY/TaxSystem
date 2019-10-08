@@ -7,11 +7,11 @@ import ua.training.persistence.dao.jdbc.JdbcTemplate;
 import ua.training.persistence.dao.mappers.impl.UserTypeMapperImpl;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.entities.UserType;
-import ua.training.util.properties.SqlPropertiesHandler;
+import ua.training.util.properties.SqlProperties;
 
 import java.util.Optional;
 
-import static ua.training.util.properties.SqlPropertiesHandler.USER_TYPE_BY_TYPE;
+import static ua.training.util.properties.SqlProperties.USER_TYPE_BY_TYPE;
 
 public class UserTypeDaoImpl implements IUserTypeDao {
     private JdbcTemplate jdbcTemplate;
@@ -43,7 +43,7 @@ public class UserTypeDaoImpl implements IUserTypeDao {
 
     @Override
     public Optional<UserType> findByType(String type) {
-        String sql = SqlPropertiesHandler.getSqlQuery(USER_TYPE_BY_TYPE);
+        String sql = SqlProperties.getSqlQuery(USER_TYPE_BY_TYPE);
         final UserTypeMapperImpl userTypeMapper = new UserTypeMapperImpl(false);
         return jdbcTemplate.findByQuery(sql, userTypeMapper, type);
 

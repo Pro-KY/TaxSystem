@@ -7,14 +7,14 @@ import ua.training.persistence.dao.factory.MysqlDaoFactory;
 import ua.training.persistence.entities.*;
 import ua.training.persistence.transaction.MysqlTransactionManager;
 import ua.training.util.exceptions.ServiceException;
-import ua.training.util.properties.MessagePropertiesHandler;
+import ua.training.util.properties.MessageProperties;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Random;
 
-import static ua.training.util.properties.MessagePropertiesHandler.SERVICE_NULL_ENTITY_ERROR;
-import static ua.training.util.properties.MessagePropertiesHandler.SERVICE_TRANSACTION_ERROR;
+import static ua.training.util.properties.MessageProperties.SERVICE_NULL_ENTITY_ERROR;
+import static ua.training.util.properties.MessageProperties.SERVICE_TRANSACTION_ERROR;
 
 public class InspectorChangingService {
     private static final Logger log = LogManager.getLogger(InspectorChangingService.class);
@@ -37,7 +37,7 @@ public class InspectorChangingService {
     public void changeInspector(Long previousInspectorId, Long reportApprovalId) {
         MysqlTransactionManager tm = new MysqlTransactionManager();
         final Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        final ServiceException serviceException = new ServiceException(MessagePropertiesHandler.getMessage(SERVICE_NULL_ENTITY_ERROR));
+        final ServiceException serviceException = new ServiceException(MessageProperties.getMessage(SERVICE_NULL_ENTITY_ERROR));
 
         tm.doInTransaction(daoFactory -> {
             final IUserDao userDao = daoFactory.getUserDao();
@@ -68,7 +68,7 @@ public class InspectorChangingService {
         });
 
         if (tm.isRollBacked()) {
-            throw new ServiceException(MessagePropertiesHandler.getMessage(SERVICE_TRANSACTION_ERROR));
+            throw new ServiceException(MessageProperties.getMessage(SERVICE_TRANSACTION_ERROR));
         }
     }
 }

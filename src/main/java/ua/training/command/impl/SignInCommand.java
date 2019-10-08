@@ -11,15 +11,15 @@ import ua.training.util.constans.Attributes;
 import ua.training.util.constans.Parameters;
 import ua.training.util.constans.StateApprovalEnum;
 import ua.training.util.constans.UserTypes;
-import ua.training.util.properties.MessagePropertiesHandler;
-import ua.training.util.properties.ViewPropertiesHandler;
+import ua.training.util.properties.MessageProperties;
+import ua.training.util.properties.ViewProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-import static ua.training.util.properties.MessagePropertiesHandler.SIGNIN_ERROR;
-import static ua.training.util.properties.ViewPropertiesHandler.*;
+import static ua.training.util.properties.MessageProperties.SIGNIN_ERROR;
+import static ua.training.util.properties.ViewProperties.*;
 
 public class SignInCommand implements ICommand {
     private SignInService signInService;
@@ -59,13 +59,13 @@ public class SignInCommand implements ICommand {
                 }
 
                 String fragmentPath = isInspector ? FRAGMENT_PATH_SENT_REPORTS : FRAGMENT_PATH_SEND_REPORT;
-                request.setAttribute(Attributes.FRAGMENT_PATH, ViewPropertiesHandler.getViewPath(fragmentPath));
+                request.setAttribute(Attributes.FRAGMENT_PATH, ViewProperties.getViewPath(fragmentPath));
             } else {
                 request.setAttribute(Attributes.ALERT_ERROR, true);
-                request.setAttribute(Attributes.ALERT_MSG, MessagePropertiesHandler.getMessage(SIGNIN_ERROR));
+                request.setAttribute(Attributes.ALERT_MSG, MessageProperties.getMessage(SIGNIN_ERROR));
             }
         }
 
-        return ViewPropertiesHandler.getViewPath(pagePath);
+        return ViewProperties.getViewPath(pagePath);
     }
 }

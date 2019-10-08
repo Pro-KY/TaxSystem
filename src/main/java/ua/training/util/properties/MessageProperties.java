@@ -3,7 +3,7 @@ package ua.training.util.properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-public class MessagePropertiesHandler {
+public class MessageProperties {
     private static ResourceBundle messageProperties;
     public static final String SIGNIN_ERROR = "SIGNIN_ERROR";
     public static final String ERROR_PARSING = "PARSING_ERROR";

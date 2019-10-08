@@ -7,9 +7,9 @@ import ua.training.dto.ReportDetailsDto;
 import ua.training.persistence.dao.factory.MysqlDaoFactory;
 import ua.training.persistence.entities.ReportApproval;
 import ua.training.util.exceptions.ServiceException;
-import ua.training.util.properties.MessagePropertiesHandler;
+import ua.training.util.properties.MessageProperties;
 
-import static ua.training.util.properties.MessagePropertiesHandler.REPORT_DETAILS_ERROR;
+import static ua.training.util.properties.MessageProperties.REPORT_DETAILS_ERROR;
 
 public class ReportDetailsService {
     private static final Logger log = LogManager.getLogger(ReportDetailsService.class);
@@ -32,7 +32,7 @@ public class ReportDetailsService {
         final ReportApproval reportApproval = daoFactory
                 .getReportApprovalDao()
                 .findByIdJoinReportJoinInspector(reportApprovalId)
-                .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(REPORT_DETAILS_ERROR)));
+                .orElseThrow(() -> new ServiceException(MessageProperties.getMessage(REPORT_DETAILS_ERROR)));
 
         return DtoMapper.getInstance().mapToReportDetailsDto(reportApproval);
     }
@@ -41,7 +41,7 @@ public class ReportDetailsService {
         final ReportApproval reportApproval = daoFactory
                 .getReportApprovalDao()
                 .findByIdJoinReportJoinUser(reportApprovalId)
-                .orElseThrow(() -> new ServiceException(MessagePropertiesHandler.getMessage(REPORT_DETAILS_ERROR)));
+                .orElseThrow(() -> new ServiceException(MessageProperties.getMessage(REPORT_DETAILS_ERROR)));
 
         return DtoMapper.getInstance().mapToReportDetailsDto(reportApproval);
     }
