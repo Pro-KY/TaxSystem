@@ -13,13 +13,9 @@ public class SignUpFragmentCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        System.out.println("SignUpFragmentCommand command");
-
-//        final String viewPath = getViewPath(FRAGMENT_PATH_SIGN_UP);
 
         final HttpSession session = request.getSession(false);
         if (session != null) {
-//            session.setAttribute(Attributes.FRAGMENT_PATH, viewPath);
             session.setAttribute(Attributes.IS_SIGN_UP, true);
         }
         return ViewProperties.getViewPath(PATH_INDEX);

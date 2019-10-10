@@ -22,7 +22,6 @@ public class PaginationHandler {
     private boolean isRightButtonDisabled;
     private PaginationDto paginationDto;
 
-
     public PaginationDto getPaginationDto() {
         return paginationDto;
     }

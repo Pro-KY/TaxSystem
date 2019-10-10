@@ -31,7 +31,6 @@ public class SignUpCommand implements ICommand {
 
         try {
             if (user != null) {
-//                signUpService.saveSignedUpUser(userOptional.get());
                 signUpService.saveSignedUpUser(user);
                 page = ViewProperties.getViewPath(PATH_INDEX);
                 request.getSession().setAttribute(Attributes.IS_SIGN_UP, false);
