@@ -25,7 +25,7 @@ public class GetReportCommand implements ICommand {
         log.info("reportId: {}", reportId);
 
         final Report report = EditReportService.getInstance().findReportById(reportId);
-        CommandAttributesSetter.setGetReportCommandAttributes(request, report, reportApprovalId);
+        CommandAttributesSetter.getInstance().setGetReportCommandAttributes(request, report, reportApprovalId);
         return ViewProperties.getViewPath(PATH_MAIN);
     }
 }

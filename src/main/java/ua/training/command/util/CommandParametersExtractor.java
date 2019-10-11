@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.function.Function;
 
 public class CommandParametersExtractor {
     private static CommandParametersExtractor instance;
@@ -21,7 +22,7 @@ public class CommandParametersExtractor {
         return instance;
     }
 
-    public <T> T extractParameters(HttpServletRequest request, Class<T> classOfT) {
+    public <T> T extractToDto(HttpServletRequest request, Class<T> classOfT) {
         T dto;
         JsonObject requestJson = new JsonObject();
 
@@ -36,5 +37,9 @@ public class CommandParametersExtractor {
             dto = null;
         }
         return dto;
+    }
+
+    public <T> T extractToEntity(HttpServletRequest request, Function<HttpServletRequest, T> function) {
+        return function.apply(request);
     }
 }

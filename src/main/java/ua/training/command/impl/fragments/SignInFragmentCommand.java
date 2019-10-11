@@ -5,22 +5,14 @@ import ua.training.util.constans.Attributes;
 import ua.training.util.properties.ViewProperties;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import static ua.training.util.properties.ViewProperties.*;
+import static ua.training.util.properties.ViewProperties.PATH_INDEX;
 
 public class SignInFragmentCommand implements ICommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        System.out.println("SignInFragmentCommand command");
-
-//        final String viewPath = getViewPath(FRAGMENT_PATH_SIGN_IN);
-
-        final HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.setAttribute(Attributes.IS_SIGN_UP, false);
-        }
+        request.setAttribute(Attributes.IS_SIGN_UP_FRAGMENT, false);
         return ViewProperties.getViewPath(PATH_INDEX);
     }
 }

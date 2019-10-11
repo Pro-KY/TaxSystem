@@ -10,7 +10,7 @@ public class Attributes {
     public static final String IS_USER_AUTHORIZED = "isUserAuthorized";
 
     public static final String FRAGMENT_PATH = "fragmentPath";
-    public static final String IS_SIGN_UP = "isSignUp";
+    public static final String IS_SIGN_UP_FRAGMENT = "isSignUp";
 
     public static final String PAGINATION_INFO = "paginationInfo";
     public static final String REPORT_DETAILS = "reportDetails";

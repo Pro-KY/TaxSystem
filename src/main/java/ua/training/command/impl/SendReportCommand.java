@@ -30,7 +30,7 @@ public class SendReportCommand implements ICommand {
         final User user = (User) session.getAttribute(Attributes.USER);
 
         final CommandParametersExtractor paramsExtractor = CommandParametersExtractor.getInstance();
-        final SendReportDto sendReportDto = paramsExtractor.extractParameters(request, SendReportDto.class);
+        final SendReportDto sendReportDto = paramsExtractor.extractToDto(request, SendReportDto.class);
 
         if (sendReportDto != null) {
             sendReportDto.setUser(user);
@@ -38,7 +38,7 @@ public class SendReportCommand implements ICommand {
         }
 
         boolean isOperationSuccessful = sendReportDto != null;
-        CommandAttributesSetter.setSendReportCommandAttributes(request, isOperationSuccessful);
+        CommandAttributesSetter.getInstance().setSendReportCommandAttributes(request, isOperationSuccessful);
 
         return ViewProperties.getViewPath(PATH_MAIN);
     }

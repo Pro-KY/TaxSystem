@@ -29,7 +29,8 @@
                     <div class="card-body">
                         <!-- signin/signout fragment -->
                         <c:choose>
-                            <c:when test="${pageContext.session.getAttribute(Attributes.IS_SIGN_UP) eq true}">
+<%--                            <c:when test="${pageContext.session.getAttribute(Attributes.IS_SIGN_UP_FRAGMENT) eq true}">--%>
+                            <c:when test="${pageContext.request.getAttribute(Attributes.IS_SIGN_UP_FRAGMENT) eq true}">
                                 <img id="user_icon" alt="user icon" src="${pageContext.request.contextPath}/assets/user.png">
                                 <%@include file="/WEB-INF/jsp/fragments/sign_up.jsp" %>
                             </c:when>

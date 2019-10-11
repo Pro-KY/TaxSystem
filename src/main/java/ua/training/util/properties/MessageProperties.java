@@ -10,6 +10,7 @@ public class MessageProperties {
     public static final String REPORT_DETAILS_ERROR = "REPORT_DETAILS_ERROR";
     public static final String SERVICE_NULL_ENTITY_ERROR = "SERVICE_NULL_ENTITY_ERROR";
     public static final String SERVICE_TRANSACTION_ERROR = "SERVICE_TRANSACTION_ERROR";
+    public static final String USER_SIGN_UP_MESSAGE = "USER_SIGN_UP_MESSAGE";
 
     static {
         messageProperties = PropertyResourceBundle.getBundle("message");

@@ -27,7 +27,7 @@ public class ApproveReportCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         log.info("approve report command");
         final CommandParametersExtractor paramsExtractor = CommandParametersExtractor.getInstance();
-        final ReportDetailsDto reportDetailsDto = paramsExtractor.extractParameters(request, ReportDetailsDto.class);
+        final ReportDetailsDto reportDetailsDto = paramsExtractor.extractToDto(request, ReportDetailsDto.class);
 
         final HttpSession session = request.getSession();
         PaginationDto currentPaginationDto = CommandUtil.getInstance().getCurrentPaginationDto(session);

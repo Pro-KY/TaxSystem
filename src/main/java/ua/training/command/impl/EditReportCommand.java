@@ -25,7 +25,7 @@ public class EditReportCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request) {
         log.info("editReport command executed");
-        ReportDto reportDto = CommandParametersExtractor.getInstance().extractParameters(request, ReportDto.class);
+        ReportDto reportDto = CommandParametersExtractor.getInstance().extractToDto(request, ReportDto.class);
 
         final Long reportId = Long.valueOf(request.getParameter(Parameters.REPORT_ID));
         final Long reportApprovalId = Long.valueOf(request.getParameter(Parameters.REPORT_APPROVAL_ID));
@@ -50,7 +50,7 @@ public class EditReportCommand implements ICommand {
             isOperationSuccessful = false;
         }
 
-        CommandAttributesSetter.setEditReportCommandAttributes(request, reportDto, isOperationSuccessful);
+       CommandAttributesSetter.getInstance().setEditReportCommandAttributes(request, reportDto, isOperationSuccessful);
         return ViewProperties.getViewPath(PATH_MAIN);
     }
 }

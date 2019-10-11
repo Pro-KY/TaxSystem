@@ -33,7 +33,7 @@ public class InspectorChangingCommand implements ICommand {
         final PaginationDto paginationHandler = reportApprovalService.getReportsApprovalForUser(currentPaginationDto, reportApproval.getUser().getId());
         request.setAttribute(PAGINATION_INFO, paginationHandler);
 
-        CommandAttributesSetter.setInspectorChangingCommandAttributes(request);
+        CommandAttributesSetter.getInstance().setInspectorChangingCommandAttributes(request);
         return ViewProperties.getViewPath(PATH_MAIN);
     }
 }
