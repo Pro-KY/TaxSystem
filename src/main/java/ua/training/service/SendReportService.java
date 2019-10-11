@@ -19,6 +19,7 @@ import ua.training.util.properties.MessageProperties;
 import java.sql.Timestamp;
 import java.util.Optional;
 
+import static ua.training.util.properties.MessageProperties.PARSING_ERROR;
 import static ua.training.util.properties.MessageProperties.SERVICE_TRANSACTION_ERROR;
 
 public class SendReportService {
@@ -37,16 +38,15 @@ public class SendReportService {
         Report report;
 
         if(sendReportDto.getReportContentTypeId() == ReportContentType.FORM.getId()) {
-            report = new Report(new TaxType(sendReportDto.getReportTaxtypeId()), sendReportDto.getReportSum(), sendReportDto.getReportQuarter());
+            report = new Report(new TaxType(sendReportDto.getTaxTypeId()), sendReportDto.getSum(), sendReportDto.getQuarterId());
             logger.info(report.toString());
         } else {
-            final ReportFileService reportFileService = new ReportFileService();
-            final Optional<Report> reportOptional = reportFileService.parseReportFile(sendReportDto);
+            final Optional<Report> reportOptional = ReportFileService.getInstance().parseReportFile(sendReportDto);
 
             if (reportOptional.isPresent()) {
                 report = reportOptional.get();
             } else {
-                throw new ServiceException("error during parsing report file");
+                throw new ServiceException(MessageProperties.getMessage(PARSING_ERROR));
             }
         }
 

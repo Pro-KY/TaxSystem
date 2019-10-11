@@ -35,7 +35,7 @@
                     <!-- quoter -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">${quarterLabel}</label>
-                        <select class="form-control" id="exampleFormControlSelect2" name="${Parameters.REPORT_QUARTER}">
+                        <select class="form-control" id="exampleFormControlSelect2" name="${Parameters.REPORT_QUARTER_ID}">
                             <option ${quarterId eq 1 ? 'selected' : ''}>1</option>
                             <option ${quarterId eq 2 ? 'selected' : ''}>2</option>
                             <option ${quarterId eq 3 ? 'selected' : ''}>3</option>

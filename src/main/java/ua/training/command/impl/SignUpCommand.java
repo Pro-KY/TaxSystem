@@ -22,7 +22,7 @@ public class SignUpCommand implements ICommand {
     public String execute(HttpServletRequest request) {
         log.info("user is sign up");
         final CommandParametersExtractor paramsExtractor = CommandParametersExtractor.getInstance();
-        final Function<HttpServletRequest, User> getUserMappingFunction = CommandUtil.getInstance().getUserMappingFunction;
+        final Function<HttpServletRequest, User> getUserMappingFunction = CommandUtil.getInstance().userMappingFunction;
         final User user = paramsExtractor.extractToEntity(request, getUserMappingFunction);
         final SignUpService signUpService = SignUpService.getInstance();
 

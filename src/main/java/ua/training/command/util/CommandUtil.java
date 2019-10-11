@@ -48,7 +48,7 @@ public class CommandUtil {
         return ReportsApprovalTypeId;
     }
 
-    public Function<HttpServletRequest, User> getUserMappingFunction = request -> {
+    public Function<HttpServletRequest, User> userMappingFunction = request -> {
         final String firstName = request.getParameter(Parameters.USER_FIRST_NAME);
         final String lastName = request.getParameter(Parameters.USER_LAST_NAME);
         final String email = request.getParameter(Parameters.EMAIL);
@@ -58,5 +58,22 @@ public class CommandUtil {
         final long userTypeId = Long.valueOf(request.getParameter(Parameters.USER_TYPE));
         return new User(firstName, lastName, organization, email, password, address, new UserType(userTypeId));
     };
+
+//    public Function<HttpServletRequest, User> sendReportDtoFunction = request -> {
+//        final long contentTypeId = Long.valueOf(request.getParameter(Parameters.REPORT_CONTENT_TYPE_ID));
+//        final long taxTypeId = Integer.valueOf(request.getParameter(Parameters.REPORT_TAXTYPE_ID));
+//        final int quarterId = Integer.valueOf(request.getParameter(Parameters.REPORT_QUARTER_ID));
+//        final double sum = Double.valueOf(request.getParameter(Parameters.REPORT_SUM));
+//
+//
+//
+//        final String lastName = request.getParameter(Parameters.USER_LAST_NAME);
+//        final String email = request.getParameter(Parameters.EMAIL);
+//        final String password = request.getParameter(Parameters.PASSWORD);
+//        final String organization = request.getParameter(Parameters.USER_ORGANIZATION);
+//        final String address = request.getParameter(Parameters.USER_ADDRESS);
+//        final long userTypeId = Long.valueOf(request.getParameter(Parameters.USER_TYPE));
+//        return new User(firstName, lastName, organization, email, password, address, new UserType(userTypeId));
+//    };
 
 }

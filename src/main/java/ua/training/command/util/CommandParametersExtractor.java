@@ -22,7 +22,7 @@ public class CommandParametersExtractor {
         return instance;
     }
 
-    public <T> T extractToDto(HttpServletRequest request, Class<T> classOfT) {
+    public <T> T extractToDto(HttpServletRequest request, Class<T> className) {
         T dto;
         JsonObject requestJson = new JsonObject();
 
@@ -31,12 +31,16 @@ public class CommandParametersExtractor {
         }
 
         try {
-             dto = new Gson().fromJson(requestJson, classOfT);
+             dto = new Gson().fromJson(requestJson, className);
         } catch (JsonSyntaxException e) {
             log.debug(e.getMessage(), e.getCause());
             dto = null;
         }
         return dto;
+    }
+
+    public <T> T extractToDto(HttpServletRequest request, Function<HttpServletRequest, T> function) {
+        return extractToEntity(request, function);
     }
 
     public <T> T extractToEntity(HttpServletRequest request, Function<HttpServletRequest, T> function) {

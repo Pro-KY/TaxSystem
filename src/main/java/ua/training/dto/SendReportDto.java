@@ -6,43 +6,44 @@ import ua.training.persistence.entities.User;
 import java.io.Serializable;
 
 public class SendReportDto implements Serializable {
-    private long reportTaxtype;
-    private long reportContentType;
-    private int reportQuarter;
-    private double reportSum;
+    private long taxTypeId;
+    private int reportContentTypeId;
+    private int quarterId;
+    private double sum;
     private String reportFileContent;
     private User user;
 
-    public long getReportContentTypeId() {
-        return reportContentType;
+
+    public int getReportContentTypeId() {
+        return reportContentTypeId;
     }
 
     public void setReportContentTypeId(int reportContentTypeId) {
-        this.reportContentType = reportContentTypeId;
+        this.reportContentTypeId = reportContentTypeId;
     }
 
-    public long getReportTaxtypeId() {
-        return reportTaxtype;
+    public long getTaxTypeId() {
+        return taxTypeId;
     }
 
-    public void setReportTaxtypeId(int reportTaxtypeId) {
-        this.reportTaxtype = reportTaxtypeId;
+    public void setTaxTypeId(long taxTypeId) {
+        this.taxTypeId = taxTypeId;
     }
 
-    public int getReportQuarter() {
-        return reportQuarter;
+    public int getQuarterId() {
+        return quarterId;
     }
 
-    public void setReportQuarter(int reportQuarter) {
-        this.reportQuarter = reportQuarter;
+    public void setQuarterId(int quarterId) {
+        this.quarterId = quarterId;
     }
 
-    public double getReportSum() {
-        return reportSum;
+    public double getSum() {
+        return sum;
     }
 
-    public void setReportSum(double reportSum) {
-        this.reportSum = reportSum;
+    public void setSum(double sum) {
+        this.sum = sum;
     }
 
     public User getUser() {
@@ -61,13 +62,16 @@ public class SendReportDto implements Serializable {
         this.reportFileContent = reportFileContent;
     }
 
+
     @Override
     public String toString() {
         return "SendReportDto{" +
-                "reportContentTypeId=" + reportTaxtype +
-                ", reportTaxtypeId=" + reportContentType +
-                ", reportQuarter=" + reportQuarter +
-                ", reportSum=" + reportSum +
+                "taxTypeId=" + taxTypeId +
+                ", reportContentTypeId=" + reportContentTypeId +
+                ", quarterId=" + quarterId +
+                ", reportSum=" + sum +
+                ", reportFileContent='" + reportFileContent + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

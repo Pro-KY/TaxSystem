@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="ua.training.util.constans.Parameters" %>
-<%@ page import="ua.training.util.constans.Attributes" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ include file="/WEB-INF/jsp/fmt_messages.jsp"%>
@@ -15,7 +14,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">${reportTypeName}</label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01" name="${Parameters.REPORT_CONTENT_TYPE}">
+                    <select class="custom-select" id="inputGroupSelect01" name="${Parameters.REPORT_CONTENT_TYPE_ID}">
                         <option value="1" selected >${selectFormItem}</option>
                         <option value="2">JSON</option>
                         <option value="3">XML</option>
@@ -38,7 +37,7 @@
                     <!-- quoter -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">${quarterLabel}</label>
-                        <select class="form-control" id="exampleFormControlSelect2" name="${Parameters.REPORT_QUARTER}">
+                        <select class="form-control" id="exampleFormControlSelect2" name="${Parameters.REPORT_QUARTER_ID}">
                             <option selected>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -49,7 +48,7 @@
                     <!-- sum-->
                     <div class="form-group">
                         <label for="exampleFormControlInput2">${sumLabel}</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="sum" name="${Parameters.REPORT_SUM}">
+                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="sum" value="0" name="${Parameters.REPORT_SUM}">
                     </div>
                 </div>
 
@@ -72,14 +71,6 @@
         </div>
         <div class="col-md-8"></div>
     </div>
-    <c:if test="${pageContext.request.getAttribute('alert')}">
-        <div class="alert alert-success alert-dismissible fade show" type="alert">
-            ${alertSuccess}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </c:if>
 </div>
 
 <script>
