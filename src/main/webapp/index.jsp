@@ -20,7 +20,6 @@
     <%@include file="/WEB-INF/jsp/fragments/header.jsp" %>
     <!-- header fragment -->
 
-<%--    <c:out value="${language}"/>--%>
     <div class="container pt-md-3">
 <%--        <h1 class="text-center"> <fmt:message key="index.text.greeting" bundle="${rb}"/> </h1>--%>
 

@@ -3,5 +3,11 @@ package ua.training.command;
 import javax.servlet.http.HttpServletRequest;
 
 public interface ICommand {
-    String execute(HttpServletRequest request); // return page(path)
+    /**
+     * Handles an HttpServletRequest and returns rendered jsp page
+     *
+     * @param request income HttpServletRequest from the user
+     * @return view path that will be rendered
+     */
+    String execute(HttpServletRequest request);
 }

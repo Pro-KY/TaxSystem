@@ -49,7 +49,7 @@ public class ReportApprovalDaoImpl implements IReportApprovalDao {
         return jdbcTemplate.saveOrUpdate(sql, params);
     }
 
-    public long countAllForUserById(Long userId) {
+    public long countAllbyUserId(Long userId) {
         return jdbcTemplate.countRows(SqlProperties.getSqlQuery(SqlProperties.REPORT_APPROVAL_COUNT_FOR_USER), userId);
     }
 

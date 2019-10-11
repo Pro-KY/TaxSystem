@@ -18,5 +18,5 @@ public class Commands {
     public static final String GET_APPROVING_FRAGMENT = "getApprovingFragment";
     public static final String APPROVE_REPORT = "approveReportCommand";
 
-    public static final String GET_UNTREATED_REPORTS = "getUntreatedReports";
+    public static final String GET_UNTREATED_REPORTS = "getSentReportApprovals";
 }

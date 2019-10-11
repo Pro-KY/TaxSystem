@@ -23,12 +23,8 @@ public class ServletSecurityFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         HttpSession session = req.getSession(false);
 
-        logger.info("I'm here");
-
         if (session != null) {
             final Object isAuthorized = session.getAttribute(Attributes.IS_USER_AUTHORIZED);
-
-            logger.info("isAuthorized - {}", isAuthorized);
 
             if(isAuthorized != null && (Boolean) isAuthorized) {
                 final RequestDispatcher requestDispatcher = servletRequest.getServletContext().getRequestDispatcher(ViewProperties.getViewPath(PATH_MAIN));

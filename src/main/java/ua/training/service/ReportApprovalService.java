@@ -36,7 +36,7 @@ public class ReportApprovalService {
         this.daoFactory = MysqlDaoFactory.getInstance();
     }
 
-    public PaginationDto getUntreatedReports(PaginationDto paginationDto, StateApproval stateApproval, User inspector) {
+    public PaginationDto getSentReportApprovals(PaginationDto paginationDto, StateApproval stateApproval, User inspector) {
         final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
 
         boolean isStateApprovalProcessing = stateApproval.getId().equals(StateApprovalEnum.PROCESSING.getStateId());
@@ -88,15 +88,11 @@ public class ReportApprovalService {
                 .orElseThrow(() -> new ServiceException(MessageProperties.getMessage(SERVICE_NULL_ENTITY_ERROR)));
     }
 
-    public long countAllReportsApprovalForUser(Long userId) {
-        return daoFactory.getReportApprovalDao().countAllForUserById(userId);
-    }
-
     public PaginationDto getReportsApprovalForUser(PaginationDto paginationDto, Long userId) {
         final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
 
         final PaginationHandler paginationHandler = new PaginationHandler(paginationDto);
-        final long allRows = countAllReportsApprovalForUser(userId);
+        final long allRows = reportApprovalDao.countAllbyUserId(userId);
         paginationHandler.setAllRowsAmount(allRows);
         paginationHandler.handlePagination();
 

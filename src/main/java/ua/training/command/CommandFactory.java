@@ -46,7 +46,6 @@ public class CommandFactory {
             command = new EmptyCommand();
         } else {
             command = commandHashMap.get(clientCommand);
-
         }
 
         return command;

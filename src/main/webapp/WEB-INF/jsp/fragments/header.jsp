@@ -23,8 +23,8 @@
                             <fmt:message key="header.language" bundle="${rb}"/>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="taxsystem/?command=${Command.CHANGE_LANGUAGE}&language=ua"><span class="flag-icon flag-icon-ua"> </span> Ukrainian</a>
-                            <a class="dropdown-item" href="taxsystem/?command=${Command.CHANGE_LANGUAGE}&language=en"><span class="flag-icon flag-icon-us"> </span> English</a>
+                            <a class="dropdown-item" href="taxsystem/?command=${Commands.CHANGE_LANGUAGE}&language=ua"><span class="flag-icon flag-icon-ua"> </span> Ukrainian</a>
+                            <a class="dropdown-item" href="taxsystem/?command=${Commands.CHANGE_LANGUAGE}&language=en"><span class="flag-icon flag-icon-us"> </span> English</a>
                         </div>
                     </li>
                 </ul>

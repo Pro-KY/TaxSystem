@@ -13,6 +13,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.StringReader;
 
+/**
+ * Implementation of {@link FileParser} for parsing XML file content
+ */
 public class XmlFileParserImpl implements FileParser<Report> {
     @Override
     public Report parseFile(String xml) throws FileParsingException {

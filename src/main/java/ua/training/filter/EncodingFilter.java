@@ -14,7 +14,6 @@ public class EncodingFilter implements Filter {
             servletResponse.setCharacterEncoding(code);
         }
         filterChain.doFilter(servletRequest, servletResponse);
-
     }
 
     @Override

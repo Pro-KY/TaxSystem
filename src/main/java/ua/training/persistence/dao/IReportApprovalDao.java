@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface IReportApprovalDao extends IDao<ReportApproval> {
     List<ReportApproval> getReportApprovalListByUserId(long pageSize, long offSet, long userId);
-    long countAllForUserById(Long userId);
+    long countAllbyUserId(Long userId);
     long countAllByStateApproval(StateApproval stateApproval);
     long countAllByStateApprovalAndInspector(StateApproval stateApproval, User user);
     Optional<ReportApproval> findByIdJoinReportJoinInspector(Long id);

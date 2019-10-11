@@ -9,6 +9,9 @@ import ua.training.persistence.entities.User;
 
 import java.sql.Timestamp;
 
+/**
+ * {@code DtoMapper} class for mapping entities to DTO
+ */
 public class DtoMapper {
     private static DtoMapper instance;
     private static final Logger log = LogManager.getLogger(DtoMapper.class);
