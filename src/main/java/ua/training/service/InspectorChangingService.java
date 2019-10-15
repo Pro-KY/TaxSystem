@@ -21,7 +21,8 @@ public class InspectorChangingService {
     private MysqlDaoFactory daoFactory;
     private static InspectorChangingService instance;
     private final String INSPECTOR_TYPE = "inspector";
-    private final String STATE_APPROVAL_PROCESSING = "processing";
+//    private final String STATE_APPROVAL_PROCESSING = "processing";
+    private final String STATE_APPROVAL_CHANGED = "changed";
 
     public static InspectorChangingService getInstance() {
         if (instance == null) {
@@ -35,11 +36,11 @@ public class InspectorChangingService {
     }
 
     public void changeInspector(Long previousInspectorId, Long reportApprovalId) {
-        MysqlTransactionManager tm = new MysqlTransactionManager();
+        MysqlTransactionManager transactionManager = new MysqlTransactionManager();
         final Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         final ServiceException serviceException = new ServiceException(MessageProperties.getMessage(SERVICE_NULL_ENTITY_ERROR));
 
-        tm.doInTransaction(daoFactory -> {
+        transactionManager.doInTransaction(daoFactory -> {
             final IUserDao userDao = daoFactory.getUserDao();
             final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
             final IInspectorChangingDao inspectorChangingDao = daoFactory.getInspectorChangingDao();
@@ -60,14 +61,15 @@ public class InspectorChangingService {
             inspectorChangingDao.save(inspectorChanging);
 
             // save in report_approval
-            final StateApproval stateApproval = stateApprovalDao.findByState(STATE_APPROVAL_PROCESSING).orElseThrow(() -> serviceException);
+            final StateApproval stateApproval = stateApprovalDao.findByState(STATE_APPROVAL_CHANGED).orElseThrow(() -> serviceException);
+//            final StateApproval stateApproval = stateApprovalDao.findByState(STATE_APPROVAL_PROCESSING).orElseThrow(() -> serviceException);
             reportApproval.setStateApproval(stateApproval);
             reportApproval.setInspector(newInspector);
 
             reportApprovalDao.update(reportApproval);
         });
 
-        if (tm.isRollBacked()) {
+        if (transactionManager.isRollBacked()) {
             throw new ServiceException(MessageProperties.getMessage(SERVICE_TRANSACTION_ERROR));
         }
     }

@@ -5,9 +5,7 @@ import ua.training.persistence.dao.impl.*;
 import ua.training.persistence.db.datasource.MysqlDataSource;
 import ua.training.persistence.db.datasource.MysqlDataSourceImpl;
 
-// get Dao's via fabric
 public class MysqlDaoFactory implements DaoFactory {
-    // should I save one method with switch statement which accepts enum?
     private MysqlDataSource mysqlDataSource;
     private static MysqlDaoFactory instance;
 

@@ -3,7 +3,7 @@ package ua.training.command.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.command.ICommand;
-import ua.training.command.util.CommandUtil;
+import ua.training.util.command.CommandUtil;
 import ua.training.dto.PaginationDto;
 import ua.training.persistence.entities.StateApproval;
 import ua.training.persistence.entities.User;

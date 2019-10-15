@@ -46,7 +46,7 @@
                     <!-- sum-->
                     <div class="form-group">
                         <label for="exampleFormControlInput2">${sumLabel}</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="sum" value="${reportDto.income}" name="${Parameters.REPORT_SUM}">
+                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="sum" value="${reportDto.sum}" name="${Parameters.REPORT_SUM}">
                     </div>
                 </div>
 

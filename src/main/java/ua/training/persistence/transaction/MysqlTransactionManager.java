@@ -11,19 +11,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class MysqlTransactionManager implements TransactionManager {
-    private static MysqlTransactionManager instance;
     private static final Logger logger = LogManager.getLogger(MysqlTransactionManager.class);
     private DaoFactory mySQLDaoFactory;
     private MysqlDataSourceProxy mysqlDataSourceProxy;
     private Connection connection;
     private boolean isRollBacked;
 
-//    public static MysqlTransactionManager getInstance() {
-//        if (instance == null) {
-//            instance = new MysqlTransactionManager();
-//        }
-//        return instance;
-//    }
 
     public MysqlTransactionManager() {
         mySQLDaoFactory = MysqlDaoFactory.getInstance();
@@ -32,7 +25,7 @@ public class MysqlTransactionManager implements TransactionManager {
     }
 
     @Override
-    public void doInTransaction(ThrowingConsumer<DaoFactory, Exception> daoFactoryConsumer) { // Consumer<DaoFactory> daoFactoryConsumer
+    public void doInTransaction(ThrowingConsumer<DaoFactory, Exception> daoFactoryConsumer) {
         isRollBacked = false;
 
         try {
@@ -41,7 +34,6 @@ public class MysqlTransactionManager implements TransactionManager {
             daoFactoryConsumer.accept(mySQLDaoFactory);
             commit();
         } catch(Exception e) {
-            logger.debug("exp here.. =(");
             isRollBacked = true;
             rollback();
         } finally {

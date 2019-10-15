@@ -3,7 +3,7 @@ package ua.training.command.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ua.training.command.ICommand;
-import ua.training.command.util.CommandAttributesSetter;
+import ua.training.util.command.CommandAttributesSetter;
 import ua.training.persistence.entities.Report;
 import ua.training.service.EditReportService;
 import ua.training.util.constans.Parameters;

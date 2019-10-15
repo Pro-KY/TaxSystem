@@ -107,7 +107,6 @@ public class JdbcTemplate {
                 resultSet.close();
             }
         } catch (Exception e) {
-            // TODO: log here
             e.printStackTrace();
         }
     }

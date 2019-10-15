@@ -1,4 +1,4 @@
-package ua.training.command.util;
+package ua.training.util.command;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

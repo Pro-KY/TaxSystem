@@ -6,14 +6,14 @@ public class ReportDto implements Serializable {
     private long reportId;
     private long taxTypeId;
     private int quarterId;
-    private double income;
+    private double sum;
     private long reportApprovalId;
 
-    public ReportDto(long reportId, long reportTaxtypeId, int quarterId, double income) {
+    public ReportDto(long reportId, long reportTaxtypeId, int quarterId, double sum) {
         this.reportId = reportId;
         this.taxTypeId = reportTaxtypeId;
         this.quarterId = quarterId;
-        this.income = income;
+        this.sum = sum;
     }
 
     public long getReportId() {
@@ -40,14 +40,13 @@ public class ReportDto implements Serializable {
         this.quarterId = quarterId;
     }
 
-    public double getIncome() {
-        return income;
+    public double getSum() {
+        return sum;
     }
 
-    public void setIncome(double income) {
-        this.income = income;
+    public void setSum(double sum) {
+        this.sum = sum;
     }
-
 
     public long getReportApprovalId() {
         return reportApprovalId;
@@ -63,7 +62,7 @@ public class ReportDto implements Serializable {
                 "reportId=" + reportId +
                 ", taxTypeId=" + taxTypeId +
                 ", quarterId=" + quarterId +
-                ", income=" + income +
+                ", income=" + sum +
                 ", reportApprovalId=" + reportApprovalId +
                 '}';
     }

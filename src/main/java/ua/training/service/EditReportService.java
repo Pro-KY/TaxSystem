@@ -43,7 +43,7 @@ public class EditReportService {
     public void updateReport(ReportDto reportDto, Long reportApprovalId) {
         MysqlTransactionManager tm = new MysqlTransactionManager();
         final StateApproval stateApproval = new StateApproval(StateApprovalEnum.CHANGED.getStateId());
-        final Report report = new Report(reportDto.getReportId(), new TaxType(reportDto.getTaxTypeId()), reportDto.getIncome(), reportDto.getQuarterId());
+        final Report report = new Report(reportDto.getReportId(), new TaxType(reportDto.getTaxTypeId()), reportDto.getSum(), reportDto.getQuarterId());
 
         tm.doInTransaction(daoFactory -> {
             final IReportApprovalDao reportApprovalDao = daoFactory.getReportApprovalDao();
@@ -53,7 +53,6 @@ public class EditReportService {
             reportApproval.setStateApproval(stateApproval);
 
             reportDao.update(report);
-//            ExceptionThrower.sneakyThrow(new ServiceException("msg"));
             reportApprovalDao.update(reportApproval);
         });
 
